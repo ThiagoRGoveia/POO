@@ -1,5 +1,8 @@
 package usp.poo.lista1.ex2;
 
+/*
+ * Testa classe SistemaOperacional
+ */
 public class Main {
     public static void main(String[] args) {
         SistemaOperacional sys = new SistemaOperacional(

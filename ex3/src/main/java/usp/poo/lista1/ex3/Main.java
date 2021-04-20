@@ -1,6 +1,8 @@
 
 package usp.poo.lista1.ex3;
-
+/*
+ * Testa classe Polinomio
+ */
 public class Main {
     public static void main(String[] args) {
         Polinomio polinomio = new Polinomio(3);
