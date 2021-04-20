@@ -24,7 +24,7 @@ public class Drivers {
     }
     // Executa teste e retorna string contendo o status
     public String executaTeste () {
-        return "Status: " + this.verificaStatus;
+        return "Status: " + this.verificaStatus();
     }
 
 }
