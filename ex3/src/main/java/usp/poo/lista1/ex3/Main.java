@@ -1,4 +1,6 @@
 
+package usp.poo.lista1.ex3;
+
 public class Main {
     public static void main(String[] args) {
         Polinomio polinomio = new Polinomio(3);

@@ -1,3 +1,5 @@
+package usp.poo.lista1.ex2;
+
 public class Impressora extends Drivers{
 
     Impressora () {

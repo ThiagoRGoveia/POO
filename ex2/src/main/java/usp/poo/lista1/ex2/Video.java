@@ -1,3 +1,5 @@
+package usp.poo.lista1.ex2;
+
 public class Video extends Drivers{
     private double brilho;
 
@@ -7,8 +9,8 @@ public class Video extends Drivers{
     }
 
     public void alteraBrilhoDeExibição (double brilho) {
-        setStatus("Alterando brilho");
-        this.brilho =brilho;
+        setStatus("Alterando brilho pada " + brilho);
+        this.brilho = brilho;
         setStatus("Ligado");
     }
 

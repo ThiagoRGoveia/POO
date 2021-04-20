@@ -1,3 +1,4 @@
+package usp.poo.lista1.ex3;
 
 public class Termo {
     public int grau;

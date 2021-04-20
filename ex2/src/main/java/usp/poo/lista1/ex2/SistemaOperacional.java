@@ -1,7 +1,9 @@
+package usp.poo.lista1.ex2;
+
 public class SistemaOperacional {
-    private Rede rede;
-    private Impressora impressora;
-    private Video video;
+    public Rede rede;
+    public Impressora impressora;
+    public Video video;
 
     SistemaOperacional(Rede rede, Impressora impressora, Video video) {
         this.rede = rede;
