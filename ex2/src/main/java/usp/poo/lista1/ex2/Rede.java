@@ -1,6 +1,6 @@
 package usp.poo.lista1.ex2;
 /*
- * Classe que define dispositivo Rede que extende Drivers
+ * Classe que define dispositivo Rede que herda de Drivers
  */
 public class Rede extends Drivers {
     // Construtor inicia contrutor de Drivers com o status inicial

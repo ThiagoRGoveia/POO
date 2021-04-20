@@ -1,6 +1,6 @@
 package usp.poo.lista1.ex2;
 /*
- * Classe que define dispositivo Video que extende Drivers
+ * Classe que define dispositivo Video que herda de Drivers
  */
 public class Video extends Drivers{
     private double brilho;

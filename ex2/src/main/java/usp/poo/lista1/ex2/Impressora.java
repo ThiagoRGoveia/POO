@@ -1,7 +1,7 @@
 package usp.poo.lista1.ex2;
 
 /*
- * Classe que define dispositivo Impressora que extende Drivers
+ * Classe que define dispositivo Impressora que herda de Drivers
  */
 public class Impressora extends Drivers{
     // Construtor inicia contrutor de Drivers com o status inicial
