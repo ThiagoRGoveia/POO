@@ -2,9 +2,9 @@ package usp.poo.lista1.ex3;
 
 import java.util.ArrayList;
 /*
- * Classe que define o polinomio,
- * possui um grau máximo e uma lista
- * termos com variáveis de instância
+ * Classe que define o polinomio, possui um grau máximo
+ * como variável de instância e uma ArrayList associada de objetos
+ * da classe Termo que compõe Polinomio
  */
 public class Polinomio {
     private int grauMaximo;
