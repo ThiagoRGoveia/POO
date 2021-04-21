@@ -5,11 +5,10 @@ package usp.poo.lista1.ex2;
  */
 public class Main {
     public static void main(String[] args) {
-        SistemaOperacional sys = new SistemaOperacional(
-            new Rede(),
-            new Impressora(),
-            new Video(0.8)
-        );
+        Rede $rede= new Rede();
+        Impressora $impressora = new Impressora();
+        Video $video = new Video(0.8);
+        SistemaOperacional sys = new SistemaOperacional($rede, $impressora, $video);
         sys.executaTeste();
         sys.ligarRede();
         sys.ligarImpressora();

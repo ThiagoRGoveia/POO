@@ -2,7 +2,7 @@ package usp.poo.lista1.ex2;
 
 /*
  * Sistema operacional, possui instancias de
- * Rede, Impressora e Video classes agregadas
+ * Rede, Impressora e Video como classes agregadas
  */
 
 public class SistemaOperacional {
