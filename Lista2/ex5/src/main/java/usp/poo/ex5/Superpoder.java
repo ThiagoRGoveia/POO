@@ -1,5 +1,9 @@
 package usp.poo.ex5;
 
+/*
+ * Classe Superpoder, as infromações categora, tipo, nome e fator
+ * em seu contrutor e implementa setters e getters.
+ */
 public class Superpoder {
     private int categoria;
     private String tipo;

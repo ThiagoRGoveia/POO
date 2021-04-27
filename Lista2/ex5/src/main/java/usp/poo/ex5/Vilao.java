@@ -1,7 +1,9 @@
 package usp.poo.ex5;
 
 import java.util.ArrayList;
-
+/*
+ * Classe Vilão extende personagem
+ */
 public class Vilao extends Personagem {
     private int anosDePrisao;
 

@@ -1,7 +1,9 @@
 package usp.poo.ex5;
 
 import java.util.ArrayList;
-
+/*
+ * Classe SuperHeroi extende personagem
+ */
 public class SuperHeroi extends Personagem {
 
     SuperHeroi(ArrayList<Superpoder> poderes, int vida) {
@@ -10,7 +12,7 @@ public class SuperHeroi extends Personagem {
 
     @Override
     public String getNomeVidaReal() {
-        return super.getNomeVidaReal();
+        return "Nome na vida real do Herói" + super.getNomeVidaReal();
     }
 
     @Override
