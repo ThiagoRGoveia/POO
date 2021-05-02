@@ -27,10 +27,10 @@ public class Main {
             new Carro("Fusca", 1970, 50000)
         );
         pegadas.add(
-            new Biscicleta("Giant")
+            new Bicicleta("Giant")
         );
         pegadas.add(
-            new Biscicleta("Caloi")
+            new Bicicleta("Caloi")
         );
 
         for (int i = 0; i < pegadas.size(); i++) {
