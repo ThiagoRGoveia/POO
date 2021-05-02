@@ -11,6 +11,15 @@ public class Main {
         //     new TimeFutebol(numeroDeVitorias, numeroDeDerrotas, numeroDeEmpates, golsSofridos, golsMarcados, cartoesVermelhos, cartoesAmarelos)
         // )
 
+
+        times.add(
+            new TimeFutebol("Palmeiras", 8, 4, 8, 16, 29, 1, 2) // Sorteio
+        );
+
+        times.add(
+            new TimeFutebol("Ituano", 8, 4, 8, 16, 29, 1, 1) //  Menos cartões Amarelos
+        );
+
         times.add(
             new TimeFutebol("Botafogo", 2, 9, 9, 10, 5, 0, 1) // Menos pontos
         );
@@ -35,17 +44,13 @@ public class Main {
             new TimeFutebol("Guarani", 8, 4, 8, 16, 29, 0, 3) // Menos cartões vermelhos
         );
 
-        times.add(
-            new TimeFutebol("Ituano", 8, 4, 8, 16, 29, 1, 1) //  Menos cartões Amarelos
-        );
+
 
         times.add(
             new TimeFutebol("Mirassol", 8, 4, 8, 16, 29, 1, 2) // Sorteio
         );
 
-        times.add(
-            new TimeFutebol("Palmeiras", 8, 4, 8, 16, 29, 1, 2) // Sorteio
-        );
+
 
         Collections.sort(times);
 
