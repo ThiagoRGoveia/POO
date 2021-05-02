@@ -15,16 +15,16 @@ public class Main {
         // );
 
         pegadas.add(
-            new Casa(1,4,2)
+            new Casa(1, 4, 2)
         );
         pegadas.add(
-            new Escola(4,8,15, "COC")
+            new Escola(4, 8, 15, "COC")
         );
         pegadas.add(
-            new Carro("Gol",2018,20000)
+            new Carro("Gol", 2018, 20000)
         );
         pegadas.add(
-            new Carro("Fusca",1970,50000)
+            new Carro("Fusca", 1970, 50000)
         );
         pegadas.add(
             new Biscicleta("Giant")
@@ -35,7 +35,7 @@ public class Main {
 
         for (int i = 0; i < pegadas.size(); i++) {
             PegadaDeCarbono entidade = pegadas.get(i);
-            System.out.println("Pegada de carbono do(a) " +  entidade.getNomeDaEntidade() + ": " + entidade.getPegadaDeCarbono());
+            System.out.println("Pegada de carbono do(a) " +  entidade.getClass().getSimpleName() + ": " + entidade.getPegadaDeCarbono());
         }
 
     }

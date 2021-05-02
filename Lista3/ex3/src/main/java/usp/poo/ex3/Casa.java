@@ -1,12 +1,7 @@
 package usp.poo.ex3;
 
-public class Casa extends Predio{
+public class Casa extends Predio {
     Casa (int numeroDeAndares, int numeroDeApartamentosPorAndar, int numeroDeVagasDeGaragem) {
-       super (numeroDeAndares,numeroDeApartamentosPorAndar,numeroDeVagasDeGaragem);
-    }
-
-    @Override
-    public String getNomeDaEntidade() {
-        return "Casa";
+       super (numeroDeAndares, numeroDeApartamentosPorAndar, numeroDeVagasDeGaragem);
     }
 }

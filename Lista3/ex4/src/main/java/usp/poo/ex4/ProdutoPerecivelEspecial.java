@@ -7,7 +7,6 @@ public class ProdutoPerecivelEspecial extends ProdutoPerecivel {
 
     @Override
     public String toString() {
-
         return String.format("%s, validade %s", super.toString(), getValidade());
     }
 }

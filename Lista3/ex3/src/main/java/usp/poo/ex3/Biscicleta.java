@@ -15,12 +15,7 @@ public class Biscicleta implements PegadaDeCarbono {
         this.marca = marca;
     }
 
-    @Override
     public double getPegadaDeCarbono() {
         return 0.0;
-    }
-
-    public String getNomeDaEntidade () {
-        return "Biscicleta";
     }
 }

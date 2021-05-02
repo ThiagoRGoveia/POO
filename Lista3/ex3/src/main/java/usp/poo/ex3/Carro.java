@@ -35,12 +35,7 @@ public class Carro implements PegadaDeCarbono {
         this.quilometragem = quilometragem;
     }
 
-    @Override
     public double getPegadaDeCarbono() {
         return quilometragem * 0.2;
-    }
-
-    public String getNomeDaEntidade () {
-        return "Carro";
     }
 }
