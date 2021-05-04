@@ -2,7 +2,7 @@ package usp.poo.ex3;
 
 public class Bicicleta implements PegadaDeCarbono {
     private String marca;
-//teste
+
     Bicicleta (String marca) {
         this.marca = marca;
     }
