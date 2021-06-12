@@ -2,6 +2,7 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
+import Tools.Position.HitBox;
 import Tools.Position.Position;
 
 import java.util.ArrayList;
@@ -34,15 +35,15 @@ public class Controller {
                     e.remove(temp);
         }
     }
-    public boolean isPositionValid(ArrayList<Element> e, Position p){
-        Element temp;
-        /*Validacao da posicao de todos os elementos com relacao a Position p*/
-        for(int i = 1; i < e.size(); i++){ /*Olha todos os elementos*/
-            temp = e.get(i); /*Pega o i-esimo elemento do jogo*/
-            if(!temp.canPassThrough())
-                if(temp.getPosition().isSamePosition(p))
-                    return false; /*A posicao p é invalida, pois ha um elemento (i-esimo temp) intransponivel lá*/
-        }
+    public boolean isPositionValid(ArrayList<Element> elements, Hero hero){
+            Element element;
+            for(int i = 1; i < elements.size(); i++) {
+                element = elements.get(i);
+                boolean isHiting = HitBox.isHiting(element.getPosition(), hero.getPosition());
+                if (isHiting){
+                    System.out.println("HIT");
+                }
+            }
         return true;
     }
 }

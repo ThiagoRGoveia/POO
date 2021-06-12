@@ -124,8 +124,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     public void keyPressed(KeyEvent e) {
         movements.makeMovement(e, hero);
 
-        /*Se o heroi for para uma posicao invalida, sobre um elemento intransponivel, volta para onde estava*/
-        if (!controller.isPositionValid(this.elements, hero.getPosition())) {
+        if (!controller.isPositionValid(this.elements, hero)) {
             hero.resetToLastPosition();
         }
     }
