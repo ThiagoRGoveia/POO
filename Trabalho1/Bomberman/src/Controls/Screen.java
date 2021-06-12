@@ -79,7 +79,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
                 try {
                     /*Linha para alterar o background*/
                     Image newImage = Toolkit.getDefaultToolkit().getImage(
-                        new java.io.File(".").getCanonicalPath() + Consts.PATH + "background.png"
+                        new java.io.File(".").getCanonicalPath() + Consts.PATH + "ground_1.png"
                     );
                     graphics.drawImage(
                         newImage,
