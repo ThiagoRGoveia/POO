@@ -25,7 +25,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);  /*teclado*/
-
         this.setSize(
             (
                 (Consts.RES * Consts.CELL_SIDE) +
@@ -40,7 +39,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         elements = new ArrayList<Element>(100);
 
         hero = new Hero();
-        hero.setPosition(0, 7);
+        hero.setPosition(0, 0);
         this.addElement(hero);
 
         movements = new Movements();

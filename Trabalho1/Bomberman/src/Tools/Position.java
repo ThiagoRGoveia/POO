@@ -14,12 +14,12 @@ public class Position {
     }
 
     public boolean setPosition(int row, int column){
-        if(row < 0 || row >= Tools.Consts.RES)
+        if(row < 0 || row >= Tools.Consts.RES * Consts.HERO_SPEED_FACTOR)
             return false;
         previousRow = this.row;
         this.row = row;
 
-        if(column < 0 || column >= Tools.Consts.RES)
+        if(column < 0 || column >= Tools.Consts.RES * Consts.HERO_SPEED_FACTOR)
             return false;
         preveiousColumn = this.column;
         this.column = column;

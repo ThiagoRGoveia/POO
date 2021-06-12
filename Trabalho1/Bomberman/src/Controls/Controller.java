@@ -29,7 +29,7 @@ public class Controller {
             /*Verifica se o heroi se sobrepoe ao i-ésimo elemento*/
             if(hero.getPosition().isSamePosition(temp.getPosition()))
                 /*Nem todos os elementos podem ser transpostos pelo heroi*/
-                if(temp.canPassThrough())
+                if(!temp.canPassThrough())
                     e.remove(temp);
         }
     }
