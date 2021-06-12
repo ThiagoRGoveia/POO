@@ -1,12 +1,12 @@
 package Model;
 
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-
 import Tools.Consts;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
@@ -69,11 +69,18 @@ public class Element implements Serializable {
 
     private void loadImage(String imageName) {
         try {
-            image = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName);
-            Image img = image.getImage();
+            BufferedImage bigImg = ImageIO.read(new File(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName));
+            BufferedImage img = bigImg.getSubimage(
+                390,
+                151,
+                16,
+                16
+            );
+
             BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
             Graphics g = bi.createGraphics();
             g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            g.dispose();
             image = new ImageIcon(bi);
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
