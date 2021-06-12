@@ -4,8 +4,6 @@ import java.io.Serializable;
 
 
 public class Position {
-    // private int	row;
-    // private int column;
     private Row	row;
     private Column column;
 
