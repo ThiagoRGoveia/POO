@@ -64,7 +64,7 @@ public class Position {
 
     public void setRow(int row){
         this.row = new Row(
-            new Coordinate(row)
+            new ScreenPosition(row)
         );
     }
 
@@ -74,7 +74,7 @@ public class Position {
 
     public void setColumn(int column){
         this.column = new Column(
-            new Coordinate(column)
+            new ScreenPosition(column)
         );
     }
 
