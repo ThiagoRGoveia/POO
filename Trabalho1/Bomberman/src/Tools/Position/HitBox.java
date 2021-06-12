@@ -3,23 +3,26 @@ package Tools.Position;
 import Tools.Consts;
 
 public class HitBox {
-    public static boolean isHiting(Position elementPosition, Position heroPosition) {
-        int y1 = elementPosition.getRow().getScreenPosition().value;
-        int x1 = elementPosition.getColumn().getScreenPosition().value;
-        int height1 = y1 + Consts.CELL_SIZE_FACTOR;
-        int width1 = x1 + Consts.CELL_SIZE_FACTOR;
+    public int x;
+    public int y;
+    public int height;
+    public int width;
 
-        // A hitbox do herói deve ser menor que a dos elementos
-        int y2 = heroPosition.getRow().getScreenPosition().value + Consts.HERO_HIT_BOX_FACTOR;
-        int x2 = heroPosition.getColumn().getScreenPosition().value + Consts.HERO_HIT_BOX_FACTOR;
-        int height2 = y2 + Consts.CELL_SIZE_FACTOR - Consts.HERO_HIT_BOX_FACTOR * 2;
-        int width2 = x2 + Consts.CELL_SIZE_FACTOR - Consts.HERO_HIT_BOX_FACTOR * 2;
+    public HitBox() {}
 
-        int hitWidth1 = width1 - x2;
-        int hitWidth2 = width2 - x1;
-        int hitHeight1 = height1 - y2;
-        int hitHeight2 = height2 - y1;
+    public HitBox(Position position) {
+        this.x = position.getColumn().getScreenPosition().value;
+        this.y = position.getRow().getScreenPosition().value;
+        this.height = y + Consts.CELL_SIZE_FACTOR;
+        this.width = x + Consts.CELL_SIZE_FACTOR;
+    }
 
+
+    public static boolean isHiting(HitBox h1, HitBox h2) {
+        int hitWidth1 = h1.width - h2.x;
+        int hitWidth2 = h2.width - h1.x;
+        int hitHeight1 = h1.height - h2.y;
+        int hitHeight2 = h2.height - h1.y;
         if (
             (
                 (hitWidth1 <= Consts.CELL_SIZE_FACTOR && hitWidth1 >= 0) ||
