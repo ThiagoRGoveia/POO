@@ -14,12 +14,12 @@ public class Position {
     }
 
     public boolean setPosition(int row, int column){
-        if(row < 0 || row >= Tools.Consts.RES * Consts.HERO_SPEED_FACTOR)
+        if(row < 0 || row >= Tools.Consts.RES * Consts.CELL_SIZE_FACTOR)
             return false;
         previousRow = this.row;
         this.row = row;
 
-        if(column < 0 || column >= Tools.Consts.RES * Consts.HERO_SPEED_FACTOR)
+        if(column < 0 || column >= Tools.Consts.RES * Consts.CELL_SIZE_FACTOR)
             return false;
         preveiousColumn = this.column;
         this.column = column;
@@ -39,7 +39,10 @@ public class Position {
     }
 
     public boolean isSamePosition(Position position){
-        return (row == position.getRow() && column == position.getColumn());
+        return (
+            row/Consts.CELL_SIZE_FACTOR == position.getRow()/Consts.CELL_SIZE_FACTOR &&
+            column/Consts.CELL_SIZE_FACTOR == position.getColumn()/Consts.CELL_SIZE_FACTOR
+        );
     }
 
     public boolean copy(Position position){
