@@ -2,44 +2,47 @@ package Tools;
 
 import java.io.Serializable;
 
-public class Position {
-    private int	row;
-    private int column;
 
-    private int previousRow;
-    private int previousColumn;
+public class Position {
+    // private int	row;
+    // private int column;
+    private Row	row;
+    private Column column;
+
+    private Row previousRow;
+    private Column previousColumn;
 
     public Position(int row, int column){
-        this.setPosition(row, column);
+        this.setPosition(new Row(row), new Column(column));
     }
 
-    public boolean setPosition(int row, int column){
-        if(row < 0) {
-            this.row = 0;
+    public boolean setPosition(int row, int column) {
+        return this.setPosition(new Row(row), new Column(column));
+    }
+
+    public boolean setPosition(Row row, Column column) {
+        if (row.getScreenPosition() < 0) {
+            row = new Row(0);
             return false;
         }
-        previousRow = this.row;
-        if (row > (Tools.Consts.RES - 1) * Consts.CELL_SIZE_FACTOR) {
-            System.out.println(row);
-            this.row = (Tools.Consts.RES - 1) * Consts.CELL_SIZE_FACTOR;
+        if (row.getScreenPosition() > Consts.SCREEN_BOUNDARY) {
+            row = new Row(Consts.SCREEN_BOUNDARY);
             return false;
         }
         this.row = row;
-
-        previousColumn = this.column;
-        if(column < 0) {
-            this.column = 0;
+        if (column.getScreenPosition() < 0) {
+            column = new Column(0);
             return false;
         }
-        if (column > (Tools.Consts.RES - 1) * Consts.CELL_SIZE_FACTOR) {
-            this.column = (Tools.Consts.RES - 1) * Consts.CELL_SIZE_FACTOR;
+        if (column.getScreenPosition() > Consts.SCREEN_BOUNDARY) {
+            column = new Column(Consts.SCREEN_BOUNDARY);
             return false;
         }
         this.column = column;
         return true;
     }
 
-    public int getRow(){
+    public Row getRow(){
         return row;
     }
 
@@ -47,15 +50,13 @@ public class Position {
         return this.setPosition(previousRow, previousColumn);
     }
 
-    public int getColumn(){
+    public Column getColumn(){
         return column;
     }
 
     public boolean isSamePosition(Position position){
-        return (
-            row/Consts.CELL_SIZE_FACTOR == position.getRow()/Consts.CELL_SIZE_FACTOR &&
-            column/Consts.CELL_SIZE_FACTOR == position.getColumn()/Consts.CELL_SIZE_FACTOR
-        );
+        return row.getCoordinate() == position.getRow().getCoordinate() &&
+            column.getCoordinate() == position.getColumn().getCoordinate();
     }
 
     public boolean copy(Position position){
@@ -63,15 +64,31 @@ public class Position {
     }
 
     public boolean moveUp(){
-        return this.setPosition(this.getRow() - Consts.HERO_SPEED, this.getColumn());
+        return this.setPosition(
+            new Row(this.getRow().getScreenPosition() - Consts.HERO_SPEED),
+            this.getColumn()
+        );
     }
     public boolean moveDown(){
-        return this.setPosition(this.getRow() + Consts.HERO_SPEED, this.getColumn());
+        return this.setPosition(
+            new Row(this.getRow().getScreenPosition() + Consts.HERO_SPEED),
+            this.getColumn()
+        );
     }
     public boolean moveRight(){
-        return this.setPosition(this.getRow(), this.getColumn() + Consts.HERO_SPEED);
+        return this.setPosition(
+            this.getRow(),
+            new Column(
+                this.getColumn().getScreenPosition() + Consts.HERO_SPEED
+            )
+        );
     }
     public boolean moveLeft(){
-        return this.setPosition(this.getRow(), this.getColumn() - Consts.HERO_SPEED);
+        return this.setPosition(
+            this.getRow(),
+            new Column(
+                this.getColumn().getScreenPosition() - Consts.HERO_SPEED
+            )
+        );
     }
 }

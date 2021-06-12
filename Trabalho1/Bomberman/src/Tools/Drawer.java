@@ -24,8 +24,8 @@ public class Drawer {
         element.getImage().paintIcon(
             screen,
             getScreenGraphics(),
-            position.getColumn() * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR,
-            position.getRow() * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR
+            position.getColumn().getScreenPosition() * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR,
+            position.getRow().getScreenPosition() * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR
         );
     }
 
