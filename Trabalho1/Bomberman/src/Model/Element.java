@@ -5,6 +5,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import Tools.Consts;
@@ -13,18 +17,21 @@ import Tools.Position.Position;
 
 
 public class Element implements Serializable {
-    protected ImageIcon image;
+    protected ArrayList<ImageIcon> images;
     protected Position position;
     protected boolean canBePassedThrough; /*Pode passar por cima?*/
     protected boolean killOnTouch;       /*Se encostar, morre?*/
     protected EventBus eventBus;
+    private int imgIndex = 0;
 
     protected Element(String imageName, EventBus eventBus) {
         this.position = new Position(1, 1);
         this.canBePassedThrough = true;
         this.killOnTouch = false;
         this.eventBus = eventBus;
-        loadImage(imageName);
+        images = new ArrayList<ImageIcon>(4);
+        loadImages(Consts.SPRITE_NAME);
+        startImageSchedule();
     }
 
     public Position getPosition() {
@@ -64,26 +71,46 @@ public class Element implements Serializable {
     }
 
     public ImageIcon getImage() {
-        return image;
+        return images.get(imgIndex);
     }
 
-    private void loadImage(String imageName) {
-        try {
-            BufferedImage bigImg = ImageIO.read(new File(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName));
-            BufferedImage img = bigImg.getSubimage(
-                390,
-                151,
-                16,
-                16
-            );
+    private void startImageSchedule() {
+        TimerTask redraw = new TimerTask() {
+            public void run() {
+                iterateImgIndex(); /*(executa o metodo paint)*/
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(redraw, 0, 500);
+    }
+
+    public void iterateImgIndex() {
+        imgIndex++;
+        if (imgIndex == 3) {
+            imgIndex = 0;
+        }
+    }
+
+    private void loadImages(String imageName) {
+        int[] imgCoords = {356, 373, 390, 373};
+        for (int x: imgCoords) {
+            try {
+                BufferedImage bigImg = ImageIO.read(new File(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName));
+                BufferedImage img = bigImg.getSubimage(
+                    x,
+                    151,
+                    16,
+                    16
+                );
 
             BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
             Graphics g = bi.createGraphics();
             g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
             g.dispose();
-            image = new ImageIcon(bi);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
+            images.add(new ImageIcon(bi));
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
         }
     }
 }
