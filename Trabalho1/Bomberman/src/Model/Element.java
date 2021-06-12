@@ -31,7 +31,7 @@ public class Element implements Serializable {
         return position;
     }
 
-    public boolean canPassThrough() {
+    public boolean canBePassedThrough() {
         return canBePassedThrough;
     }
 
