@@ -9,10 +9,8 @@ public class EventBus {
     private Screen screen;
 
     public EventBus(Screen screen) {
+        eventMap = new LinkedHashMap<String,Event>(50);
         this.screen = screen;
-    }
-    public EventBus() {
-        eventMap = new LinkedHashMap<>(50);
     }
 
     public void on(String name, Event event) {
