@@ -2,6 +2,7 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
+import Tools.Position.HeroHitBox;
 import Tools.Position.HitBox;
 import Tools.Position.Position;
 
@@ -29,19 +30,29 @@ public class Controller {
         for(int i = 1; i < e.size(); i++){
             temp = e.get(i); /*Pega o i-esimo elemento do jogo*/
             /*Verifica se o heroi se sobrepoe ao i-ésimo elemento*/
-            if(hero.getPosition().isSamePosition(temp.getPosition()))
-                /*Nem todos os elementos podem ser transpostos pelo heroi*/
-                if(!temp.canPassThrough())
-                    e.remove(temp);
+            if(
+                HitBox.isHiting(
+                    new HeroHitBox(hero.getPosition()),
+                    new HitBox(temp.getPosition())
+                )
+            ) {
+                continue;
+            }
         }
     }
     public boolean isPositionValid(ArrayList<Element> elements, Hero hero){
             Element element;
             for(int i = 1; i < elements.size(); i++) {
                 element = elements.get(i);
-                boolean isHiting = HitBox.isHiting(element.getPosition(), hero.getPosition());
-                if (isHiting){
-                    return false;
+                if (!element.canBePassedThrough()) {
+                    boolean isHiting = HitBox.isHiting(
+                        new HeroHitBox(hero.getPosition()),
+                        new HitBox(element.getPosition())
+                    );
+                    if (isHiting){
+                        System.out.println("HIT");
+                        return false;
+                    }
                 }
             }
         return true;
