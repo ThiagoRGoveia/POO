@@ -43,6 +43,10 @@ public class Element implements Serializable {
         return position.setPosition(row, column);
     }
 
+    public boolean setPosition(Position position) {
+        return this.position.setPosition(position);
+    }
+
     public boolean moveUp() {
         return this.position.moveUp();
     }

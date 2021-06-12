@@ -16,6 +16,10 @@ public class Position {
         this.setPosition(row, column);
     }
 
+    public Position(Row row, Column column){
+        this.setPosition(row, column);
+    }
+
     public boolean setPosition(int row, int column) {
         return this.setPosition(
             new Row(
@@ -46,6 +50,11 @@ public class Position {
             return false;
         }
         this.column = column;
+        return true;
+    }
+
+    public boolean setPosition(Position position) {
+        setPosition(position.getRow(), position.getColumn());
         return true;
     }
 
