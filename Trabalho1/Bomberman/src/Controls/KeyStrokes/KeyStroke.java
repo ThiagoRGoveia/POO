@@ -1,7 +1,7 @@
 package Controls.KeyStrokes;
 
-import Model.Element;
+import Model.Hero;
 
 public interface KeyStroke {
-    public boolean execute(Element element);
+    public boolean execute(Hero hero);
 }

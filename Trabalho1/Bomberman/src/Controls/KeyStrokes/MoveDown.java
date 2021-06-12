@@ -1,9 +1,9 @@
 package Controls.KeyStrokes;
 
-import Model.Element;
+import Model.Hero;
 
 public class MoveDown implements KeyStroke {
-    public boolean execute(Element element) {
-        return element.moveDown();
+    public boolean execute(Hero hero) {
+        return hero.moveDown();
     }
 }

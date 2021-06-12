@@ -1,9 +1,9 @@
 package Controls.KeyStrokes;
 
-import Model.Element;
+import Model.Hero;
 
 public class MoveRight implements KeyStroke {
-    public boolean execute(Element element) {
-        return element.moveRight();
+    public boolean execute(Hero hero) {
+        return hero.moveRight();
     }
 }
