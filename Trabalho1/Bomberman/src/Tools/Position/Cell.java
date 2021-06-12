@@ -25,7 +25,7 @@ public abstract class Cell {
     }
 
     public void setCoordinate(int screenPosition) {
-        this.coordinate = new Coordinate(screenPosition / Consts.CELL_SIZE_FACTOR);
+        this.coordinate = new Coordinate((screenPosition + Consts.CELL_SIZE_FACTOR/2) / Consts.CELL_SIZE_FACTOR);
     }
 
     public void setCoordinate(Coordinate coordinate) {
