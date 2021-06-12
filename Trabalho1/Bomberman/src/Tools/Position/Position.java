@@ -40,7 +40,6 @@ public class Position {
             setRow(Consts.SCREEN_BOUNDARY);
             return false;
         }
-        this.row = row;
         if (column.getScreenPosition().value < 0) {
             setColumn(0);
             return false;
@@ -49,6 +48,9 @@ public class Position {
             setColumn(Consts.SCREEN_BOUNDARY);
             return false;
         }
+        this.previousRow = this.row;
+        this.previousColumn = this.column;
+        this.row = row;
         this.column = column;
         return true;
     }
@@ -80,12 +82,6 @@ public class Position {
 
     public boolean reset(){
         return this.setPosition(previousRow, previousColumn);
-    }
-
-
-    public boolean isSamePosition(Position position){
-        return row.getCoordinate() == position.getRow().getCoordinate() &&
-            column.getCoordinate() == position.getColumn().getCoordinate();
     }
 
     public boolean copy(Position position){
