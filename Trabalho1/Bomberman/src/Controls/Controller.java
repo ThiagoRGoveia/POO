@@ -4,7 +4,6 @@ import Model.Element;
 import Model.Hero;
 import Tools.Position.HeroHitBox;
 import Tools.Position.HitBox;
-import Tools.Position.Position;
 
 import java.util.ArrayList;
 
@@ -36,7 +35,7 @@ public class Controller {
                     new HitBox(temp.getPosition())
                 )
             ) {
-                continue;
+                continue; // INTERAGIR
             }
         }
     }
@@ -50,7 +49,6 @@ public class Controller {
                         new HitBox(element.getPosition())
                     );
                     if (isHiting){
-                        System.out.println("HIT");
                         return false;
                     }
                 }

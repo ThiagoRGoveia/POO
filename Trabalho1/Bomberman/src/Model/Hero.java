@@ -1,14 +1,22 @@
 package Model;
 
 import Tools.Events.EventBus;
+import Tools.Image.Boundaries;
+import Tools.Image.LoadImage;
 import Tools.Position.Column;
 import Tools.Position.Coordinate;
 import Tools.Position.Position;
 import Tools.Position.Row;
 
-public class Hero extends Element {
+public class Hero extends StaticElement {
     public Hero (EventBus eventBus) {
-        super("b_parado.png", eventBus);
+        super(
+            eventBus,
+            LoadImage.loadImageFromFile(
+                "b_parado.png",
+                new Boundaries(0,0,31,31)
+            )
+        );
     }
 
     public void resetToLastPosition(){

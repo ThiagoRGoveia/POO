@@ -16,4 +16,5 @@ public class Consts {
     public static final int HERO_HIT_BOX_FACTOR = 3;
     public static final int HERO_SPEED = 1;
     public static final int SCREEN_BOUNDARY = Consts.CELL_SIZE_FACTOR * (Consts.RES - 1);
+    public static final String SPRITE_NAME = "all.png";
 }
