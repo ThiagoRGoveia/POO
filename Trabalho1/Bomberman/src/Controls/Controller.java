@@ -2,7 +2,8 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
-import Tools.Position;
+import Tools.Position.Position;
+
 import java.util.ArrayList;
 
 /**

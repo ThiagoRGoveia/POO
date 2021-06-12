@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import java.io.Serializable;
 import javax.swing.ImageIcon;
 import Model.Element;
-
+import Tools.Position.Position;
 import Controls.Screen;
 
 public class Drawer {
@@ -24,8 +24,8 @@ public class Drawer {
         element.getImage().paintIcon(
             screen,
             getScreenGraphics(),
-            position.getColumn().getScreenPosition() * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR,
-            position.getRow().getScreenPosition() * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR
+            position.getColumn().getScreenPosition().value * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR,
+            position.getRow().getScreenPosition().value * Consts.CELL_SIDE / Consts.CELL_SIZE_FACTOR
         );
     }
 
