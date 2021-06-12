@@ -8,6 +8,7 @@ import java.io.Serializable;
 import javax.swing.ImageIcon;
 
 import Tools.Consts;
+import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 
@@ -16,21 +17,14 @@ public class Element implements Serializable {
     protected Position position;
     protected boolean canBePassedThrough; /*Pode passar por cima?*/
     protected boolean killOnTouch;       /*Se encostar, morre?*/
+    protected EventBus eventBus;
 
-    protected Element(String imageName) {
+    protected Element(String imageName, EventBus eventBus) {
         this.position = new Position(1, 1);
         this.canBePassedThrough = true;
         this.killOnTouch = false;
-        try {
-            image = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName);
-            Image img = image.getImage();
-            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
-            Graphics g = bi.createGraphics();
-            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-            image = new ImageIcon(bi);
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        this.eventBus = eventBus;
+        loadImage(imageName);
     }
 
     public Position getPosition() {
@@ -67,5 +61,18 @@ public class Element implements Serializable {
 
     public ImageIcon getImage() {
         return image;
+    }
+
+    private void loadImage(String imageName) {
+        try {
+            image = new ImageIcon(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName);
+            Image img = image.getImage();
+            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bi.createGraphics();
+            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            image = new ImageIcon(bi);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

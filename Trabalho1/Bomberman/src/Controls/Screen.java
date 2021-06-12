@@ -3,6 +3,9 @@ package Controls;
 import Model.Element;
 import Model.Hero;
 import Tools.*;
+import Tools.Events.CreateElementsEvent;
+import Tools.Events.EventBus;
+import Tools.Events.RemoveElementsEvent;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -19,6 +22,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Controller controller = new Controller(this);
     private Graphics graphics;
     private Movements movements;
+    private EventBus eventBus;
 
     public Screen(Drawer drawer) {
         this.drawer = drawer;
@@ -26,6 +30,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);  /*teclado*/
+
         this.setSize(
             (
                 (Consts.RES * Consts.CELL_SIDE) +
@@ -37,9 +42,13 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
+        eventBus = new EventBus(this);
+        eventBus.on("create-element", new CreateElementsEvent());
+        eventBus.on("remove-element", new RemoveElementsEvent());
+
         elements = new ArrayList<Element>(100);
 
-        hero = new Hero();
+        hero = new Hero(eventBus);
         hero.setPosition(0, 0);
         this.addElement(hero);
 

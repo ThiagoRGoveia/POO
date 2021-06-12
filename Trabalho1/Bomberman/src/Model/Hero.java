@@ -1,8 +1,10 @@
 package Model;
 
+import Tools.Events.EventBus;
+
 public class Hero extends Element {
-    public Hero () {
-        super("skooter_hero.png");
+    public Hero (EventBus eventBus) {
+        super("skooter_hero.png", eventBus);
     }
 
     public void resetToLastPosition(){
