@@ -41,7 +41,7 @@ public class Controller {
                 element = elements.get(i);
                 boolean isHiting = HitBox.isHiting(element.getPosition(), hero.getPosition());
                 if (isHiting){
-                    System.out.println("HIT");
+                    return false;
                 }
             }
         return true;
