@@ -13,4 +13,5 @@ public class Consts {
     public static final int TIMER_DISPARO = 20; /*Em numero de frames (redesenhos)*/
     public static final String PATH = File.separator+"imgs"+File.separator;
     public static final int CELL_SIZE_FACTOR = 10;
+    public static final int HERO_SPEED = 4;
 }
