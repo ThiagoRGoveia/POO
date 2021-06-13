@@ -45,7 +45,7 @@ public class Controller {
             Element element;
             for(int i = 1; i < elements.size(); i++) {
                 element = elements.get(i);
-                if (!element.canBePassedThrough()) {
+                if (!element.traversable()) {
                     boolean isHiting = HitBox.isHiting(
                         new HeroHitBox(hero.getPosition()),
                         new HitBox(element.getPosition())

@@ -9,7 +9,7 @@ import Tools.Position.Position;
 
 public abstract class Element implements Serializable, Drawable, Interactable {
     protected Position position;
-    protected boolean canBePassedThrough; /*Pode passar por cima?*/
+    protected boolean traversable; /*Pode passar por cima?*/
     protected boolean killOnTouch;       /*Se encostar, morre?*/
     protected EventBus eventBus;
 
@@ -22,12 +22,12 @@ public abstract class Element implements Serializable, Drawable, Interactable {
         return position;
     }
 
-    public boolean canBePassedThrough() {
-        return canBePassedThrough;
+    public boolean traversable() {
+        return traversable;
     }
 
-    public void setCanBePassedThrough(boolean canBePassedThrough) {
-        this.canBePassedThrough = canBePassedThrough;
+    public void setTraversable(boolean traversable) {
+        this.traversable = traversable;
     }
 
     public boolean setPosition(int row, int column) {

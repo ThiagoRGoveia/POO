@@ -17,13 +17,13 @@ public class Bomb extends AnimatedElement {
             ),
             eventBus
         );
-        this.canBePassedThrough = true;
+        this.traversable = true;
 
         schedulePropertyChange();
     }
 
     private void turnBlockable() {
-        this.canBePassedThrough = false;
+        this.traversable = false;
     }
 
     private void schedulePropertyChange() {
