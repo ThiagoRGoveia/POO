@@ -18,9 +18,10 @@ public class Controller {
         this.screen = screen;
     }
     public void draw(ArrayList<Element> e){
-        for(int i = 0; i < e.size(); i++){
+        for(int i = 1; i < e.size(); i++){
             screen.drawer.draw(e.get(i));
         }
+        screen.drawer.draw(e.get(0)); // Desenhar o herói por último
     }
     public void process(ArrayList<Element> e){
         Hero hero = (Hero)e.get(0); /*O heroi (protagonista) eh sempre o primeiro do array*/
