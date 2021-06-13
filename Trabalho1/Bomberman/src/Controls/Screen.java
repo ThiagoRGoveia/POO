@@ -17,12 +17,12 @@ import Controls.KeyStrokes.Movements;
 
 public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener {
     public Drawer drawer;
+    private EventBus eventBus;
     private Hero hero;
     private ArrayList<Element> elements;
     private Controller controller = new Controller(this);
     private Graphics graphics;
     private Movements movements;
-    private EventBus eventBus;
     private InteractionMap interactionMap;
 
     public Screen(Drawer drawer) {
@@ -73,6 +73,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         return interactionMap;
     }
 
+    public EventBus getEventBus() {
+        return eventBus;
+    }
+
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/
     public void paint(Graphics oldGraphics) {
         Graphics newGraphics = this.getBufferStrategy().getDrawGraphics();
@@ -105,7 +109,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         /*Aqui podem ser inseridos novos processamentos de controle*/
         if (!this.elements.isEmpty()) {
             this.controller.draw(elements);
-            this.controller.process(elements);
+            this.controller.process(hero);
         }
 
         newGraphics.dispose();
