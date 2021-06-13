@@ -7,7 +7,7 @@ import Tools.Image.Animator;
 import Tools.Image.Boundaries;
 
 public class Bomb extends AnimatedElement {
-    Timer traversableCancelation;
+    Timer traversableCancelationTimer;
     public Bomb (EventBus eventBus) {
         super(
             new Animator(
@@ -19,21 +19,21 @@ public class Bomb extends AnimatedElement {
         );
         this.traversable = true;
 
-        schedulePropertyChange();
+        scheduleTraversableChange();
     }
 
     private void turnBlockable() {
         this.traversable = false;
     }
 
-    private void schedulePropertyChange() {
+    private void scheduleTraversableChange() {
         TimerTask task = new TimerTask() {
             public void run() {
                 turnBlockable();
             }
         };
-        Timer time = new Timer();
-        time.schedule(task, 2000);
+        traversableCancelationTimer = new Timer();
+        traversableCancelationTimer.schedule(task, 1000);
     }
 
     private static Boundaries[] bombSpritesBoundaries() {
@@ -41,12 +41,15 @@ public class Bomb extends AnimatedElement {
             new Boundaries(356, 151, 16, 16),
             new Boundaries(373, 151, 16, 16),
             new Boundaries(390, 151, 16, 16),
-            new Boundaries(373, 151, 16, 16),
+            new Boundaries(373, 151, 16, 16)
         };
         return boundaries;
     }
 
-    public void interact(Hero hero) {}
+    public void interact(Hero hero) {
+        this.traversableCancelationTimer.cancel();
+        scheduleTraversableChange();
+    }
 
     public void interact(Enemy enemy) {}
 
