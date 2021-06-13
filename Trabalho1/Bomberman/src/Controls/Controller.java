@@ -2,6 +2,7 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
+import Tools.InteractionMap;
 import Tools.Position.HeroHitBox;
 import Tools.Position.HitBox;
 
@@ -55,5 +56,14 @@ public class Controller {
                 }
             }
         return true;
+    }
+
+    public void processHeroInteraction(Hero hero) {
+        InteractionMap map = screen.getInteractionMap();
+        Element element = map.get(hero.getPosition());
+        if (element != null) {
+            element.interact(hero);
+        }
+
     }
 }
