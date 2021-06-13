@@ -7,7 +7,7 @@ import Model.Explosion;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 
-public class FirstExplosion extends Explosion {
+public class FirstExplosion extends Explosion implements Propagable {
     private Timer propagationTimer;
 
     public FirstExplosion (Animator animator, EventBus eventBus, int intensity) {
@@ -26,10 +26,10 @@ public class FirstExplosion extends Explosion {
         propagationTimer.schedule(task, 50);
     }
 
-    private void propagateExplosion() {
+    public void propagateExplosion() {
         propagateUp();
         propagateDown();
         propagateLeft();
-        propagateright();
+        propagateRight();
     }
 }

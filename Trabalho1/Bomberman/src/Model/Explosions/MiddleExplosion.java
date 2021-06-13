@@ -7,7 +7,7 @@ import Model.Explosion;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 
-public abstract class MiddleExplosion extends Explosion {
+public abstract class MiddleExplosion extends Explosion implements Propagable {
     private Timer propagationTimer;
 
     public MiddleExplosion (Animator animator, EventBus eventBus) {
@@ -23,6 +23,4 @@ public abstract class MiddleExplosion extends Explosion {
         propagationTimer = new Timer();
         propagationTimer.schedule(task, 50);
     }
-
-    protected abstract void propagateExplosion();
 }

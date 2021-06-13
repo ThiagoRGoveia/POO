@@ -3,18 +3,30 @@ package Model.Explosions.Directions;
 import Model.Explosions.MiddleExplosion;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
+import Tools.Image.Boundaries;
 
-public class VerticalMiddleExplosion extends MiddleExplosion {
+public abstract class VerticalMiddleExplosion extends MiddleExplosion {
 
-    public VerticalMiddleExplosion(Animator animator, EventBus eventBus) {
-        super(animator, eventBus);
-        //TODO Auto-generated constructor stub
+    public VerticalMiddleExplosion(EventBus eventBus, int intensity) {
+        super(
+            new Animator(
+                "all.png",
+                5,
+                VerticalMiddleExplosion.bombSpritesBoundaries()
+            ),
+            eventBus
+        );
+        this.intensity = intensity;
     }
 
-    @Override
-    protected void propagateExplosion() {
-        // TODO Auto-generated method stub
-
+    private static Boundaries[] bombSpritesBoundaries() {
+        Boundaries[] boundaries = {
+            new Boundaries(304, 134, 16, 16),
+            new Boundaries(287, 134, 16, 16),
+            new Boundaries(373, 117, 16, 16),
+            new Boundaries(356, 117, 16, 16),
+            new Boundaries(339, 117, 16, 16)
+        };
+        return boundaries;
     }
-
 }

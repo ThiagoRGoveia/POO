@@ -1,11 +1,7 @@
 package Model;
 
-import Model.Explosions.Directions.HoriziontalLeftLastExplosion;
-import Model.Explosions.Directions.HorizontalMiddleExplosion;
-import Model.Explosions.Directions.HorizontalRightLastExplosion;
-import Model.Explosions.Directions.VerticalDownLastExplosion;
-import Model.Explosions.Directions.VerticalMiddleExplosion;
-import Model.Explosions.Directions.VerticalUpLastExplosion;
+import Model.Explosions.Propagable;
+import Model.Explosions.Directions.*;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 import Tools.Position.Position;
@@ -31,9 +27,9 @@ public abstract class Explosion extends AnimatedElement {
         Position position = this.getPosition();
         Explosion explodeUp;
         if (intensity == 0) {
-            explodeUp = new VerticalUpLastExplosion();
+            explodeUp = new VerticalUpLastExplosion(eventBus);
         } else {
-            explodeUp = new VerticalMiddleExplosion(intensity - 1);
+            explodeUp = new VerticalUpMiddleExplosion(eventBus, intensity - 1);
         }
         explodeUp.setPosition(
             position.getRow().getCoordinate().value - 1,
@@ -46,9 +42,9 @@ public abstract class Explosion extends AnimatedElement {
         Position position = this.getPosition();
         Explosion explodeDown;
         if (intensity == 0) {
-            explodeDown = new VerticalDownLastExplosion();
+            explodeDown = new VerticalDownLastExplosion(eventBus);
         } else {
-            explodeDown = new VerticalMiddleExplosion(intensity - 1);
+            explodeDown = new VerticalDownMiddleExplosion(eventBus, intensity - 1);
         }
         explodeDown.setPosition(
             position.getRow().getCoordinate().value + 1,
@@ -61,9 +57,9 @@ public abstract class Explosion extends AnimatedElement {
         Position position = this.getPosition();
         Explosion explodeLeft;
         if (intensity == 0) {
-            explodeLeft = new HoriziontalLeftLastExplosion();
+            explodeLeft = new HoriziontalLeftLastExplosion(eventBus);
         } else {
-            explodeLeft = new HorizontalMiddleExplosion(intensity - 1);
+            explodeLeft = new HorizontalLeftMiddleExplosion(eventBus, intensity - 1);
         }
         explodeLeft.setPosition(
             position.getRow().getCoordinate().value,
@@ -72,20 +68,18 @@ public abstract class Explosion extends AnimatedElement {
         this.eventBus.emit("create-explosion",explodeLeft);
 
     }
-    protected void propagateright() {
+    protected void propagateRight() {
         Position position = this.getPosition();
         Explosion explodeRight;
         if (intensity == 0) {
-            explodeRight = new HorizontalRightLastExplosion();
+            explodeRight = new HorizontalRightLastExplosion(eventBus);
         } else {
-            explodeRight = new HorizontalMiddleExplosion(intensity - 1);
+            explodeRight = new HorizontalRightMiddleExplosion(eventBus, intensity - 1);
         }
         explodeRight.setPosition(
             position.getRow().getCoordinate().value ,
             position.getColumn().getCoordinate().value + 1
         );
         this.eventBus.emit("create-explosion", explodeRight);
-
     }
-
 }
