@@ -1,6 +1,5 @@
 package Model;
 
-import Model.Explosions.Propagable;
 import Model.Explosions.Directions.*;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;

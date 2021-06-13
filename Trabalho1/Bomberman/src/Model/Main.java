@@ -1,16 +1,9 @@
 package Model;
 
 
-import java.util.LinkedHashMap;
 
 import Controls.Screen;
 import Tools.Drawer;
-import Tools.Events.Event;
-import Tools.Events.EventBus;
-import Tools.Position.Column;
-import Tools.Position.Position;
-import Tools.Position.Row;
-
 /**
  *
  * @author junio
