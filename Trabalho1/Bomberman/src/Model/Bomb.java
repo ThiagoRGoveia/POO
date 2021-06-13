@@ -9,7 +9,8 @@ import Tools.Image.Boundaries;
 public class Bomb extends AnimatedElement {
     Timer traversableCancelationTimer;
     Timer explosionTimer;
-    public Bomb (EventBus eventBus) {
+    int intensiy;
+    public Bomb (EventBus eventBus, int intensity) {
         super(
             new Animator(
                 "all.png",
