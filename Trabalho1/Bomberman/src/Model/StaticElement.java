@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 import Tools.Events.EventBus;
 
-public class StaticElement extends Element {
+public abstract class StaticElement extends Element {
     private ImageIcon image;
 
     protected StaticElement(EventBus eventBus, ImageIcon image) {

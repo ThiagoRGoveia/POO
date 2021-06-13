@@ -1,11 +1,13 @@
 package Model;
 
 import java.io.Serializable;
+
+import Tools.Interactable;
 import Tools.Events.EventBus;
 import Tools.Image.Drawable;
 import Tools.Position.Position;
 
-public abstract class Element implements Serializable, Drawable {
+public abstract class Element implements Serializable, Drawable, Interactable {
     protected Position position;
     protected boolean canBePassedThrough; /*Pode passar por cima?*/
     protected boolean killOnTouch;       /*Se encostar, morre?*/
