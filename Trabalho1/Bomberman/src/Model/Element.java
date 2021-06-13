@@ -22,7 +22,7 @@ public abstract class Element implements Serializable, Drawable, Interactable {
         return position;
     }
 
-    public boolean traversable() {
+    public boolean isTraversable() {
         return traversable;
     }
 
