@@ -3,9 +3,7 @@ package Model.Explosions;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import Model.Enemy;
 import Model.Explosion;
-import Model.Hero;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 

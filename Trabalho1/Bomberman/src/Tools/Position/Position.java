@@ -1,7 +1,5 @@
 package Tools.Position;
 
-import java.io.Serializable;
-
 import Tools.Consts;
 
 
