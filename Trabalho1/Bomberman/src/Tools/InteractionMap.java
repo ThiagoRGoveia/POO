@@ -13,4 +13,7 @@ public class InteractionMap {
     public Element get(Position position) {
         return interactionMap[position.getRow().getCoordinate().value][position.getColumn().getCoordinate().value];
     }
+    public void remove(Position position) {
+        interactionMap[position.getRow().getCoordinate().value][position.getColumn().getCoordinate().value] = null;
+    }
 }
