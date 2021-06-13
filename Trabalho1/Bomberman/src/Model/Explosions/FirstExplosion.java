@@ -10,8 +10,10 @@ import Tools.Image.Animator;
 public class FirstExplosion extends Explosion {
     private Timer propagationTimer;
 
-    public FirstExplosion (Animator animator, EventBus eventBus) {
+    public FirstExplosion (Animator animator, EventBus eventBus, int intensity) {
         super(animator, eventBus);
+        this.intensity = intensity;
+        propagateExplosion();
     }
 
     public void setPropagationTimer() {
@@ -25,5 +27,9 @@ public class FirstExplosion extends Explosion {
     }
 
     private void propagateExplosion() {
+        propagateUp();
+        propagateDown();
+        propagateLeft();
+        propagateright();
     }
 }
