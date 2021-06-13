@@ -128,4 +128,20 @@ public class Position {
             )
         );
     }
+
+    public static boolean isPositionOutOfBoundaries(Position position) {
+        if (position.getRow().getScreenPosition().value < 0) {
+            return true;
+        }
+        if (position.getRow().getScreenPosition().value > Consts.SCREEN_BOUNDARY) {
+            return true;
+        }
+        if (position.getColumn().getScreenPosition().value < 0) {
+            return true;
+        }
+        if (position.getColumn().getScreenPosition().value > Consts.SCREEN_BOUNDARY) {
+            return true;
+        }
+        return false;
+    }
 }
