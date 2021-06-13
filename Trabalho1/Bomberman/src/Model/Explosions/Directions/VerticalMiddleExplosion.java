@@ -12,6 +12,8 @@ public abstract class VerticalMiddleExplosion extends MiddleExplosion {
             new Animator(
                 "all.png",
                 5,
+                false,
+                50,
                 VerticalMiddleExplosion.bombSpritesBoundaries()
             ),
             eventBus

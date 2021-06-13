@@ -16,28 +16,52 @@ public class Animator {
     private ArrayList<ImageIcon> images;
     private int imgIndex = 0;
     private int numberOfImages;
+    private Timer timer;
 
-    public Animator(String imageName, int numberOfImages, Boundaries... boundaries) {
+    public Animator(String imageName, int numberOfImages, boolean isLoop, long interval, Boundaries... boundaries) {
         this.numberOfImages = numberOfImages;
         images = new ArrayList<ImageIcon>(numberOfImages);
         loadImages(imageName, boundaries);
-        startImageSchedule();
+        startImageSchedule(isLoop, interval);
     }
 
-    public void iterateImgIndex() {
+    private void iterateImgIndexLoop() {
         if (imgIndex++ == numberOfImages) {
             imgIndex = 0;
         }
     }
 
-    private void startImageSchedule() {
-        TimerTask redraw = new TimerTask() {
+    private void iterateImgIndexOnce() {
+        if (imgIndex++ == numberOfImages) {
+            timer.cancel();
+        }
+    }
+
+    private TimerTask getLoopTimerTask() {
+        return new TimerTask() {
             public void run() {
-                iterateImgIndex();
+                iterateImgIndexLoop();
             }
         };
-        Timer timer = new Timer();
-        timer.schedule(redraw, 0, 500);
+    }
+
+    private TimerTask getOneTimeTimerTask() {
+        return new TimerTask() {
+            public void run() {
+                iterateImgIndexOnce();
+            }
+        };
+    }
+
+    private void startImageSchedule(boolean isLoop, long interval) {
+        TimerTask changeImageTask;
+        if (isLoop) {
+            changeImageTask = getLoopTimerTask();
+        } else {
+            changeImageTask = getOneTimeTimerTask();
+        }
+        timer = new Timer();
+        timer.schedule(changeImageTask, 0, interval);
     }
 
     private void loadImages(String imageName, Boundaries[] boundariesList) {

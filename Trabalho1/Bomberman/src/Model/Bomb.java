@@ -15,6 +15,8 @@ public class Bomb extends AnimatedElement {
             new Animator(
                 "all.png",
                 4,
+                true,
+                500,
                 Bomb.bombSpritesBoundaries()
             ),
             eventBus

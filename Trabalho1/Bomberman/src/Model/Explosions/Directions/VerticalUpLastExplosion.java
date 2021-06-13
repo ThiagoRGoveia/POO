@@ -12,6 +12,8 @@ public class VerticalUpLastExplosion extends LastExplosion {
             new Animator(
                 "all.png",
                 5,
+                false,
+                50,
                 VerticalUpLastExplosion.bombSpritesBoundaries()
             ),
             eventBus
