@@ -3,10 +3,7 @@ package Controls;
 import Model.Element;
 import Model.Hero;
 import Tools.*;
-import Tools.Events.CreateElementsEvent;
-import Tools.Events.EventBus;
-import Tools.Events.RemoveElementsEvent;
-
+import Tools.Events.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
