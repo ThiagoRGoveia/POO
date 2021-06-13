@@ -24,28 +24,19 @@ public class Controller {
         }
         screen.drawer.draw(e.get(0)); // Desenhar o herói por último
     }
-    public void process(ArrayList<Element> e){
-        Hero hero = (Hero)e.get(0); /*O heroi (protagonista) eh sempre o primeiro do array*/
-        Element temp;
-        /*Processa todos os demais em relacao ao heroi*/
-        for(int i = 1; i < e.size(); i++){
-            temp = e.get(i); /*Pega o i-esimo elemento do jogo*/
-            /*Verifica se o heroi se sobrepoe ao i-ésimo elemento*/
-            if(
-                HitBox.isHiting(
-                    new HeroHitBox(hero.getPosition()),
-                    new HitBox(temp.getPosition())
-                )
-            ) {
-                continue; // INTERAGIR
-            }
+    public void process(Hero hero){
+        InteractionMap map = screen.getInteractionMap();
+        Element element = map.get(hero.getPosition());
+        if (element != null) {
+            element.interact(hero);
         }
+
     }
     public boolean isPositionValid(ArrayList<Element> elements, Hero hero){
             Element element;
             for(int i = 1; i < elements.size(); i++) {
                 element = elements.get(i);
-                if (!element.traversable()) {
+                if (!element.isTraversable()) {
                     boolean isHiting = HitBox.isHiting(
                         new HeroHitBox(hero.getPosition()),
                         new HitBox(element.getPosition())
@@ -58,12 +49,13 @@ public class Controller {
         return true;
     }
 
-    public void processHeroInteraction(Hero hero) {
+    public void processHeroMovement(Hero hero) {
         InteractionMap map = screen.getInteractionMap();
         Element element = map.get(hero.getPosition());
         if (element != null) {
-            element.interact(hero);
+            if (!element.isTraversable()) {
+                hero.getPosition().reset();
+            }
         }
-
     }
 }
