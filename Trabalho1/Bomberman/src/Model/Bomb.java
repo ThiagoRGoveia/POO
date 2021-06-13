@@ -33,7 +33,7 @@ public class Bomb extends AnimatedElement {
             }
         };
         traversableCancelationTimer = new Timer();
-        traversableCancelationTimer.schedule(task, 1000);
+        traversableCancelationTimer.schedule(task, 500);
     }
 
     private static Boundaries[] bombSpritesBoundaries() {

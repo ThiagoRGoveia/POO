@@ -23,10 +23,10 @@ public class Position {
     public boolean setPosition(int row, int column) {
         return this.setPosition(
             new Row(
-                new ScreenPosition(row)
+                new Coordinate(row)
             ),
             new Column(
-                new ScreenPosition(column)
+                new Coordinate(column)
             )
         );
     }
