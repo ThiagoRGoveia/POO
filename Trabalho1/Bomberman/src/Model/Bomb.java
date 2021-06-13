@@ -8,6 +8,7 @@ import Tools.Image.Boundaries;
 
 public class Bomb extends AnimatedElement {
     Timer traversableCancelationTimer;
+    Timer explosionTimer;
     public Bomb (EventBus eventBus) {
         super(
             new Animator(
@@ -20,6 +21,7 @@ public class Bomb extends AnimatedElement {
         this.traversable = true;
 
         scheduleTraversableChange();
+        setExplosionTimer();
     }
 
     private void turnBlockable() {
@@ -34,6 +36,20 @@ public class Bomb extends AnimatedElement {
         };
         traversableCancelationTimer = new Timer();
         traversableCancelationTimer.schedule(task, 500);
+    }
+
+    private void setExplosionTimer() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                explode();
+            }
+        };
+        explosionTimer = new Timer();
+        explosionTimer.schedule(task, 5000);
+    }
+
+    private void explode() {
+        System.out.println("BUM");
     }
 
     private static Boundaries[] bombSpritesBoundaries() {
