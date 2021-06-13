@@ -45,8 +45,6 @@ public class Hero extends StaticElement {
 
     public void interact(Hero hero) {}
 
-    public void interact(Item item) {}
-
     public void interact(Enemy enemy) {}
 
     public void interact(Explosion explosion) {}

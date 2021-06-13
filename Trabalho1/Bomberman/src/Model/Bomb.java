@@ -7,6 +7,7 @@ import Tools.Image.Animator;
 import Tools.Image.Boundaries;
 
 public class Bomb extends AnimatedElement {
+    Timer traversableCancelation;
     public Bomb (EventBus eventBus) {
         super(
             new Animator(
@@ -46,8 +47,6 @@ public class Bomb extends AnimatedElement {
     }
 
     public void interact(Hero hero) {}
-
-    public void interact(Item item) {}
 
     public void interact(Enemy enemy) {}
 
