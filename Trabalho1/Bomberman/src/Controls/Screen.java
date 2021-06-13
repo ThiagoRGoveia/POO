@@ -23,6 +23,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Graphics graphics;
     private Movements movements;
     private EventBus eventBus;
+    private InteractionMap interactionMap;
 
     public Screen(Drawer drawer) {
         this.drawer = drawer;
@@ -53,6 +54,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         this.addElement(hero);
 
         movements = new Movements();
+        interactionMap= new InteractionMap();
     }
 
     public void addElement(Element element) {
@@ -65,6 +67,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public Graphics getGraphicsBuffer(){
         return graphics;
+    }
+
+    public InteractionMap getInteractionMap() {
+        return interactionMap;
     }
 
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/
