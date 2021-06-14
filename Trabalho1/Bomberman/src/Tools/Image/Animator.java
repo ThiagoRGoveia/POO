@@ -22,16 +22,18 @@ public class Animator {
     private boolean isLoop;
     private long interval;
 
-    public Animator(String imageName, int numberOfImages, boolean isLoop, long interval, Boundaries... boundaries) {
+    public Animator(boolean isLoop, long interval, ArrayList<ImageIcon> images) {
         this.isLoop = isLoop;
         this.interval = interval;
-        this.numberOfImages = numberOfImages;
-        images = new ArrayList<ImageIcon>(numberOfImages);
-        loadImages(imageName, boundaries);
+        this.images = images;
     }
 
     public void start() {
         startImageSchedule(isLoop, interval);
+    }
+
+    public void stop() {
+        timer.cancel();
     }
 
     private void iterateImgIndexLoop() {
@@ -72,28 +74,6 @@ public class Animator {
         }
         timer = new Timer();
         timer.schedule(changeImageTask, 0, interval);
-    }
-
-    private void loadImages(String imageName, Boundaries[] boundariesList) {
-        for (Boundaries boundaries: boundariesList) {
-            try {
-                BufferedImage bigImg = ImageIO.read(new File(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName));
-                BufferedImage img = bigImg.getSubimage(
-                    boundaries.x,
-                    boundaries.y,
-                    boundaries.width,
-                    boundaries.height
-                );
-
-                BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
-                Graphics g = bi.createGraphics();
-                g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-                g.dispose();
-                images.add(new ImageIcon(bi));
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-        }
     }
 
     public ImageIcon getImage() {

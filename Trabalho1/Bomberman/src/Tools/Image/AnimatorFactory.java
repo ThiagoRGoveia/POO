@@ -2,107 +2,106 @@ package Tools.Image;
 
 import java.util.LinkedHashMap;
 
-import Tools.Image.Boundaries.BoundaryFactory;
-
 public class AnimatorFactory {
-    private BoundaryFactory boundaryFactory;
-    private LinkedHashMap<String,Animator> animatorMap;
+    private LinkedHashMap<String,Creatable> animatorMap;
+    private ImageFactory imageLoader;
 
-    public AnimatorFactory(BoundaryFactory boundaryFactory) {
-        this.boundaryFactory = boundaryFactory;
-        animatorMap = new LinkedHashMap<String,Animator>(8);
+    public AnimatorFactory(ImageFactory imageLoader) {
+        animatorMap = new LinkedHashMap<String,Creatable>(8);
+        this.imageLoader = imageLoader;
 
-        animatorMap.put("bomb", setBomb());
-        animatorMap.put("first-explosion", setFirstExplosion());
-        animatorMap.put("horizontal-left-last-explosion", setHoriziontalLeftLastExplosion());
-        animatorMap.put("horizontal-right-last-explosion", setHorizontalRightLastExplosion());
-        animatorMap.put("vertical-up-last-explosion", setVerticalUpLastExplosion());
-        animatorMap.put("vertical-down-last-explosion", setVerticalDownLastExplosion());
-        animatorMap.put("horizontal-middle-explosion", setHorizontalMiddleExplosion());
-        animatorMap.put("vertical-middle-explosion", setVerticalMiddleExplosion());
+        animatorMap.put("bomb", new BombAnimator());
+        animatorMap.put("first-explosion", new FirstExplosionAnimator());
+        animatorMap.put("horizontal-left-last-explosion", new HoriziontalLeftLastExplosionAnimator());
+        animatorMap.put("horizontal-right-last-explosion", new HorizontalRightLastExplosionAnimator());
+        animatorMap.put("vertical-up-last-explosion", new VerticalUpLastExplosionAnimator());
+        animatorMap.put("vertical-down-last-explosion", new VerticalDownLastExplosionAnimator());
+        animatorMap.put("horizontal-middle-explosion", new HorizontalMiddleExplosionAnimator());
+        animatorMap.put("vertical-middle-explosion", new VerticalMiddleExplosionAnimator());
     }
 
-    public Animator setBomb() {
-        return new Animator(
-            "all.png",
-            3,
-            true,
-            500,
-            boundaryFactory.getBombBoundaries()
-        );
+    class BombAnimator implements Creatable {
+        public Animator create() {
+            return new Animator(
+                true,
+                500,
+                imageLoader.getImageList("bomb")
+              );
+            }
     }
 
-    public Animator setFirstExplosion() {
-        return new Animator(
-            "all.png",
-            5,
-            false,
-            100,
-            boundaryFactory.getFirstExplosionBoundaries()
-        );
+    class FirstExplosionAnimator implements Creatable {
+         public Animator create() {
+            return new Animator(
+                false,
+                100,
+                imageLoader.getImageList("first-explosion")
+         );
+}
     }
 
-    public Animator setHoriziontalLeftLastExplosion() {
-        return new Animator(
-            "all.png",
-            5,
-            false,
-            100,
-            boundaryFactory.getHoriziontalLeftLastExplosionBoundaries()
-        );
+    class HoriziontalLeftLastExplosionAnimator implements Creatable {
+         public Animator create() {
+            return new Animator(
+                false,
+                100,
+                imageLoader.getImageList("horizontal-left-last-explosion")
+         );
+}
     }
 
-    public Animator setHorizontalMiddleExplosion() {
-        return new Animator(
-            "all.png",
-            5,
-            false,
-            100,
-            boundaryFactory.getHorizontalMiddleExplosionsionBoundaries()
-        );
+    class HorizontalMiddleExplosionAnimator implements Creatable {
+         public Animator create() {
+            return new Animator(
+                false,
+                100,
+                imageLoader.getImageList("horizontal-middle-explosion")
+         );
+}
     }
 
-    public Animator setHorizontalRightLastExplosion() {
-        return new Animator(
-            "all.png",
-            5,
-            false,
-            100,
-            boundaryFactory.getHorizontalRightLastExplosionBoundaries()
-        );
+    class HorizontalRightLastExplosionAnimator implements Creatable {
+         public Animator create() {
+            return new Animator(
+                false,
+                100,
+                imageLoader.getImageList("horizontal-right-last-explosion")
+         );
+}
     }
 
-    public Animator setVerticalDownLastExplosion() {
-        return new Animator(
-            "all.png",
-            5,
-            false,
-            100,
-            boundaryFactory.getVerticalDownLastExplosionsionBoundaries()
-        );
+    class VerticalDownLastExplosionAnimator implements Creatable {
+         public Animator create() {
+            return new Animator(
+                false,
+                100,
+                imageLoader.getImageList("vertical-down-last-explosion")
+         );
+}
     }
 
-    public Animator setVerticalMiddleExplosion() {
-        return new Animator(
-            "all.png",
-            5,
-            false,
-            100,
-            boundaryFactory.getVerticalMiddleExplosionsionBoundaries()
-        );
+    class VerticalMiddleExplosionAnimator implements Creatable {
+         public Animator create() {
+            return new Animator(
+                false,
+                100,
+                imageLoader.getImageList("vertical-middle-explosion")
+         );
+}
     }
 
-    public Animator setVerticalUpLastExplosion() {
-        return new Animator(
-            "all.png",
-            5,
-            false,
-            100,
-            boundaryFactory.getVerticalUpLastExplosionsionBoundaries()
-        );
+    class VerticalUpLastExplosionAnimator implements Creatable {
+         public Animator create() {
+            return new Animator(
+                false,
+                100,
+                imageLoader.getImageList("vertical-up-last-explosion")
+         );
+}
     }
 
-    public Animator getAnimator(String name) {
-        return animatorMap.get(name);
+    public Animator getAnimatorFactory(String name) {
+        return animatorMap.get(name).create();
     }
 }
+
