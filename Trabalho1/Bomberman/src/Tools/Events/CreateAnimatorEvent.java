@@ -10,9 +10,9 @@ public class CreateAnimatorEvent implements Event {
        AnimatedElement element = (AnimatedElement) elements[0];
        Animator animator = screen.getAnimator(element.getAnimatorName());
        if (animator != null) {
+           animator.start();
            element.setAnimator(animator);
        }
-
     }
 
 }

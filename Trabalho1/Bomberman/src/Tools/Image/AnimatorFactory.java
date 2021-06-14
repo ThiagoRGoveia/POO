@@ -2,9 +2,6 @@ package Tools.Image;
 
 import java.util.LinkedHashMap;
 
-import Model.*;
-import Model.Explosions.*;
-import Model.Explosions.Directions.*;
 import Tools.Image.Boundaries.BoundaryFactory;
 
 public class AnimatorFactory {

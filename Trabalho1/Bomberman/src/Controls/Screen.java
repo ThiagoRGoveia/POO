@@ -49,6 +49,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
+        eventBus.on("create-animator", new CreateAnimatorEvent());
 
         elements = new ArrayList<Element>(100);
 

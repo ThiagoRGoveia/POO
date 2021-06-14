@@ -5,14 +5,13 @@ import java.util.TimerTask;
 
 import Model.Explosions.Directions.*;
 import Tools.Events.EventBus;
-import Tools.Image.Animator;
 import Tools.Position.Position;
 
 public abstract class Explosion extends AnimatedElement {
     protected int intensity;
 
-    protected Explosion(Animator animator, EventBus eventBus, Position position) {
-        super(animator, eventBus, position);
+    protected Explosion(EventBus eventBus, Position position) {
+        super(eventBus, position);
         // finishExplosion();
     }
 

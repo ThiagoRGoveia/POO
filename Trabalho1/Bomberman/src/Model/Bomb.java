@@ -5,8 +5,6 @@ import java.util.TimerTask;
 
 import Model.Explosions.FirstExplosion;
 import Tools.Events.EventBus;
-import Tools.Image.Animator;
-import Tools.Image.Boundaries;
 import Tools.Position.Position;
 
 public class Bomb extends AnimatedElement {
@@ -15,20 +13,11 @@ public class Bomb extends AnimatedElement {
     private int intensity;
 
     public Bomb (EventBus eventBus, int intensity, Position position) {
-        super(
-            new Animator(
-                "all.png",
-                3,
-                true,
-                500,
-                Bomb.bombSpritesBoundaries()
-            ),
-            eventBus,
-            position
-        );
+        super(eventBus,position);
         this.traversable = true;
         this.intensity = intensity;
-
+        this.setAnimatorName("bomb");
+        eventBus.emit("create-animator", this);
         scheduleTraversableChange();
         setExplosionTimer();
     }
@@ -65,16 +54,6 @@ public class Bomb extends AnimatedElement {
         this.eventBus.emit("remove-element", this);
         FirstExplosion firstExplosion = new FirstExplosion(eventBus, intensity, this.getPosition());
         this.eventBus.emit("create-explosion", firstExplosion);
-    }
-
-    private static Boundaries[] bombSpritesBoundaries() {
-        Boundaries[] boundaries = {
-            new Boundaries(356, 151, 16, 16),
-            new Boundaries(373, 151, 16, 16),
-            new Boundaries(390, 151, 16, 16),
-            new Boundaries(373, 151, 16, 16)
-        };
-        return boundaries;
     }
 
     public void interact(Hero hero) {
