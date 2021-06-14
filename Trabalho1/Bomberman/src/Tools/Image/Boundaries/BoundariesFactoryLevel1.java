@@ -36,11 +36,11 @@ public class BoundariesFactoryLevel1 extends BoundaryFactory {
 
     public Boundaries[] getHorizontalMiddleExplosionsionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(305, 117, 16, 16),
-            new Boundaries(305, 100, 16, 16),
-            new Boundaries(271, 134, 16, 16),
-            new Boundaries(271, 117, 16, 16),
-            new Boundaries(271, 100, 16, 16)
+            new Boundaries(288, 117, 16, 16),
+            new Boundaries(288, 100, 16, 16),
+            new Boundaries(254, 134, 16, 16),
+            new Boundaries(254, 117, 16, 16),
+            new Boundaries(254, 100, 16, 16)
         };
         return b;
     }
