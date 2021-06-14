@@ -26,14 +26,15 @@ public class Animator {
     }
 
     private void iterateImgIndexLoop() {
-        if (imgIndex++ == numberOfImages) {
+        if (++imgIndex == numberOfImages) {
             imgIndex = 0;
         }
     }
 
     private void iterateImgIndexOnce() {
-        if (imgIndex++ == numberOfImages) {
+        if (++imgIndex == numberOfImages) {
             timer.cancel();
+            imgIndex--;
         }
     }
 
