@@ -37,7 +37,7 @@ public class AnimatorFactory {
             "all.png",
             5,
             false,
-            50,
+            100,
             boundaryFactory.getFirstExplosionBoundaries()
         );
     }
@@ -47,7 +47,7 @@ public class AnimatorFactory {
             "all.png",
             5,
             false,
-            50,
+            100,
             boundaryFactory.getHoriziontalLeftLastExplosionBoundaries()
         );
     }
@@ -57,7 +57,7 @@ public class AnimatorFactory {
             "all.png",
             5,
             false,
-            50,
+            100,
             boundaryFactory.getHorizontalMiddleExplosionsionBoundaries()
         );
     }
@@ -67,7 +67,7 @@ public class AnimatorFactory {
             "all.png",
             5,
             false,
-            50,
+            100,
             boundaryFactory.getHorizontalRightLastExplosionBoundaries()
         );
     }
@@ -77,7 +77,7 @@ public class AnimatorFactory {
             "all.png",
             5,
             false,
-            50,
+            100,
             boundaryFactory.getVerticalDownLastExplosionsionBoundaries()
         );
     }
@@ -87,7 +87,7 @@ public class AnimatorFactory {
             "all.png",
             5,
             false,
-            50,
+            100,
             boundaryFactory.getVerticalMiddleExplosionsionBoundaries()
         );
     }
@@ -97,7 +97,7 @@ public class AnimatorFactory {
             "all.png",
             5,
             false,
-            50,
+            100,
             boundaryFactory.getVerticalUpLastExplosionsionBoundaries()
         );
     }
