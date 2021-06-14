@@ -4,6 +4,10 @@ import Model.Element;
 import Model.Hero;
 import Tools.*;
 import Tools.Events.*;
+import Tools.Image.Animator;
+import Tools.Image.AnimatorFactory;
+import Tools.Image.Boundaries.BoundariesFactoryLevel1;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
@@ -21,6 +25,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Graphics graphics;
     private Movements movements;
     private InteractionMap interactionMap;
+    private AnimatorFactory animatorFactory;
 
     public Screen(Drawer drawer) {
         this.drawer = drawer;
@@ -47,11 +52,13 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         elements = new ArrayList<Element>(100);
 
-        hero = new Hero(eventBus, 0, 0);
+        hero = new Hero(eventBus, 8, 8);
         this.addElement(hero);
 
         movements = new Movements();
         interactionMap= new InteractionMap();
+        animatorFactory = new AnimatorFactory(new BoundariesFactoryLevel1());
+
     }
 
     public void addElement(Element element) {
@@ -72,6 +79,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public EventBus getEventBus() {
         return eventBus;
+    }
+
+    public Animator getAnimator(String animatorName) {
+        return animatorFactory.getAnimator(animatorName);
     }
 
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/

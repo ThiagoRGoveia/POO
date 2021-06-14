@@ -7,14 +7,31 @@ import Tools.Position.Position;
 
 public abstract class AnimatedElement extends Element {
     protected Animator animator;
+    protected String animatorName;
 
-    protected AnimatedElement(Animator animator, EventBus eventBus, Position position) {
+    protected AnimatedElement(EventBus eventBus, Position position) {
         super(eventBus, position);
-        this.animator = animator;
 
+    }
+
+    public void setAnimator(Animator animator) {
+        this.animator = animator;
+    }
+
+    public void setAnimatorName(String animatorName) {
+        this.animatorName = animatorName;
+    }
+
+    public Animator getAnimator() {
+        return animator;
     }
 
     public ImageIcon getImage() {
         return animator.getImage();
     }
+
+    public String getAnimatorName() {
+        return animatorName;
+    }
+
 }

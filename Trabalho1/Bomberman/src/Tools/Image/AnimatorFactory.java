@@ -1,5 +1,7 @@
 package Tools.Image;
 
+import java.util.LinkedHashMap;
+
 import Model.*;
 import Model.Explosions.*;
 import Model.Explosions.Directions.*;
@@ -7,29 +9,24 @@ import Tools.Image.Boundaries.BoundaryFactory;
 
 public class AnimatorFactory {
     private BoundaryFactory boundaryFactory;
-    private Animator HorizontalMiddleExplosion;
-    private Animator VerticalMiddleExplosion;
-    private Animator HoriziontalLeftLastExplosion;
-    private Animator HorizontalRightLastExplosion;
-    private Animator VerticalDownLastExplosion;
-    private Animator VerticalUpLastExplosion;
-    private Animator FirstExplosion;
-    private Animator Bomb;
+    private LinkedHashMap<String,Animator> animatorMap;
 
     public AnimatorFactory(BoundaryFactory boundaryFactory) {
         this.boundaryFactory = boundaryFactory;
-        setBomb();
-        setFirstExplosion();
-        setHoriziontalLeftLastExplosion();
-        setHorizontalMiddleExplosion();
-        setHorizontalRightLastExplosion();
-        setVerticalDownLastExplosion();
-        setVerticalMiddleExplosion();
-        setVerticalUpLastExplosion();
+        animatorMap = new LinkedHashMap<String,Animator>(8);
+
+        animatorMap.put("bomb", setBomb());
+        animatorMap.put("first-explosion", setFirstExplosion());
+        animatorMap.put("horizontal-left-last-explosion", setHoriziontalLeftLastExplosion());
+        animatorMap.put("horizontal-right-last-explosion", setHorizontalRightLastExplosion());
+        animatorMap.put("vertical-up-last-explosion", setVerticalUpLastExplosion());
+        animatorMap.put("vertical-down-last-explosion", setVerticalDownLastExplosion());
+        animatorMap.put("horizontal-middle-explosion", setHorizontalMiddleExplosion());
+        animatorMap.put("vertical-middle-explosion", setVerticalMiddleExplosion());
     }
 
-    public void setBomb() {
-        Bomb = new Animator(
+    public Animator setBomb() {
+        return new Animator(
             "all.png",
             3,
             true,
@@ -38,8 +35,8 @@ public class AnimatorFactory {
         );
     }
 
-    public void setFirstExplosion() {
-        FirstExplosion = new Animator(
+    public Animator setFirstExplosion() {
+        return new Animator(
             "all.png",
             5,
             false,
@@ -48,8 +45,8 @@ public class AnimatorFactory {
         );
     }
 
-    public void setHoriziontalLeftLastExplosion() {
-        HoriziontalLeftLastExplosion = new Animator(
+    public Animator setHoriziontalLeftLastExplosion() {
+        return new Animator(
             "all.png",
             5,
             false,
@@ -58,8 +55,8 @@ public class AnimatorFactory {
         );
     }
 
-    public void setHorizontalMiddleExplosion() {
-        HorizontalMiddleExplosion = new Animator(
+    public Animator setHorizontalMiddleExplosion() {
+        return new Animator(
             "all.png",
             5,
             false,
@@ -68,8 +65,8 @@ public class AnimatorFactory {
         );
     }
 
-    public void setHorizontalRightLastExplosion() {
-        HorizontalRightLastExplosion = new Animator(
+    public Animator setHorizontalRightLastExplosion() {
+        return new Animator(
             "all.png",
             5,
             false,
@@ -78,8 +75,8 @@ public class AnimatorFactory {
         );
     }
 
-    public void setVerticalDownLastExplosion() {
-        VerticalDownLastExplosion = new Animator(
+    public Animator setVerticalDownLastExplosion() {
+        return new Animator(
             "all.png",
             5,
             false,
@@ -88,8 +85,8 @@ public class AnimatorFactory {
         );
     }
 
-    public void setVerticalMiddleExplosion() {
-        VerticalMiddleExplosion = new Animator(
+    public Animator setVerticalMiddleExplosion() {
+        return new Animator(
             "all.png",
             5,
             false,
@@ -98,8 +95,8 @@ public class AnimatorFactory {
         );
     }
 
-    public void setVerticalUpLastExplosion() {
-        VerticalUpLastExplosion = new Animator(
+    public Animator setVerticalUpLastExplosion() {
+        return new Animator(
             "all.png",
             5,
             false,
@@ -108,35 +105,7 @@ public class AnimatorFactory {
         );
     }
 
-    public Animator getAnimator(Bomb bomb) {
-        return Bomb;
-    }
-
-    public Animator getAnimator(FirstExplosion firstExplosion) {
-        return FirstExplosion;
-    }
-
-    public Animator getAnimator(HoriziontalLeftLastExplosion horiziontalLeftLastExplosion) {
-        return HoriziontalLeftLastExplosion;
-    }
-
-    public Animator getAnimator(HorizontalRightLastExplosion horizontalRightLastExplosion) {
-        return HorizontalRightLastExplosion;
-    }
-
-    public Animator getAnimator(HorizontalMiddleExplosion horizontalMiddleExplosion) {
-        return HorizontalMiddleExplosion;
-    }
-
-    public Animator getAnimator(VerticalDownLastExplosion verticalDownLastExplosion) {
-        return VerticalDownLastExplosion;
-    }
-
-    public Animator getAnimator(VerticalMiddleExplosion verticalMiddleExplosion) {
-        return VerticalMiddleExplosion;
-    }
-
-    public Animator getAnimator(VerticalUpLastExplosion verticalUpLastExplosion) {
-        return VerticalUpLastExplosion;
+    public Animator getAnimator(String name) {
+        return animatorMap.get(name);
     }
 }
