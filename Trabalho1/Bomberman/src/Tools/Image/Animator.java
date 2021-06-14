@@ -19,11 +19,18 @@ public class Animator {
     private int imgIndex = 0;
     private int numberOfImages;
     private Timer timer;
+    private boolean isLoop;
+    private long interval;
 
     public Animator(String imageName, int numberOfImages, boolean isLoop, long interval, Boundaries... boundaries) {
+        this.isLoop = isLoop;
+        this.interval = interval;
         this.numberOfImages = numberOfImages;
         images = new ArrayList<ImageIcon>(numberOfImages);
         loadImages(imageName, boundaries);
+    }
+
+    public void start() {
         startImageSchedule(isLoop, interval);
     }
 
