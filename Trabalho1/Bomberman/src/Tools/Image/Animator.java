@@ -5,6 +5,8 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import java.awt.image.BufferedImage;
 import Tools.Consts;
+import Tools.Image.Boundaries.Boundaries;
+
 import java.awt.Graphics;
 import java.io.IOException;
 import java.io.File;

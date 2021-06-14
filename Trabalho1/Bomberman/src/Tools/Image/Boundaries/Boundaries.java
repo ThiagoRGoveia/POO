@@ -1,4 +1,4 @@
-package Tools.Image;
+package Tools.Image.Boundaries;
 
 public class Boundaries {
     public int x;
