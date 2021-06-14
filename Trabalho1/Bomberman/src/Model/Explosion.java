@@ -26,7 +26,6 @@ public abstract class Explosion extends AnimatedElement {
     }
 
     protected void propagateUp() {
-        System.out.println("UP " +position.getRow().getCoordinate().value);
         Explosion explodeUp;
         Position newPosition = new Position(
             this.position.getRow().getCoordinate().value - 1,

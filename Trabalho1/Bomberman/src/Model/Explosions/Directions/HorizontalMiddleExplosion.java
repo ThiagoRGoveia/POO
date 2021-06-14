@@ -28,8 +28,8 @@ public abstract class HorizontalMiddleExplosion extends MiddleExplosion {
             new Boundaries(288, 117, 16, 16),
             new Boundaries(288, 100, 16, 16),
             new Boundaries(254, 134, 16, 16),
-            new Boundaries(254, 116, 16, 16),
-            new Boundaries(254, 99, 16, 16)
+            new Boundaries(254, 117, 16, 16),
+            new Boundaries(254, 100, 16, 16)
         };
         return boundaries;
     }

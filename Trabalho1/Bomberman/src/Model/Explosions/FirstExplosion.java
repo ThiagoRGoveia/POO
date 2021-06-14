@@ -27,15 +27,14 @@ public class FirstExplosion extends Explosion implements Propagable {
         Boundaries[] boundaries = {
             new Boundaries(322, 117, 16, 16),
             new Boundaries(373, 100, 16, 16),
-            new Boundaries(356, 117, 16, 16),
-            new Boundaries(340, 117, 16, 16),
-            new Boundaries(322, 117, 16, 16)
+            new Boundaries(356, 100, 16, 16),
+            new Boundaries(339, 100, 16, 16),
+            new Boundaries(322, 100, 16, 16)
         };
         return boundaries;
     }
 
     public void propagateExplosion() {
-        System.out.println("FIRST " + this.getPosition().getRow().getCoordinate().value);
         propagateUp();
         propagateDown();
         propagateLeft();

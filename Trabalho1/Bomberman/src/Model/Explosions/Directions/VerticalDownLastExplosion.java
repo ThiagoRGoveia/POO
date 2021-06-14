@@ -25,10 +25,10 @@ public class VerticalDownLastExplosion extends LastExplosion {
     private static Boundaries[] bombSpritesBoundaries() {
         Boundaries[] boundaries = {
             new Boundaries(305, 83, 16, 16),
-            new Boundaries(321, 134, 16, 16),
+            new Boundaries(322, 134, 16, 16),
             new Boundaries(373, 134, 16, 16),
             new Boundaries(356, 134, 16, 16),
-            new Boundaries(340, 134, 16, 16)
+            new Boundaries(339, 134, 16, 16)
         };
         return boundaries;
     }

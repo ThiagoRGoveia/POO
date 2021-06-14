@@ -18,7 +18,7 @@ public class Bomb extends AnimatedElement {
         super(
             new Animator(
                 "all.png",
-                4,
+                3,
                 true,
                 500,
                 Bomb.bombSpritesBoundaries()
@@ -63,7 +63,6 @@ public class Bomb extends AnimatedElement {
 
     private void explode() {
         this.eventBus.emit("remove-element", this);
-        System.out.println("BOMBA " + this.getPosition().getRow().getCoordinate().value);
         FirstExplosion firstExplosion = new FirstExplosion(eventBus, intensity, this.getPosition());
         this.eventBus.emit("create-explosion", firstExplosion);
     }
