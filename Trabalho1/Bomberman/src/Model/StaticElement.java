@@ -3,12 +3,13 @@ package Model;
 import javax.swing.ImageIcon;
 
 import Tools.Events.EventBus;
+import Tools.Position.Position;
 
 public abstract class StaticElement extends Element {
     private ImageIcon image;
 
-    protected StaticElement(EventBus eventBus, ImageIcon image) {
-        super(eventBus);
+    protected StaticElement(EventBus eventBus, ImageIcon image, Position position) {
+        super(eventBus, position);
         this.image = image;
     }
 

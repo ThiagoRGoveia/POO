@@ -13,8 +13,13 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     protected boolean killOnTouch;       /*Se encostar, morre?*/
     protected EventBus eventBus;
 
+    protected Element(EventBus eventBus, Position position) {
+        this.eventBus = eventBus;
+        this.position = position;
+    }
+
     protected Element(EventBus eventBus) {
-        position = new Position(1, 1);
+        this.position = new Position(0, 0);
         this.eventBus = eventBus;
     }
 

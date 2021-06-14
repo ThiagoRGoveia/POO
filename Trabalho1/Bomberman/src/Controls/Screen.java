@@ -47,8 +47,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         elements = new ArrayList<Element>(100);
 
-        hero = new Hero(eventBus);
-        hero.setPosition(0, 0);
+        hero = new Hero(eventBus, 0, 0);
         this.addElement(hero);
 
         movements = new Movements();
