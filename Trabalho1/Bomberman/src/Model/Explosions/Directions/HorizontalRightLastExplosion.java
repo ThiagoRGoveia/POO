@@ -4,10 +4,11 @@ import Model.Explosions.LastExplosion;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 import Tools.Image.Boundaries;
+import Tools.Position.Position;
 
 public class HorizontalRightLastExplosion extends LastExplosion {
 
-    public HorizontalRightLastExplosion(EventBus eventBus) {
+    public HorizontalRightLastExplosion(EventBus eventBus, Position position) {
         super(
             new Animator(
                 "all.png",
@@ -16,7 +17,8 @@ public class HorizontalRightLastExplosion extends LastExplosion {
                 50,
                 HorizontalRightLastExplosion.bombSpritesBoundaries()
             ),
-            eventBus
+            eventBus,
+            position
         );
     }
 

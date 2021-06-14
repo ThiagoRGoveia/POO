@@ -4,10 +4,11 @@ import Model.Explosions.MiddleExplosion;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 import Tools.Image.Boundaries;
+import Tools.Position.Position;
 
 public abstract class HorizontalMiddleExplosion extends MiddleExplosion {
 
-    public HorizontalMiddleExplosion(EventBus eventBus, int intensity) {
+    public HorizontalMiddleExplosion(EventBus eventBus, int intensity, Position position) {
         super(
             new Animator(
                 "all.png",
@@ -16,7 +17,8 @@ public abstract class HorizontalMiddleExplosion extends MiddleExplosion {
                 50,
                 HorizontalMiddleExplosion.bombSpritesBoundaries()
             ),
-            eventBus
+            eventBus,
+            position
         );
         this.intensity = intensity;
     }

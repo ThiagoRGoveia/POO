@@ -1,5 +1,8 @@
 package Model;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import Model.Explosions.Directions.*;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
@@ -8,10 +11,10 @@ import Tools.Position.Position;
 public abstract class Explosion extends AnimatedElement {
     protected int intensity;
 
-    protected Explosion(Animator animator, EventBus eventBus) {
-        super(animator, eventBus);
+    protected Explosion(Animator animator, EventBus eventBus, Position position) {
+        super(animator, eventBus, position);
+        // finishExplosion();
     }
-
 
     public void interact(Hero hero) {
     }
@@ -23,27 +26,30 @@ public abstract class Explosion extends AnimatedElement {
     }
 
     protected void propagateUp() {
-        Position position = this.getPosition();
+        System.out.println("UP " +position.getRow().getCoordinate().value);
         Explosion explodeUp;
-        if (intensity == 0) {
-            explodeUp = new VerticalUpLastExplosion(eventBus);
-        } else {
-            explodeUp = new VerticalUpMiddleExplosion(eventBus, intensity - 1);
-        }
-        explodeUp.setPosition(
-            position.getRow().getCoordinate().value - 1,
-            position.getColumn().getCoordinate().value
+        Position newPosition = new Position(
+            this.position.getRow().getCoordinate().value - 1,
+            this.position.getColumn().getCoordinate().value
         );
+        if (intensity == 0) {
+            explodeUp = new VerticalUpLastExplosion(eventBus, newPosition);
+        } else {
+            explodeUp = new VerticalUpMiddleExplosion(eventBus, intensity - 1, newPosition);
+        }
         this.eventBus.emit("create-explosion", explodeUp);
 
     }
     protected void propagateDown() {
-        Position position = this.getPosition();
         Explosion explodeDown;
+        Position newPosition = new Position(
+            this.position.getRow().getCoordinate().value + 1,
+            this.position.getColumn().getCoordinate().value
+        );
         if (intensity == 0) {
-            explodeDown = new VerticalDownLastExplosion(eventBus);
+            explodeDown = new VerticalDownLastExplosion(eventBus, newPosition);
         } else {
-            explodeDown = new VerticalDownMiddleExplosion(eventBus, intensity - 1);
+            explodeDown = new VerticalDownMiddleExplosion(eventBus, intensity - 1, newPosition);
         }
         explodeDown.setPosition(
             position.getRow().getCoordinate().value + 1,
@@ -53,32 +59,45 @@ public abstract class Explosion extends AnimatedElement {
 
     }
     protected void propagateLeft() {
-        Position position = this.getPosition();
         Explosion explodeLeft;
-        if (intensity == 0) {
-            explodeLeft = new HoriziontalLeftLastExplosion(eventBus);
-        } else {
-            explodeLeft = new HorizontalLeftMiddleExplosion(eventBus, intensity - 1);
-        }
-        explodeLeft.setPosition(
-            position.getRow().getCoordinate().value,
-            position.getColumn().getCoordinate().value - 1
+        Position newPosition = new Position(
+            this.position.getRow().getCoordinate().value,
+            this.position.getColumn().getCoordinate().value - 1
         );
-        this.eventBus.emit("create-explosion",explodeLeft);
+        if (intensity == 0) {
+            explodeLeft = new HoriziontalLeftLastExplosion(eventBus, newPosition);
+        } else {
+            explodeLeft = new HorizontalLeftMiddleExplosion(eventBus, intensity - 1, newPosition);
+        }
+        this.eventBus.emit("create-explosion", explodeLeft);
 
     }
     protected void propagateRight() {
-        Position position = this.getPosition();
         Explosion explodeRight;
-        if (intensity == 0) {
-            explodeRight = new HorizontalRightLastExplosion(eventBus);
-        } else {
-            explodeRight = new HorizontalRightMiddleExplosion(eventBus, intensity - 1);
-        }
-        explodeRight.setPosition(
-            position.getRow().getCoordinate().value ,
-            position.getColumn().getCoordinate().value + 1
+        Position newPosition = new Position(
+            this.position.getRow().getCoordinate().value,
+            this.position.getColumn().getCoordinate().value + 1
         );
+        if (intensity == 0) {
+            explodeRight = new HorizontalRightLastExplosion(eventBus, newPosition);
+        } else {
+            explodeRight = new HorizontalRightMiddleExplosion(eventBus, intensity - 1, newPosition);
+        }
         this.eventBus.emit("create-explosion", explodeRight);
+        // setExplosionFinshTimer();
+    }
+
+    private void finishExplosion() {
+        this.eventBus.emit("remove-element", this);
+    }
+
+    private void setExplosionFinshTimer() {
+        TimerTask task = new TimerTask() {
+            public void run() {
+                finishExplosion();
+            }
+        };
+        Timer timer = new Timer();
+        timer.schedule(task, 260);
     }
 }

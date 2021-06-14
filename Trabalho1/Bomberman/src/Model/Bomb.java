@@ -2,15 +2,19 @@ package Model;
 
 import java.util.Timer;
 import java.util.TimerTask;
+
+import Model.Explosions.FirstExplosion;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 import Tools.Image.Boundaries;
+import Tools.Position.Position;
 
 public class Bomb extends AnimatedElement {
-    Timer traversableCancelationTimer;
-    Timer explosionTimer;
-    int intensiy;
-    public Bomb (EventBus eventBus, int intensity) {
+    private Timer traversableCancelationTimer;
+    private Timer explosionTimer;
+    private int intensity;
+
+    public Bomb (EventBus eventBus, int intensity, Position position) {
         super(
             new Animator(
                 "all.png",
@@ -19,12 +23,18 @@ public class Bomb extends AnimatedElement {
                 500,
                 Bomb.bombSpritesBoundaries()
             ),
-            eventBus
+            eventBus,
+            position
         );
         this.traversable = true;
+        this.intensity = intensity;
 
         scheduleTraversableChange();
         setExplosionTimer();
+    }
+
+    public Bomb(EventBus eventBus, int intensity, int row, int column) {
+        this(eventBus, intensity, new Position(row, column));
     }
 
     private void turnBlockable() {
@@ -37,8 +47,8 @@ public class Bomb extends AnimatedElement {
                 turnBlockable();
             }
         };
-        traversableCancelationTimer = new Timer();
-        traversableCancelationTimer.schedule(task, 500);
+        this.traversableCancelationTimer = new Timer();
+        this.traversableCancelationTimer.schedule(task, 500);
     }
 
     private void setExplosionTimer() {
@@ -47,12 +57,15 @@ public class Bomb extends AnimatedElement {
                 explode();
             }
         };
-        explosionTimer = new Timer();
-        explosionTimer.schedule(task, 5000);
+        this.explosionTimer = new Timer();
+        this.explosionTimer.schedule(task, 5000);
     }
 
     private void explode() {
-        System.out.println("BUM");
+        this.eventBus.emit("remove-element", this);
+        System.out.println("BOMBA " + this.getPosition().getRow().getCoordinate().value);
+        FirstExplosion firstExplosion = new FirstExplosion(eventBus, intensity, this.getPosition());
+        this.eventBus.emit("create-explosion", firstExplosion);
     }
 
     private static Boundaries[] bombSpritesBoundaries() {
