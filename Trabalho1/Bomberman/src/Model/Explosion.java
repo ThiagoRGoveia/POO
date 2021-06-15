@@ -8,15 +8,16 @@ import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public abstract class Explosion extends AnimatedElement {
-    protected boolean isTraversable = true;
     protected int intensity;
 
     protected Explosion(EventBus eventBus, Position position, int intensity) {
         super(eventBus, position);
         this.intensity = intensity;
+        this.setTraversable(true);
     }
 
     public void interact(Hero hero) {
+        System.out.println("KILL");
     }
 
     public void interact(Enemy enemy) {
