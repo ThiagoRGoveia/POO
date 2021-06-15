@@ -18,6 +18,9 @@ public class CreateExplosionEvent implements Event {
                 explosion.propagateExplosion(explosion.getIntensity());
             } else {
                 preExistingElement.interact(explosion);
+                if (element.isTraversable()) {
+                    explosion.propagateExplosion(explosion.getIntensity());
+                }
             }
         }
     }
