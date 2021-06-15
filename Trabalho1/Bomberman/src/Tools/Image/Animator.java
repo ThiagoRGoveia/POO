@@ -26,6 +26,7 @@ public class Animator {
         this.isLoop = isLoop;
         this.interval = interval;
         this.images = images;
+        numberOfImages = images.size();
     }
 
     public void start() {
@@ -37,13 +38,13 @@ public class Animator {
     }
 
     private void iterateImgIndexLoop() {
-        if (++imgIndex == numberOfImages) {
+        if (++imgIndex >= numberOfImages) {
             imgIndex = 0;
         }
     }
 
     private void iterateImgIndexOnce() {
-        if (++imgIndex == numberOfImages) {
+        if (++imgIndex >= numberOfImages) {
             timer.cancel();
             imgIndex--;
         }
