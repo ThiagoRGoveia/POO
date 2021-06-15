@@ -6,6 +6,7 @@ import Tools.*;
 import Tools.Events.*;
 import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
+import Tools.Image.ImageFactory;
 import Tools.Image.Boundaries.BoundariesFactoryLevel1;
 
 import java.awt.*;
@@ -58,7 +59,11 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         movements = new Movements();
         interactionMap= new InteractionMap();
-        animatorFactory = new AnimatorFactory(new BoundariesFactoryLevel1());
+        animatorFactory = new AnimatorFactory(
+            new ImageFactory(
+                new BoundariesFactoryLevel1()
+            )
+        );
 
     }
 

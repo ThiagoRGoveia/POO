@@ -100,7 +100,7 @@ public class AnimatorFactory {
 }
     }
 
-    public Animator getAnimatorFactory(String name) {
+    public Animator getAnimator(String name) {
         return animatorMap.get(name).create();
     }
 }
