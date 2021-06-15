@@ -77,7 +77,7 @@ public class Animator {
     }
 
     public ImageIcon getImage() {
-        if (imgIndex == numberOfImages) {
+        if (imgIndex >= numberOfImages) {
             return images.get(0);
         } else {
             return images.get(imgIndex);
