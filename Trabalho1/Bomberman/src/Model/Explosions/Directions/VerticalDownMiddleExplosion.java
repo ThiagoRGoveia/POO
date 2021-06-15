@@ -9,8 +9,8 @@ public class VerticalDownMiddleExplosion  extends VerticalMiddleExplosion {
         super(eventBus, intensity, position);
     }
 
-    public void propagateExplosion() {
-        propagateDown();
+    public void propagateExplosion(int intensity) {
+        propagateDown(intensity);
     }
 
 }

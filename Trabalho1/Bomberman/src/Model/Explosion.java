@@ -8,7 +8,7 @@ import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public abstract class Explosion extends AnimatedElement {
-    protected int intensity;
+    protected boolean isTraversable = true;
 
     protected Explosion(EventBus eventBus, Position position) {
         super(eventBus, position);
@@ -23,7 +23,7 @@ public abstract class Explosion extends AnimatedElement {
     public void interact(Explosion explosion) {
     }
 
-    protected void propagateUp() {
+    protected void propagateUp(int intensity) {
         Explosion explodeUp;
         Position newPosition = new Position(
             this.position.getRow().getCoordinate().value - 1,
@@ -37,7 +37,7 @@ public abstract class Explosion extends AnimatedElement {
         this.eventBus.emit("create-explosion", explodeUp);
         setExplosionFinishTimer();
     }
-    protected void propagateDown() {
+    protected void propagateDown(int intensity) {
         Explosion explodeDown;
         Position newPosition = new Position(
             this.position.getRow().getCoordinate().value + 1,
@@ -55,7 +55,7 @@ public abstract class Explosion extends AnimatedElement {
         this.eventBus.emit("create-explosion", explodeDown);
         setExplosionFinishTimer();
     }
-    protected void propagateLeft() {
+    protected void propagateLeft(int intensity) {
         Explosion explodeLeft;
         Position newPosition = new Position(
             this.position.getRow().getCoordinate().value,
@@ -69,7 +69,7 @@ public abstract class Explosion extends AnimatedElement {
         this.eventBus.emit("create-explosion", explodeLeft);
         setExplosionFinishTimer();
     }
-    protected void propagateRight() {
+    protected void propagateRight(int intensity) {
         Explosion explodeRight;
         Position newPosition = new Position(
             this.position.getRow().getCoordinate().value,

@@ -7,7 +7,7 @@ import Tools.Position.Position;
 public abstract class HorizontalMiddleExplosion extends MiddleExplosion {
 
     public HorizontalMiddleExplosion(EventBus eventBus, int intensity, Position position) {
-        super(eventBus,position);
+        super(eventBus, intensity, position);
         this.setAnimatorName("horizontal-middle-explosion");
         eventBus.emit("create-animator", this);
     }

@@ -7,17 +7,16 @@ import Tools.Position.Position;
 public class FirstExplosion extends Explosion implements Propagable {
     public FirstExplosion (EventBus eventBus, int intensity, Position position) {
         super(eventBus,position);
-        this.intensity = intensity;
         this.setAnimatorName("first-explosion");
         eventBus.emit("create-animator", this);
-        propagateExplosion();
+        propagateExplosion(intensity);
     }
 
 
-    public void propagateExplosion() {
-        propagateUp();
-        propagateDown();
-        propagateLeft();
-        propagateRight();
+    public void propagateExplosion(int intensity) {
+        propagateUp(intensity);
+        propagateDown(intensity);
+        propagateLeft(intensity);
+        propagateRight(intensity);
     }
 }

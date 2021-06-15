@@ -9,8 +9,8 @@ public class HorizontalLeftMiddleExplosion extends HorizontalMiddleExplosion {
         super(eventBus, intensity, position);
     }
 
-    public void propagateExplosion() {
-        propagateLeft();
+    public void propagateExplosion(int intensity) {
+        propagateLeft(intensity);
     }
 
 }

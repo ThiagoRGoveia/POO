@@ -7,9 +7,8 @@ import Tools.Position.Position;
 public abstract class VerticalMiddleExplosion extends MiddleExplosion {
 
     public VerticalMiddleExplosion(EventBus eventBus, int intensity, Position position) {
-        super(eventBus,position);
+        super(eventBus, intensity, position);
         this.setAnimatorName("vertical-middle-explosion");
         eventBus.emit("create-animator", this);
-        this.intensity = intensity;
     }
 }
