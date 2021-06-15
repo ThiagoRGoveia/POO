@@ -31,18 +31,22 @@ public class Position {
 
     public boolean setPosition(Row row, Column column) {
         if (row.getScreenPosition().value < 0) {
+            this.column = column;
             setRow(0);
             return false;
         }
         if (row.getScreenPosition().value > Consts.SCREEN_BOUNDARY) {
+            this.column = column;
             setRow(Consts.SCREEN_BOUNDARY);
             return false;
         }
         if (column.getScreenPosition().value < 0) {
+            this.row = row;
             setColumn(0);
             return false;
         }
         if (column.getScreenPosition().value > Consts.SCREEN_BOUNDARY) {
+            this.row = row;
             setColumn(Consts.SCREEN_BOUNDARY);
             return false;
         }

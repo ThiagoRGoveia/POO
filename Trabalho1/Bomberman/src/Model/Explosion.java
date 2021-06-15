@@ -29,12 +29,14 @@ public abstract class Explosion extends AnimatedElement {
             this.position.getRow().getCoordinate().value - 1,
             this.position.getColumn().getCoordinate().value
         );
-        if (intensity == 0) {
-            explodeUp = new VerticalUpLastExplosion(eventBus, newPosition);
-        } else {
-            explodeUp = new VerticalUpMiddleExplosion(eventBus, intensity - 1, newPosition);
+        if (!Position.isPositionOutOfBoundaries(newPosition)) {
+            if (intensity == 0) {
+                explodeUp = new VerticalUpLastExplosion(eventBus, newPosition);
+            } else {
+                explodeUp = new VerticalUpMiddleExplosion(eventBus, intensity - 1, newPosition);
+            }
+            this.eventBus.emit("create-explosion", explodeUp);
         }
-        this.eventBus.emit("create-explosion", explodeUp);
         setExplosionFinishTimer();
     }
     protected void propagateDown(int intensity) {
@@ -43,16 +45,18 @@ public abstract class Explosion extends AnimatedElement {
             this.position.getRow().getCoordinate().value + 1,
             this.position.getColumn().getCoordinate().value
         );
-        if (intensity == 0) {
-            explodeDown = new VerticalDownLastExplosion(eventBus, newPosition);
-        } else {
-            explodeDown = new VerticalDownMiddleExplosion(eventBus, intensity - 1, newPosition);
+        if (!Position.isPositionOutOfBoundaries(newPosition)) {
+                if (intensity == 0) {
+                explodeDown = new VerticalDownLastExplosion(eventBus, newPosition);
+            } else {
+                explodeDown = new VerticalDownMiddleExplosion(eventBus, intensity - 1, newPosition);
+            }
+            explodeDown.setPosition(
+                position.getRow().getCoordinate().value + 1,
+                position.getColumn().getCoordinate().value
+            );
+            this.eventBus.emit("create-explosion", explodeDown);
         }
-        explodeDown.setPosition(
-            position.getRow().getCoordinate().value + 1,
-            position.getColumn().getCoordinate().value
-        );
-        this.eventBus.emit("create-explosion", explodeDown);
         setExplosionFinishTimer();
     }
     protected void propagateLeft(int intensity) {
@@ -61,12 +65,14 @@ public abstract class Explosion extends AnimatedElement {
             this.position.getRow().getCoordinate().value,
             this.position.getColumn().getCoordinate().value - 1
         );
-        if (intensity == 0) {
-            explodeLeft = new HoriziontalLeftLastExplosion(eventBus, newPosition);
-        } else {
-            explodeLeft = new HorizontalLeftMiddleExplosion(eventBus, intensity - 1, newPosition);
+        if (!Position.isPositionOutOfBoundaries(newPosition)) {
+            if (intensity == 0) {
+                explodeLeft = new HoriziontalLeftLastExplosion(eventBus, newPosition);
+            } else {
+                explodeLeft = new HorizontalLeftMiddleExplosion(eventBus, intensity - 1, newPosition);
+            }
+            this.eventBus.emit("create-explosion", explodeLeft);
         }
-        this.eventBus.emit("create-explosion", explodeLeft);
         setExplosionFinishTimer();
     }
     protected void propagateRight(int intensity) {
@@ -75,12 +81,14 @@ public abstract class Explosion extends AnimatedElement {
             this.position.getRow().getCoordinate().value,
             this.position.getColumn().getCoordinate().value + 1
         );
-        if (intensity == 0) {
-            explodeRight = new HorizontalRightLastExplosion(eventBus, newPosition);
-        } else {
-            explodeRight = new HorizontalRightMiddleExplosion(eventBus, intensity - 1, newPosition);
+        if (!Position.isPositionOutOfBoundaries(newPosition)) {
+            if (intensity == 0) {
+                explodeRight = new HorizontalRightLastExplosion(eventBus, newPosition);
+            } else {
+                explodeRight = new HorizontalRightMiddleExplosion(eventBus, intensity - 1, newPosition);
+            }
+            this.eventBus.emit("create-explosion", explodeRight);
         }
-        this.eventBus.emit("create-explosion", explodeRight);
         setExplosionFinishTimer();
     }
 
