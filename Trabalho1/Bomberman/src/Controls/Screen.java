@@ -3,6 +3,7 @@ package Controls;
 import Model.Element;
 import Model.Hero;
 import Model.Teste;
+import Model.Enemies.Helicopter;
 import Tools.*;
 import Tools.Events.*;
 import Tools.Image.Animator;
@@ -58,6 +59,9 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         hero = new Hero(eventBus, 8, 8);
         this.addElement(hero);
+
+        Helicopter enemy = new Helicopter(eventBus, 0, 0, false);
+        this.addElement(enemy);
 
         movements = new Movements();
         interactionMap= new InteractionMap();

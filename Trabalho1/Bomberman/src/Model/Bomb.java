@@ -3,6 +3,7 @@ package Model;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Model.Enemies.Enemy;
 import Model.Explosions.FirstExplosion;
 import Tools.Events.EventBus;
 import Tools.Position.Position;

@@ -2,6 +2,7 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
+import Model.Enemies.Enemy;
 import Tools.InteractionMap;
 import Tools.Position.HeroHitBox;
 import Tools.Position.HitBox;
@@ -29,6 +30,16 @@ public class Controller {
         Element element = map.get(hero.getPosition());
         if (element != null) {
             element.interact(hero);
+        }
+
+    }
+    public void process(ArrayList<Enemy> enemies){
+        InteractionMap map = screen.getInteractionMap();
+        for (Enemy enemy: enemies) {
+            Element element = map.get(enemy.getPosition());
+            if (element != null) {
+                element.interact(enemy);
+            }
         }
 
     }

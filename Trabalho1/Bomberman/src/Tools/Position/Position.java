@@ -94,7 +94,7 @@ public class Position {
         return this.setPosition(
             new Row(
                 new ScreenPosition(
-                    this.getRow().getScreenPosition().value - Consts.HERO_SPEED
+                    this.getRow().getScreenPosition().value - 1
                 )
             ),
             this.getColumn()
@@ -104,7 +104,7 @@ public class Position {
         return this.setPosition(
             new Row(
                 new ScreenPosition(
-                    this.getRow().getScreenPosition().value + Consts.HERO_SPEED
+                    this.getRow().getScreenPosition().value + 1
                 )
             ),
             this.getColumn()
@@ -115,7 +115,7 @@ public class Position {
             this.getRow(),
             new Column(
                 new ScreenPosition(
-                    this.getColumn().getScreenPosition().value + Consts.HERO_SPEED
+                    this.getColumn().getScreenPosition().value + 1
                 )
             )
         );
@@ -125,7 +125,7 @@ public class Position {
             this.getRow(),
             new Column(
                 new ScreenPosition(
-                    this.getColumn().getScreenPosition().value - Consts.HERO_SPEED
+                    this.getColumn().getScreenPosition().value - 1
                 )
             )
         );
