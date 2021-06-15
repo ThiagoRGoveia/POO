@@ -15,12 +15,10 @@ public class Movements {
         keyStrokeMap.put(KeyEvent.VK_E, new PlaceBomb());
     }
 
-    public boolean makeMovement(KeyEvent keyEvent, Hero hero) {
+    public void makeMovement(KeyEvent keyEvent, Hero hero) {
         KeyStroke keyStroke = keyStrokeMap.get(keyEvent.getKeyCode());
         if (keyStroke != null) {
-            return keyStroke.execute(hero);
-        } else {
-            return false;
+            keyStroke.execute(hero);
         }
     }
 

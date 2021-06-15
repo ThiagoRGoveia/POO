@@ -2,12 +2,14 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
+import Model.Teste;
 import Tools.*;
 import Tools.Events.*;
 import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
 import Tools.Image.ImageFactory;
 import Tools.Image.Boundaries.BoundariesFactoryLevel1;
+import Tools.Position.Position;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -64,6 +66,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
                 new BoundariesFactoryLevel1()
             )
         );
+
+        Teste teste = new Teste(eventBus, 5, 5);
+        interactionMap.insert(new Position(5,5), teste);
+        this.addElement(teste);
 
     }
 
@@ -145,17 +151,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         timer.schedule(redesenhar, 0, Consts.FRAME_INTERVAL);
     }
 
-    public void keyPressed(KeyEvent e) {
-        movements.makeMovement(e, hero);
-
-        if (!controller.isPositionValid(this.elements, hero)) {
-            hero.resetToLastPosition();
-        }
-    }
-
-    public void mousePressed(MouseEvent e) {
-   }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -208,7 +203,19 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     public void keyTyped(KeyEvent e) {
     }
 
+    public void mousePressed(MouseEvent e) {
+    }
+
     public void keyReleased(KeyEvent e) {
+        hero.stop(e.getKeyCode());
+    }
+
+    public void keyPressed(KeyEvent e) {
+        movements.makeMovement(e, hero);
+
+        if (!controller.isPositionValid(this.elements, hero)) {
+            hero.resetToLastPosition();
+        }
     }
 
 }

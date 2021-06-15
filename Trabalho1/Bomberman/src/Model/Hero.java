@@ -1,23 +1,22 @@
 package Model;
+import java.util.ArrayList;
+import javax.swing.ImageIcon;
 
 import Tools.Events.EventBus;
-import Tools.Image.Boundaries;
-import Tools.Image.LoadImage;
 import Tools.Position.Column;
 import Tools.Position.Coordinate;
 import Tools.Position.Position;
 import Tools.Position.Row;
-
-public class Hero extends StaticElement {
+import Tools.Image.Animator;
+import Tools.Image.LoadImage;
+import Tools.Image.Boundaries.Boundaries;
+public class Hero extends MovableElement {
     public Hero(EventBus eventBus, Position position) {
         super(
             eventBus,
-            LoadImage.loadImageFromFile(
-                "b_parado.png",
-                new Boundaries(0,0,31,31)
-            ),
             position
         );
+        this.setTraversable(true);
     }
 
     public Hero(EventBus eventBus, int row, int column) {
@@ -28,10 +27,10 @@ public class Hero extends StaticElement {
         this.position.reset();
     }
 
-    public boolean placeBomb() {
+    public void placeBomb() {
         Bomb bomb = new Bomb(
             this.eventBus,
-            1,
+            5,
             new Position(
                 new Row(
                     new Coordinate(
@@ -47,7 +46,6 @@ public class Hero extends StaticElement {
         );
 
         this.eventBus.emit("create-element", bomb);
-        return true;
     }
 
     public void interact(Hero hero) {}
@@ -59,4 +57,45 @@ public class Hero extends StaticElement {
     public void die() {}
 
     public void pickup(){}
+
+    public void setDownAnimator() {
+        ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(56, 45, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(87, 45, 16, 24)));
+        this.downAnimator = new Animator(true, 300, images);
+    }
+
+    public void setLeftAnimator() {
+        ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(19, 45, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(35, 45, 16, 24)));
+        this.leftAnimator = new Animator(true, 300, images);
+    }
+
+    public void setRightAnimator() {
+        ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(122, 47, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(138, 47, 16, 24)));
+        this.rightAnimator = new Animator(true, 300, images);
+    }
+
+    public void setUpAnimator() {
+        ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(57, 20, 16, 24)));
+
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(89, 20, 16, 24)));
+        this.upAnimator = new Animator(true, 300, images);
+    }
+
+    public void setStopedAnimator() {
+        ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)));
+        this.stopedAnimator = new Animator(false, 10000, images);
+
+        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24))); DOWN
+        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(73, 20, 16, 24))); UP
+        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(106, 47, 16, 24))); RIGHT
+        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(3, 45, 16, 24))); LEFT
+
+    }
 }

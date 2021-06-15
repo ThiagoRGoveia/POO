@@ -18,7 +18,6 @@ public class Drawer {
         return screen;
     }
 
-    // public void draw(ImageIcon image, int column, int row) {
     public void draw(Element element) {
         Position position = element.getPosition();
         element.getImage().paintIcon(

@@ -4,8 +4,8 @@ import Model.Hero;
 
 public class PlaceBomb implements KeyStroke {
 
-    public boolean execute(Hero hero) {
-        return hero.placeBomb();
+    public void execute(Hero hero) {
+        hero.placeBomb();
     }
 
 }

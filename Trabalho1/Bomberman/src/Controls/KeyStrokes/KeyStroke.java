@@ -3,5 +3,5 @@ package Controls.KeyStrokes;
 import Model.Hero;
 
 public interface KeyStroke {
-    public boolean execute(Hero hero);
+    public void execute(Hero hero);
 }

@@ -42,21 +42,4 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     public boolean setPosition(Position position) {
         return this.position.setPosition(position);
     }
-
-    public boolean moveUp() {
-        return this.position.moveUp();
-    }
-
-    public boolean moveDown() {
-        return this.position.moveDown();
-    }
-
-    public boolean moveRight() {
-        return this.position.moveRight();
-    }
-
-    public boolean moveLeft() {
-        return this.position.moveLeft();
-    }
-
 }
