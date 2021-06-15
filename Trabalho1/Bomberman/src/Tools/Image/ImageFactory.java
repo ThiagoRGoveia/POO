@@ -20,7 +20,7 @@ public class ImageFactory {
 
     public ImageFactory(BoundaryFactory boundaryFactory) {
         this.boundaryFactory = boundaryFactory;
-
+        imageMap = new LinkedHashMap<String,ArrayList<ImageIcon>>(8);
         imageMap.put("bomb", loadBombImages());
         imageMap.put("first-explosion", loadFirstExplosionImages());
         imageMap.put("horizontal-left-last-explosion", loadHoriziontalLeftLastExplosionImages());
