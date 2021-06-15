@@ -12,7 +12,6 @@ public abstract class Explosion extends AnimatedElement {
 
     protected Explosion(EventBus eventBus, Position position) {
         super(eventBus, position);
-        // finishExplosion();
     }
 
     public void interact(Hero hero) {
@@ -36,7 +35,7 @@ public abstract class Explosion extends AnimatedElement {
             explodeUp = new VerticalUpMiddleExplosion(eventBus, intensity - 1, newPosition);
         }
         this.eventBus.emit("create-explosion", explodeUp);
-
+        setExplosionFinishTimer();
     }
     protected void propagateDown() {
         Explosion explodeDown;
@@ -54,7 +53,7 @@ public abstract class Explosion extends AnimatedElement {
             position.getColumn().getCoordinate().value
         );
         this.eventBus.emit("create-explosion", explodeDown);
-
+        setExplosionFinishTimer();
     }
     protected void propagateLeft() {
         Explosion explodeLeft;
@@ -68,7 +67,7 @@ public abstract class Explosion extends AnimatedElement {
             explodeLeft = new HorizontalLeftMiddleExplosion(eventBus, intensity - 1, newPosition);
         }
         this.eventBus.emit("create-explosion", explodeLeft);
-
+        setExplosionFinishTimer();
     }
     protected void propagateRight() {
         Explosion explodeRight;
@@ -82,14 +81,14 @@ public abstract class Explosion extends AnimatedElement {
             explodeRight = new HorizontalRightMiddleExplosion(eventBus, intensity - 1, newPosition);
         }
         this.eventBus.emit("create-explosion", explodeRight);
-        // setExplosionFinshTimer();
+        setExplosionFinishTimer();
     }
 
     private void finishExplosion() {
         this.eventBus.emit("remove-element", this);
     }
 
-    private void setExplosionFinshTimer() {
+    protected void setExplosionFinishTimer() {
         TimerTask task = new TimerTask() {
             public void run() {
                 finishExplosion();

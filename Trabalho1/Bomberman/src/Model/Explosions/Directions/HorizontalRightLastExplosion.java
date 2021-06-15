@@ -10,6 +10,7 @@ public class HorizontalRightLastExplosion extends LastExplosion {
         super(eventBus,position);
         this.setAnimatorName("horizontal-right-last-explosion");
         eventBus.emit("create-animator", this);
+        setExplosionFinishTimer();
     }
 
 }

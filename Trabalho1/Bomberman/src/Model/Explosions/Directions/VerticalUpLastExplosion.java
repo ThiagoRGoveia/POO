@@ -10,5 +10,6 @@ public class VerticalUpLastExplosion extends LastExplosion {
         super(eventBus,position);
         this.setAnimatorName("vertical-up-last-explosion");
         eventBus.emit("create-animator", this);
+        setExplosionFinishTimer();
     }
 }
