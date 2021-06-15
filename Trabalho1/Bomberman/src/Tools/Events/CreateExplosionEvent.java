@@ -4,7 +4,6 @@ import Controls.Screen;
 import Model.Element;
 import Model.Explosion;
 import Tools.InteractionMap;
-import Tools.Position.Position;
 
 public class CreateExplosionEvent implements Event {
 
@@ -14,10 +13,9 @@ public class CreateExplosionEvent implements Event {
             InteractionMap interactionMap = screen.getInteractionMap();
             Element preExistingElement = interactionMap.get(explosion.getPosition());
             if (preExistingElement == null) {
-                if (!Position.isPositionOutOfBoundaries(explosion.getPosition())) {
-                    screen.addElement(explosion);
-                    interactionMap.insert(explosion.getPosition(), explosion);
-                }
+                screen.addElement(explosion);
+                interactionMap.insert(explosion.getPosition(), explosion);
+                explosion.propagateExplosion(explosion.getIntensity());
             } else {
                 preExistingElement.interact(explosion);
             }

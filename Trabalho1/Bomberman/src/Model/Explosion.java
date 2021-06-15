@@ -9,9 +9,11 @@ import Tools.Position.Position;
 
 public abstract class Explosion extends AnimatedElement {
     protected boolean isTraversable = true;
+    protected int intensity;
 
-    protected Explosion(EventBus eventBus, Position position) {
+    protected Explosion(EventBus eventBus, Position position, int intensity) {
         super(eventBus, position);
+        this.intensity = intensity;
     }
 
     public void interact(Hero hero) {
@@ -104,5 +106,10 @@ public abstract class Explosion extends AnimatedElement {
         };
         Timer timer = new Timer();
         timer.schedule(task, 260);
+    }
+
+    public void propagateExplosion(int intensity) {}
+    public int getIntensity(){
+        return this.intensity;
     }
 }
