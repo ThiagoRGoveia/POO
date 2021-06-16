@@ -1,8 +1,6 @@
 package Tools;
 
 import java.awt.Graphics;
-import java.io.Serializable;
-import javax.swing.ImageIcon;
 import Model.Element;
 import Tools.Position.Position;
 import Controls.Screen;

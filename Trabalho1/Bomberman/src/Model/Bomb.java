@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 import Model.Enemies.Enemy;
@@ -14,7 +13,7 @@ public class Bomb extends AnimatedElement {
     private TimerTask explosionTimer;
     private int intensity;
 
-    public Bomb (EventBus eventBus, int intensity, Position position) {
+    public Bomb (EventBus<Element> eventBus, int intensity, Position position) {
         super(eventBus,position);
         this.traversable = true;
         this.intensity = intensity;
@@ -24,7 +23,7 @@ public class Bomb extends AnimatedElement {
         setExplosionTimer();
     }
 
-    public Bomb(EventBus eventBus, int intensity, int row, int column) {
+    public Bomb(EventBus<Element> eventBus, int intensity, int row, int column) {
         this(eventBus, intensity, new Position(row, column));
     }
 

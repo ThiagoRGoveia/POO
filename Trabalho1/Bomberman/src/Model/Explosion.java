@@ -1,6 +1,5 @@
 package Model;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 import Model.Enemies.Enemy;

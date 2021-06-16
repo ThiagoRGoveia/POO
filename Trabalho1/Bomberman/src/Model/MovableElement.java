@@ -5,7 +5,6 @@ import javax.swing.ImageIcon;
 
 import Model.Enemies.Enemy;
 
-import java.util.Timer;
 import java.util.TimerTask;
 
 import Tools.Schedule;

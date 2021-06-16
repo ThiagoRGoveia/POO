@@ -8,7 +8,6 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.KeyEvent;
 
-import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Column;
 import Tools.Position.Coordinate;
