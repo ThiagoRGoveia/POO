@@ -33,21 +33,4 @@ public abstract class AnimatedElement extends Element {
     public String getAnimatorName() {
         return animatorName;
     }
-
-    public boolean moveUp() {
-        return this.position.moveUp();
-    }
-
-    public boolean moveDown() {
-        return this.position.moveDown();
-    }
-
-    public boolean moveRight() {
-        return this.position.moveRight();
-    }
-
-    public boolean moveLeft() {
-        return this.position.moveLeft();
-    }
-
 }
