@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import Tools.Events.EventBus;
 import Tools.Position.Column;
 import Tools.Position.Coordinate;
+import Tools.Position.HeroHitBox;
 import Tools.Position.Position;
 import Tools.Position.Row;
 import Tools.Image.Animator;
@@ -25,6 +26,7 @@ public class Hero extends MovableElement {
         this.setTraversable(true);
         this.speed = 10;
         this.timer = timer;
+        this.setHitBox(new HeroHitBox(this.position));
     }
 
     public Hero(EventBus<Element>eventBus, int row, int column, Timer timer) {
@@ -68,18 +70,11 @@ public class Hero extends MovableElement {
 
     public void moveUp() {
         if (movementDirection != "up") {
-            keysDown++;
-            this.movementDirection = "up";
-            this.activeAnimator.stop();
-            this.activeAnimator = upAnimator;
-            activeAnimator.start();
-
-            if (this.movementTimer != null) {
-                this.movementTimer.cancel();
-            }
+            changeAnimatorAndKillMovement(upAnimator, "up");
             this.movementTimer = new TimerTask() {
                 public void run() {
-                    position.moveUp();
+                    nextPosition = position.getMovementUp();
+                    processMovement();
                 }
             };
             this.move(this.speed);
@@ -88,18 +83,11 @@ public class Hero extends MovableElement {
 
     public void moveDown() {
         if (movementDirection != "down") {
-            keysDown++;
-            this.movementDirection = "down";
-            this.activeAnimator.stop();
-            this.activeAnimator = downAnimator;
-            this.activeAnimator.start();
-
-            if (this.movementTimer != null) {
-                this.movementTimer.cancel();
-            }
+            changeAnimatorAndKillMovement(downAnimator, "down");
             this.movementTimer = new TimerTask() {
                 public void run() {
-                    position.moveDown();
+                    nextPosition = position.getMovementDown();
+                    processMovement();
                 }
             };
             this.move(this.speed);
@@ -108,18 +96,11 @@ public class Hero extends MovableElement {
 
     public void moveRight() {
         if (movementDirection != "right") {
-            keysDown++;
-            this.movementDirection = "right";
-            this.activeAnimator.stop();
-            this.activeAnimator = rightAnimator;
-            this.activeAnimator.start();
-
-            if (this.movementTimer != null) {
-                this.movementTimer.cancel();
-            }
+            changeAnimatorAndKillMovement(rightAnimator, "right");
             this.movementTimer = new TimerTask() {
                 public void run() {
-                    position.moveRight();
+                    nextPosition = position.getMovementRight();
+                    processMovement();
                 }
             };
             this.move(this.speed);
@@ -128,21 +109,31 @@ public class Hero extends MovableElement {
 
     public void moveLeft() {
         if (movementDirection != "left") {
-            keysDown++;
-            this.movementDirection = "left";
-            this.activeAnimator.stop();
-            this.activeAnimator = leftAnimator;
-            this.activeAnimator.start();
-
-            if (this.movementTimer != null) {
-                this.movementTimer.cancel();
-            }
+            changeAnimatorAndKillMovement(leftAnimator, "left");
             movementTimer = new TimerTask() {
                 public void run() {
-                    position.moveLeft();
+                    nextPosition = position.getMovementLeft();
+                    processMovement();
                 }
             };
             this.move(this.speed);
+        }
+    }
+
+    public void processMovement() {
+        if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
+            this.setHitBox(
+                new HeroHitBox(this.nextPosition)
+            );
+            this.eventBus.emit("verify-element-interaction", this);
+            if (this.interactingElement != null && this.interactingElement != this) {
+                this.interactingElement.interact(this);
+                if (this.interactingElement.isTraversable()) {
+                    this.position.setPosition(this.nextPosition);
+                }
+            } else {
+                this.position.setPosition(this.nextPosition);
+            }
         }
     }
 
@@ -170,6 +161,17 @@ public class Hero extends MovableElement {
             this.activeAnimator = this.stopedAnimator;
         }
 
+    }
+
+    private void changeAnimatorAndKillMovement(Animator animator, String direction) {
+        keysDown++;
+        this.movementDirection = direction;
+        this.activeAnimator.stop();
+        this.activeAnimator = animator;
+        activeAnimator.start();
+        if (this.movementTimer != null) {
+            this.movementTimer.cancel();
+        }
     }
 
     public void setDownAnimator() {
@@ -204,12 +206,19 @@ public class Hero extends MovableElement {
     public void setStopedAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)));
+
+        if (this.movementDirection == "up") {
+            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(73, 20, 16, 24)));
+        }
+        else if (this.movementDirection == "down") {
+            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)));
+        }
+        else if (this.movementDirection == "left") {
+            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(3, 45, 16, 24)));
+        }
+        else if (this.movementDirection == "right") {
+            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(106, 47, 16, 24)));
+        }
         this.stopedAnimator = new Animator(false, 10000, images, timer);
-
-        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24))); DOWN
-        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(73, 20, 16, 24))); UP
-        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(106, 47, 16, 24))); RIGHT
-        // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(3, 45, 16, 24))); LEFT
-
     }
 }

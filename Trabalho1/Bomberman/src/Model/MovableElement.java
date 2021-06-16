@@ -23,6 +23,9 @@ public abstract class MovableElement extends Element {
     protected Animator stopedAnimator;
     protected TimerTask movementTimer;
     protected int keysDown;
+    protected Element interactingElement;
+    protected Position nextPosition;
+
 
     protected MovableElement(EventBus<Element>eventBus, Position position) {
         super(eventBus, position);
@@ -56,11 +59,31 @@ public abstract class MovableElement extends Element {
     public void interact(Explosion explosion) {
     }
 
+    public void setInteractingElement(Element interactingElement) {
+        this.interactingElement = interactingElement;
+    }
 
+    public Element getInteractingElement() {
+        return interactingElement;
+    }
+
+    public void setNextPosition(Position nextPosition) {
+        this.nextPosition = nextPosition;
+    }
+
+    public Position getNextPosition() {
+        return nextPosition;
+    }
 
     public abstract void setDownAnimator();
     public abstract void setLeftAnimator();
     public abstract void setRightAnimator();
     public abstract void setUpAnimator();
     public abstract void setStopedAnimator();
+    public abstract void processMovement();
+    public abstract void moveUp();
+    public abstract void moveDown();
+    public abstract void moveLeft();
+    public abstract void moveRight();
+
 }

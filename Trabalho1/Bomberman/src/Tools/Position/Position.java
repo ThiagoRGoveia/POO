@@ -90,8 +90,8 @@ public class Position {
         return this.setPosition(position.getRow(),position.getColumn());
     }
 
-    public boolean moveUp(){
-        return this.setPosition(
+    public Position getMovementUp() {
+        return new Position(
             new Row(
                 new ScreenPosition(
                     this.getRow().getScreenPosition().value - 1
@@ -100,8 +100,8 @@ public class Position {
             this.getColumn()
         );
     }
-    public boolean moveDown(){
-        return this.setPosition(
+    public Position getMovementDown(){
+        return new Position(
             new Row(
                 new ScreenPosition(
                     this.getRow().getScreenPosition().value + 1
@@ -110,8 +110,8 @@ public class Position {
             this.getColumn()
         );
     }
-    public boolean moveRight(){
-        return this.setPosition(
+    public Position getMovementRight(){
+        return new Position(
             this.getRow(),
             new Column(
                 new ScreenPosition(
@@ -120,8 +120,8 @@ public class Position {
             )
         );
     }
-    public boolean moveLeft(){
-        return this.setPosition(
+    public Position getMovementLeft(){
+        return new Position(
             this.getRow(),
             new Column(
                 new ScreenPosition(

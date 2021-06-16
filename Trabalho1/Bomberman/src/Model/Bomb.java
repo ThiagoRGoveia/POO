@@ -62,7 +62,10 @@ public class Bomb extends AnimatedElement {
     }
 
     public void interact(Hero hero) {
-        this.traversableCancelationTimer.cancel();
+        if (this.traversableCancelationTimer != null) {
+            this.traversableCancelationTimer.cancel();
+            this.traversableCancelationTimer = null;
+        }
         scheduleTraversableChange();
     }
 
