@@ -6,7 +6,9 @@ import javax.swing.ImageIcon;
 import Model.Enemies.Enemy;
 
 import java.util.Timer;
+import java.util.TimerTask;
 
+import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 
@@ -20,7 +22,7 @@ public abstract class MovableElement extends Element {
     protected Animator downAnimator;
     protected Animator activeAnimator;
     protected Animator stopedAnimator;
-    protected Timer movementTimer;
+    protected TimerTask movementTimer;
     protected int keysDown;
 
     protected MovableElement(EventBus<Element>eventBus, Position position) {
@@ -37,6 +39,13 @@ public abstract class MovableElement extends Element {
 
     public ImageIcon getImage() {
         return activeAnimator.getImage();
+    }
+
+    public void move(int speed) {
+        this.createScheduledTask(
+                new Schedule(this.movementTimer, 0, speed)
+            );
+        this.eventBus.emit("create-schedule-loop", this);
     }
 
     public void interact(Hero hero) {

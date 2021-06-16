@@ -5,6 +5,7 @@ import java.util.TimerTask;
 
 import Model.Enemies.Enemy;
 import Model.Explosions.Directions.*;
+import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
@@ -106,8 +107,10 @@ public abstract class Explosion extends AnimatedElement {
                 finishExplosion();
             }
         };
-        Timer timer = new Timer();
-        timer.schedule(task, 260);
+        this.createScheduledTask(
+            new Schedule(task, 260)
+        );
+        this.eventBus.emit("create-schedule", this);
     }
 
     public void propagateExplosion(int intensity) {}

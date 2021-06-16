@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.KeyEvent;
 
+import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Column;
 import Tools.Position.Coordinate;
@@ -18,15 +19,17 @@ import Tools.Image.LoadImage;
 import Tools.Image.Boundaries.Boundaries;
 public class Hero extends MovableElement {
     private int speed;
+    private Timer timer;
 
-    public Hero(EventBus<Element>eventBus, Position position) {
+    public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position);
         this.setTraversable(true);
-        this.speed = 15;
+        this.speed = 10;
+        this.timer = timer;
     }
 
-    public Hero(EventBus<Element>eventBus, int row, int column) {
-        this(eventBus, new Position(row, column));
+    public Hero(EventBus<Element>eventBus, int row, int column, Timer timer) {
+        this(eventBus, new Position(row, column), timer);
     }
 
     public void resetToLastPosition(){
@@ -75,13 +78,12 @@ public class Hero extends MovableElement {
             if (this.movementTimer != null) {
                 this.movementTimer.cancel();
             }
-            TimerTask task = new TimerTask() {
+            this.movementTimer = new TimerTask() {
                 public void run() {
                     position.moveUp();
                 }
             };
-            this.movementTimer = new Timer();
-            this.movementTimer.schedule(task, 0, this.speed);
+            this.move(this.speed);
         }
     }
 
@@ -96,13 +98,12 @@ public class Hero extends MovableElement {
             if (this.movementTimer != null) {
                 this.movementTimer.cancel();
             }
-            TimerTask task = new TimerTask() {
+            this.movementTimer = new TimerTask() {
                 public void run() {
                     position.moveDown();
                 }
             };
-            this.movementTimer = new Timer();
-            this.movementTimer.schedule(task, 0, this.speed);
+            this.move(this.speed);
         }
     }
 
@@ -117,13 +118,12 @@ public class Hero extends MovableElement {
             if (this.movementTimer != null) {
                 this.movementTimer.cancel();
             }
-            TimerTask task = new TimerTask() {
+            this.movementTimer = new TimerTask() {
                 public void run() {
                     position.moveRight();
                 }
             };
-            this.movementTimer = new Timer();
-            this.movementTimer.schedule(task, 0, this.speed);
+            this.move(this.speed);
         }
     }
 
@@ -138,13 +138,12 @@ public class Hero extends MovableElement {
             if (this.movementTimer != null) {
                 this.movementTimer.cancel();
             }
-            TimerTask task = new TimerTask() {
+            movementTimer = new TimerTask() {
                 public void run() {
                     position.moveLeft();
                 }
             };
-            this.movementTimer = new Timer();
-            this.movementTimer.schedule(task, 0, this.speed);
+            this.move(this.speed);
         }
     }
 
@@ -178,21 +177,21 @@ public class Hero extends MovableElement {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(56, 45, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(87, 45, 16, 24)));
-        this.downAnimator = new Animator(true, 300, images);
+        this.downAnimator = new Animator(true, 300, images, timer);
     }
 
     public void setLeftAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(19, 45, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(35, 45, 16, 24)));
-        this.leftAnimator = new Animator(true, 300, images);
+        this.leftAnimator = new Animator(true, 300, images, timer);
     }
 
     public void setRightAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(122, 47, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(138, 47, 16, 24)));
-        this.rightAnimator = new Animator(true, 300, images);
+        this.rightAnimator = new Animator(true, 300, images, timer);
     }
 
     public void setUpAnimator() {
@@ -200,13 +199,13 @@ public class Hero extends MovableElement {
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(57, 20, 16, 24)));
 
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(89, 20, 16, 24)));
-        this.upAnimator = new Animator(true, 300, images);
+        this.upAnimator = new Animator(true, 300, images, timer);
     }
 
     public void setStopedAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)));
-        this.stopedAnimator = new Animator(false, 10000, images);
+        this.stopedAnimator = new Animator(false, 10000, images, timer);
 
         // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24))); DOWN
         // images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(73, 20, 16, 24))); UP

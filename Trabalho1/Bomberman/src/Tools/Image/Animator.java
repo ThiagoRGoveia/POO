@@ -1,15 +1,8 @@
 package Tools.Image;
 
 import java.util.ArrayList;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import java.awt.image.BufferedImage;
-import Tools.Consts;
-import Tools.Image.Boundaries.Boundaries;
 
-import java.awt.Graphics;
-import java.io.IOException;
-import java.io.File;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -21,12 +14,14 @@ public class Animator {
     private Timer timer;
     private boolean isLoop;
     private long interval;
+    private TimerTask timerTask;
 
-    public Animator(boolean isLoop, long interval, ArrayList<ImageIcon> images) {
+    public Animator(boolean isLoop, long interval, ArrayList<ImageIcon> images, Timer timer) {
         this.isLoop = isLoop;
         this.interval = interval;
         this.images = images;
         numberOfImages = images.size();
+        this.timer = timer;
     }
 
     public void start() {
@@ -67,14 +62,13 @@ public class Animator {
     }
 
     private void startImageSchedule(boolean isLoop, long interval) {
-        TimerTask changeImageTask;
         if (isLoop) {
-            changeImageTask = getLoopTimerTask();
+            timerTask = getLoopTimerTask();
         } else {
-            changeImageTask = getOneTimeTimerTask();
+            timerTask = getOneTimeTimerTask();
         }
         timer = new Timer();
-        timer.schedule(changeImageTask, 0, interval);
+        timer.schedule(timerTask, 0, interval);
     }
 
     public ImageIcon getImage() {

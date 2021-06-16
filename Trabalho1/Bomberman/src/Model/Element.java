@@ -1,7 +1,6 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.TimerTask;
 
 import Tools.Interactable;
 import Tools.Schedule;
@@ -50,7 +49,13 @@ public abstract class Element implements Serializable, Drawable, Interactable {
         return scheduledTask;
     }
 
-    public void setScheduledTask(Schedule scheduledTask) {
+    public void createScheduledTask(Schedule scheduledTask) {
         this.scheduledTask = scheduledTask;
+    }
+
+    public void cancelSchedule() {
+        if (scheduledTask != null) {
+            scheduledTask.timerTask.cancel();
+        }
     }
 }

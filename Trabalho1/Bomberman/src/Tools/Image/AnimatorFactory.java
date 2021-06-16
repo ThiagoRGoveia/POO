@@ -1,14 +1,17 @@
 package Tools.Image;
 
 import java.util.LinkedHashMap;
+import java.util.Timer;
 
 public class AnimatorFactory {
     private LinkedHashMap<String,Creatable> animatorMap;
     private ImageFactory imageLoader;
+    private Timer timer;
 
-    public AnimatorFactory(ImageFactory imageLoader) {
+    public AnimatorFactory(ImageFactory imageLoader, Timer timer) {
         animatorMap = new LinkedHashMap<String,Creatable>(8);
         this.imageLoader = imageLoader;
+        this.timer = timer;
 
         animatorMap.put("bomb", new BombAnimator());
         animatorMap.put("first-explosion", new FirstExplosionAnimator());
@@ -25,7 +28,8 @@ public class AnimatorFactory {
             return new Animator(
                 true,
                 500,
-                imageLoader.getImageList("bomb")
+                imageLoader.getImageList("bomb"),
+                timer
               );
             }
     }
@@ -35,7 +39,8 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("first-explosion")
+                imageLoader.getImageList("first-explosion"),
+                timer
          );
 }
     }
@@ -45,7 +50,8 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-left-last-explosion")
+                imageLoader.getImageList("horizontal-left-last-explosion"),
+                timer
          );
 }
     }
@@ -55,7 +61,8 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-middle-explosion")
+                imageLoader.getImageList("horizontal-middle-explosion"),
+                timer
          );
 }
     }
@@ -65,7 +72,8 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-right-last-explosion")
+                imageLoader.getImageList("horizontal-right-last-explosion"),
+                timer
          );
 }
     }
@@ -75,7 +83,8 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-down-last-explosion")
+                imageLoader.getImageList("vertical-down-last-explosion"),
+                timer
          );
 }
     }
@@ -85,7 +94,8 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-middle-explosion")
+                imageLoader.getImageList("vertical-middle-explosion"),
+                timer
          );
 }
     }
@@ -95,7 +105,8 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-up-last-explosion")
+                imageLoader.getImageList("vertical-up-last-explosion"),
+                timer
          );
 }
     }

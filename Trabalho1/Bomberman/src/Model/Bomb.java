@@ -5,15 +5,16 @@ import java.util.TimerTask;
 
 import Model.Enemies.Enemy;
 import Model.Explosions.FirstExplosion;
+import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public class Bomb extends AnimatedElement {
-    private Timer traversableCancelationTimer;
-    private Timer explosionTimer;
+    private TimerTask traversableCancelationTimer;
+    private TimerTask explosionTimer;
     private int intensity;
 
-    public Bomb (EventBus<Element>eventBus, int intensity, Position position) {
+    public Bomb (EventBus eventBus, int intensity, Position position) {
         super(eventBus,position);
         this.traversable = true;
         this.intensity = intensity;
@@ -23,7 +24,7 @@ public class Bomb extends AnimatedElement {
         setExplosionTimer();
     }
 
-    public Bomb(EventBus<Element>eventBus, int intensity, int row, int column) {
+    public Bomb(EventBus eventBus, int intensity, int row, int column) {
         this(eventBus, intensity, new Position(row, column));
     }
 
@@ -32,23 +33,27 @@ public class Bomb extends AnimatedElement {
     }
 
     private void scheduleTraversableChange() {
-        TimerTask task = new TimerTask() {
+        traversableCancelationTimer = new TimerTask() {
             public void run() {
                 turnBlockable();
             }
         };
-        this.traversableCancelationTimer = new Timer();
-        this.traversableCancelationTimer.schedule(task, 500);
+        this.createScheduledTask(
+            new Schedule(traversableCancelationTimer, 500)
+        );
+        this.eventBus.emit("create-schedule", this);
     }
 
     private void setExplosionTimer() {
-        TimerTask task = new TimerTask() {
+        explosionTimer = new TimerTask() {
             public void run() {
                 explode();
             }
         };
-        this.explosionTimer = new Timer();
-        this.explosionTimer.schedule(task, 5000);
+        this.createScheduledTask(
+            new Schedule(explosionTimer, 5000)
+        );
+        this.eventBus.emit("create-schedule", this);
     }
 
     private void explode() {
