@@ -1,26 +1,28 @@
 package Tools.Events;
 import java.util.LinkedHashMap;
-
 import Controls.Screen;
-import Model.Element;
 
-public class EventBus {
-    private LinkedHashMap<String,Event> eventMap;
+public class EventBus<T> {
+    private LinkedHashMap<String,Event<T>> eventMap;
     private Screen screen;
 
-    public EventBus(Screen screen) {
-        eventMap = new LinkedHashMap<String,Event>(50);
+    public EventBus(Screen screen, int size) {
+        eventMap = new LinkedHashMap<String,Event<T>>(size);
         this.screen = screen;
     }
 
-    public void on(String name, Event event) {
+    public void on(String name, Event<T> event) {
         eventMap.put(name, event);
     }
 
-    public void emit(String name, Element... elements) {
-        Event event = eventMap.get(name);
+    public void off(String name) {
+        eventMap.remove(name);
+    }
+
+    public void emit(String name, T t) {
+        Event<T> event = eventMap.get(name);
         if (event != null) {
-            event.fire(this.screen, elements);
+            event.fire(this.screen, t);
         }
     }
 }

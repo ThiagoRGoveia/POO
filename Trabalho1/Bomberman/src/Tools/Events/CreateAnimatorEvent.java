@@ -5,13 +5,13 @@ import Model.AnimatedElement;
 import Model.Element;
 import Tools.Image.Animator;
 
-public class CreateAnimatorEvent implements Event {
-    public void fire(Screen screen, Element... elements) {
-       AnimatedElement element = (AnimatedElement) elements[0];
-       Animator animator = screen.getAnimator(element.getAnimatorName());
+public class CreateAnimatorEvent implements Event<Element> {
+    public void fire(Screen screen, Element element) {
+       AnimatedElement animatedElement = (AnimatedElement) element;
+       Animator animator = screen.getAnimator(animatedElement.getAnimatorName());
        if (animator != null) {
            animator.start();
-           element.setAnimator(animator);
+           animatedElement.setAnimator(animator);
        }
     }
 

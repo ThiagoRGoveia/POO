@@ -2,7 +2,6 @@ package Model.Enemies;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.concurrent.Callable;
 
 import Model.MovableElement;
 import Tools.Events.EventBus;

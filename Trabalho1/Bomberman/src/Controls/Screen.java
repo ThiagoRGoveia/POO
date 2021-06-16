@@ -6,6 +6,7 @@ import Model.Teste;
 import Model.Enemies.Helicopter;
 import Tools.*;
 import Tools.Events.*;
+import Tools.Events.Event;
 import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
 import Tools.Image.ImageFactory;
@@ -22,7 +23,7 @@ import Controls.KeyStrokes.Movements;
 
 public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener {
     public Drawer drawer;
-    private EventBus eventBus;
+    private EventBus<Element> eventBus;
     private Hero hero;
     private ArrayList<Element> elements;
     private Controller controller = new Controller(this);
@@ -49,11 +50,12 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
-        eventBus = new EventBus(this);
+        eventBus = new EventBus<Element>(this, 20);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
         eventBus.on("create-animator", new CreateAnimatorEvent());
+        eventBus.on("schedule-task", new CreateAnimatorEvent());
 
         elements = new ArrayList<Element>(100);
 
