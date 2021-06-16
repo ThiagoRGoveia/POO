@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.TimerTask;
 
 import Tools.Interactable;
+import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Image.Drawable;
 import Tools.Position.Position;
@@ -13,7 +14,7 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     protected boolean traversable; /*Pode passar por cima?*/
     protected boolean killOnTouch;       /*Se encostar, morre?*/
     protected EventBus<Element> eventBus;
-    protected TimerTask scheduledTask;
+    protected Schedule scheduledTask;
 
     protected Element(EventBus<Element> eventBus, Position position) {
         this.eventBus = eventBus;
@@ -45,11 +46,11 @@ public abstract class Element implements Serializable, Drawable, Interactable {
         return this.position.setPosition(position);
     }
 
-    public TimerTask getScheduledTask() {
+    public Schedule getScheduledTask() {
         return scheduledTask;
     }
 
-    public void setScheduledTask(TimerTask scheduledTask) {
+    public void setScheduledTask(Schedule scheduledTask) {
         this.scheduledTask = scheduledTask;
     }
 }

@@ -31,6 +31,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Movements movements;
     private InteractionMap interactionMap;
     private AnimatorFactory animatorFactory;
+    private Timer timer;
 
     public Screen(Drawer drawer) {
         this.drawer = drawer;
@@ -50,11 +51,13 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
-        eventBus = new EventBus<Element>(this, 4);
+        eventBus = new EventBus<Element>(this, 6);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
         eventBus.on("create-animator", new CreateAnimatorEvent());
+        eventBus.on("create-schedule", new CreateScheduleEvent());
+        eventBus.on("create-schedule-loop", new CreateScheduleEventLoop());
 
         elements = new ArrayList<Element>(100);
 
@@ -94,8 +97,12 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         return interactionMap;
     }
 
-    public EventBus getEventBus() {
+    public EventBus<Element>getEventBus() {
         return eventBus;
+    }
+
+    public Timer getTimer() {
+        return timer;
     }
 
     public Animator getAnimator(String animatorName) {
@@ -152,7 +159,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         };
 
         /*Redesenha (executa o metodo paint) tudo a cada Consts.FRAME_INTERVAL milissegundos*/
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.schedule(redesenhar, 0, Consts.FRAME_INTERVAL);
     }
 
