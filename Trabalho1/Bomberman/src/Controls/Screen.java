@@ -50,12 +50,11 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
-        eventBus = new EventBus<Element>(this, 20);
+        eventBus = new EventBus<Element>(this, 4);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
         eventBus.on("create-animator", new CreateAnimatorEvent());
-        eventBus.on("schedule-task", new CreateAnimatorEvent());
 
         elements = new ArrayList<Element>(100);
 
