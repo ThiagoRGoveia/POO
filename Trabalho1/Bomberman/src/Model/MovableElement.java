@@ -23,7 +23,7 @@ public abstract class MovableElement extends Element {
     protected Timer movementTimer;
     protected int keysDown;
 
-    protected MovableElement(EventBus eventBus, Position position) {
+    protected MovableElement(EventBus<Element>eventBus, Position position) {
         super(eventBus, position);
         this.keysDown = 0;
         setDownAnimator();

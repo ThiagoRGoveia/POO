@@ -19,13 +19,13 @@ import Tools.Image.Boundaries.Boundaries;
 public class Hero extends MovableElement {
     private int speed;
 
-    public Hero(EventBus eventBus, Position position) {
+    public Hero(EventBus<Element>eventBus, Position position) {
         super(eventBus, position);
         this.setTraversable(true);
         this.speed = 15;
     }
 
-    public Hero(EventBus eventBus, int row, int column) {
+    public Hero(EventBus<Element>eventBus, int row, int column) {
         this(eventBus, new Position(row, column));
     }
 

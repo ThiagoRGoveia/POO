@@ -1,6 +1,7 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.TimerTask;
 
 import Tools.Interactable;
 import Tools.Events.EventBus;
@@ -11,14 +12,15 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     protected Position position;
     protected boolean traversable; /*Pode passar por cima?*/
     protected boolean killOnTouch;       /*Se encostar, morre?*/
-    protected EventBus eventBus;
+    protected EventBus<Element> eventBus;
+    protected TimerTask scheduledTask;
 
-    protected Element(EventBus eventBus, Position position) {
+    protected Element(EventBus<Element> eventBus, Position position) {
         this.eventBus = eventBus;
         this.position = position;
     }
 
-    protected Element(EventBus eventBus) {
+    protected Element(EventBus<Element> eventBus) {
         this.position = new Position(0, 0);
         this.eventBus = eventBus;
     }
@@ -41,5 +43,13 @@ public abstract class Element implements Serializable, Drawable, Interactable {
 
     public boolean setPosition(Position position) {
         return this.position.setPosition(position);
+    }
+
+    public TimerTask getScheduledTask() {
+        return scheduledTask;
+    }
+
+    public void setScheduledTask(TimerTask scheduledTask) {
+        this.scheduledTask = scheduledTask;
     }
 }

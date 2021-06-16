@@ -11,7 +11,7 @@ import Tools.Position.Position;
 public abstract class Explosion extends AnimatedElement {
     protected int intensity;
 
-    protected Explosion(EventBus eventBus, Position position, int intensity) {
+    protected Explosion(EventBus<Element> eventBus, Position position, int intensity) {
         super(eventBus, position);
         this.intensity = intensity;
         this.setTraversable(true);

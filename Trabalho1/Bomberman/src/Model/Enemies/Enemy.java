@@ -3,13 +3,14 @@ package Model.Enemies;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import Model.Element;
 import Model.MovableElement;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public abstract class Enemy extends MovableElement {
     private int speed;
-    protected Enemy(EventBus eventBus, Position position) {
+    protected Enemy(EventBus<Element>eventBus, Position position) {
         super(eventBus, position);
         this.speed = 20;
     }

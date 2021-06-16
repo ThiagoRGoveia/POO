@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+import Model.Element;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
 import Tools.Image.LoadImage;
@@ -11,7 +12,7 @@ import Tools.Image.Boundaries.Boundaries;
 import Tools.Position.Position;
 
 public class Helicopter extends Enemy {
-    protected Helicopter(EventBus eventBus, Position position, boolean isVertical) {
+    protected Helicopter(EventBus<Element>eventBus, Position position, boolean isVertical) {
         super(eventBus, position);
         if (isVertical) {
             this.moveUp();
@@ -20,7 +21,7 @@ public class Helicopter extends Enemy {
         }
     }
 
-    public Helicopter(EventBus eventBus, int row, int column, boolean isVertical) {
+    public Helicopter(EventBus<Element>eventBus, int row, int column, boolean isVertical) {
         this(eventBus, new Position(row, column), isVertical);
     }
 
