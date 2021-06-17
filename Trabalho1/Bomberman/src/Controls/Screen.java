@@ -2,7 +2,6 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
-import Model.Teste;
 import Tools.*;
 import Tools.Events.*;
 import Tools.Image.Animator;
@@ -75,10 +74,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             ),
             timer
         );
-
-        Teste teste = new Teste(eventBus, 5, 5);
-        interactionMap.insert(new Position(5,5), teste);
-        this.addElement(teste);
 
     }
 
