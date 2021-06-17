@@ -92,4 +92,8 @@ public class Animator {
             return images.get(imgIndex);
         }
     }
+
+    public void reset () {
+        imgIndex = 0;
+    }
 }

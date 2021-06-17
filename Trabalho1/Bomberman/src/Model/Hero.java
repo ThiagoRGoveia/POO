@@ -87,7 +87,7 @@ public class Hero extends MovableElement {
                             isDead = false;
                             isImmortal = true;
                             activeAnimator.stop();
-                            activeAnimator.restart();
+                            activeAnimator.reset();
                             movementDirection="down";
                             setStopedAnimator();
                             movementDirection="stoped";
