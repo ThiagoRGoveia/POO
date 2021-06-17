@@ -18,17 +18,15 @@ import Tools.Position.Row;
 import Tools.Image.Animator;
 import Tools.Image.LoadImage;
 import Tools.Image.Boundaries.Boundaries;
-public class Hero extends MovableElement {
-    private int speed;
+public final class Hero extends MovableElement {
     private Timer timer;
     private Animator deathAnimator;
     private boolean isDead;
     private boolean isImmortal;
 
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
-        super(eventBus, position);
+        super(eventBus, position, 10);
         this.setTraversable(true);
-        this.speed = 10;
         this.timer = timer;
         this.setHitBox(new HeroHitBox(this.position));
         setDeathAnimator();
@@ -66,9 +64,13 @@ public class Hero extends MovableElement {
 
     public void interact(Hero hero) {}
 
-    public void interact(Enemy enemy) {}
+    public void interact(Enemy enemy) {
+        die();
+    }
 
-    public void interact(Explosion explosion) {}
+    public void interact(Explosion explosion) {
+        die();
+    }
 
     public void die() {
         if (!isDead && !isImmortal) {
@@ -116,57 +118,7 @@ public class Hero extends MovableElement {
 
     public void pickup(){}
 
-    public void moveUp() {
-        if (movementDirection != "up") {
-            changeAnimatorAndKillMovement(upAnimator, "up");
-            this.movementTimer = new TimerTask() {
-                public void run() {
-                    nextPosition = position.getMovementUp();
-                    processMovement();
-                }
-            };
-            this.move(this.speed);
-        }
-    }
 
-    public void moveDown() {
-        if (movementDirection != "down") {
-            changeAnimatorAndKillMovement(downAnimator, "down");
-            this.movementTimer = new TimerTask() {
-                public void run() {
-                    nextPosition = position.getMovementDown();
-                    processMovement();
-                }
-            };
-            this.move(this.speed);
-        }
-    }
-
-    public void moveRight() {
-        if (movementDirection != "right") {
-            changeAnimatorAndKillMovement(rightAnimator, "right");
-            this.movementTimer = new TimerTask() {
-                public void run() {
-                    nextPosition = position.getMovementRight();
-                    processMovement();
-                }
-            };
-            this.move(this.speed);
-        }
-    }
-
-    public void moveLeft() {
-        if (movementDirection != "left") {
-            changeAnimatorAndKillMovement(leftAnimator, "left");
-            movementTimer = new TimerTask() {
-                public void run() {
-                    nextPosition = position.getMovementLeft();
-                    processMovement();
-                }
-            };
-            this.move(this.speed);
-        }
-    }
 
     public void processMovement() {
         if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
@@ -209,17 +161,6 @@ public class Hero extends MovableElement {
             movementDirection = "stoped";
         }
 
-    }
-
-    private void changeAnimatorAndKillMovement(Animator animator, String direction) {
-        keysDown++;
-        this.movementDirection = direction;
-        this.activeAnimator.stop();
-        this.activeAnimator = animator;
-        activeAnimator.start();
-        if (this.movementTimer != null) {
-            this.movementTimer.cancel();
-        }
     }
 
     public void setDownAnimator() {

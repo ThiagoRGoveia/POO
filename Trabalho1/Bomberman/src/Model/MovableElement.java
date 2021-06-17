@@ -26,9 +26,10 @@ public abstract class MovableElement extends Element {
     protected int keysDown;
     protected Element interactingElement;
     protected Position nextPosition;
+    protected int speed;
 
 
-    protected MovableElement(EventBus<Element>eventBus, Position position) {
+    protected MovableElement(EventBus<Element>eventBus, Position position, int speed) {
         super(eventBus, position);
         this.keysDown = 0;
         setDownAnimator();
@@ -38,6 +39,7 @@ public abstract class MovableElement extends Element {
         setStopedAnimatorList();
         this.activeAnimator = this.stopedAnimatorList.get(0);
         activeAnimator.start();
+        this.speed = speed;
     }
 
     public ImageIcon getImage() {
@@ -76,6 +78,69 @@ public abstract class MovableElement extends Element {
         return nextPosition;
     }
 
+    public void moveUp() {
+        if (movementDirection != "up") {
+            changeAnimatorAndKillMovement(upAnimator, "up");
+            this.movementTimer = new TimerTask() {
+                public void run() {
+                    nextPosition = position.getMovementUp();
+                    processMovement();
+                }
+            };
+            this.move(this.speed);
+        }
+    }
+
+    public void moveDown() {
+        if (movementDirection != "down") {
+            changeAnimatorAndKillMovement(downAnimator, "down");
+            this.movementTimer = new TimerTask() {
+                public void run() {
+                    nextPosition = position.getMovementDown();
+                    processMovement();
+                }
+            };
+            this.move(this.speed);
+        }
+    }
+
+    public void moveRight() {
+        if (movementDirection != "right") {
+            changeAnimatorAndKillMovement(rightAnimator, "right");
+            this.movementTimer = new TimerTask() {
+                public void run() {
+                    nextPosition = position.getMovementRight();
+                    processMovement();
+                }
+            };
+            this.move(this.speed);
+        }
+    }
+
+    public void moveLeft() {
+        if (movementDirection != "left") {
+            changeAnimatorAndKillMovement(leftAnimator, "left");
+            movementTimer = new TimerTask() {
+                public void run() {
+                    nextPosition = position.getMovementLeft();
+                    processMovement();
+                }
+            };
+            this.move(this.speed);
+        }
+    }
+
+    public void changeAnimatorAndKillMovement(Animator animator, String direction) {
+        keysDown++;
+        this.movementDirection = direction;
+        this.activeAnimator.stop();
+        this.activeAnimator = animator;
+        activeAnimator.start();
+        if (this.movementTimer != null) {
+            this.movementTimer.cancel();
+        }
+    }
+
     public abstract void setDownAnimator();
     public abstract void setLeftAnimator();
     public abstract void setRightAnimator();
@@ -83,9 +148,6 @@ public abstract class MovableElement extends Element {
     public abstract void setStopedAnimator();
     public abstract void setStopedAnimatorList();
     public abstract void processMovement();
-    public abstract void moveUp();
-    public abstract void moveDown();
-    public abstract void moveLeft();
-    public abstract void moveRight();
+
 
 }
