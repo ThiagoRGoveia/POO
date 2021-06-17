@@ -18,7 +18,7 @@ public abstract class Explosion extends AnimatedElement {
     }
 
     public void interact(Hero hero) {
-        System.out.println("KILL");
+        hero.die();
     }
 
     public void interact(Enemy enemy) {

@@ -8,6 +8,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.KeyEvent;
 
+import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Column;
 import Tools.Position.Coordinate;
@@ -20,6 +21,9 @@ import Tools.Image.Boundaries.Boundaries;
 public class Hero extends MovableElement {
     private int speed;
     private Timer timer;
+    private Animator deathAnimator;
+    private boolean isDead;
+    private boolean isImmortal;
 
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position);
@@ -27,6 +31,8 @@ public class Hero extends MovableElement {
         this.speed = 10;
         this.timer = timer;
         this.setHitBox(new HeroHitBox(this.position));
+        setDeathAnimator();
+
     }
 
     public Hero(EventBus<Element>eventBus, int row, int column, Timer timer) {
@@ -64,7 +70,46 @@ public class Hero extends MovableElement {
 
     public void interact(Explosion explosion) {}
 
-    public void die() {}
+    public void die() {
+        if (!isDead && !isImmortal) {
+            this.isDead = true;
+            this.activeAnimator.stop();
+            this.movementTimer.cancel();
+            this.activeAnimator = deathAnimator;
+            this.activeAnimator.start();
+
+            this.createScheduledTask(
+                new Schedule(
+                    // Restaura heroi pra status parado na posição (0,0)
+                    new TimerTask(){
+                        public void run() {
+                            position.setPosition(0,0);
+                            isDead = false;
+                            isImmortal = true;
+                            activeAnimator.stop();
+                            activeAnimator.restart();
+                            movementDirection="down";
+                            setStopedAnimator();
+                            movementDirection="stoped";
+                        }
+                    },
+                    2000
+                )
+            );
+            this.eventBus.emit("create-schedule", this);
+            this.createScheduledTask(
+                new Schedule(
+                    new TimerTask(){
+                        public void run() {
+                            isImmortal = false;
+                        }
+                    },
+                    7000
+                )
+            );
+            this.eventBus.emit("create-schedule", this);
+        }
+    }
 
     public void pickup(){}
 
@@ -227,6 +272,19 @@ public class Hero extends MovableElement {
         stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(3, 45, 16, 24)))); // LEFT
         stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(106, 47, 16, 24)))); // RIGHT
     }
+
+    public void setDeathAnimator() {
+        ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(6);
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(30, 75, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(48, 75, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(66, 75, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(82, 75, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(99, 75, 16, 24)));
+        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(117, 75, 16, 24)));
+        this.deathAnimator = new Animator(false, 100, images, timer);
+    }
+
+
 
 
 }
