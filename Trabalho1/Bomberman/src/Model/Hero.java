@@ -20,6 +20,7 @@ import Tools.Image.Boundaries.Boundaries;
 public class Hero extends MovableElement {
     private int speed;
     private Timer timer;
+    private ArrayList<ImageIcon> stopedImages;
 
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position);
@@ -157,8 +158,8 @@ public class Hero extends MovableElement {
         }
         if (keysDown <= 0) {
             keysDown = 0;
+            this.setStopedAnimator();
             movementDirection = "stoped";
-            this.activeAnimator = this.stopedAnimator;
         }
 
     }
@@ -204,21 +205,29 @@ public class Hero extends MovableElement {
     }
 
     public void setStopedAnimator() {
-        ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
-        images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)));
-
-        if (this.movementDirection == "up") {
-            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(73, 20, 16, 24)));
-        }
-        else if (this.movementDirection == "down") {
-            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)));
+        Animator animator;
+        if (this.movementDirection == "right") {
+            animator = stopedAnimatorList.get(3);
         }
         else if (this.movementDirection == "left") {
-            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(3, 45, 16, 24)));
+            animator = stopedAnimatorList.get(2);
         }
-        else if (this.movementDirection == "right") {
-            images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(106, 47, 16, 24)));
+        else if (this.movementDirection == "up") {
+            animator = stopedAnimatorList.get(1);
         }
-        this.stopedAnimator = new Animator(false, 10000, images, timer);
+        else {
+            animator = stopedAnimatorList.get(0);
+        }
+        this.activeAnimator = animator;
     }
+
+    public void setStopedAnimatorList() {
+        stopedAnimatorList = new ArrayList<Animator>();
+        stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)))); // DOWN
+        stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(73, 20, 16, 24)))); // UP
+        stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(3, 45, 16, 24)))); // LEFT
+        stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(106, 47, 16, 24)))); // RIGHT
+    }
+
+
 }

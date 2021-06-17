@@ -5,6 +5,7 @@ import javax.swing.ImageIcon;
 
 import Model.Enemies.Enemy;
 
+import java.util.ArrayList;
 import java.util.TimerTask;
 
 import Tools.Schedule;
@@ -20,7 +21,7 @@ public abstract class MovableElement extends Element {
     protected Animator upAnimator;
     protected Animator downAnimator;
     protected Animator activeAnimator;
-    protected Animator stopedAnimator;
+    protected ArrayList<Animator> stopedAnimatorList;
     protected TimerTask movementTimer;
     protected int keysDown;
     protected Element interactingElement;
@@ -34,8 +35,8 @@ public abstract class MovableElement extends Element {
         setLeftAnimator();
         setRightAnimator();
         setUpAnimator();
-        setStopedAnimator();
-        this.activeAnimator = this.stopedAnimator;
+        setStopedAnimatorList();
+        this.activeAnimator = this.stopedAnimatorList.get(0);
         activeAnimator.start();
     }
 
@@ -80,6 +81,7 @@ public abstract class MovableElement extends Element {
     public abstract void setRightAnimator();
     public abstract void setUpAnimator();
     public abstract void setStopedAnimator();
+    public abstract void setStopedAnimatorList();
     public abstract void processMovement();
     public abstract void moveUp();
     public abstract void moveDown();
