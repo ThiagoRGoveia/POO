@@ -7,7 +7,7 @@ public class Movements {
     private LinkedHashMap<Integer,KeyStroke> keyStrokeMap;
 
     public Movements() {
-        keyStrokeMap = new LinkedHashMap<>(4);
+        keyStrokeMap = new LinkedHashMap<Integer,KeyStroke>(4);
         keyStrokeMap.put(KeyEvent.VK_UP, new MoveUp());
         keyStrokeMap.put(KeyEvent.VK_DOWN, new MoveDown());
         keyStrokeMap.put(KeyEvent.VK_RIGHT, new MoveRight());
