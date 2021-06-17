@@ -77,6 +77,7 @@ public class Hero extends MovableElement {
             this.movementTimer.cancel();
             this.activeAnimator = deathAnimator;
             this.activeAnimator.start();
+            Hero hero = this;
 
             this.createScheduledTask(
                 new Schedule(
@@ -84,6 +85,7 @@ public class Hero extends MovableElement {
                     new TimerTask(){
                         public void run() {
                             position.setPosition(0,0);
+                            eventBus.emit("insert-element-to-map", hero);
                             isDead = false;
                             isImmortal = true;
                             activeAnimator.stop();
@@ -97,6 +99,7 @@ public class Hero extends MovableElement {
                 )
             );
             this.eventBus.emit("create-schedule", this);
+            // O heroi deve reaparecer imortal por 5 segundos
             this.createScheduledTask(
                 new Schedule(
                     new TimerTask(){
