@@ -20,7 +20,6 @@ import Tools.Image.Boundaries.Boundaries;
 public class Hero extends MovableElement {
     private int speed;
     private Timer timer;
-    private ArrayList<ImageIcon> stopedImages;
 
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position);
