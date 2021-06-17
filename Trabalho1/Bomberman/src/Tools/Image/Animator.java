@@ -13,6 +13,7 @@ public class Animator {
     private int numberOfImages;
     private Timer timer;
     private boolean isLoop;
+    private boolean isStatic;
     private long interval;
     private TimerTask timerTask;
 
@@ -22,14 +23,27 @@ public class Animator {
         this.images = images;
         numberOfImages = images.size();
         this.timer = timer;
+        isStatic = false;
+    }
+
+    public Animator(ImageIcon image) {
+        isStatic = true;
+        images = new ArrayList<ImageIcon>(1);
+        numberOfImages = 1;
+        imgIndex = 1;
+        images.add(image);
     }
 
     public void start() {
-        startImageSchedule(isLoop, interval);
+        if (!this.isStatic) {
+            startImageSchedule(isLoop, interval);
+        }
     }
 
     public void stop() {
-        timer.cancel();
+        if (!this.isStatic) {
+            timer.cancel();
+        }
     }
 
     private void iterateImgIndexLoop() {
