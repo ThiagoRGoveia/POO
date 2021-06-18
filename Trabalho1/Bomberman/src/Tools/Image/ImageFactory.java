@@ -29,6 +29,10 @@ public class ImageFactory {
         imageMap.put("vertical-down-last-explosion", loadVerticalDownLastExplosionImages());
         imageMap.put("horizontal-middle-explosion", loadHorizontalMiddleExplosionImages());
         imageMap.put("vertical-middle-explosion", loadVerticalMiddleExplosionImages());
+        imageMap.put("enemy-vertical-up-movement", loadEnemyVerticalUpMovementBoundaries());
+        imageMap.put("enemy-vertical-down-movement", loadEnemyVerticalDownMovementBoundaries());
+        imageMap.put("enemy-horizontal-left-movement", loadEnemyHorizontalLeftMovementBoundaries());
+        imageMap.put("enemy-horizontal-right-movement", loadEnemyHorizontalRightMovementBoundaries());
     }
 
     private ArrayList<ImageIcon> loadImages(
@@ -120,6 +124,38 @@ public class ImageFactory {
             "all.png",
             5,
             boundaryFactory.getVerticalUpLastExplosionsionBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadEnemyVerticalUpMovementBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            4,
+            boundaryFactory.getEnemyVerticalUpMovementBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadEnemyVerticalDownMovementBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            4,
+            boundaryFactory.getEnemyVerticalDownMovementBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadEnemyHorizontalLeftMovementBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            4,
+            boundaryFactory.getEnemyHorizontalLeftMovementBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadEnemyHorizontalRightMovementBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            4,
+            boundaryFactory.getEnemyHorizontalRightMovementBoundaries()
         );
     }
 
