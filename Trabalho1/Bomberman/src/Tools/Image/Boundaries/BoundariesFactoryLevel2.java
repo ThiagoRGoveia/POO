@@ -4,87 +4,87 @@ package Tools.Image.Boundaries;
 public class BoundariesFactoryLevel2 extends BoundaryFactory {
     public Boundaries[] getBombBoundaries() {
         Boundaries[] b = {
-            new Boundaries(356, 151, 16, 16),
-            new Boundaries(373, 151, 16, 16),
-            new Boundaries(390, 151, 16, 16),
-            new Boundaries(373, 151, 16, 16)
+            new Boundaries(407, 117, 16, 16),
+            new Boundaries(424, 117, 16, 16),
+            new Boundaries(441, 117, 16, 16),
+            new Boundaries(424, 117, 16, 16)
         };
         return b;
     }
 
     public Boundaries[] getFirstExplosionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(322, 117, 16, 16),
-            new Boundaries(373, 100, 16, 16),
-            new Boundaries(356, 100, 16, 16),
-            new Boundaries(339, 100, 16, 16),
-            new Boundaries(322, 100, 16, 16)
+            new Boundaries(407, 151, 16, 16),
+            new Boundaries(526, 134, 16, 16),
+            new Boundaries(509, 134, 16, 16),
+            new Boundaries(492, 134, 16, 16),
+            new Boundaries(475, 134, 16, 16)
         };
         return b;
     }
 
     public Boundaries[] getHoriziontalLeftLastExplosionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(254, 66, 16, 16),
-            new Boundaries(271, 66, 16, 16),
-            new Boundaries(288, 66, 16, 16),
-            new Boundaries(305, 66, 16, 16),
-            new Boundaries(322, 66, 16, 16)
+            new Boundaries(407, 100, 16, 16),
+            new Boundaries(424, 100, 16, 16),
+            new Boundaries(441, 100, 16, 16),
+            new Boundaries(458, 100, 16, 16),
+            new Boundaries(475, 100, 16, 16)
         };
         return b;
     }
 
     public Boundaries[] getHorizontalMiddleExplosionsionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(288, 117, 16, 16),
-            new Boundaries(288, 100, 16, 16),
-            new Boundaries(254, 134, 16, 16),
-            new Boundaries(254, 117, 16, 16),
-            new Boundaries(254, 100, 16, 16)
+            new Boundaries(441, 151, 16, 16),
+            new Boundaries(441, 134, 16, 16),
+            new Boundaries(407, 168, 16, 16),
+            new Boundaries(407, 151, 16, 16),
+            new Boundaries(407, 134, 16, 16)
         };
         return b;
     }
 
     public Boundaries[] getHorizontalRightLastExplosionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(305, 117, 16, 16),
-            new Boundaries(305, 100, 16, 16),
-            new Boundaries(271, 134, 16, 16),
-            new Boundaries(271, 117, 16, 16),
-            new Boundaries(271, 100, 16, 16)
+            new Boundaries(458, 151, 16, 16),
+            new Boundaries(458, 134, 16, 16),
+            new Boundaries(424, 168, 16, 16),
+            new Boundaries(424, 151, 16, 16),
+            new Boundaries(424, 134, 16, 16)
         };
         return b;
     }
 
     public Boundaries[] getVerticalDownLastExplosionsionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(305, 83, 16, 16),
-            new Boundaries(322, 134, 16, 16),
-            new Boundaries(373, 134, 16, 16),
-            new Boundaries(356, 134, 16, 16),
-            new Boundaries(339, 134, 16, 16)
+            new Boundaries(458, 117, 16, 16),
+            new Boundaries(475, 168, 16, 16),
+            new Boundaries(526, 168, 16, 16),
+            new Boundaries(509, 168, 16, 16),
+            new Boundaries(492, 168, 16, 16)
         };
         return b;
     }
 
     public Boundaries[] getVerticalMiddleExplosionsionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(305, 134, 16, 16),
-            new Boundaries(288, 134, 16, 16),
-            new Boundaries(373, 117, 16, 16),
-            new Boundaries(356, 117, 16, 16),
-            new Boundaries(339, 117, 16, 16)
+            new Boundaries(458, 168, 16, 16),
+            new Boundaries(441, 168, 16, 16),
+            new Boundaries(526, 151, 16, 16),
+            new Boundaries(509, 151, 16, 16),
+            new Boundaries(492, 151, 16, 16)
         };
         return b;
     }
 
     public Boundaries[] getVerticalUpLastExplosionsionBoundaries() {
         Boundaries[] b = {
-            new Boundaries(322, 83, 16, 16),
-            new Boundaries(339, 83, 16, 16),
-            new Boundaries(356, 83, 16, 16),
-            new Boundaries(373, 83, 16, 16),
-            new Boundaries(373, 66, 16, 16)
+            new Boundaries(475, 117, 16, 16),
+            new Boundaries(492, 117, 16, 16),
+            new Boundaries(509, 117, 16, 16),
+            new Boundaries(526, 117, 16, 16),
+            new Boundaries(526, 100, 16, 16)
         };
         return b;
     }
