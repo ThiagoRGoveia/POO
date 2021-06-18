@@ -41,7 +41,15 @@ public abstract class MovableElement extends Element {
         this.activeAnimator = this.stopedAnimatorList.get(0);
         activeAnimator.start();
         this.speed = speed;
+        isLocked = false;
     }
+
+    public abstract void setDownAnimator();
+    public abstract void setLeftAnimator();
+    public abstract void setRightAnimator();
+    public abstract void setUpAnimator();
+    public abstract void setStopedAnimatorList();
+    public abstract void processMovement();
 
     public ImageIcon getImage() {
         return activeAnimator.getImage();
@@ -142,13 +150,21 @@ public abstract class MovableElement extends Element {
         }
     }
 
-    public abstract void setDownAnimator();
-    public abstract void setLeftAnimator();
-    public abstract void setRightAnimator();
-    public abstract void setUpAnimator();
-    public abstract void setStopedAnimator();
-    public abstract void setStopedAnimatorList();
-    public abstract void processMovement();
-
+    public void setStopedAnimator() {
+        Animator animator;
+        if (this.movementDirection == "right") {
+            animator = stopedAnimatorList.get(3);
+        }
+        else if (this.movementDirection == "left") {
+            animator = stopedAnimatorList.get(2);
+        }
+        else if (this.movementDirection == "up") {
+            animator = stopedAnimatorList.get(1);
+        }
+        else {
+            animator = stopedAnimatorList.get(0);
+        }
+        this.activeAnimator = animator;
+    }
 
 }
