@@ -30,6 +30,7 @@ public final class Hero extends MovableElement {
         this.timer = timer;
         this.setHitBox(new HeroHitBox(this.position));
         setDeathAnimator();
+        isLocked = false;
 
     }
 
@@ -74,12 +75,13 @@ public final class Hero extends MovableElement {
 
     public void die() {
         if (!isDead && !isImmortal) {
+            this.isLocked = true;
             this.isDead = true;
             this.activeAnimator.stop();
             this.movementTimer.cancel();
             this.activeAnimator = deathAnimator;
             this.activeAnimator.start();
-            Hero hero = this;
+            final Hero hero = this;
 
             this.createScheduledTask(
                 new Schedule(
@@ -90,6 +92,7 @@ public final class Hero extends MovableElement {
                             eventBus.emit("insert-element-to-map", hero);
                             isDead = false;
                             isImmortal = true;
+                            isLocked = false;
                             activeAnimator.stop();
                             activeAnimator.reset();
                             movementDirection="down";
@@ -121,46 +124,50 @@ public final class Hero extends MovableElement {
 
 
     public void processMovement() {
-        if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
-            this.setHitBox(
-                new HeroHitBox(this.nextPosition)
-            );
-            this.eventBus.emit("verify-element-interaction", this);
-            if (this.interactingElement != null && this.interactingElement != this) {
-                this.interactingElement.interact(this);
-                if (this.interactingElement.isTraversable()) {
+        if (!isLocked) {
+            if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
+                this.setHitBox(
+                    new HeroHitBox(this.nextPosition)
+                );
+                this.eventBus.emit("verify-element-interaction", this);
+                if (this.interactingElement != null && this.interactingElement != this) {
+                    this.interactingElement.interact(this);
+                    if (this.interactingElement.isTraversable()) {
+                        this.position.setPosition(this.nextPosition);
+                    }
+                } else {
                     this.position.setPosition(this.nextPosition);
                 }
-            } else {
-                this.position.setPosition(this.nextPosition);
             }
         }
+
     }
 
     public void stop(int key) {
-        if (
-            (KeyEvent.VK_UP == key && this.movementDirection == "up") ||
-            (KeyEvent.VK_DOWN == key && this.movementDirection == "down") ||
-            (KeyEvent.VK_LEFT == key && this.movementDirection == "left") ||
-            (KeyEvent.VK_RIGHT == key && this.movementDirection == "right")
-        ){
-            this.activeAnimator.stop();
-            this.movementTimer.cancel();
+        if (!isLocked) {
+            if (
+                (KeyEvent.VK_UP == key && this.movementDirection == "up") ||
+                (KeyEvent.VK_DOWN == key && this.movementDirection == "down") ||
+                (KeyEvent.VK_LEFT == key && this.movementDirection == "left") ||
+                (KeyEvent.VK_RIGHT == key && this.movementDirection == "right")
+            ){
+                this.activeAnimator.stop();
+                this.movementTimer.cancel();
+            }
+            if (
+                KeyEvent.VK_UP == key ||
+                KeyEvent.VK_DOWN == key ||
+                KeyEvent.VK_LEFT == key ||
+                KeyEvent.VK_RIGHT == key
+            ) {
+                keysDown--;
+            }
+            if (keysDown <= 0) {
+                keysDown = 0;
+                this.setStopedAnimator();
+                movementDirection = "stoped";
+            }
         }
-        if (
-            KeyEvent.VK_UP == key ||
-            KeyEvent.VK_DOWN == key ||
-            KeyEvent.VK_LEFT == key ||
-            KeyEvent.VK_RIGHT == key
-        ) {
-            keysDown--;
-        }
-        if (keysDown <= 0) {
-            keysDown = 0;
-            this.setStopedAnimator();
-            movementDirection = "stoped";
-        }
-
     }
 
     public void setDownAnimator() {

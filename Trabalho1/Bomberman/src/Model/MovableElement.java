@@ -27,6 +27,7 @@ public abstract class MovableElement extends Element {
     protected Element interactingElement;
     protected Position nextPosition;
     protected int speed;
+    protected boolean isLocked;
 
 
     protected MovableElement(EventBus<Element>eventBus, Position position, int speed) {
@@ -79,7 +80,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveUp() {
-        if (movementDirection != "up") {
+        if (movementDirection != "up" && !isLocked) {
             changeAnimatorAndKillMovement(upAnimator, "up");
             this.movementTimer = new TimerTask() {
                 public void run() {
@@ -92,7 +93,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveDown() {
-        if (movementDirection != "down") {
+        if (movementDirection != "down" && !isLocked) {
             changeAnimatorAndKillMovement(downAnimator, "down");
             this.movementTimer = new TimerTask() {
                 public void run() {
@@ -105,7 +106,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveRight() {
-        if (movementDirection != "right") {
+        if (movementDirection != "right" && !isLocked) {
             changeAnimatorAndKillMovement(rightAnimator, "right");
             this.movementTimer = new TimerTask() {
                 public void run() {
@@ -118,7 +119,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveLeft() {
-        if (movementDirection != "left") {
+        if (movementDirection != "left" && !isLocked) {
             changeAnimatorAndKillMovement(leftAnimator, "left");
             movementTimer = new TimerTask() {
                 public void run() {
