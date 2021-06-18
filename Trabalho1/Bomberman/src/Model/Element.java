@@ -70,4 +70,6 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     public void setHitBox(HitBox hitBox) {
         this.hitBox = hitBox;
     }
+
+    public void destroy() {}
 }
