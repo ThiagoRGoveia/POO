@@ -11,6 +11,8 @@ public class CreateElementsEvent implements Event<Element> {
         if (interactionMap.get(element.getPosition()) == null) { // Somente criar o elemento se posição estiver vazia
             screen.addElement(element);
             interactionMap.insert(element.getPosition(), element);
+        } else {
+            element.destroy();
         }
     }
 }
