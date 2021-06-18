@@ -92,6 +92,8 @@ public class BoundariesFactoryLevel2 extends BoundaryFactory {
     public Boundaries[] getEnemyVerticalUpMovementBoundaries() {
         Boundaries[] b = {
             new Boundaries(128, 28, 16, 16),
+            new Boundaries(146, 28, 16, 16),
+            new Boundaries(128, 28, 16, 16),
             new Boundaries(146, 28, 16, 16)
         };
         return b;
@@ -99,6 +101,8 @@ public class BoundariesFactoryLevel2 extends BoundaryFactory {
 
     public Boundaries[] getEnemyVerticalDownMovementBoundaries() {
         Boundaries[] b = {
+            new Boundaries(92, 28, 16, 16),
+            new Boundaries(110, 28, 16, 16),
             new Boundaries(92, 28, 16, 16),
             new Boundaries(110, 28, 16, 16)
         };
@@ -108,6 +112,8 @@ public class BoundariesFactoryLevel2 extends BoundaryFactory {
     public Boundaries[] getEnemyHorizontalLeftMovementBoundaries() {
         Boundaries[] b = {
             new Boundaries(56, 28, 16, 16),
+            new Boundaries(74, 28, 16, 16),
+            new Boundaries(56, 28, 16, 16),
             new Boundaries(74, 28, 16, 16)
         };
         return b;
@@ -115,6 +121,8 @@ public class BoundariesFactoryLevel2 extends BoundaryFactory {
 
     public Boundaries[] getEnemyHorizontalRightMovementBoundaries() {
         Boundaries[] b = {
+            new Boundaries(303, 340, 16, 16),
+            new Boundaries(321, 340, 16, 16),
             new Boundaries(303, 340, 16, 16),
             new Boundaries(321, 340, 16, 16)
         };
