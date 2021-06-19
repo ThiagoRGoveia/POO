@@ -1,7 +1,6 @@
 package Model.Enemies;
 
 import java.util.Random;
-import java.util.Timer;
 import java.util.TimerTask;
 
 import Model.Element;
@@ -16,10 +15,8 @@ public abstract class Enemy extends MovableElement {
     private static String[] directions = {"up", "down", "right", "left"};
 
     protected Enemy(EventBus<Element>eventBus, Position position) {
-        super(eventBus, position, 20);
+        super(eventBus, position, 35);
     }
-
-    public void die() {}
 
     public void interact(Hero hero) {
         hero.die();
@@ -34,21 +31,20 @@ public abstract class Enemy extends MovableElement {
     }
 
     public void processMovement() {
-        if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
+        if (!Position.isPositionByTheBoundaries(this.nextPosition)) {
             this.setHitBox(
                 new HitBox(this.nextPosition)
             );
             this.eventBus.emit("verify-element-interaction", this);
             if (this.interactingElement != null && this.interactingElement != this) {
                 this.interactingElement.interact(this);
-                this.changeDirection();
                 if (this.interactingElement.isTraversable()) {
-                    this.position.setPosition(this.nextPosition);
+                    this.updatePosition();
                 } else {
-                    this.setStopedAnimator();
+                    this.changeDirection();
                 }
             } else {
-                this.position.setPosition(this.nextPosition);
+                this.updatePosition();
             }
         } else {
             this.changeDirection();
@@ -121,5 +117,9 @@ public abstract class Enemy extends MovableElement {
         this.move(this.speed);
     }
 
+    public void updatePosition() {
+        eventBus.emit("move-element-on-map", this);
+        this.position.setPosition(this.nextPosition);
+    }
 
 }

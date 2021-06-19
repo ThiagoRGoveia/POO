@@ -15,6 +15,7 @@ import Tools.Position.Coordinate;
 import Tools.Position.HeroHitBox;
 import Tools.Position.Position;
 import Tools.Position.Row;
+import Tools.Position.ScreenPosition;
 import Tools.Image.Animator;
 import Tools.Image.LoadImage;
 import Tools.Image.Boundaries.Boundaries;
@@ -22,7 +23,10 @@ public final class Hero extends MovableElement {
     private Timer timer;
     private Animator deathAnimator;
     private boolean isDead;
-    private boolean isImmortal;
+    private int maxNumberOfBombs = 1;
+    private int numberOfBombsPlaced = 0;
+    private int bombIntensity = 0;
+    private int numberOfLives;
 
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position, 10);
@@ -31,7 +35,7 @@ public final class Hero extends MovableElement {
         this.setHitBox(new HeroHitBox(this.position));
         setDeathAnimator();
         isLocked = false;
-
+        numberOfLives = 3;
     }
 
     public Hero(EventBus<Element>eventBus, int row, int column, Timer timer) {
@@ -43,24 +47,27 @@ public final class Hero extends MovableElement {
     }
 
     public void placeBomb() {
-        Bomb bomb = new Bomb(
-            this.eventBus,
-            5,
-            new Position(
-                new Row(
-                    new Coordinate(
-                        this.position.getRow().getCoordinate().value
+        if (this.numberOfBombsPlaced < this.maxNumberOfBombs) {
+            Bomb bomb = new Bomb(
+                this.eventBus,
+                bombIntensity,
+                new Position(
+                    new Row(
+                        new Coordinate(
+                            this.position.getRow().getCoordinate().value
+                        )
+                    ),
+                    new Column(
+                        new Coordinate(
+                            this.position.getColumn().getCoordinate().value
+                        )
                     )
                 ),
-                new Column(
-                    new Coordinate(
-                        this.position.getColumn().getCoordinate().value
-                    )
-                )
-            )
-        );
-
-        this.eventBus.emit("create-element", bomb);
+                this
+            );
+            this.eventBus.emit("create-element", bomb);
+            this.incrementNumberOfBombsPlaced();
+        }
     }
 
     public void interact(Hero hero) {}
@@ -75,6 +82,11 @@ public final class Hero extends MovableElement {
 
     public void die() {
         if (!isDead && !isImmortal) {
+            this.numberOfLives--;
+            if (numberOfLives == 0) {
+                eventBus.emit("game-over", this); // Se o número de vidas zerar, game over
+                return;
+            }
             this.isLocked = true;
             this.isDead = true;
             this.activeAnimator.stop();
@@ -85,11 +97,19 @@ public final class Hero extends MovableElement {
 
             this.createScheduledTask(
                 new Schedule(
-                    // Restaura heroi pra status parado na posição (0,0)
+                    // Restaura heroi pra status parado na posição (1,1)
                     new TimerTask(){
                         public void run() {
-                            position.setPosition(0,0);
-                            eventBus.emit("insert-element-to-map", hero);
+                            position.setPosition(
+                                new Position(
+                                    new Row(
+                                        new ScreenPosition(1)
+                                    ),
+                                    new Column(
+                                        new ScreenPosition(1)
+                                    )
+                                )
+                            );
                             isDead = false;
                             isImmortal = true;
                             isLocked = false;
@@ -118,10 +138,6 @@ public final class Hero extends MovableElement {
             this.eventBus.emit("create-schedule", this);
         }
     }
-
-    public void pickup(){}
-
-
 
     public void processMovement() {
         if (!isLocked) {
@@ -235,7 +251,37 @@ public final class Hero extends MovableElement {
         this.deathAnimator = new Animator(false, 100, images, timer);
     }
 
+    public void incrementMaxNumberOfBombs() {
+        this.maxNumberOfBombs++;
+    }
 
+    public void decrementMaxNumberOfBombs() {
+        this.maxNumberOfBombs--;
+    }
+
+    public void incrementNumberOfBombsPlaced() {
+        this.numberOfBombsPlaced++;
+    }
+
+    public void decrementNumberOfBombsPlaced() {
+        this.numberOfBombsPlaced--;
+    }
+
+    public void incrementBombIntensity() {
+        this.bombIntensity++;
+    }
+
+    public void decrementBombIntensity() {
+        this.bombIntensity--;
+    }
+
+    public void incrementNumberOfLives() {
+        this.numberOfLives++;
+    }
+
+    public void decrementNumberOfLives() {
+        this.numberOfLives--;
+    }
 
 
 }
