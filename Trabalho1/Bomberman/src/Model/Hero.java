@@ -23,7 +23,6 @@ public final class Hero extends MovableElement {
     private Timer timer;
     private Animator deathAnimator;
     private boolean isDead;
-    private boolean isImmortal;
 
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position, 10);
