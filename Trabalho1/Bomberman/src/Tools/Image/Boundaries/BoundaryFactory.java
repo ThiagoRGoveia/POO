@@ -17,4 +17,36 @@ public abstract class BoundaryFactory {
     public abstract Boundaries[] getFloorObstacleBoundaries();
     public abstract Boundaries[] getFloorObstacleDestructionBoundaries();
     public abstract Boundaries[] getIndestructableObstacleBoundaries();
+
+    public Boundaries[] getBombItemBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(188, 32, 16, 16),
+            new Boundaries(188, 48, 16, 16),
+        };
+        return b;
+    }
+
+    public Boundaries[] getBombIntensityItemBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(204, 32, 16, 16),
+            new Boundaries(204, 48, 16, 16),
+        };
+        return b;
+    }
+
+    public Boundaries[] getSpeedUpItemBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(204, 64, 16, 16),
+            new Boundaries(204, 80, 16, 16),
+        };
+        return b;
+    }
+
+    public Boundaries[] getExtraLifeItemBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(188, 96, 16, 16),
+            new Boundaries(188, 112, 16, 16),
+        };
+        return b;
+    }
 }
