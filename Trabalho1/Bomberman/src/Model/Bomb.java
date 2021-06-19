@@ -80,6 +80,7 @@ public class Bomb extends AnimatedElement {
     }
 
     public void die() {
+        hero.decrementNumberOfBombsPlaced();
         explosionTimer.cancel();
     }
 
