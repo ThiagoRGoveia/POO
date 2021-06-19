@@ -27,7 +27,6 @@ public abstract class Enemy extends MovableElement {
     }
 
     public void interact(Explosion explosion) {
-        System.out.println("DIE");
         die();
     }
 
