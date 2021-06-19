@@ -16,11 +16,13 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     protected EventBus<Element> eventBus;
     protected Schedule scheduledTask;
     protected HitBox hitBox;
+    protected boolean isImmortal;
 
     protected Element(EventBus<Element> eventBus, Position position) {
         this.eventBus = eventBus;
         this.position = position;
         this.hitBox = new HitBox(position);
+        isImmortal = false;
     }
 
     protected Element(EventBus<Element> eventBus) {
@@ -72,7 +74,9 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     }
 
     public void die() {
-        eventBus.emit("remove-element", this);
-        eventBus.emit("remove-element-from-map", this);
+        if (!isImmortal) {
+            eventBus.emit("remove-element", this);
+            eventBus.emit("remove-element-from-map", this);
+        }
     }
 }
