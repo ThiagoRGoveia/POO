@@ -9,7 +9,7 @@ public class AnimatorFactory {
     private Timer timer;
 
     public AnimatorFactory(ImageFactory imageLoader, Timer timer) {
-        animatorMap = new LinkedHashMap<String,Creatable>(8);
+        animatorMap = new LinkedHashMap<String,Creatable>(12);
         this.imageLoader = imageLoader;
         this.timer = timer;
 
@@ -21,6 +21,10 @@ public class AnimatorFactory {
         animatorMap.put("vertical-down-last-explosion", new VerticalDownLastExplosionAnimator());
         animatorMap.put("horizontal-middle-explosion", new HorizontalMiddleExplosionAnimator());
         animatorMap.put("vertical-middle-explosion", new VerticalMiddleExplosionAnimator());
+        animatorMap.put("enemy-vertical-up-movement", new EnemyVerticalUpMovementAnimator());
+        animatorMap.put("enemy-vertical-down-movement", new EnemyVerticalDownMovementAnimator());
+        animatorMap.put("enemy-horizontal-left-movement", new EnemyHorizontalLeftMovementAnimator());
+        animatorMap.put("enemy-horizontal-right-movement", new EnemyHorizontalRightMovementAnimator());
     }
 
     class BombAnimator implements Creatable {
@@ -110,6 +114,50 @@ public class AnimatorFactory {
          );
 }
     }
+
+    class EnemyVerticalUpMovementAnimator implements Creatable { 
+        public Animator create() {
+            return new Animator(
+                true,
+                500,
+                imageLoader.getImageList("enemy-vertical-up-movement"),
+                timer
+              );
+            }
+    }
+
+    class EnemyVerticalDownMovementAnimator implements Creatable { 
+        public Animator create() {
+            return new Animator(
+                true,
+                500,
+                imageLoader.getImageList("enemy-vertical-down-movement"),
+                timer
+              );
+            }
+    }
+
+    class EnemyHorizontalLeftMovementAnimator implements Creatable { 
+    public Animator create() {
+        return new Animator(
+            true,
+            500,
+            imageLoader.getImageList("enemy-horizontal-left-movement"),
+            timer
+          );
+        }
+}
+
+    class EnemyHorizontalRightMovementAnimator implements Creatable { 
+    public Animator create() {
+        return new Animator(
+            true,
+            500,
+            imageLoader.getImageList("enemy-horizontal-right-movement"),
+            timer
+            );
+        }
+}
 
     public Animator getAnimator(String name) {
         return animatorMap.get(name).create();
