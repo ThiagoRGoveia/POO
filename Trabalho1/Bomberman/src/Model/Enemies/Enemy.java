@@ -32,7 +32,7 @@ public abstract class Enemy extends MovableElement {
     }
 
     public void processMovement() {
-        if (!Position.isPositionOnTheBoundaries(this.nextPosition)) {
+        if (!Position.isPositionByTheBoundaries(this.nextPosition)) {
             this.setHitBox(
                 new HitBox(this.nextPosition)
             );
