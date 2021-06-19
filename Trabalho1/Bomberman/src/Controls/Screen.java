@@ -64,7 +64,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("remove-element-from-map", new RemoveFromInteractionMapEvent());
         eventBus.on("move-element-on-map", new MoveOnInteractionMap());
         eventBus.on("game-over", new GameOverEvent());
-        eventBus.on("monster-kill", new MonsterKillEvent());
         eventBus.on("create-enemy", new CreateEnemyEvent());
         eventBus.on("remove-enemy", new RemoveEnemyEvent());
 
@@ -149,10 +148,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         System.out.println("CONGRATULATIONS YOU WON");
     }
 
-    public void recordMonsterKill() {
-        System.out.println("MonsterKill"); // Controlar se a fase acabou aqui
-    }
-
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/
     public void paint(Graphics oldGraphics) {
         Graphics newGraphics = this.getBufferStrategy().getDrawGraphics();
@@ -186,6 +181,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         if (!this.elements.isEmpty()) {
             this.controller.draw(elements, enemies);
             this.controller.process(hero);
+            boolean victory = this.controller.checkVitory(enemies);
+            if (victory) {
+                this.nextLevel();
+            }
         }
 
         newGraphics.dispose();
