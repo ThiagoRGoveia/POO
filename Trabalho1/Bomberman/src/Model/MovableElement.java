@@ -14,7 +14,7 @@ import Tools.Image.Animator;
 
 import Tools.Position.Position;
 
-public abstract class MovableElement extends Element {
+public abstract class MovableElement extends AnimatedElement {
     protected String movementDirection;
     protected Animator leftAnimator;
     protected Animator rightAnimator;

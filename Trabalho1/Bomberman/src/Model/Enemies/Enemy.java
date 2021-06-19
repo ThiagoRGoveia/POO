@@ -12,7 +12,7 @@ import Tools.Position.HitBox;
 import Tools.Position.Position;
 
 public abstract class Enemy extends MovableElement {
-    private static String[] directions = {"up", "down", "right", "left"};
+    protected static String[] directions = {"up", "down", "right", "left"};
 
     protected Enemy(EventBus<Element>eventBus, Position position) {
         super(eventBus, position, 35);

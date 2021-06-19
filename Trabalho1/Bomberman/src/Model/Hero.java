@@ -233,7 +233,7 @@ public final class Hero extends MovableElement {
     }
 
     public void setStopedAnimatorList() {
-        stopedAnimatorList = new ArrayList<Animator>();
+        stopedAnimatorList = new ArrayList<Animator>(4);
         stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)))); // DOWN
         stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(73, 20, 16, 24)))); // UP
         stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(3, 45, 16, 24)))); // LEFT
