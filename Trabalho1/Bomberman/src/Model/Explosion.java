@@ -98,6 +98,7 @@ public abstract class Explosion extends AnimatedElement {
 
     private void finishExplosion() {
         this.eventBus.emit("remove-element", this);
+        this.eventBus.emit("remove-element-from-map", this);
     }
 
     protected void setExplosionFinishTimer() {
