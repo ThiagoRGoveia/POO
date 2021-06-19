@@ -1,20 +1,22 @@
 package Model.Blocks;
 
-import javax.swing.ImageIcon;
-
+import Model.AnimatedElement;
 import Model.Element;
 import Model.Explosion;
 import Model.Hero;
-import Model.StaticElement;
 import Model.Enemies.Enemy;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 
-public class IndestructableBlock extends StaticElement {
+public class IndestructableBlock extends AnimatedElement {
 
-    protected IndestructableBlock(EventBus<Element> eventBus, ImageIcon image, Position position) {
-        super(eventBus, image, position);
+
+    protected IndestructableBlock(EventBus<Element> eventBus, Position position) {
+        super(eventBus, position);
+        this.setAnimatorName("indestructable-obstacle");
+        eventBus.emit("create-animator", this);
+        this.isImmortal = true;
     }
 
     public void interact(Hero hero) {
