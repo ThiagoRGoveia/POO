@@ -91,40 +91,52 @@ public class BoundariesFactoryLevel1 extends BoundaryFactory {
 
     public Boundaries[] getEnemyVerticalUpMovementBoundaries() {
         Boundaries[] b = {
-            new Boundaries(74, 2, 16, 16),
-            new Boundaries(92, 2, 16, 16),
-            new Boundaries(110, 2, 16, 16),
-            new Boundaries(128, 2, 16, 16)
+            new Boundaries(74, 2, 16, 26),
+            new Boundaries(92, 2, 16, 26),
+            new Boundaries(110, 2, 16, 26),
+            new Boundaries(128, 2, 16, 26),
+            new Boundaries(110, 2, 16, 26),
+            new Boundaries(92, 2, 16, 26),
+            new Boundaries(74, 2, 16, 26)
         };
         return b;
     }
 
     public Boundaries[] getEnemyVerticalDownMovementBoundaries() {
         Boundaries[] b = {
-            new Boundaries(2, 2, 16, 16),
-            new Boundaries(20, 2, 16, 16),
-            new Boundaries(38, 2, 16, 16),
-            new Boundaries(56, 2, 16, 16)
+            new Boundaries(2, 2, 16, 26),
+            new Boundaries(20, 2, 16, 26),
+            new Boundaries(38, 2, 16, 26),
+            new Boundaries(56, 2, 16, 26),
+            new Boundaries(38, 2, 16, 26),
+            new Boundaries(20, 2, 16, 26),
+            new Boundaries(2, 2, 16, 26)
         };
         return b;
     }
 
     public Boundaries[] getEnemyHorizontalLeftMovementBoundaries() {
         Boundaries[] b = {
-            new Boundaries(146, 2, 16, 16),
-            new Boundaries(164, 2, 16, 16),
-            new Boundaries(182, 2, 16, 16),
-            new Boundaries(200, 2, 16, 16)
+            new Boundaries(146, 2, 16, 26),
+            new Boundaries(164, 2, 16, 26),
+            new Boundaries(182, 2, 16, 26),
+            new Boundaries(200, 2, 16, 26),
+            new Boundaries(182, 2, 16, 26),
+            new Boundaries(164, 2, 16, 26),
+            new Boundaries(146, 2, 16, 26)
         };
         return b;
     }
 
     public Boundaries[] getEnemyHorizontalRightMovementBoundaries() {
         Boundaries[] b = {
-            new Boundaries(228, 2, 16, 16),
-            new Boundaries(246, 2, 16, 16),
-            new Boundaries(264, 2, 16, 16),
-            new Boundaries(282, 2, 16, 16)
+            new Boundaries(228, 2, 16, 26),
+            new Boundaries(246, 2, 16, 26),
+            new Boundaries(264, 2, 16, 26),
+            new Boundaries(282, 2, 16, 26),
+            new Boundaries(264, 2, 16, 26),
+            new Boundaries(246, 2, 16, 26),
+            new Boundaries(228, 2, 16, 26),
         };
         return b;
     }
