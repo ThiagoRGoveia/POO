@@ -53,4 +53,8 @@ public class Controller {
             }
         return true;
     }
+
+    public boolean checkVitory(ArrayList<Enemy> enemies) {
+        return enemies.isEmpty();
+    }
 }
