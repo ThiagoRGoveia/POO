@@ -12,7 +12,7 @@ public class CreateElementsEvent implements Event<Element> {
             screen.addElement(element);
             interactionMap.insert(element.getPosition(), element);
         } else {
-            element.destroy();
+            element.die();
         }
     }
 }

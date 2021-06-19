@@ -71,7 +71,7 @@ public abstract class Element implements Serializable, Drawable, Interactable {
         this.hitBox = hitBox;
     }
 
-    public void destroy() {
+    public void die() {
         eventBus.emit("remove-element", this);
         eventBus.emit("remove-element-from-map", this);
     }
