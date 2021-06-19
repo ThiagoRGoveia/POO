@@ -19,6 +19,10 @@ public class IndestructableBlock extends AnimatedElement {
         this.isImmortal = true;
     }
 
+    public IndestructableBlock(EventBus<Element> eventBus, int row, int column) {
+        this(eventBus, new Position(row, column));
+    }
+
     public void interact(Hero hero) {
     }
 
