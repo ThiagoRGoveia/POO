@@ -26,6 +26,8 @@ public final class Hero extends MovableElement {
     private int maxNumberOfBombs = 1;
     private int numberOfBombsPlaced = 0;
     private int bombIntensity = 0;
+    private int numberOfLives;
+
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position, 10);
         this.setTraversable(true);
@@ -33,7 +35,7 @@ public final class Hero extends MovableElement {
         this.setHitBox(new HeroHitBox(this.position));
         setDeathAnimator();
         isLocked = false;
-
+        numberOfLives = 3;
     }
 
     public Hero(EventBus<Element>eventBus, int row, int column, Timer timer) {
@@ -80,6 +82,11 @@ public final class Hero extends MovableElement {
 
     public void die() {
         if (!isDead && !isImmortal) {
+            this.numberOfLives--;
+            if (numberOfLives == 0) {
+                eventBus.emit("game-over", this); // Se o número de vidas zerar, game over
+                return;
+            }
             this.isLocked = true;
             this.isDead = true;
             this.activeAnimator.stop();
@@ -269,7 +276,13 @@ public final class Hero extends MovableElement {
         this.bombIntensity--;
     }
 
+    public void incrementNumberOfLives() {
+        this.numberOfLives++;
+    }
 
+    public void decrementNumberOfLives() {
+        this.numberOfLives--;
+    }
 
 
 }
