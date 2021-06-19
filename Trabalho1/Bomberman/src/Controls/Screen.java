@@ -2,13 +2,15 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
+import Model.Blocks.RegularBlock;
+import Model.Enemies.BasicEnemy;
+import Model.Enemies.Enemy;
 import Tools.*;
 import Tools.Events.*;
 import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
 import Tools.Image.ImageFactory;
-import Tools.Image.Boundaries.BoundariesFactoryLevel1;
-import Tools.Position.Position;
+import Tools.Image.Boundaries.*;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,6 +25,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private EventBus<Element> eventBus;
     private Hero hero;
     private ArrayList<Element> elements;
+    private ArrayList<Enemy> enemies;
     private Controller controller = new Controller(this);
     private Graphics graphics;
     private Movements movements;
@@ -49,7 +52,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
-        eventBus = new EventBus<Element>(this, 12);
+        eventBus = new EventBus<Element>(this, 13);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
@@ -62,10 +65,12 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("move-element-on-map", new MoveOnInteractionMap());
         eventBus.on("game-over", new GameOverEvent());
         eventBus.on("monster-kill", new MonsterKillEvent());
+        eventBus.on("create-enemy", new CreateEnemyEvent());
 
         elements = new ArrayList<Element>(100);
+        elements = new ArrayList<Element>(10);
 
-        hero = new Hero(eventBus, 8, 8, timer);
+        hero = new Hero(eventBus, 0, 0, timer);
         this.addElement(hero);
 
         movements = new Movements();
@@ -76,6 +81,23 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             ),
             timer
         );
+        Enemy enemy = new BasicEnemy(eventBus, 5, 5);
+        this.addElement(enemy);
+        enemy = new BasicEnemy(eventBus, 7, 7);
+        this.addElement(enemy);
+        enemy = new BasicEnemy(eventBus, 12, 12);
+        this.addElement(enemy);
+        enemy = new BasicEnemy(eventBus, 6, 20);
+        this.addElement(enemy);
+
+        RegularBlock block = new RegularBlock(eventBus, 2, 2);
+        this.addElement(block);
+        block = new RegularBlock(eventBus, 2, 2);
+        this.addElement(block);
+        block = new RegularBlock(eventBus, 2, 3);
+        this.addElement(block);
+        block = new RegularBlock(eventBus, 2, 4);
+        this.addElement(block);
     }
 
     public void addElement(Element element) {
@@ -84,6 +106,14 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public void removeElement(Element element) {
         elements.remove(element);
+    }
+
+    public void addEnemy(Enemy enemy) {
+        enemies.add(enemy);
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        enemies.remove(enemy);
     }
 
     public Graphics getGraphicsBuffer(){
