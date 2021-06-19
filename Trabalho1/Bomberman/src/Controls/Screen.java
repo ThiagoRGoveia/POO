@@ -11,6 +11,7 @@ import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
 import Tools.Image.ImageFactory;
 import Tools.Image.Boundaries.*;
+import Tools.Position.Position;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -32,11 +33,16 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private InteractionMap interactionMap;
     private AnimatorFactory animatorFactory;
     private Timer timer;
+    private GameLevel[] levels;
+    private GameLevel currentLevel;
+    private int currentLevelIndex = 0;
 
     public Screen(Drawer drawer) {
         timer = new Timer();
         this.drawer = drawer;
         drawer.setScreen(this);
+
+        levels = new GameLevel[4];
 
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);  /*teclado*/
@@ -75,12 +81,11 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         movements = new Movements();
         interactionMap= new InteractionMap();
-        animatorFactory = new AnimatorFactory(
-            new ImageFactory(
-                new BoundariesFactoryLevel1()
-            ),
-            timer
+        ImageFactory imageFactory = new ImageFactory(
+            new BoundariesFactoryLevel1()
         );
+        animatorFactory = new AnimatorFactory(imageFactory, timer);
+
         Enemy enemy = new BasicEnemy(eventBus, 5, 5);
         this.addElement(enemy);
         enemy = new BasicEnemy(eventBus, 7, 7);
@@ -136,12 +141,28 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         return animatorFactory.getAnimator(animatorName);
     }
 
+    public void setAnimatorFactory(AnimatorFactory animatorFactory) {
+        this.animatorFactory = animatorFactory;
+    }
+
     public void gameOver() {
         System.out.println("GAME OVER");
     }
 
     public void nextLevel() {
-
+        elements.clear();
+        enemies.clear();
+        hero.setPosition(
+            new Position(0, 0)
+        );
+        currentLevelIndex++;
+        if (currentLevelIndex >= 4) {
+            victory();
+            System.exit(0);
+        } else {
+            currentLevel = levels[currentLevelIndex];
+            currentLevel.begin();
+        }
     }
 
     public void victory() {
