@@ -23,7 +23,9 @@ public final class Hero extends MovableElement {
     private Timer timer;
     private Animator deathAnimator;
     private boolean isDead;
-
+    private int maxNumberOfBombs = 1;
+    private int numberOfBombsPlaced = 0;
+    private int bombIntensity = 0;
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
         super(eventBus, position, 10);
         this.setTraversable(true);
@@ -43,24 +45,26 @@ public final class Hero extends MovableElement {
     }
 
     public void placeBomb() {
-        Bomb bomb = new Bomb(
-            this.eventBus,
-            5,
-            new Position(
-                new Row(
-                    new Coordinate(
-                        this.position.getRow().getCoordinate().value
+        if (this.numberOfBombsPlaced < this.maxNumberOfBombs) {
+            Bomb bomb = new Bomb(
+                this.eventBus,
+                bombIntensity,
+                new Position(
+                    new Row(
+                        new Coordinate(
+                            this.position.getRow().getCoordinate().value
+                        )
+                    ),
+                    new Column(
+                        new Coordinate(
+                            this.position.getColumn().getCoordinate().value
+                        )
                     )
                 ),
-                new Column(
-                    new Coordinate(
-                        this.position.getColumn().getCoordinate().value
-                    )
-                )
-            )
-        );
-
-        this.eventBus.emit("create-element", bomb);
+                this
+            );
+            this.eventBus.emit("create-element", bomb);
+        }
     }
 
     public void interact(Hero hero) {}
@@ -127,10 +131,6 @@ public final class Hero extends MovableElement {
             this.eventBus.emit("create-schedule", this);
         }
     }
-
-    public void pickup(){}
-
-
 
     public void processMovement() {
         if (!isLocked) {
@@ -242,6 +242,30 @@ public final class Hero extends MovableElement {
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(99, 75, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(117, 75, 16, 24)));
         this.deathAnimator = new Animator(false, 100, images, timer);
+    }
+
+    public void incrementMaxNumberOfBombs() {
+        this.maxNumberOfBombs++;
+    }
+
+    public void decrementMaxNumberOfBombs() {
+        this.maxNumberOfBombs--;
+    }
+
+    public void incrementNumberOfBombsPlaced() {
+        this.numberOfBombsPlaced++;
+    }
+
+    public void decrementNumberOfBombsPlaced() {
+        this.numberOfBombsPlaced--;
+    }
+
+    public void incrementBombIntensity() {
+        this.bombIntensity++;
+    }
+
+    public void decrementBombIntensity() {
+        this.bombIntensity--;
     }
 
 

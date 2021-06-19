@@ -167,4 +167,12 @@ public abstract class MovableElement extends Element {
         this.activeAnimator = animator;
     }
 
+    public void setSpeed(int speed) {
+        this.speed = speed;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
 }

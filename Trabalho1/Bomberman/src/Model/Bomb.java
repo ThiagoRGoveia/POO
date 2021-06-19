@@ -12,8 +12,9 @@ public class Bomb extends AnimatedElement {
     private TimerTask traversableCancelationTimer;
     private TimerTask explosionTimer;
     private int intensity;
+    private Hero hero;
 
-    public Bomb (EventBus<Element> eventBus, int intensity, Position position) {
+    public Bomb (EventBus<Element> eventBus, int intensity, Position position, Hero hero) {
         super(eventBus,position);
         this.traversable = true;
         this.intensity = intensity;
@@ -21,10 +22,11 @@ public class Bomb extends AnimatedElement {
         eventBus.emit("create-animator", this);
         scheduleTraversableChange();
         setExplosionTimer();
+        this.hero = hero;
     }
 
-    public Bomb(EventBus<Element> eventBus, int intensity, int row, int column) {
-        this(eventBus, intensity, new Position(row, column));
+    public Bomb(EventBus<Element> eventBus, int intensity, int row, int column, Hero hero) {
+        this(eventBus, intensity, new Position(row, column), hero);
     }
 
     private void turnBlockable() {
@@ -56,6 +58,7 @@ public class Bomb extends AnimatedElement {
     }
 
     private void explode() {
+        this.hero.decrementNumberOfBombsPlaced();
         this.eventBus.emit("remove-element", this);
         FirstExplosion firstExplosion = new FirstExplosion(eventBus, intensity, this.getPosition());
         this.eventBus.emit("create-explosion", firstExplosion);
