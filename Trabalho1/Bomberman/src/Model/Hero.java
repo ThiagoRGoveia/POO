@@ -110,7 +110,6 @@ public final class Hero extends MovableElement {
                                     )
                                 )
                             );
-                            eventBus.emit("insert-element-to-map", hero);
                             isDead = false;
                             isImmortal = true;
                             isLocked = false;
