@@ -128,4 +128,41 @@ public class BoundariesFactoryLevel1 extends BoundaryFactory {
         };
         return b;
     }
+
+    public Boundaries[] getFloorStaticBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(305, 32, 16, 16)
+        };
+        return b;
+    }
+
+    public Boundaries[] getFloorObstacleBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(322, 15, 16, 16),
+            new Boundaries(339, 15, 16, 16),
+            new Boundaries(356, 15, 16, 16),
+            new Boundaries(373, 15, 16, 16)
+        };
+        return b;
+    }
+
+    public Boundaries[] getFloorObstacleDestructionBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(254, 151, 16, 16),
+            new Boundaries(271, 151, 16, 16),
+            new Boundaries(288, 151, 16, 16),
+            new Boundaries(305, 151, 16, 16),
+            new Boundaries(322, 151, 16, 16),
+            new Boundaries(339, 151, 16, 16)
+        };
+        return b;
+    }
+
+    public Boundaries[] getIndestructableObstacleBoundaries() {
+        Boundaries[] b = {
+            new Boundaries(288, 32, 16, 16)
+        };
+        return b;
+    }
+
 }

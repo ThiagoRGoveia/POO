@@ -9,7 +9,7 @@ public class AnimatorFactory {
     private Timer timer;
 
     public AnimatorFactory(ImageFactory imageLoader, Timer timer) {
-        animatorMap = new LinkedHashMap<String,Creatable>(12);
+        animatorMap = new LinkedHashMap<String,Creatable>(16);
         this.imageLoader = imageLoader;
         this.timer = timer;
 
@@ -25,6 +25,11 @@ public class AnimatorFactory {
         animatorMap.put("enemy-vertical-down-movement", new EnemyVerticalDownMovementAnimator());
         animatorMap.put("enemy-horizontal-left-movement", new EnemyHorizontalLeftMovementAnimator());
         animatorMap.put("enemy-horizontal-right-movement", new EnemyHorizontalRightMovementAnimator());
+        animatorMap.put("floor-static", new FloorStaticAnimator());
+        animatorMap.put("floor-obstacle", new FloorObstacleAnimator());
+        animatorMap.put("floor-obstacle-destruction", new FloorObstacleDestructionAnimator());
+        animatorMap.put("indestructable-obstacle", new IndestructableObstacleAnimator());
+
     }
 
     class BombAnimator implements Creatable {
@@ -155,6 +160,44 @@ public class AnimatorFactory {
             500,
             imageLoader.getImageList("enemy-horizontal-right-movement"),
             timer
+            );
+        }
+}
+
+    class FloorStaticAnimator implements Creatable {  
+    public Animator create() {
+        return new Animator(
+            imageLoader.getImageList("floor-static").get(0)
+            );
+        }
+}
+
+    class FloorObstacleAnimator implements Creatable { 
+    public Animator create() {
+        return new Animator(
+            true,
+            500,
+            imageLoader.getImageList("floor-obstacle"),
+            timer
+            );
+        }
+}
+
+    class FloorObstacleDestructionAnimator implements Creatable { 
+    public Animator create() {
+        return new Animator(
+            false,
+            500,
+            imageLoader.getImageList("floor-obstacle-destruction"),
+            timer
+            );
+        }
+}
+
+    class IndestructableObstacleAnimator implements Creatable {   //FloorObstacleAnimator
+    public Animator create() {
+        return new Animator(
+            imageLoader.getImageList("indestructable-obstacle").get(0)
             );
         }
 }

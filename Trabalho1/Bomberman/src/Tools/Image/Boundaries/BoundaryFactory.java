@@ -13,4 +13,8 @@ public abstract class BoundaryFactory {
     public abstract Boundaries[] getEnemyVerticalDownMovementBoundaries();
     public abstract Boundaries[] getEnemyHorizontalLeftMovementBoundaries();
     public abstract Boundaries[] getEnemyHorizontalRightMovementBoundaries();
+    public abstract Boundaries[] getFloorStaticBoundaries();
+    public abstract Boundaries[] getFloorObstacleBoundaries();
+    public abstract Boundaries[] getFloorObstacleDestructionBoundaries();
+    public abstract Boundaries[] getIndestructableObstacleBoundaries();
 }
