@@ -187,7 +187,7 @@ public class AnimatorFactory {
     public Animator create() {
         return new Animator(
             false,
-            500,
+            100,
             imageLoader.getImageList("floor-obstacle-destruction"),
             timer
             );
