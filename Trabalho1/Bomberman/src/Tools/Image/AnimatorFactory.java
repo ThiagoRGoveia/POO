@@ -120,51 +120,51 @@ public class AnimatorFactory {
 }
     }
 
-    class EnemyVerticalUpMovementAnimator implements Creatable { 
+    class EnemyVerticalUpMovementAnimator implements Creatable {
         public Animator create() {
             return new Animator(
                 true,
-                500,
+                100,
                 imageLoader.getImageList("enemy-vertical-up-movement"),
                 timer
               );
             }
     }
 
-    class EnemyVerticalDownMovementAnimator implements Creatable { 
+    class EnemyVerticalDownMovementAnimator implements Creatable {
         public Animator create() {
             return new Animator(
                 true,
-                500,
+                100,
                 imageLoader.getImageList("enemy-vertical-down-movement"),
                 timer
               );
             }
     }
 
-    class EnemyHorizontalLeftMovementAnimator implements Creatable { 
+    class EnemyHorizontalLeftMovementAnimator implements Creatable {
     public Animator create() {
         return new Animator(
             true,
-            500,
+            100,
             imageLoader.getImageList("enemy-horizontal-left-movement"),
             timer
           );
         }
 }
 
-    class EnemyHorizontalRightMovementAnimator implements Creatable { 
+    class EnemyHorizontalRightMovementAnimator implements Creatable {
     public Animator create() {
         return new Animator(
             true,
-            500,
+            100,
             imageLoader.getImageList("enemy-horizontal-right-movement"),
             timer
             );
         }
 }
 
-    class FloorStaticAnimator implements Creatable {  
+    class FloorStaticAnimator implements Creatable {
     public Animator create() {
         return new Animator(
             imageLoader.getImageList("floor-static").get(0)
@@ -172,7 +172,7 @@ public class AnimatorFactory {
         }
 }
 
-    class FloorObstacleAnimator implements Creatable { 
+    class FloorObstacleAnimator implements Creatable {
     public Animator create() {
         return new Animator(
             true,
@@ -183,7 +183,7 @@ public class AnimatorFactory {
         }
 }
 
-    class FloorObstacleDestructionAnimator implements Creatable { 
+    class FloorObstacleDestructionAnimator implements Creatable {
     public Animator create() {
         return new Animator(
             false,
