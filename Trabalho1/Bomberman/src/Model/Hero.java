@@ -64,6 +64,7 @@ public final class Hero extends MovableElement {
                 this
             );
             this.eventBus.emit("create-element", bomb);
+            this.incrementNumberOfBombsPlaced();
         }
     }
 
