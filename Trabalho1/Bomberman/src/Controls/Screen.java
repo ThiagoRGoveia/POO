@@ -31,6 +31,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Timer timer;
 
     public Screen(Drawer drawer) {
+        timer = new Timer();
         this.drawer = drawer;
         drawer.setScreen(this);
 
@@ -44,11 +45,11 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             ),
             (
                 (Consts.RES * Consts.CELL_SIDE) +
-                (getInsets().top +  getInsets().bottom)
+                (getInsets().top +  getInsets().bottom) + 30
             )
         );
 
-        eventBus = new EventBus<Element>(this, 8);
+        eventBus = new EventBus<Element>(this, 12);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
@@ -57,14 +58,15 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("create-schedule-loop", new CreateScheduleEventLoop());
         eventBus.on("verify-element-interaction", new VerifyElementInteractionEvent());
         eventBus.on("insert-element-to-map", new InsertToInteractionMapEvent());
+        eventBus.on("remove-element-from-map", new RemoveFromInteractionMapEvent());
+        eventBus.on("move-element-on-map", new MoveOnInteractionMap());
+        eventBus.on("game-over", new GameOverEvent());
+        eventBus.on("monster-kill", new MonsterKillEvent());
 
         elements = new ArrayList<Element>(100);
 
         hero = new Hero(eventBus, 8, 8, timer);
         this.addElement(hero);
-
-        // Helicopter enemy = new Helicopter(eventBus, 0, 0, false);
-        // this.addElement(enemy);
 
         movements = new Movements();
         interactionMap= new InteractionMap();
@@ -74,7 +76,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             ),
             timer
         );
-
     }
 
     public void addElement(Element element) {
@@ -103,6 +104,22 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public Animator getAnimator(String animatorName) {
         return animatorFactory.getAnimator(animatorName);
+    }
+
+    public void gameOver() {
+        System.out.println("GAME OVER");
+    }
+
+    public void nextLevel() {
+
+    }
+
+    public void victory() {
+        System.out.println("CONGRATULATIONS YOU WON");
+    }
+
+    public void recordMonsterKill() {
+        System.out.println("MonsterKill"); // Controlar se a fase acabou aqui
     }
 
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/
@@ -155,7 +172,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         };
 
         /*Redesenha (executa o metodo paint) tudo a cada Consts.FRAME_INTERVAL milissegundos*/
-        timer = new Timer();
         timer.schedule(redesenhar, 0, Consts.FRAME_INTERVAL);
     }
 
