@@ -15,7 +15,7 @@ public abstract class Enemy extends MovableElement {
     private static String[] directions = {"up", "down", "right", "left"};
 
     protected Enemy(EventBus<Element>eventBus, Position position) {
-        super(eventBus, position, 20);
+        super(eventBus, position, 35);
     }
 
     public void interact(Hero hero) {
