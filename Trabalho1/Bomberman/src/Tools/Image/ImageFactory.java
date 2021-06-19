@@ -20,7 +20,7 @@ public class ImageFactory {
 
     public ImageFactory(BoundaryFactory boundaryFactory) {
         this.boundaryFactory = boundaryFactory;
-        imageMap = new LinkedHashMap<String,ArrayList<ImageIcon>>(16);
+        imageMap = new LinkedHashMap<String,ArrayList<ImageIcon>>(20);
         imageMap.put("bomb", loadBombImages());
         imageMap.put("first-explosion", loadFirstExplosionImages());
         imageMap.put("horizontal-left-last-explosion", loadHoriziontalLeftLastExplosionImages());
@@ -37,6 +37,10 @@ public class ImageFactory {
         imageMap.put("floor-obstacle", loadFloorObstacleBoundaries());
         imageMap.put("floor-obstable-destruction", loadFloorObstacleDestructionBoundaries());
         imageMap.put("indestructable-obstacle", loadIndestructableObstacleBoundaries());
+        imageMap.put("bomb-item", loadBombItemBoundaries());
+        imageMap.put("bomb-intensity-item", loadBombIntensityItemBoundaries());
+        imageMap.put("speed-up-item", loadSpeedUpItemBoundaries());
+        imageMap.put("extra-life-item", loadExtraLifeItemBoundaries());
 
     }
 
@@ -164,7 +168,7 @@ public class ImageFactory {
         );
     }
 
-    public ArrayList<ImageIcon> loadFloorStaticBoundaries() { 
+    public ArrayList<ImageIcon> loadFloorStaticBoundaries() {
         return loadImages(
             "all.png",
             1,
@@ -172,7 +176,7 @@ public class ImageFactory {
         );
     }
 
-    public ArrayList<ImageIcon> loadFloorObstacleBoundaries() { 
+    public ArrayList<ImageIcon> loadFloorObstacleBoundaries() {
         return loadImages(
             "all.png",
             4,
@@ -180,7 +184,7 @@ public class ImageFactory {
         );
     }
 
-    public ArrayList<ImageIcon> loadFloorObstacleDestructionBoundaries() { 
+    public ArrayList<ImageIcon> loadFloorObstacleDestructionBoundaries() {
         return loadImages(
             "all.png",
             6,
@@ -188,11 +192,43 @@ public class ImageFactory {
         );
     }
 
-    public ArrayList<ImageIcon> loadIndestructableObstacleBoundaries() { 
+    public ArrayList<ImageIcon> loadIndestructableObstacleBoundaries() {
         return loadImages(
             "all.png",
             1,
             boundaryFactory.getIndestructableObstacleBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadBombItemBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            2,
+            boundaryFactory.getBombItemBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadBombIntensityItemBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            2,
+            boundaryFactory.getBombIntensityItemBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadSpeedUpItemBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            2,
+            boundaryFactory.getSpeedUpItemBoundaries()
+        );
+    }
+
+    public ArrayList<ImageIcon> loadExtraLifeItemBoundaries() {
+        return loadImages(
+            "enemies2.png",
+            2,
+            boundaryFactory.getExtraLifeItemBoundaries()
         );
     }
 

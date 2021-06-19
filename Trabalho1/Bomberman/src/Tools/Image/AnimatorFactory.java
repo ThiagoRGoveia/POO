@@ -29,6 +29,10 @@ public class AnimatorFactory {
         animatorMap.put("floor-obstacle", new FloorObstacleAnimator());
         animatorMap.put("floor-obstacle-destruction", new FloorObstacleDestructionAnimator());
         animatorMap.put("indestructable-obstacle", new IndestructableObstacleAnimator());
+        animatorMap.put("bomb-item", new BombItemAnimator());
+        animatorMap.put("bombo-intensity-item", new BombIntensityItemAnimator());
+        animatorMap.put("speed-up-item", new BombSpeedUpItemAnimator());
+        animatorMap.put("extra-life-item", new BombExtraLifeItemAnimator());
 
     }
 
@@ -151,7 +155,7 @@ public class AnimatorFactory {
             timer
           );
         }
-}
+    }
 
     class EnemyHorizontalRightMovementAnimator implements Creatable {
     public Animator create() {
@@ -162,7 +166,7 @@ public class AnimatorFactory {
             timer
             );
         }
-}
+    }
 
     class FloorStaticAnimator implements Creatable {
     public Animator create() {
@@ -170,7 +174,7 @@ public class AnimatorFactory {
             imageLoader.getImageList("floor-static").get(0)
             );
         }
-}
+    }
 
     class FloorObstacleAnimator implements Creatable {
     public Animator create() {
@@ -181,7 +185,7 @@ public class AnimatorFactory {
             timer
             );
         }
-}
+    }
 
     class FloorObstacleDestructionAnimator implements Creatable {
     public Animator create() {
@@ -192,7 +196,7 @@ public class AnimatorFactory {
             timer
             );
         }
-}
+    }
 
     class IndestructableObstacleAnimator implements Creatable {   //FloorObstacleAnimator
     public Animator create() {
@@ -200,7 +204,51 @@ public class AnimatorFactory {
             imageLoader.getImageList("indestructable-obstacle").get(0)
             );
         }
-}
+    }
+
+    class BombItemAnimator implements Creatable {
+        public Animator create() {
+            return new Animator(
+            true,
+            500,
+            imageLoader.getImageList("bomb-item"),
+            timer
+            );
+        }
+    }
+
+    class BombIntensityItemAnimator implements Creatable {
+        public Animator create() {
+            return new Animator(
+            true,
+            500,
+            imageLoader.getImageList("bomb-intensity-item"),
+            timer
+            );
+        }
+    }
+
+    class BombSpeedUpItemAnimator implements Creatable {
+        public Animator create() {
+            return new Animator(
+            true,
+            500,
+            imageLoader.getImageList("speed-up-item"),
+            timer
+            );
+        }
+    }
+
+    class BombExtraLifeItemAnimator implements Creatable {
+        public Animator create() {
+            return new Animator(
+            true,
+            500,
+            imageLoader.getImageList("extra-life-item"),
+            timer
+            );
+        }
+    }
 
     public Animator getAnimator(String name) {
         return animatorMap.get(name).create();
