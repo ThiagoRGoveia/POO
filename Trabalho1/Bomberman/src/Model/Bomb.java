@@ -76,7 +76,7 @@ public class Bomb extends AnimatedElement {
         this.explode();
     }
 
-    public void destroy() {
+    public void die() {
         explosionTimer.cancel();
     }
 
