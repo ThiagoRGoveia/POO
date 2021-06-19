@@ -30,7 +30,7 @@ public class AnimatorFactory {
         animatorMap.put("floor-obstacle-destruction", new FloorObstacleDestructionAnimator());
         animatorMap.put("indestructable-obstacle", new IndestructableObstacleAnimator());
         animatorMap.put("bomb-item", new BombItemAnimator());
-        animatorMap.put("bombo-intensity-item", new BombIntensityItemAnimator());
+        animatorMap.put("bomb-intensity-item", new BombIntensityItemAnimator());
         animatorMap.put("speed-up-item", new BombSpeedUpItemAnimator());
         animatorMap.put("extra-life-item", new BombExtraLifeItemAnimator());
 

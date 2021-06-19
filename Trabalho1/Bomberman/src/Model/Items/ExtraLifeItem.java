@@ -11,14 +11,18 @@ public class ExtraLifeItem extends Item {
 
     protected ExtraLifeItem(EventBus<Element> eventBus, Position position) {
         super(eventBus, position);
+        this.setAnimatorName("extra-life-item");
+        eventBus.emit("create-animator", this);
     }
 
-    @Override
+    public ExtraLifeItem(EventBus<Element> eventBus, int row, int column) {
+        this(eventBus, new Position(row, column));
+    }
+
     public void pickUp(Hero hero) {
         hero.incrementNumberOfLives();
     }
 
-    @Override
     public ImageIcon getImage() {
         return null;
     }
