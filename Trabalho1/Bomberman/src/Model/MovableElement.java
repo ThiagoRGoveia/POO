@@ -27,6 +27,7 @@ public abstract class MovableElement extends Element {
     protected Element interactingElement;
     protected Position nextPosition;
     protected int speed;
+    protected boolean isLocked;
 
 
     protected MovableElement(EventBus<Element>eventBus, Position position, int speed) {
@@ -40,7 +41,15 @@ public abstract class MovableElement extends Element {
         this.activeAnimator = this.stopedAnimatorList.get(0);
         activeAnimator.start();
         this.speed = speed;
+        isLocked = false;
     }
+
+    public abstract void setDownAnimator();
+    public abstract void setLeftAnimator();
+    public abstract void setRightAnimator();
+    public abstract void setUpAnimator();
+    public abstract void setStopedAnimatorList();
+    public abstract void processMovement();
 
     public ImageIcon getImage() {
         return activeAnimator.getImage();
@@ -79,7 +88,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveUp() {
-        if (movementDirection != "up") {
+        if (movementDirection != "up" && !isLocked) {
             changeAnimatorAndKillMovement(upAnimator, "up");
             this.movementTimer = new TimerTask() {
                 public void run() {
@@ -92,7 +101,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveDown() {
-        if (movementDirection != "down") {
+        if (movementDirection != "down" && !isLocked) {
             changeAnimatorAndKillMovement(downAnimator, "down");
             this.movementTimer = new TimerTask() {
                 public void run() {
@@ -105,7 +114,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveRight() {
-        if (movementDirection != "right") {
+        if (movementDirection != "right" && !isLocked) {
             changeAnimatorAndKillMovement(rightAnimator, "right");
             this.movementTimer = new TimerTask() {
                 public void run() {
@@ -118,7 +127,7 @@ public abstract class MovableElement extends Element {
     }
 
     public void moveLeft() {
-        if (movementDirection != "left") {
+        if (movementDirection != "left" && !isLocked) {
             changeAnimatorAndKillMovement(leftAnimator, "left");
             movementTimer = new TimerTask() {
                 public void run() {
@@ -141,13 +150,21 @@ public abstract class MovableElement extends Element {
         }
     }
 
-    public abstract void setDownAnimator();
-    public abstract void setLeftAnimator();
-    public abstract void setRightAnimator();
-    public abstract void setUpAnimator();
-    public abstract void setStopedAnimator();
-    public abstract void setStopedAnimatorList();
-    public abstract void processMovement();
-
+    public void setStopedAnimator() {
+        Animator animator;
+        if (this.movementDirection == "right") {
+            animator = stopedAnimatorList.get(3);
+        }
+        else if (this.movementDirection == "left") {
+            animator = stopedAnimatorList.get(2);
+        }
+        else if (this.movementDirection == "up") {
+            animator = stopedAnimatorList.get(1);
+        }
+        else {
+            animator = stopedAnimatorList.get(0);
+        }
+        this.activeAnimator = animator;
+    }
 
 }
