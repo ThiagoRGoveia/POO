@@ -15,6 +15,7 @@ import Tools.Position.Coordinate;
 import Tools.Position.HeroHitBox;
 import Tools.Position.Position;
 import Tools.Position.Row;
+import Tools.Position.ScreenPosition;
 import Tools.Image.Animator;
 import Tools.Image.LoadImage;
 import Tools.Image.Boundaries.Boundaries;
@@ -85,10 +86,19 @@ public final class Hero extends MovableElement {
 
             this.createScheduledTask(
                 new Schedule(
-                    // Restaura heroi pra status parado na posição (0,0)
+                    // Restaura heroi pra status parado na posição (1,1)
                     new TimerTask(){
                         public void run() {
-                            position.setPosition(0,0);
+                            position.setPosition(
+                                new Position(
+                                    new Row(
+                                        new ScreenPosition(1)
+                                    ),
+                                    new Column(
+                                        new ScreenPosition(1)
+                                    )
+                                )
+                            );
                             eventBus.emit("insert-element-to-map", hero);
                             isDead = false;
                             isImmortal = true;
