@@ -25,7 +25,7 @@ public final class Hero extends MovableElement {
     private boolean isDead;
     private int maxNumberOfBombs = 1;
     private int numberOfBombsPlaced = 0;
-    private int bombIntensity = 0;
+    private int bombIntensity = 1;
     private int numberOfLives;
 
     public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
@@ -90,10 +90,11 @@ public final class Hero extends MovableElement {
             this.isLocked = true;
             this.isDead = true;
             this.activeAnimator.stop();
-            this.movementTimer.cancel();
+            if (this.movementTimer != null) {
+                this.movementTimer.cancel();
+            }
             this.activeAnimator = deathAnimator;
             this.activeAnimator.start();
-            final Hero hero = this;
 
             this.createScheduledTask(
                 new Schedule(
