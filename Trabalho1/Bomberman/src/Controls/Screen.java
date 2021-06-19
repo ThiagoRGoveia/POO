@@ -52,7 +52,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
-        eventBus = new EventBus<Element>(this, 13);
+        eventBus = new EventBus<Element>(this, 14);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
@@ -66,6 +66,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("game-over", new GameOverEvent());
         eventBus.on("monster-kill", new MonsterKillEvent());
         eventBus.on("create-enemy", new CreateEnemyEvent());
+        eventBus.on("remove-enemy", new RemoveEnemyEvent());
 
         elements = new ArrayList<Element>(100);
         elements = new ArrayList<Element>(10);

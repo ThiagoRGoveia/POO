@@ -122,4 +122,8 @@ public abstract class Enemy extends MovableElement {
         this.position.setPosition(this.nextPosition);
     }
 
+    public void die() {
+        eventBus.emit("remove-enemy", this);
+    }
+
 }

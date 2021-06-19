@@ -76,7 +76,6 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     public void die() {
         if (!isImmortal) {
             eventBus.emit("remove-element", this);
-            eventBus.emit("remove-element-from-map", this);
         }
     }
 
