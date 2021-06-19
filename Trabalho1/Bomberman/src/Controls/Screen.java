@@ -183,7 +183,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         /*Aqui podem ser inseridos novos processamentos de controle*/
         if (!this.elements.isEmpty()) {
-            this.controller.draw(elements);
+            this.controller.draw(elements, enemies);
             this.controller.process(hero);
         }
 
