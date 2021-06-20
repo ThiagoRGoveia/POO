@@ -122,4 +122,6 @@ public abstract class Explosion extends AnimatedElement {
     public int getIntensity(){
         return this.intensity;
     }
+
+    public void die() {}
 }
