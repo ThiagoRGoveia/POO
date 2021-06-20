@@ -131,7 +131,7 @@ public class BoundariesFactoryLevel2 extends BoundaryFactory {
 
     public Boundaries[] getFloorStaticBoundaries() {
         Boundaries[] b = {
-            new Boundaries(458, 49, 16, 16)
+            new Boundaries(475, 15, 16, 16)
         };
         return b;
     }
