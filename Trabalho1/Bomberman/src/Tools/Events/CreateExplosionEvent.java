@@ -17,13 +17,13 @@ public class CreateExplosionEvent implements Event<Element> {
             explosion.propagateExplosion(explosion.getIntensity());
         } else {
             if (!preExistingElement.isImmortal()) {
+                screen.addElement(explosion);
                 preExistingElement.interact(explosion);
                 if (preExistingElement.isTraversable()) {
                     explosion.propagateExplosion(explosion.getIntensity());
                 } else {
                     explosion.changeToLastExplosion();
                 }
-                screen.addElement(explosion);
             }
 
         }
