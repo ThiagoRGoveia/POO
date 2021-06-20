@@ -143,7 +143,6 @@ public final class Hero extends MovableElement {
             if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
                 this.eventBus.emit("verify-element-interaction", this);
                 if (this.interactingElement != null && this.interactingElement != this) {
-                    System.out.println("HIT");
                     this.interactingElement.interact(this);
                     if (this.interactingElement.isTraversable()) {
                         this.position.setPosition(this.nextPosition);
