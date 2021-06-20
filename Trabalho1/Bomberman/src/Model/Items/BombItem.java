@@ -1,7 +1,5 @@
 package Model.Items;
 
-import javax.swing.ImageIcon;
-
 import Model.Element;
 import Model.Hero;
 import Tools.Events.EventBus;
@@ -13,18 +11,16 @@ public class BombItem extends Item  {
         super(eventBus, position);
         this.setAnimatorName("bomb-item");
         eventBus.emit("create-animator", this);
+        setTraversable(true);
     }
 
     public BombItem(EventBus<Element> eventBus, int row, int column) {
         this(eventBus, new Position(row, column));
     }
 
-    public ImageIcon getImage() {
-        return null;
-    }
-
     public void pickUp(Hero hero) {
         hero.incrementMaxNumberOfBombs();
+        die();
     }
 
 }

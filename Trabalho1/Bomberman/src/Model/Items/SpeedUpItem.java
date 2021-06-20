@@ -1,6 +1,5 @@
 package Model.Items;
 
-import javax.swing.ImageIcon;
 
 import Model.Element;
 import Model.Hero;
@@ -20,11 +19,7 @@ public class SpeedUpItem extends Item {
     }
 
     public void pickUp(Hero hero) {
-        hero.setSpeed(hero.getSpeed() - 5);
+        hero.setSpeed(hero.getSpeed() - 1);
+        die();
     }
-
-    public ImageIcon getImage() {
-        return null;
-    }
-
 }

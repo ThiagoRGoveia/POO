@@ -1,7 +1,5 @@
 package Model.Items;
 
-import javax.swing.ImageIcon;
-
 import Model.Element;
 import Model.Hero;
 import Tools.Events.EventBus;
@@ -19,12 +17,9 @@ public class BombIntensityItem extends Item {
         this(eventBus, new Position(row, column));
     }
 
-    public ImageIcon getImage() {
-        return null;
-    }
-
     public void pickUp(Hero hero) {
         hero.incrementBombIntensity();
+        die();
     }
 
 }

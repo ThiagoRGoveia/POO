@@ -25,7 +25,6 @@ public abstract class Item extends AnimatedElement implements Pickable {
 
     public void interact(Explosion explosion) {
         this.die();
-
     }
 
 }
