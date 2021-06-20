@@ -123,6 +123,7 @@ public abstract class Enemy extends MovableElement {
     }
 
     public void die() {
+        this.movementTimer.cancel();
         eventBus.emit("remove-enemy", this);
     }
 
