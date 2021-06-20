@@ -671,8 +671,6 @@ public class Level1 {
         eventBus.emit("create-element", block);
         //destrutíveis do meio do mapa
         //inimigos
-        enemy = new BasicEnemy(eventBus, 7, 1);
-        eventBus.emit("create-element", enemy);
         enemy = new BasicEnemy(eventBus, 17, 1);
         eventBus.emit("create-element", enemy);
         enemy = new BasicEnemy(eventBus, 18, 3);
