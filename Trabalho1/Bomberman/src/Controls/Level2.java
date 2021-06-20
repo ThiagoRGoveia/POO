@@ -1,20 +1,25 @@
 package Controls;
 
-import Model.Element;
 import Model.Blocks.IndestructableBlock;
 import Model.Blocks.RegularBlock;
 import Model.Enemies.BasicEnemy;
-import Tools.Events.EventBus;
+import Tools.Image.ImageFactory;
+import Tools.Image.Boundaries.BoundariesFactoryLevel1;
 
 
-public class Level2 {
-    private EventBus<Element> eventBus;
-    public Level2( EventBus<Element> eventBus) {
-        this.eventBus = eventBus;
+public class Level2 extends GameLevel {
+
+    public Level2(Screen screen) {
+        super(screen);
     }
 
-    public void drawGround() {
-
+    public void begin() {
+        this.setImageFactory(
+            new ImageFactory(
+                new BoundariesFactoryLevel1()
+            )
+        );
+        super.begin();
     }
 
     public void draw() {

@@ -1,20 +1,25 @@
 package Controls;
 
-import Model.Element;
 import Model.Blocks.IndestructableBlock;
 import Model.Blocks.RegularBlock;
 import Model.Enemies.BasicEnemy;
-import Tools.Events.EventBus;
+import Tools.Image.ImageFactory;
+import Tools.Image.Boundaries.BoundariesFactoryLevel2;
 
 
-public class Level4 {
-    private EventBus<Element> eventBus;
-    public Level4( EventBus<Element> eventBus) {
-        this.eventBus = eventBus;
+public class Level4 extends GameLevel {
+
+    public Level4(Screen screen) {
+        super(screen);
     }
 
-    public void drawGround() {
-
+    public void begin() {
+        this.setImageFactory(
+            new ImageFactory(
+                new BoundariesFactoryLevel2()
+            )
+        );
+        super.begin();
     }
 
     public void draw() {
@@ -409,7 +414,7 @@ public class Level4 {
         block = new RegularBlock(eventBus, 17, 18); eventBus.emit("create-element", block);
         block = new RegularBlock(eventBus, 18, 18); eventBus.emit("create-element", block);
 
-        
+
         //destrutíveis do meio do mapa
         //inimigos
         enemy = new BasicEnemy(eventBus, 5, 1);

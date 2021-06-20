@@ -7,7 +7,6 @@ import Tools.*;
 import Tools.Events.*;
 import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
-import Tools.Image.ImageFactory;
 import Tools.Image.Boundaries.*;
 import Tools.Position.Position;
 
@@ -28,7 +27,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Movements movements;
     private InteractionMap interactionMap;
     private AnimatorFactory animatorFactory;
-    private ImageFactory imageFactory;
     private Timer timer;
     private GameLevel[] levels;
     private GameLevel currentLevel;
@@ -40,8 +38,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         drawer.setScreen(this);
         elements = new ArrayList<Element>(400);
         enemies = new ArrayList<Enemy>(20);
-
-        levels = new GameLevel[4];
 
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);  /*teclado*/
@@ -78,33 +74,15 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         movements = new Movements();
         interactionMap= new InteractionMap();
-        imageFactory = new ImageFactory(
-            new BoundariesFactoryLevel2()
-        );
-        animatorFactory = new AnimatorFactory(imageFactory, timer);
 
-        // Item item = new BombItem(eventBus, 0, 1);
-        // eventBus.emit("create-element", item);
-        Level2 level = new Level2(eventBus);
-        level.draw();
+        levels = new GameLevel[4];
+        levels[0] = new Level1(this);
+        levels[1] = new Level2(this);
+        levels[2] = new Level3(this);
+        levels[3] = new Level4(this);
 
-    //     Enemy enemy = new BasicEnemy(eventBus, 5, 5);
-    //     this.addElement(enemy);
-    //     enemy = new BasicEnemy(eventBus, 7, 7);
-    //     this.addElement(enemy);
-    //     enemy = new BasicEnemy(eventBus, 12, 12);
-    //     this.addElement(enemy);
-    //     enemy = new BasicEnemy(eventBus, 6, 20);
-    //     this.addElement(enemy);
-
-    //     RegularBlock block = new RegularBlock(eventBus, 2, 2);
-    //     this.addElement(block);
-    //     block = new RegularBlock(eventBus, 2, 2);
-    //     this.addElement(block);
-    //     block = new RegularBlock(eventBus, 2, 3);
-    //     this.addElement(block);
-    //     block = new RegularBlock(eventBus, 2, 4);
-    //     this.addElement(block);
+        currentLevel = levels[0];
+        currentLevel.begin();
     }
 
     public void addElement(Element element) {
@@ -157,6 +135,8 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         hero.setPosition(
             new Position(0, 0)
         );
+        interactionMap.clear();
+        levels[currentLevelIndex] = null;
         currentLevelIndex++;
         if (currentLevelIndex >= 4) {
             victory();
@@ -180,7 +160,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         /*Desenha cenário*/
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
-                    this.imageFactory.getImageList("floor-static").get(0).paintIcon(
+                    currentLevel.getImageFactory().getImageList("floor-static").get(0).paintIcon(
                     this,
                     this.getGraphicsBuffer(),
                     j * Consts.CELL_SIDE,
