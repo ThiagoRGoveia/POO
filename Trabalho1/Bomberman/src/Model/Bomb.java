@@ -28,10 +28,6 @@ public class Bomb extends AnimatedElement {
         this(eventBus, intensity, new Position(row, column), hero);
     }
 
-    private void turnBlockable() {
-        this.traversable = false;
-    }
-
     private void setExplosionTimer() {
         explosionTimer = new TimerTask() {
             public void run() {
