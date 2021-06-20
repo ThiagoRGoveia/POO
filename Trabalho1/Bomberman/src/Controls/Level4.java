@@ -4,7 +4,7 @@ import Model.Blocks.IndestructableBlock;
 import Model.Blocks.RegularBlock;
 import Model.Enemies.BasicEnemy;
 import Tools.Image.ImageFactory;
-import Tools.Image.Boundaries.BoundariesFactoryLevel3;
+import Tools.Image.Boundaries.BoundariesFactoryLevel4;
 
 
 public class Level4 extends GameLevel {
@@ -16,7 +16,7 @@ public class Level4 extends GameLevel {
     public void begin() {
         this.setImageFactory(
             new ImageFactory(
-                new BoundariesFactoryLevel3()
+                new BoundariesFactoryLevel4()
             )
         );
         super.begin();
