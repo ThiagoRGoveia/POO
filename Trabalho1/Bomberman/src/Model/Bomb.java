@@ -57,6 +57,7 @@ public class Bomb extends AnimatedElement {
         enemy.changeDirection();
     }
 
+    // Se uma bomba for atingiida por outra ela deve explodir imediatamente
     public void interact(Explosion explosion) {
         this.explosionTimer.cancel();
         this.explode();
