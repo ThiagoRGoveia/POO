@@ -11,6 +11,7 @@ import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public abstract class Enemy extends MovableElement {
+    private boolean isDead = false;
     protected static String[] directions = {"up", "down", "right", "left"};
 
     protected Enemy(EventBus<Element>eventBus, Position position) {
@@ -30,7 +31,7 @@ public abstract class Enemy extends MovableElement {
     }
 
     public void processMovement() {
-        if (!Position.isPositionByTheBoundaries(this.nextPosition)) {
+        if (!Position.isPositionByTheBoundaries(this.nextPosition) && !isDead) { // Mover se estiver dentro do mapa e não estiver morto
             this.eventBus.emit("verify-element-interaction", this);
             if (this.interactingElement != null && this.interactingElement != this) {
                 this.interactingElement.interact(this);
@@ -119,6 +120,7 @@ public abstract class Enemy extends MovableElement {
     }
 
     public void die() {
+        this.isDead = true;
         this.movementTimer.cancel();
         eventBus.emit("remove-enemy", this);
     }

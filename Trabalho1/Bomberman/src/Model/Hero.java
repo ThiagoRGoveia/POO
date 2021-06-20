@@ -78,7 +78,7 @@ public final class Hero extends MovableElement {
     }
 
     public void die() {
-        if (!isDead && !isImmortal) {
+        if (!isDead && !isImmortal) { // Evitar morte quando ele está imortal ou já esta morto
             decrementNumberOfLives();
             if (numberOfLives == 0) {
                 eventBus.emit("game-over", this); // Se o número de vidas zerar, game over
@@ -87,14 +87,14 @@ public final class Hero extends MovableElement {
             eventBus.emit("set-hero-lives", this);
             this.isLocked = true;
             this.isDead = true;
-            this.activeAnimator.stop();
+            this.activeAnimator.stop(); // Parar animação atual
             if (this.movementTimer != null) {
-                this.movementTimer.cancel();
+                this.movementTimer.cancel(); // Parar movimento atual se houver
             }
-            this.activeAnimator = deathAnimator;
+            this.activeAnimator = deathAnimator; // Ativar animação de morte
             this.activeAnimator.start();
 
-            this.createScheduledTask(
+            this.createScheduledTask( // Criar tarefa para reviver a posição dentro de dois segundos
                 new Schedule(
                     // Restaura heroi pra status parado na posição (1,1)
                     new TimerTask(){
@@ -206,7 +206,6 @@ public final class Hero extends MovableElement {
     public void setUpAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(57, 20, 16, 24)));
-
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(89, 20, 16, 24)));
         this.upAnimator = new Animator(true, 300, images, timer);
     }
