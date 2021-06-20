@@ -175,4 +175,8 @@ public abstract class MovableElement extends AnimatedElement {
         return speed;
     }
 
+    public String getMovementDirection() {
+        return movementDirection;
+    }
+
 }
