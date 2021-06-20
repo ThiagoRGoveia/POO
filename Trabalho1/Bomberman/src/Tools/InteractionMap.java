@@ -16,4 +16,12 @@ public class InteractionMap {
     public void remove(Position position) {
         interactionMap[position.getRow().getCoordinate().value][position.getColumn().getCoordinate().value] = null;
     }
+
+    public void clear() {
+        for (int i = 0; i < Consts.RES; i++) {
+            for(int j = 0; j < Consts.RES; j++) {
+                interactionMap[i][j] = null;
+            }
+        }
+    }
 }

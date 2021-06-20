@@ -25,12 +25,6 @@ public abstract class Element implements Serializable, Drawable, Interactable {
         isImmortal = false;
     }
 
-    protected Element(EventBus<Element> eventBus) {
-        this.position = new Position(0, 0);
-        this.eventBus = eventBus;
-        this.hitBox = new HitBox();
-    }
-
     public Position getPosition() {
         return position;
     }

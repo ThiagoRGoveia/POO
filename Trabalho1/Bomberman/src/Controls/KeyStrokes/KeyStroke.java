@@ -1,7 +1,7 @@
 package Controls.KeyStrokes;
 
-import Model.Hero;
+import Controls.Screen;
 
 public interface KeyStroke {
-    public void execute(Hero hero);
+    public void execute(Screen screen);
 }

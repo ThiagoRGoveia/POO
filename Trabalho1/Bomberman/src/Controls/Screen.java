@@ -7,7 +7,6 @@ import Tools.*;
 import Tools.Events.*;
 import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
-import Tools.Image.Boundaries.*;
 import Tools.Position.Position;
 
 import java.awt.*;
@@ -130,11 +129,13 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void nextLevel() {
+        Hero hero = (Hero) elements.get(0);
         elements.clear();
         enemies.clear();
         hero.setPosition(
-            new Position(0, 0)
+            new Position(1, 1)
         );
+        elements.add(hero);
         interactionMap.clear();
         levels[currentLevelIndex] = null;
         currentLevelIndex++;
@@ -149,6 +150,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public void victory() {
         System.out.println("CONGRATULATIONS YOU WON");
+    }
+
+    public Hero getHero() {
+        return hero;
     }
 
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/
@@ -257,7 +262,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void keyPressed(KeyEvent e) {
-        movements.makeMovement(e, hero);
+        movements.makeMovement(e, this);
 
         if (!controller.isPositionValid(this.elements, hero)) {
             hero.resetToLastPosition();

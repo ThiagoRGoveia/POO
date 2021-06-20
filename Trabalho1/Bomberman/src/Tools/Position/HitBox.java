@@ -17,7 +17,7 @@ public class HitBox {
         this.width = x + Consts.CELL_SIZE_FACTOR;
     }
 
-
+    // Verificando se os retangulos de cada elemento se intersectam
     public static boolean isHiting(HitBox h1, HitBox h2) {
         int hitWidth1 = h1.width - h2.x;
         int hitWidth2 = h2.width - h1.x;

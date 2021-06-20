@@ -1,9 +1,11 @@
 package Controls.KeyStrokes;
 
+import Controls.Screen;
 import Model.Hero;
 
 public class MoveRight implements KeyStroke {
-    public void execute(Hero hero) {
+    public void execute(Screen screen) {
+        Hero hero = screen.getHero();
         hero.moveRight();
     }
 }
