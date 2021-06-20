@@ -162,4 +162,11 @@ public class Position {
         }
         return false;
     }
+
+    public boolean equals(Position p) {
+        return p.getColumn().getCoordinate().value == this.getColumn().getCoordinate().value &&
+            p.getRow().getCoordinate().value == this.getRow().getCoordinate().value;
+    }
 }
+
+

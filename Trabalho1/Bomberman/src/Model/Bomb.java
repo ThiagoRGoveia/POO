@@ -9,7 +9,6 @@ import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public class Bomb extends AnimatedElement {
-    private TimerTask traversableCancelationTimer;
     private TimerTask explosionTimer;
     private int intensity;
     private Hero hero;
@@ -20,7 +19,7 @@ public class Bomb extends AnimatedElement {
         this.intensity = intensity;
         this.setAnimatorName("bomb");
         eventBus.emit("create-animator", this);
-        scheduleTraversableChange();
+        setTraversable(true);
         setExplosionTimer();
         this.hero = hero;
     }
@@ -31,18 +30,6 @@ public class Bomb extends AnimatedElement {
 
     private void turnBlockable() {
         this.traversable = false;
-    }
-
-    private void scheduleTraversableChange() {
-        traversableCancelationTimer = new TimerTask() {
-            public void run() {
-                turnBlockable();
-            }
-        };
-        this.createScheduledTask(
-            new Schedule(traversableCancelationTimer, 500)
-        );
-        this.eventBus.emit("create-schedule", this);
     }
 
     private void setExplosionTimer() {
@@ -65,11 +52,9 @@ public class Bomb extends AnimatedElement {
     }
 
     public void interact(Hero hero) {
-        if (this.traversableCancelationTimer != null) {
-            this.traversableCancelationTimer.cancel();
-            this.traversableCancelationTimer = null;
+        if (!this.position.equals(hero.position) && this.isTraversable()) {
+            this.setTraversable(false);
         }
-        scheduleTraversableChange();
     }
 
     public void interact(Enemy enemy) {}
