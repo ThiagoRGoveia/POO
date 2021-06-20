@@ -104,10 +104,10 @@ public final class Hero extends MovableElement {
                             position.setPosition(
                                 new Position(
                                     new Row(
-                                        new ScreenPosition(1)
+                                        new Coordinate(1)
                                     ),
                                     new Column(
-                                        new ScreenPosition(1)
+                                        new Coordinate(1)
                                     )
                                 )
                             );
