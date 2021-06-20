@@ -34,4 +34,7 @@ public class IndestructableBlock extends AnimatedElement {
     public void interact(Explosion explosion) {
     }
 
+    public void die() {
+    }
+
 }
