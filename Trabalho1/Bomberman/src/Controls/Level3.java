@@ -236,9 +236,6 @@ public class Level3 extends GameLevel {
         wall = new IndestructableBlock(eventBus, 8, 9); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 8, 10); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 8, 13); eventBus.emit("create-element", wall);
-        wall = new IndestructableBlock(eventBus, 10, 3); eventBus.emit("create-element", wall);
-        wall = new IndestructableBlock(eventBus, 10, 4); eventBus.emit("create-element", wall);
-        wall = new IndestructableBlock(eventBus, 10, 8); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 9, 11); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 9, 15); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 10, 16); eventBus.emit("create-element", wall);
@@ -257,7 +254,6 @@ public class Level3 extends GameLevel {
         wall = new IndestructableBlock(eventBus, 13, 8); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 13, 11); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 13, 13); eventBus.emit("create-element", wall);
-        wall = new IndestructableBlock(eventBus, 13, 15); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 13, 15); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 13, 17); eventBus.emit("create-element", wall);
         wall = new IndestructableBlock(eventBus, 12, 17); eventBus.emit("create-element", wall);
