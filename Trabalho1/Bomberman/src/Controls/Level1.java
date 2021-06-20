@@ -16,7 +16,7 @@ public class Level1 {
 
     }
 
-    public void drawElements() {
+    public void draw() {
         RegularBlock block;
         IndestructableBlock wall;
         BasicEnemy enemy;
@@ -672,31 +672,31 @@ public class Level1 {
         //destrutíveis do meio do mapa
         //inimigos
         enemy = new BasicEnemy(eventBus, 17, 1);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 18, 3);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 7, 6);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 1, 7);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 12, 7);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 17, 7);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 15, 10);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 17, 12);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 7, 1);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 3, 17);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 8, 17);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 13, 17);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         enemy = new BasicEnemy(eventBus, 16, 17);
-        eventBus.emit("create-element", enemy);
+        eventBus.emit("create-enemy", enemy);
         //inimigos
 
 
