@@ -16,7 +16,8 @@ public class IndestructableBlock extends AnimatedElement {
         super(eventBus, position);
         this.setAnimatorName("indestructable-obstacle");
         eventBus.emit("create-animator", this);
-        this.isImmortal = true;
+        this.setImmortal(true);
+        this.setTraversable(false);
     }
 
     public IndestructableBlock(EventBus<Element> eventBus, int row, int column) {
