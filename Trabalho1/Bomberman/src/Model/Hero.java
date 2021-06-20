@@ -4,7 +4,6 @@ import javax.swing.ImageIcon;
 
 import Model.Enemies.Enemy;
 
-import java.util.Timer;
 import java.util.TimerTask;
 import java.awt.event.KeyEvent;
 
@@ -18,7 +17,6 @@ import Tools.Image.Animator;
 import Tools.Image.LoadImage;
 import Tools.Image.Boundaries.Boundaries;
 public final class Hero extends MovableElement {
-    private Timer timer;
     private Animator deathAnimator;
     private boolean isDead;
     private int maxNumberOfBombs = 1;
@@ -26,17 +24,16 @@ public final class Hero extends MovableElement {
     private int bombIntensity = 1;
     private int numberOfLives;
 
-    public Hero(EventBus<Element>eventBus, Position position, Timer timer) {
+    public Hero(EventBus<Element>eventBus, Position position) {
         super(eventBus, position, 10);
         this.setTraversable(true);
-        this.timer = timer;
         setDeathAnimator();
         isLocked = false;
         numberOfLives = 3;
     }
 
-    public Hero(EventBus<Element>eventBus, int row, int column, Timer timer) {
-        this(eventBus, new Position(row, column), timer);
+    public Hero(EventBus<Element>eventBus, int row, int column) {
+        this(eventBus, new Position(row, column));
     }
 
     public void resetToLastPosition(){
@@ -186,28 +183,28 @@ public final class Hero extends MovableElement {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(56, 45, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(87, 45, 16, 24)));
-        this.downAnimator = new Animator(true, 300, images, timer);
+        this.downAnimator = new Animator(true, 300, images);
     }
 
     public void setLeftAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(19, 45, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(35, 45, 16, 24)));
-        this.leftAnimator = new Animator(true, 300, images, timer);
+        this.leftAnimator = new Animator(true, 300, images);
     }
 
     public void setRightAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(122, 47, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(138, 47, 16, 24)));
-        this.rightAnimator = new Animator(true, 300, images, timer);
+        this.rightAnimator = new Animator(true, 300, images);
     }
 
     public void setUpAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(57, 20, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(89, 20, 16, 24)));
-        this.upAnimator = new Animator(true, 300, images, timer);
+        this.upAnimator = new Animator(true, 300, images);
     }
 
     public void setStopedAnimator() {
@@ -243,7 +240,7 @@ public final class Hero extends MovableElement {
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(82, 75, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(99, 75, 16, 24)));
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(117, 75, 16, 24)));
-        this.deathAnimator = new Animator(false, 100, images, timer);
+        this.deathAnimator = new Animator(false, 100, images);
     }
 
     public void incrementMaxNumberOfBombs() {

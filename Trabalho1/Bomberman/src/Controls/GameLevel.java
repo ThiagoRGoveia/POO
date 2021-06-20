@@ -19,7 +19,7 @@ public abstract class GameLevel {
 
     public void begin() {
         screen.setAnimatorFactory(
-            new AnimatorFactory(imageFactory, screen.getTimer())
+            new AnimatorFactory(imageFactory)
         );
         draw();
     }

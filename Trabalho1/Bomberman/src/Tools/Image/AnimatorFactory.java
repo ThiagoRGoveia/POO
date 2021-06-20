@@ -6,12 +6,10 @@ import java.util.Timer;
 public class AnimatorFactory {
     private LinkedHashMap<String,Creatable> animatorMap;
     private ImageFactory imageLoader;
-    private Timer timer;
 
-    public AnimatorFactory(ImageFactory imageLoader, Timer timer) {
+    public AnimatorFactory(ImageFactory imageLoader) {
         animatorMap = new LinkedHashMap<String,Creatable>(20);
         this.imageLoader = imageLoader;
-        this.timer = timer;
 
         animatorMap.put("bomb", new BombAnimator());
         animatorMap.put("first-explosion", new FirstExplosionAnimator());
@@ -41,8 +39,7 @@ public class AnimatorFactory {
             return new Animator(
                 true,
                 500,
-                imageLoader.getImageList("bomb"),
-                timer
+                imageLoader.getImageList("bomb")
               );
             }
     }
@@ -52,8 +49,7 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("first-explosion"),
-                timer
+                imageLoader.getImageList("first-explosion")
          );
 }
     }
@@ -63,8 +59,7 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-left-last-explosion"),
-                timer
+                imageLoader.getImageList("horizontal-left-last-explosion")
          );
 }
     }
@@ -74,8 +69,7 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-middle-explosion"),
-                timer
+                imageLoader.getImageList("horizontal-middle-explosion")
          );
 }
     }
@@ -85,8 +79,7 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-right-last-explosion"),
-                timer
+                imageLoader.getImageList("horizontal-right-last-explosion")
          );
 }
     }
@@ -96,8 +89,7 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-down-last-explosion"),
-                timer
+                imageLoader.getImageList("vertical-down-last-explosion")
          );
 }
     }
@@ -107,8 +99,7 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-middle-explosion"),
-                timer
+                imageLoader.getImageList("vertical-middle-explosion")
          );
 }
     }
@@ -118,8 +109,7 @@ public class AnimatorFactory {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-up-last-explosion"),
-                timer
+                imageLoader.getImageList("vertical-up-last-explosion")
          );
 }
     }
@@ -129,8 +119,7 @@ public class AnimatorFactory {
             return new Animator(
                 true,
                 100,
-                imageLoader.getImageList("enemy-vertical-up-movement"),
-                timer
+                imageLoader.getImageList("enemy-vertical-up-movement")
               );
             }
     }
@@ -140,8 +129,7 @@ public class AnimatorFactory {
             return new Animator(
                 true,
                 100,
-                imageLoader.getImageList("enemy-vertical-down-movement"),
-                timer
+                imageLoader.getImageList("enemy-vertical-down-movement")
               );
             }
     }
@@ -151,8 +139,7 @@ public class AnimatorFactory {
         return new Animator(
             true,
             100,
-            imageLoader.getImageList("enemy-horizontal-left-movement"),
-            timer
+            imageLoader.getImageList("enemy-horizontal-left-movement")
           );
         }
     }
@@ -162,8 +149,7 @@ public class AnimatorFactory {
         return new Animator(
             true,
             100,
-            imageLoader.getImageList("enemy-horizontal-right-movement"),
-            timer
+            imageLoader.getImageList("enemy-horizontal-right-movement")
             );
         }
     }
@@ -181,8 +167,7 @@ public class AnimatorFactory {
         return new Animator(
             true,
             500,
-            imageLoader.getImageList("floor-obstacle"),
-            timer
+            imageLoader.getImageList("floor-obstacle")
             );
         }
     }
@@ -192,8 +177,7 @@ public class AnimatorFactory {
         return new Animator(
             false,
             80,
-            imageLoader.getImageList("floor-obstacle-destruction"),
-            timer
+            imageLoader.getImageList("floor-obstacle-destruction")
             );
         }
     }
@@ -211,8 +195,7 @@ public class AnimatorFactory {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("bomb-item"),
-            timer
+            imageLoader.getImageList("bomb-item")
             );
         }
     }
@@ -222,8 +205,7 @@ public class AnimatorFactory {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("bomb-intensity-item"),
-            timer
+            imageLoader.getImageList("bomb-intensity-item")
             );
         }
     }
@@ -233,8 +215,7 @@ public class AnimatorFactory {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("speed-up-item"),
-            timer
+            imageLoader.getImageList("speed-up-item")
             );
         }
     }
@@ -244,8 +225,7 @@ public class AnimatorFactory {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("extra-life-item"),
-            timer
+            imageLoader.getImageList("extra-life-item")
             );
         }
     }

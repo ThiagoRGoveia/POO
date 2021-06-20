@@ -17,12 +17,11 @@ public class Animator {
     private long interval;
     private TimerTask timerTask;
 
-    public Animator(boolean isLoop, long interval, ArrayList<ImageIcon> images, Timer timer) {
+    public Animator(boolean isLoop, long interval, ArrayList<ImageIcon> images) {
         this.isLoop = isLoop;
         this.interval = interval;
         this.images = images;
         numberOfImages = images.size();
-        this.timer = timer;
         isStatic = false;
     }
 
