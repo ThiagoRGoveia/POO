@@ -53,7 +53,9 @@ public class Bomb extends AnimatedElement {
         }
     }
 
-    public void interact(Enemy enemy) {}
+    public void interact(Enemy enemy) {
+        enemy.changeDirection();
+    }
 
     public void interact(Explosion explosion) {
         this.explosionTimer.cancel();
