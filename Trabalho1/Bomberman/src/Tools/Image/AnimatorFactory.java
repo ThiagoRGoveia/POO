@@ -9,7 +9,7 @@ public class AnimatorFactory {
     private Timer timer;
 
     public AnimatorFactory(ImageFactory imageLoader, Timer timer) {
-        animatorMap = new LinkedHashMap<String,Creatable>(16);
+        animatorMap = new LinkedHashMap<String,Creatable>(20);
         this.imageLoader = imageLoader;
         this.timer = timer;
 
