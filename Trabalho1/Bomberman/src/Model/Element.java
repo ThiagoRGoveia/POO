@@ -76,4 +76,8 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     public void setImmortal(boolean isImmortal) {
         this.isImmortal = isImmortal;
     }
+
+    public boolean isImmortal() {
+        return isImmortal;
+    }
 }

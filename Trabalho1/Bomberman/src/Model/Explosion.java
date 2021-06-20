@@ -17,6 +17,12 @@ public abstract class Explosion extends AnimatedElement {
         this.setTraversable(true);
     }
 
+    public abstract void propagateExplosion(int intensity);
+    public void changeToLastExplosion() {
+        setExplosionFinishTimer();
+    }
+
+
     public void interact(Hero hero) {
         hero.die();
     }
@@ -113,7 +119,6 @@ public abstract class Explosion extends AnimatedElement {
         this.eventBus.emit("create-schedule", this);
     }
 
-    public void propagateExplosion(int intensity) {}
     public int getIntensity(){
         return this.intensity;
     }

@@ -19,4 +19,6 @@ public class FirstExplosion extends Explosion implements Propagable {
         propagateLeft(intensity);
         propagateRight(intensity);
     }
+
+    public void changeToLastExplosion() {}
 }

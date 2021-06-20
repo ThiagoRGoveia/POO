@@ -14,4 +14,6 @@ public class HorizontalRightLastExplosion extends LastExplosion {
         setExplosionFinishTimer();
     }
 
+    public void propagateExplosion(int intensity) {}
+
 }

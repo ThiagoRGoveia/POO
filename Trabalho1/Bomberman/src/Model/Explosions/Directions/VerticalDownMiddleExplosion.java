@@ -14,4 +14,11 @@ public class VerticalDownMiddleExplosion  extends VerticalMiddleExplosion {
         propagateDown(intensity);
     }
 
+    public void changeToLastExplosion() {
+        this.animator.stop();
+        this.setAnimatorName("vertical-down-last-explosion");
+        eventBus.emit("create-animator", this);
+        super.changeToLastExplosion();
+    }
+
 }

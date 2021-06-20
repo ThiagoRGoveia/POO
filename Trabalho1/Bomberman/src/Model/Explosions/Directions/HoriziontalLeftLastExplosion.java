@@ -13,4 +13,7 @@ public class HoriziontalLeftLastExplosion extends LastExplosion {
         eventBus.emit("create-animator", this);
         setExplosionFinishTimer();
     }
+
+    public void propagateExplosion(int intensity) {}
+
 }

@@ -13,4 +13,6 @@ public class VerticalDownLastExplosion extends LastExplosion {
         eventBus.emit("create-animator", this);
         setExplosionFinishTimer();
     }
+
+    public void propagateExplosion(int intensity) {}
 }

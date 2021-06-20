@@ -16,10 +16,16 @@ public class CreateExplosionEvent implements Event<Element> {
             interactionMap.insert(explosion.getPosition(), explosion);
             explosion.propagateExplosion(explosion.getIntensity());
         } else {
-            preExistingElement.interact(explosion);
-            if (preExistingElement.isTraversable()) {
-                explosion.propagateExplosion(explosion.getIntensity());
+            if (!preExistingElement.isImmortal()) {
+                preExistingElement.interact(explosion);
+                if (preExistingElement.isTraversable()) {
+                    explosion.propagateExplosion(explosion.getIntensity());
+                } else {
+                    explosion.changeToLastExplosion();
+                }
+                screen.addElement(explosion);
             }
+
         }
     }
 
