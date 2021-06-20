@@ -81,11 +81,12 @@ public final class Hero extends MovableElement {
 
     public void die() {
         if (!isDead && !isImmortal) {
-            this.numberOfLives--;
+            decrementNumberOfLives();
             if (numberOfLives == 0) {
                 eventBus.emit("game-over", this); // Se o número de vidas zerar, game over
                 return;
             }
+            eventBus.emit("set-hero-lives", this);
             this.isLocked = true;
             this.isDead = true;
             this.activeAnimator.stop();
@@ -277,6 +278,7 @@ public final class Hero extends MovableElement {
 
     public void incrementNumberOfLives() {
         this.numberOfLives++;
+        eventBus.emit("set-hero-lives", this);
     }
 
     public void decrementNumberOfLives() {
@@ -290,6 +292,10 @@ public final class Hero extends MovableElement {
         if (this.speed > 1) {
             this.speed--;
         }
+    }
+
+    public int getNumberOfLives() {
+        return numberOfLives;
     }
 
 

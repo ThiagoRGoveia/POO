@@ -52,7 +52,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
-        eventBus = new EventBus<Element>(this, 14);
+        eventBus = new EventBus<Element>(this, 15);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
@@ -66,10 +66,12 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("game-over", new GameOverEvent());
         eventBus.on("create-enemy", new CreateEnemyEvent());
         eventBus.on("remove-enemy", new RemoveEnemyEvent());
+        eventBus.on("set-hero-lives", new SetHeroLivesEvent());
 
 
         hero = new Hero(eventBus, 1, 1, timer);
         this.addElement(hero);
+        eventBus.emit("set-hero-lives", hero);
 
         movements = new Movements();
         interactionMap= new InteractionMap();
@@ -126,6 +128,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public void gameOver() {
         System.out.println("GAME OVER");
+        System.exit(0);
     }
 
     public void nextLevel() {
@@ -153,6 +156,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public void victory() {
         System.out.println("CONGRATULATIONS YOU WON");
+        System.exit(0);
     }
 
     public Hero getHero() {

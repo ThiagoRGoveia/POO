@@ -12,6 +12,8 @@ public class CreateElementsEvent implements Event<Element> {
             screen.addElement(element);
             interactionMap.insert(element.getPosition(), element);
         } else {
+            // System.out.println("REPETIDO " + "COL: " + element.getPosition().getColumn().getCoordinate().value +
+            // " ROW: "+element.getPosition().getRow().getCoordinate().value);
             element.die();
         }
     }
