@@ -12,7 +12,6 @@ import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Column;
 import Tools.Position.Coordinate;
-import Tools.Position.HeroHitBox;
 import Tools.Position.Position;
 import Tools.Position.Row;
 import Tools.Image.Animator;
@@ -31,7 +30,6 @@ public final class Hero extends MovableElement {
         super(eventBus, position, 10);
         this.setTraversable(true);
         this.timer = timer;
-        this.setHitBox(new HeroHitBox(this.position));
         setDeathAnimator();
         isLocked = false;
         numberOfLives = 3;
@@ -143,11 +141,9 @@ public final class Hero extends MovableElement {
     public void processMovement() {
         if (!isLocked) {
             if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
-                this.setHitBox(
-                    new HeroHitBox(this.nextPosition)
-                );
                 this.eventBus.emit("verify-element-interaction", this);
                 if (this.interactingElement != null && this.interactingElement != this) {
+                    System.out.println("HIT");
                     this.interactingElement.interact(this);
                     if (this.interactingElement.isTraversable()) {
                         this.position.setPosition(this.nextPosition);

@@ -6,7 +6,6 @@ import Tools.Interactable;
 import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Image.Drawable;
-import Tools.Position.HitBox;
 import Tools.Position.Position;
 
 public abstract class Element implements Serializable, Drawable, Interactable {
@@ -15,13 +14,11 @@ public abstract class Element implements Serializable, Drawable, Interactable {
     protected boolean killOnTouch;       /*Se encostar, morre?*/
     protected EventBus<Element> eventBus;
     protected Schedule scheduledTask;
-    protected HitBox hitBox;
     protected boolean isImmortal;
 
     protected Element(EventBus<Element> eventBus, Position position) {
         this.eventBus = eventBus;
         this.position = position;
-        this.hitBox = new HitBox(position);
         isImmortal = false;
     }
 
@@ -57,14 +54,6 @@ public abstract class Element implements Serializable, Drawable, Interactable {
         if (scheduledTask != null) {
             scheduledTask.timerTask.cancel();
         }
-    }
-
-    public HitBox getHitBox() {
-        return this.hitBox;
-    }
-
-    public void setHitBox(HitBox hitBox) {
-        this.hitBox = hitBox;
     }
 
     public void die() {

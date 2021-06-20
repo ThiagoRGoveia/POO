@@ -8,7 +8,6 @@ import Model.Explosion;
 import Model.Hero;
 import Model.MovableElement;
 import Tools.Events.EventBus;
-import Tools.Position.HitBox;
 import Tools.Position.Position;
 
 public abstract class Enemy extends MovableElement {
@@ -32,9 +31,6 @@ public abstract class Enemy extends MovableElement {
 
     public void processMovement() {
         if (!Position.isPositionByTheBoundaries(this.nextPosition)) {
-            this.setHitBox(
-                new HitBox(this.nextPosition)
-            );
             this.eventBus.emit("verify-element-interaction", this);
             if (this.interactingElement != null && this.interactingElement != this) {
                 this.interactingElement.interact(this);

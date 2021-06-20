@@ -6,7 +6,6 @@ import Model.MovableElement;
 import Tools.Consts;
 import Tools.InteractionMap;
 import Tools.Position.Column;
-import Tools.Position.HitBox;
 import Tools.Position.Position;
 import Tools.Position.Row;
 import Tools.Position.ScreenPosition;

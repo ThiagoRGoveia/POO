@@ -4,8 +4,6 @@ import Model.Element;
 import Model.Hero;
 import Model.Enemies.Enemy;
 import Tools.InteractionMap;
-import Tools.Position.HeroHitBox;
-import Tools.Position.HitBox;
 
 import java.util.ArrayList;
 
@@ -35,23 +33,6 @@ public class Controller {
             element.interact(hero);
         }
 
-    }
-
-    public boolean isPositionValid(ArrayList<Element> elements, Hero hero){
-            Element element;
-            for(int i = 1; i < elements.size(); i++) {
-                element = elements.get(i);
-                if (!element.isTraversable()) {
-                    boolean isHiting = HitBox.isHiting(
-                        new HeroHitBox(hero.getPosition()),
-                        new HitBox(element.getPosition())
-                    );
-                    if (isHiting){
-                        return false;
-                    }
-                }
-            }
-        return true;
     }
 
     public boolean checkVitory(ArrayList<Enemy> enemies) {
