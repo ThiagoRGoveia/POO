@@ -49,7 +49,7 @@ public class ExplodingBlock extends AnimatedElement {
     }
 
     private Schedule sheduleItemDrop() {
-        ExplodingBlock block = this;
+        final ExplodingBlock block = this;
         return new Schedule(
              new TimerTask(){
                  public void run() {
