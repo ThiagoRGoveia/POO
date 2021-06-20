@@ -2,8 +2,6 @@ package Controls;
 
 import Model.Element;
 import Model.Hero;
-import Model.Blocks.RegularBlock;
-import Model.Enemies.BasicEnemy;
 import Model.Enemies.Enemy;
 import Tools.*;
 import Tools.Events.*;
@@ -15,9 +13,7 @@ import Tools.Position.Position;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.*;
 import java.util.*;
-import java.util.logging.*;
 
 import Controls.KeyStrokes.Movements;
 
@@ -32,6 +28,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Movements movements;
     private InteractionMap interactionMap;
     private AnimatorFactory animatorFactory;
+    private ImageFactory imageFactory;
     private Timer timer;
     private GameLevel[] levels;
     private GameLevel currentLevel;
@@ -41,6 +38,8 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         timer = new Timer();
         this.drawer = drawer;
         drawer.setScreen(this);
+        elements = new ArrayList<Element>(400);
+        enemies = new ArrayList<Enemy>(20);
 
         levels = new GameLevel[4];
 
@@ -73,36 +72,39 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("create-enemy", new CreateEnemyEvent());
         eventBus.on("remove-enemy", new RemoveEnemyEvent());
 
-        elements = new ArrayList<Element>(100);
-        elements = new ArrayList<Element>(10);
 
-        hero = new Hero(eventBus, 0, 0, timer);
+        hero = new Hero(eventBus, 1, 1, timer);
         this.addElement(hero);
 
         movements = new Movements();
         interactionMap= new InteractionMap();
-        ImageFactory imageFactory = new ImageFactory(
-            new BoundariesFactoryLevel1()
+        imageFactory = new ImageFactory(
+            new BoundariesFactoryLevel2()
         );
         animatorFactory = new AnimatorFactory(imageFactory, timer);
 
-        Enemy enemy = new BasicEnemy(eventBus, 5, 5);
-        this.addElement(enemy);
-        enemy = new BasicEnemy(eventBus, 7, 7);
-        this.addElement(enemy);
-        enemy = new BasicEnemy(eventBus, 12, 12);
-        this.addElement(enemy);
-        enemy = new BasicEnemy(eventBus, 6, 20);
-        this.addElement(enemy);
+        // Item item = new BombItem(eventBus, 0, 1);
+        // eventBus.emit("create-element", item);
+        Level2 level = new Level2(eventBus);
+        level.draw();
 
-        RegularBlock block = new RegularBlock(eventBus, 2, 2);
-        this.addElement(block);
-        block = new RegularBlock(eventBus, 2, 2);
-        this.addElement(block);
-        block = new RegularBlock(eventBus, 2, 3);
-        this.addElement(block);
-        block = new RegularBlock(eventBus, 2, 4);
-        this.addElement(block);
+    //     Enemy enemy = new BasicEnemy(eventBus, 5, 5);
+    //     this.addElement(enemy);
+    //     enemy = new BasicEnemy(eventBus, 7, 7);
+    //     this.addElement(enemy);
+    //     enemy = new BasicEnemy(eventBus, 12, 12);
+    //     this.addElement(enemy);
+    //     enemy = new BasicEnemy(eventBus, 6, 20);
+    //     this.addElement(enemy);
+
+    //     RegularBlock block = new RegularBlock(eventBus, 2, 2);
+    //     this.addElement(block);
+    //     block = new RegularBlock(eventBus, 2, 2);
+    //     this.addElement(block);
+    //     block = new RegularBlock(eventBus, 2, 3);
+    //     this.addElement(block);
+    //     block = new RegularBlock(eventBus, 2, 4);
+    //     this.addElement(block);
     }
 
     public void addElement(Element element) {
@@ -178,23 +180,12 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         /*Desenha cenário*/
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
-                try {
-                    /*Linha para alterar o background*/
-                    Image newImage = Toolkit.getDefaultToolkit().getImage(
-                        new java.io.File(".").getCanonicalPath() + Consts.PATH + "ground_1.png"
-                    );
-                    graphics.drawImage(
-                        newImage,
-                        j * Consts.CELL_SIDE,
-                        i * Consts.CELL_SIDE,
-                        Consts.CELL_SIDE,
-                        Consts.CELL_SIDE,
-                        null
-                    );
-
-                } catch (IOException ex) {
-                    Logger.getLogger(Screen.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                    this.imageFactory.getImageList("floor-static").get(0).paintIcon(
+                    this,
+                    this.getGraphicsBuffer(),
+                    j * Consts.CELL_SIDE,
+                    i * Consts.CELL_SIDE
+                );
             }
         }
 
@@ -202,10 +193,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         if (!this.elements.isEmpty()) {
             this.controller.draw(elements, enemies);
             this.controller.process(hero);
-            boolean victory = this.controller.checkVitory(enemies);
-            if (victory) {
-                this.nextLevel();
-            }
+            // boolean victory = this.controller.checkVitory(enemies);
+            // if (victory) {
+            //     this.nextLevel();
+            // }
         }
 
         newGraphics.dispose();
