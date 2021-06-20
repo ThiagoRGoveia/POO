@@ -18,6 +18,7 @@ public class RegularBlock extends AnimatedElement {
         super(eventBus, position);
         this.setAnimatorName("floor-obstacle");
         eventBus.emit("create-animator", this);
+        this.setImmortal(false);
         this.setTraversable(false);
     }
 
@@ -37,13 +38,14 @@ public class RegularBlock extends AnimatedElement {
     }
 
     public void die() {
+        super.die();
         Random random = new Random();
         int randomNumber = random.nextInt(1000);
-        boolean willItDroAnItem = 500 < randomNumber && randomNumber <= 600;
+        boolean willItDroAnItem = 250 < randomNumber && randomNumber <= 500;
         if (willItDroAnItem) {
             int itemNumber = random.nextInt(4);
             Item item = ItemFactory.createItem(eventBus, position, itemNumber);
-            eventBus.emit("create-item", item);
+            eventBus.emit("create-element", item);
         }
     }
 
