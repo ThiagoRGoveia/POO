@@ -15,7 +15,6 @@ import Tools.Position.Coordinate;
 import Tools.Position.HeroHitBox;
 import Tools.Position.Position;
 import Tools.Position.Row;
-import Tools.Position.ScreenPosition;
 import Tools.Image.Animator;
 import Tools.Image.LoadImage;
 import Tools.Image.Boundaries.Boundaries;
@@ -282,6 +281,15 @@ public final class Hero extends MovableElement {
 
     public void decrementNumberOfLives() {
         this.numberOfLives--;
+    }
+
+    // A velocidade na verdade é o intervalo em que o método
+    // move() é chamado, então para aumentar a velocidade,
+    // diminuímos o intervalo
+    public void increaseSpeed() {
+        if (this.speed > 1) {
+            this.speed--;
+        }
     }
 
 

@@ -19,7 +19,7 @@ public class SpeedUpItem extends Item {
     }
 
     public void pickUp(Hero hero) {
-        hero.setSpeed(hero.getSpeed() - 1);
+        hero.increaseSpeed();
         die();
     }
 }
