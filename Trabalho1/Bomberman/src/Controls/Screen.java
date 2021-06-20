@@ -129,22 +129,25 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void nextLevel() {
-        Hero hero = (Hero) elements.get(0);
-        elements.clear();
-        enemies.clear();
-        hero.setPosition(
+        Hero hero = (Hero) elements.get(0); // Reservar herói
+        elements.clear(); // Limpar elementos a renderizar
+        for (Enemy enemy: enemies) { // Parar inimigos
+            enemy.stop();
+        }
+        enemies.clear(); // Remover inimigos
+        interactionMap.clear(); // Limpar mapa de interação
+        hero.setPosition( // Resetar posição do herói
             new Position(1, 1)
         );
-        elements.add(hero);
-        interactionMap.clear();
-        levels[currentLevelIndex] = null;
-        currentLevelIndex++;
-        if (currentLevelIndex >= 4) {
+        elements.add(hero); // Adicionar herói À lista de elementos à renderizar
+        levels[currentLevelIndex] = null; // Remover nível atual da memória
+        currentLevelIndex++; // Incrementar nível atual
+        if (currentLevelIndex >= 4) { // Se for o ultimo nível declarar vitória e sair
             victory();
             System.exit(0);
         } else {
             currentLevel = levels[currentLevelIndex];
-            currentLevel.begin();
+            currentLevel.begin(); // Iniciar próximo nível
         }
     }
 
