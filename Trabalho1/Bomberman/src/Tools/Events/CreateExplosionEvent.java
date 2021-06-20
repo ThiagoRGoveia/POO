@@ -19,10 +19,8 @@ public class CreateExplosionEvent implements Event<Element> {
             if (!preExistingElement.isImmortal()) {
                 if (preExistingElement.isTraversable()) {
                     explosion.propagateExplosion(explosion.getIntensity());
-                } else {
-                    explosion.changeToLastExplosion();
+                    screen.addElement(explosion);
                 }
-                screen.addElement(explosion);
                 preExistingElement.interact(explosion);
             }
 

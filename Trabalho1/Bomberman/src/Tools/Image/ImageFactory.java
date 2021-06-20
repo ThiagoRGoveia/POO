@@ -35,7 +35,7 @@ public class ImageFactory {
         imageMap.put("enemy-horizontal-right-movement", loadEnemyHorizontalRightMovementBoundaries());
         imageMap.put("floor-static", loadFloorStaticBoundaries());
         imageMap.put("floor-obstacle", loadFloorObstacleBoundaries());
-        imageMap.put("floor-obstable-destruction", loadFloorObstacleDestructionBoundaries());
+        imageMap.put("floor-obstacle-destruction", loadFloorObstacleDestructionBoundaries());
         imageMap.put("indestructable-obstacle", loadIndestructableObstacleBoundaries());
         imageMap.put("bomb-item", loadBombItemBoundaries());
         imageMap.put("bomb-intensity-item", loadBombIntensityItemBoundaries());
