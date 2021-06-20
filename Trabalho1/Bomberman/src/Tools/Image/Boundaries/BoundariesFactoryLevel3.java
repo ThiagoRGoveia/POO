@@ -132,7 +132,7 @@ public class BoundariesFactoryLevel3 extends BoundaryFactory {//atualizado
 
     public Boundaries[] getFloorStaticBoundaries() {//atualizado
         Boundaries[] b = {
-            new Boundaries(483, 255, 16, 16)
+            new Boundaries(283, 255, 16, 16)
         };
         return b;
     }
