@@ -84,6 +84,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         currentLevel = levels[0];
         currentLevel.begin();
+
+        // for (Enemy enemy: enemies) { // Parar inimigos
+        //     enemy.stop();
+        // }
     }
 
     public void addElement(Element element) {
@@ -270,10 +274,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public void keyPressed(KeyEvent e) {
         movements.makeMovement(e, this);
-
-        if (!controller.isPositionValid(this.elements, hero)) {
-            hero.resetToLastPosition();
-        }
     }
 
 }
