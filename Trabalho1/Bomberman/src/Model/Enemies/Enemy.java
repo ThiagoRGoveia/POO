@@ -127,4 +127,8 @@ public abstract class Enemy extends MovableElement {
         eventBus.emit("remove-enemy", this);
     }
 
+    public void stop() {
+        this.movementTimer.cancel();
+    }
+
 }
