@@ -35,7 +35,7 @@ public class Bomb extends AnimatedElement {
             }
         };
         this.createScheduledTask(
-            new Schedule(explosionTimer, 5000)
+            new Schedule(explosionTimer, 4000) // Explodir depois de 4 segundos
         );
         this.eventBus.emit("create-schedule", this);
     }

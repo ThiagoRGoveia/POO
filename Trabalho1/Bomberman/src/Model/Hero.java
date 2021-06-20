@@ -284,8 +284,8 @@ public final class Hero extends MovableElement {
     // move() é chamado, então para aumentar a velocidade,
     // diminuímos o intervalo
     public void increaseSpeed() {
-        if (this.speed > 1) {
-            this.speed--;
+        if (this.speed > 2) {
+            this.speed -= 2;
         }
     }
 
