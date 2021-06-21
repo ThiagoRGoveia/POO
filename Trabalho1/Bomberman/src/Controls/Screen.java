@@ -15,6 +15,7 @@ import java.util.*;
 
 import Controls.KeyStrokes.Movements;
 
+// Esta classe centraliza o controle do jogo, ela é responsável por manter todos os objetos em uso
 public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener {
     public Drawer drawer;
     private EventBus<Element> eventBus;
@@ -32,15 +33,19 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private int currentLevelIndex = 0;
 
     public Screen(Drawer drawer) {
-        timer = new Timer();
+        timer = new Timer(); // Instancia timer que contrlará redesenhos e movimentos
         this.drawer = drawer;
         drawer.setScreen(this);
+
         elements = new ArrayList<Element>(400);
         enemies = new ArrayList<Enemy>(20);
 
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);  /*teclado*/
 
+        // Seta tamanho da janela
+        // Por algum motivo a janela calculada era 30px menor do que deveria
+        // tivemos que adicionar esse valor à conta pois não encontramos o motivo.
         this.setSize(
             (
                 (Consts.RES * Consts.CELL_SIDE) +
@@ -52,6 +57,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             )
         );
 
+        // Instancia EventBus e registra eventos
         eventBus = new EventBus<Element>(this, 15);
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
@@ -68,7 +74,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("remove-enemy", new RemoveEnemyEvent());
         eventBus.on("set-hero-lives", new SetHeroLivesEvent());
 
-
+        // Cria herói
         hero = new Hero(eventBus, 1, 1);
         this.addElement(hero);
         eventBus.emit("set-hero-lives", hero);
@@ -76,12 +82,14 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         movements = new Movements();
         interactionMap= new InteractionMap();
 
+        // Instancia fases
         levels = new GameLevel[4];
         levels[0] = new Level1(this);
         levels[1] = new Level2(this);
         levels[2] = new Level3(this);
         levels[3] = new Level4(this);
 
+        // Inicia primeira fase
         currentLevel = levels[0];
         currentLevel.begin();
 
@@ -270,7 +278,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void keyPressed(KeyEvent e) {
-        movements.makeMovement(e, this);
+        movements.makeMovement(e, this); // Procurar tecla no objeto de handlers
     }
 
 }

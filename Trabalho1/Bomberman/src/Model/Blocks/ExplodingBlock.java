@@ -36,7 +36,7 @@ public class ExplodingBlock extends AnimatedElement {
 
     public void interact(Explosion explosion) {
     }
-
+    // Programa fim da explosão do bloco
     private Schedule getTerminationSchedule() {
         return new Schedule(
             new TimerTask(){
@@ -47,7 +47,7 @@ public class ExplodingBlock extends AnimatedElement {
             400
         );
     }
-
+    // Programa drop do item
     private Schedule sheduleItemDrop() {
         final ExplodingBlock block = this;
         return new Schedule(
@@ -59,7 +59,7 @@ public class ExplodingBlock extends AnimatedElement {
              100
          );
      }
-
+    // Ao morrer decida se ira dropar um item
     public void die() {
         super.die();
         Random random = new Random();

@@ -6,6 +6,9 @@ import javax.swing.ImageIcon;
 import java.util.Timer;
 import java.util.TimerTask;
 
+// Esta classe controla uma animação, ela é composta por um objeto Timer dedicado,
+// ou seja, cada animação roda em uam thread própria. A cada intervalo dado a imagem servida
+// é substituída plea seguinte. Os seguntes modos são possíveis: loop, animação única e modo estático.
 public class Animator {
 
     private ArrayList<ImageIcon> images;

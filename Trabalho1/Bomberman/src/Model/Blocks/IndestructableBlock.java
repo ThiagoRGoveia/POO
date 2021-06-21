@@ -8,10 +8,8 @@ import Model.Enemies.Enemy;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
-
+// Esta classe define um bloco indestrutível
 public class IndestructableBlock extends AnimatedElement {
-
-
     protected IndestructableBlock(EventBus<Element> eventBus, Position position) {
         super(eventBus, position);
         this.setAnimatorName("indestructable-obstacle");

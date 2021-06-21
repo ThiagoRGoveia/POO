@@ -4,7 +4,7 @@ import java.awt.Graphics;
 import Model.Element;
 import Tools.Position.Position;
 import Controls.Screen;
-
+// Contém lógica para desenhar os elementos na tela. Aqui são definidas as dimensões desses elementos
 public class Drawer {
     private Screen screen;
 

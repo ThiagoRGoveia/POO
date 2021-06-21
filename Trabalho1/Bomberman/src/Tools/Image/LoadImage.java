@@ -10,26 +10,26 @@ import java.awt.Graphics;
 import java.io.IOException;
 import java.io.File;
 
-
+// Esta classe carrega uma imagem em uma área específica da imagem fornecida como parâmetro
 public class LoadImage {
     public static ImageIcon loadImageFromFile(String imageName, Boundaries boundaries) {
-            try {
-                BufferedImage bigImg = ImageIO.read(new File(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName));
-                BufferedImage img = bigImg.getSubimage(
-                    boundaries.x,
-                    boundaries.y,
-                    boundaries.width,
-                    boundaries.height
-                );
+        try {
+            BufferedImage bigImg = ImageIO.read(new File(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName));
+            BufferedImage img = bigImg.getSubimage(
+                boundaries.x,
+                boundaries.y,
+                boundaries.width,
+                boundaries.height
+            );
 
-                BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
-                Graphics g = bi.createGraphics();
-                g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
-                g.dispose();
-            return new ImageIcon(bi);
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+            BufferedImage bi = new BufferedImage(Consts.CELL_SIDE, Consts.CELL_SIDE, BufferedImage.TYPE_INT_ARGB);
+            Graphics g = bi.createGraphics();
+            g.drawImage(img, 0, 0, Consts.CELL_SIDE, Consts.CELL_SIDE, null);
+            g.dispose();
+        return new ImageIcon(bi);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
         return null;
     }
 }

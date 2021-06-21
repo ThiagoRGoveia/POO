@@ -16,6 +16,8 @@ import Tools.Position.Row;
 import Tools.Image.Animator;
 import Tools.Image.LoadImage;
 import Tools.Image.Boundaries.Boundaries;
+
+// Esta classe define o herói do jogo
 public final class Hero extends MovableElement {
     private Animator deathAnimator;
     private boolean isDead;
@@ -40,6 +42,7 @@ public final class Hero extends MovableElement {
         this.position.reset();
     }
 
+    // Permite crirar uma bomba
     public void placeBomb() {
         if (this.numberOfBombsPlaced < this.maxNumberOfBombs) {
             Bomb bomb = new Bomb(
@@ -93,7 +96,7 @@ public final class Hero extends MovableElement {
 
             this.createScheduledTask( // Criar tarefa para reviver a posição dentro de dois segundos
                 new Schedule(
-                    // Restaura heroi pra status parado na posição (1,1)
+                    // Programa respwan do heroi pra status parado na posição (1,1)
                     new TimerTask(){
                         public void run() {
                             position.setPosition(
@@ -109,8 +112,8 @@ public final class Hero extends MovableElement {
                             isDead = false;
                             isImmortal = true;
                             isLocked = false;
-                            activeAnimator.stop();
-                            activeAnimator.reset();
+                            activeAnimator.stop(); // Para animação
+                            activeAnimator.reset(); // Reinicia animação
                             movementDirection="down";
                             setStopedAnimator();
                             movementDirection="stoped";
@@ -120,7 +123,7 @@ public final class Hero extends MovableElement {
                 )
             );
             this.eventBus.emit("create-schedule", this);
-            // O heroi deve reaparecer imortal por 5 segundos
+            // O heroi deve permanecer imortal por 5 segundos
             this.createScheduledTask(
                 new Schedule(
                     new TimerTask(){
@@ -179,6 +182,8 @@ public final class Hero extends MovableElement {
         }
     }
 
+    // Cria animações de movimento
+
     public void setDownAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(2);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(56, 45, 16, 24)));
@@ -223,7 +228,7 @@ public final class Hero extends MovableElement {
         }
         this.activeAnimator = animator;
     }
-
+    // Popula as imagens usadas quando ele está parado
     public void setStopedAnimatorList() {
         stopedAnimatorList = new ArrayList<Animator>(4);
         stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(71, 45, 16, 24)))); // DOWN
@@ -232,6 +237,7 @@ public final class Hero extends MovableElement {
         stopedAnimatorList.add(new Animator(LoadImage.loadImageFromFile("heros.png", new Boundaries(106, 47, 16, 24)))); // RIGHT
     }
 
+    // Cria animação de morte
     public void setDeathAnimator() {
         ArrayList<ImageIcon> images = new ArrayList<ImageIcon>(6);
         images.add(LoadImage.loadImageFromFile("heros.png", new Boundaries(30, 75, 16, 24)));
@@ -277,7 +283,7 @@ public final class Hero extends MovableElement {
     }
 
     // A velocidade na verdade é o intervalo em que o método
-    // move() é chamado, então para aumentar a velocidade,
+    // move é chamado, então para aumentar a velocidade,
     // diminuímos o intervalo
     public void increaseSpeed() {
         if (this.speed > 2) {

@@ -10,32 +10,33 @@ import Model.MovableElement;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
+// Esta classe define o comportametno dos inimigos
 public abstract class Enemy extends MovableElement {
     private boolean isDead = false;
-    protected static String[] directions = {"up", "down", "right", "left"};
+    protected static String[] directions = {"up", "down", "right", "left"}; // Direções disponíveis
 
     protected Enemy(EventBus<Element>eventBus, Position position) {
         super(eventBus, position, 35);
     }
 
-    public void interact(Hero hero) {
+    public void interact(Hero hero) { // SE interagir com um heroi, mate ele
         hero.die();
     }
 
-    public void interact(Enemy enemy) {
+    public void interact(Enemy enemy) { // Se interagir com outro inimigo, mode de direção
         enemy.changeDirection();
     }
 
-    public void interact(Explosion explosion) {
+    public void interact(Explosion explosion) { // Se interagir com uma explosão morra
         die();
     }
 
     public void processMovement() {
         if (!Position.isPositionByTheBoundaries(this.nextPosition) && !isDead) { // Mover se estiver dentro do mapa e não estiver morto
-            this.eventBus.emit("verify-element-interaction", this);
-            if (this.interactingElement != null && this.interactingElement != this) {
+            this.eventBus.emit("verify-element-interaction", this); // Verificar se proxima posição irá interagir com algum elemento
+            if (this.interactingElement != null && this.interactingElement != this) { // Se houver um elemento na proxima posição, interagir com ele
                 this.interactingElement.interact(this);
-                if (this.interactingElement.isTraversable()) {
+                if (this.interactingElement.isTraversable()) { // Se ele não for transponível mude de direção
                     this.updatePosition();
                 } else {
                     this.changeDirection();
@@ -43,11 +44,12 @@ public abstract class Enemy extends MovableElement {
             } else {
                 this.updatePosition();
             }
-        } else {
+        } else { // Se o mapa acabou mude de direção
             this.changeDirection();
         }
     }
 
+    // A escolha da proxima direção é aleatória
     public void changeDirection() {
         Random random = new Random();
         int nextDirection = random.nextInt(4);
@@ -55,10 +57,11 @@ public abstract class Enemy extends MovableElement {
             nextDirection = random.nextInt(4);
         }
         this.movementDirection = directions[nextDirection];
-        move();
+        makeMovement();
     }
 
-    protected void move() {
+    // Realiza o movimento baseado na direção
+    protected void makeMovement() {
         if (this.movementDirection == "up") {
             this.moveUp();
         } else if (this.movementDirection == "down") {
@@ -113,7 +116,7 @@ public abstract class Enemy extends MovableElement {
         };
         this.move(this.speed);
     }
-
+    // Atualiza posição no mapa de interação
     public void updatePosition() {
         eventBus.emit("move-element-on-map", this);
         this.position.setPosition(this.nextPosition);
@@ -125,6 +128,7 @@ public abstract class Enemy extends MovableElement {
         eventBus.emit("remove-enemy", this);
     }
 
+    // PAra movimento
     public void stop() {
         this.movementTimer.cancel();
     }

@@ -9,12 +9,13 @@ import Model.Enemies.Enemy;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
+// Esta classe define um item
 public abstract class Item extends AnimatedElement implements Pickable {
     protected Item(EventBus<Element> eventBus, Position position) {
         super(eventBus, position);
     }
 
-    public void interact(Hero hero) {
+    public void interact(Hero hero) { // Ao interagir com o heroi ele pega o item
         this.pickUp(hero);
     }
 

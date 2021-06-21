@@ -12,7 +12,7 @@ public class FirstExplosion extends Explosion implements Propagable {
         eventBus.emit("create-animator", this);
     }
 
-
+    // Propaga explosão nas 4 direções
     public void propagateExplosion(int intensity) {
         propagateUp(intensity);
         propagateDown(intensity);

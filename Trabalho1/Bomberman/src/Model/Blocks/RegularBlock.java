@@ -9,8 +9,8 @@ import Model.Enemies.Enemy;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
+// Esta classe define um bloco regular
 public class RegularBlock extends AnimatedElement {
-
     protected RegularBlock(EventBus<Element> eventBus, Position position) {
         super(eventBus, position);
         this.setAnimatorName("floor-obstacle");

@@ -1,5 +1,5 @@
 package Tools.Image.Boundaries;
-
+// Esta classe define as dimensões do retangulo a ser recortado da imagem que contém as sprites
 public class Boundaries {
     public int x;
     public int y;

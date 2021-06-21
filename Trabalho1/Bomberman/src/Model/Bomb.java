@@ -8,6 +8,8 @@ import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
+
+// Esta classe define uma bomba
 public class Bomb extends AnimatedElement {
     private TimerTask explosionTimer;
     private int intensity;
@@ -18,9 +20,9 @@ public class Bomb extends AnimatedElement {
         this.traversable = true;
         this.intensity = intensity;
         this.setAnimatorName("bomb");
-        eventBus.emit("create-animator", this);
+        eventBus.emit("create-animator", this); // pedir animador
         setTraversable(true);
-        setExplosionTimer();
+        setExplosionTimer(); // iniciar timer
         this.hero = hero;
     }
 
@@ -46,7 +48,7 @@ public class Bomb extends AnimatedElement {
         FirstExplosion firstExplosion = new FirstExplosion(eventBus, intensity, this.getPosition());
         this.eventBus.emit("create-explosion", firstExplosion);
     }
-
+    // Se tornar intranponível após o heoi sair de cima da bomba
     public void interact(Hero hero) {
         if (!this.position.equals(hero.position) && this.isTraversable()) {
             this.setTraversable(false);

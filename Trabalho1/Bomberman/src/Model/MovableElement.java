@@ -2,16 +2,11 @@ package Model;
 
 
 import javax.swing.ImageIcon;
-
-import Model.Enemies.Enemy;
-
 import java.util.ArrayList;
 import java.util.TimerTask;
-
 import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
-
 import Tools.Position.Position;
 
 public abstract class MovableElement extends AnimatedElement {
@@ -33,12 +28,12 @@ public abstract class MovableElement extends AnimatedElement {
     protected MovableElement(EventBus<Element>eventBus, Position position, int speed) {
         super(eventBus, position);
         this.keysDown = 0;
-        setDownAnimator();
+        setDownAnimator(); // Chama cada um dos animadores
         setLeftAnimator();
         setRightAnimator();
         setUpAnimator();
         setStopedAnimatorList();
-        this.activeAnimator = this.stopedAnimatorList.get(0);
+        this.activeAnimator = this.stopedAnimatorList.get(0); // O animador padrão é o primeiro da lista (olhando para baixo)
         activeAnimator.start();
         this.speed = speed;
         isLocked = false;
@@ -55,6 +50,7 @@ public abstract class MovableElement extends AnimatedElement {
         return activeAnimator.getImage();
     }
 
+    // Programa  movimento na thread principal do jogo
     public void move(int speed) {
         this.createScheduledTask(
                 new Schedule(this.movementTimer, 0, speed)
@@ -62,15 +58,7 @@ public abstract class MovableElement extends AnimatedElement {
         this.eventBus.emit("create-schedule-loop", this);
     }
 
-    public void interact(Hero hero) {
-    }
-
-    public void interact(Enemy enemy) {
-    }
-
-    public void interact(Explosion explosion) {
-    }
-
+    // Metodo utilizado para informar ao objeto qual elemento interagirá com ele
     public void setInteractingElement(Element interactingElement) {
         this.interactingElement = interactingElement;
     }
@@ -87,6 +75,7 @@ public abstract class MovableElement extends AnimatedElement {
         return nextPosition;
     }
 
+    // Quando houver mudança de direção, programe movimento apropriado
     public void moveUp() {
         if (movementDirection != "up" && !isLocked) {
             changeAnimatorAndKillMovement(upAnimator, "up");
@@ -138,7 +127,7 @@ public abstract class MovableElement extends AnimatedElement {
             this.move(this.speed);
         }
     }
-
+    // Muda animador e para movimento antes da troca de direção
     public void changeAnimatorAndKillMovement(Animator animator, String direction) {
         keysDown++;
         this.movementDirection = direction;
@@ -149,7 +138,7 @@ public abstract class MovableElement extends AnimatedElement {
             this.movementTimer.cancel();
         }
     }
-
+    // Seta animador de estado parado dependendo da direção
     public void setStopedAnimator() {
         Animator animator;
         if (this.movementDirection == "right") {

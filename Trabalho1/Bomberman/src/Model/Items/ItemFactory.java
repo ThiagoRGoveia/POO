@@ -6,6 +6,7 @@ import Model.Element;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
+// Esta classe cria itens aleatóriamente
 public class ItemFactory {
     public static Item createItem(EventBus<Element> eventBus, Position position, int itemNumber) {
         switch (itemNumber) {

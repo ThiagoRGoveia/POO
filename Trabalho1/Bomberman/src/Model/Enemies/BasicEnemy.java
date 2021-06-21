@@ -8,6 +8,7 @@ import Tools.Events.EventBus;
 import Tools.Position.Position;
 import Tools.Image.Animator;
 
+// Define animações dos inimigos
 public class BasicEnemy extends Enemy {
 
     protected BasicEnemy(EventBus<Element> eventBus, Position position) {
@@ -15,7 +16,7 @@ public class BasicEnemy extends Enemy {
         Random random = new Random();
         int nextDirection = random.nextInt(4);
         this.movementDirection = Enemy.directions[nextDirection];
-        this.move();
+        this.makeMovement();
     }
 
     public BasicEnemy(EventBus<Element>eventBus, int row, int column) {

@@ -4,6 +4,7 @@ import Controls.Screen;
 import Model.Element;
 import Tools.InteractionMap;
 
+// Permite inserir um elemento no mapa de interação
 public class InsertToInteractionMapEvent implements Event<Element>{
 
     public void fire(Screen screen, Element element) {

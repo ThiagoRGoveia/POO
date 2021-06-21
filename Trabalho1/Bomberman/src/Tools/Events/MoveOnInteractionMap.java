@@ -5,6 +5,7 @@ import Model.Element;
 import Model.MovableElement;
 import Tools.InteractionMap;
 
+// Permite mover um elemento no mapa de interação
 public class MoveOnInteractionMap implements Event<Element>{
 
     public void fire(Screen screen, Element element) {

@@ -8,12 +8,12 @@ import Tools.Events.EventBus;
 import Tools.Image.Drawable;
 import Tools.Position.Position;
 
+// Esta classe é a mãe de todos os elementos
 public abstract class Element implements Serializable, Drawable, Interactable {
     protected Position position;
     protected boolean traversable; /*Pode passar por cima?*/
-    protected boolean killOnTouch;       /*Se encostar, morre?*/
     protected EventBus<Element> eventBus;
-    protected Schedule scheduledTask;
+    protected Schedule scheduledTask; // Tarefa a ser executada pela thread do jogo
     protected boolean isImmortal;
 
     protected Element(EventBus<Element> eventBus, Position position) {

@@ -10,6 +10,8 @@ import Tools.Position.Position;
 import Tools.Position.Row;
 import Tools.Position.ScreenPosition;
 
+
+// Permite verificar se um elemento está interagindo com outro
 public class VerifyElementInteractionEvent implements Event<Element>{
 
     public void fire(Screen screen, Element element) {

@@ -1,7 +1,7 @@
 package Tools;
 
 import java.util.TimerTask;
-
+// Esta classe abstrai a programação de uma ação na thread principal do jogo
 public class Schedule {
     public TimerTask timerTask;
     public long delay;

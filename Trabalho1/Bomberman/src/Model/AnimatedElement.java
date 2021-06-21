@@ -5,6 +5,8 @@ import Tools.Events.EventBus;
 import Tools.Image.Animator;
 import Tools.Position.Position;
 
+
+// Esta classe define um elemento animado
 public abstract class AnimatedElement extends Element {
     protected Animator animator;
     protected String animatorName;

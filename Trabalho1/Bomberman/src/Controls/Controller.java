@@ -17,6 +17,7 @@ public class Controller {
     public Controller (Screen screen) {
         this.screen = screen;
     }
+    // Chama o método draw para cada elemento e para cada inimigo
     public void draw(ArrayList<Element> elements, ArrayList<Enemy> enemies){
         for(int i = 1; i < elements.size(); i++){ // desenhar elementos estáticos excluindo o herói
             screen.drawer.draw(elements.get(i));
@@ -35,6 +36,7 @@ public class Controller {
 
     }
 
+    // Se não existem mais inimigos, a faze terminou
     public boolean checkVitory(ArrayList<Enemy> enemies) {
         return enemies.isEmpty();
     }

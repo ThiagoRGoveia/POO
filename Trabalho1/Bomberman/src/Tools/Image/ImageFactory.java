@@ -14,6 +14,9 @@ import Tools.Consts;
 import Tools.Image.Boundaries.Boundaries;
 import Tools.Image.Boundaries.BoundaryFactory;
 
+// Esta classe é responsável por carregar as listas de imagens
+// na memória, o acesso de cada lista de imagens é feito através
+// de uma string no LinkedHashMap
 public class ImageFactory {
     private BoundaryFactory boundaryFactory;
     private LinkedHashMap<String,ArrayList<ImageIcon>> imageMap;

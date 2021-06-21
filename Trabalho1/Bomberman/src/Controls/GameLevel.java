@@ -5,6 +5,8 @@ import Tools.Image.AnimatorFactory;
 import Tools.Image.ImageFactory;
 import Model.Element;
 
+// Esta classe define as fases do jogo, cada uma de suas filhas sera composta
+// por uma classe BoundariesFactoryLevelX que determina as imagens a serem carregadas
 public abstract class GameLevel {
     protected ImageFactory imageFactory;
     protected Screen screen;

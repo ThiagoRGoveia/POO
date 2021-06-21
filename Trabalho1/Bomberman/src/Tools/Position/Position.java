@@ -2,7 +2,7 @@ package Tools.Position;
 
 import Tools.Consts;
 
-
+// Controla a posição dos elementos,
 public class Position {
     private Row	row;
     private Column column;
@@ -131,6 +131,7 @@ public class Position {
         );
     }
 
+    // Verifica se positão está dentro dos limites exluindo as extremidades
     public static boolean isPositionOutOfBoundaries(Position position) {
         if (position.getRow().getScreenPosition().value < 0) {
             return true;
@@ -147,6 +148,7 @@ public class Position {
         return false;
     }
 
+    // Verifica se positão está dentro dos limites incluindo as extremidades
     public static boolean isPositionByTheBoundaries(Position position) {
         if (position.getRow().getScreenPosition().value <= 0) {
             return true;
@@ -163,6 +165,7 @@ public class Position {
         return false;
     }
 
+    // Verifica se duas posições são iguais
     public boolean equals(Position p) {
         return p.getColumn().getCoordinate().value == this.getColumn().getCoordinate().value &&
             p.getRow().getCoordinate().value == this.getRow().getCoordinate().value;
