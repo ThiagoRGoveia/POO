@@ -1,7 +1,6 @@
 package Tools.Image;
 
 import java.util.LinkedHashMap;
-import java.util.Timer;
 
 public class AnimatorFactory {
     private LinkedHashMap<String,Creatable> animatorMap;
