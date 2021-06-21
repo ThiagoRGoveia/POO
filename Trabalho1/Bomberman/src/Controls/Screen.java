@@ -69,7 +69,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("set-hero-lives", new SetHeroLivesEvent());
 
 
-        hero = new Hero(eventBus, 1, 1, timer);
+        hero = new Hero(eventBus, 1, 1);
         this.addElement(hero);
         eventBus.emit("set-hero-lives", hero);
 
@@ -85,9 +85,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         currentLevel = levels[0];
         currentLevel.begin();
 
-        // for (Enemy enemy: enemies) { // Parar inimigos
-        //     enemy.stop();
-        // }
     }
 
     public void addElement(Element element) {
