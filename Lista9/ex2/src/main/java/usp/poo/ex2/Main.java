@@ -2,13 +2,6 @@ package usp.poo.ex2;
 
 public class Main {
     public static void main(String[] args) {
-        // Integer[] array = {40, 20, 15, 50, 5, 80, 10, 90, 70, 60};
-        // InsertionSort<Integer> insertionSort = new InsertionSort<Integer>(array);
-
-        // insertionSort.printArray();
-        // insertionSort.sort();
-        // insertionSort.printArray();
-
         StudentSortableByGrade[] students = {
             new StudentSortableByGrade(
                 "Joao",
@@ -44,13 +37,39 @@ public class Main {
                 "Carlos",
                 17,
                 2.3,
-                10541383
-            )
+                10541372
+            ),
+            new StudentSortableByGrade(
+                "Rafael",
+                19,
+                6.5,
+                10541341
+            ),
+            new StudentSortableByGrade(
+                "Julia",
+                17,
+                0.5,
+                11616383
+            ),
+            new StudentSortableByGrade(
+                "Joaquim",
+                19,
+                9.5,
+                11616168
+            ),
+            new StudentSortableByGrade(
+                "JAqueline",
+                19,
+                5.5,
+                12868686
+            ),
         };
 
         InsertionSort<StudentSortableByGrade> insertionSort = new InsertionSort<StudentSortableByGrade>(students);
-
+        System.out.println("Antes da ordenação");
+        insertionSort.printArray();
         insertionSort.sort();
+        System.out.println("Após a ordenação");
         insertionSort.printArray();
 
     }
