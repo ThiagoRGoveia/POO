@@ -4,11 +4,9 @@ public class Node<T> {
     private T entry;
     private Node<T> left;
     private Node<T> right;
-    private boolean isDeleted;
 
     public Node(T entry) {
         this.entry = entry;
-        isDeleted = false;
         left = null;
         right = null;
     }
@@ -37,15 +35,11 @@ public class Node<T> {
         this.entry = entry;
     }
 
-    public boolean isDeleted() {
-        return isDeleted;
-    }
-
-    public void delete() {
-        isDeleted = true;
-    }
-
-    public void restore() {
-        isDeleted = false;
+    public void delete(Node<T> node) {
+        if (left == node) {
+            left = null;
+        } else if (right == node) {
+            right = null;
+        }
     }
 }
