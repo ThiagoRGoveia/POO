@@ -59,9 +59,85 @@ public class BinaryTree<T extends Comparable<T>> {
     }
 
     public void delete(T entry) {
-        Node<T> nodeToBeDeleted = search(entry);
-        if (nodeToBeDeleted != null) {
-            nodeToBeDeleted.delete();
+        Node<T> parent = null;
+
+        // start with the root node
+        Node<T> current = root;
+
+        // search key in the BST and set its parent pointer
+        while (current != null && !current.getEntry().equals(entry))
+        {
+            // update the parent to the current node
+            parent = current;
+
+            // if the given key is less than the current node, go to the left subtree;
+            // otherwise, go to the right subtree
+            if (key < current.data) {
+                current = current.getLeft();
+            }
+            else {
+                current = current.getRight();
+            }
+        }
+
+        // Case 1: node to be deleted has no children, i.e., it is a leaf node
+        if (current.getLeft() == null && current.getRight() == null)
+        {
+            // if the node to be deleted is not a root node, then set its
+            // parent left/right child to null
+            if (current != root)
+            {
+                if (parent.getLeft() == current) {
+                    parent.setLeft(null);
+                }
+                else {
+                    parent.setRight(null);
+                }
+            }
+            // if the tree has only a root node, set it to null
+            else {
+                root = null;
+            }
+        }
+
+        // Case 2: node to be deleted has two children
+        else if (current.getLeft() != null && current.getRight() != null)
+        {
+            // find its inorder successor node
+            Node<T> successor = getMinimumKey(current.getRight());
+
+            // store successor value
+            int val = successor.data;
+
+            // recursively delete the successor. Note that the successor
+            // will have at most one child (right child)
+            deleteNode(root, successor.data);
+
+            // copy value of the successor to the current node
+            current.data = val;
+        }
+
+        // Case 3: node to be deleted has only one child
+        else {
+            // choose a child node
+            Node<T> child = (current.getLeft() != null)? current.getLeft(): current.getRight();
+
+            // if the node to be deleted is not a root node, set its parent
+            // to its child
+            if (current != root)
+            {
+                if (current == parent.getLeft()) {
+                    parent.setLeft(child);
+                }
+                else {
+                    parent.setRight(child);
+                }
+            }
+
+            // if the node to be deleted is a root node, then set the root to the child
+            else {
+                root = child;
+            }
         }
     }
 
