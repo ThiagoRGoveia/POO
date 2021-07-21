@@ -1,11 +1,12 @@
 package Tools.Events;
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 import Controls.Screen;
 
 // Esta classe é responsável guardar as instancias dos eventos e
 // injetar a instancia de Screen na execução do evento. Esta abstração
 // permite desacoblar a lógica que envolve manipulação das classes Element e Screen
-public class EventBus<T> {
+public class EventBus<T> implements Serializable {
     private LinkedHashMap<String,Event<T>> eventMap;
     private Screen screen;
 

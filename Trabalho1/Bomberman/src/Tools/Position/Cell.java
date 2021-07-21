@@ -1,9 +1,11 @@
 package Tools.Position;
 
+import java.io.Serializable;
+
 import Tools.Consts;
 
 // Esta classe pemite abstrair a posição na tela para um sistema de cartesiano
-public abstract class Cell {
+public abstract class Cell implements Serializable {
     protected ScreenPosition screenPosition;
     protected Coordinate coordinate;
 

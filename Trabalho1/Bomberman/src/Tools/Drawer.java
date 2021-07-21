@@ -1,11 +1,13 @@
 package Tools;
 
 import java.awt.Graphics;
+import java.io.Serializable;
+
 import Model.Element;
 import Tools.Position.Position;
 import Controls.Screen;
 // Contém lógica para desenhar os elementos na tela. Aqui são definidas as dimensões desses elementos
-public class Drawer {
+public class Drawer implements Serializable {
     private Screen screen;
 
     public void setScreen(Screen screen) {

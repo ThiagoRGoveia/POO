@@ -8,10 +8,11 @@ import Tools.Image.Boundaries.Boundaries;
 
 import java.awt.Graphics;
 import java.io.IOException;
+import java.io.Serializable;
 import java.io.File;
 
 // Esta classe carrega uma imagem em uma área específica da imagem fornecida como parâmetro
-public class LoadImage {
+public class LoadImage implements Serializable {
     public static ImageIcon loadImageFromFile(String imageName, Boundaries boundaries) {
         try {
             BufferedImage bigImg = ImageIO.read(new File(new java.io.File(".").getCanonicalPath() + Consts.PATH + imageName));

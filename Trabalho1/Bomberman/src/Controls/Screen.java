@@ -11,12 +11,13 @@ import Tools.Position.Position;
 
 import java.awt.*;
 import java.awt.event.*;
+import java.io.Serializable;
 import java.util.*;
 
 import Controls.KeyStrokes.Movements;
 
 // Esta classe centraliza o controle do jogo, ela é responsável por manter todos os objetos em uso
-public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener {
+public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener, Serializable {
     public Drawer drawer;
     private EventBus<Element> eventBus;
     private Hero hero;
@@ -30,7 +31,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Timer timer;
     private GameLevel[] levels;
     private GameLevel currentLevel;
-    private int currentLevelIndex = 0;
+    private LevelState levelState;
 
     public Screen(Drawer drawer) {
         timer = new Timer(); // Instancia timer que contrlará redesenhos e movimentos
@@ -90,7 +91,9 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         levels[3] = new Level4(this);
 
         // Inicia primeira fase
+        levelState = new LevelState(0);
         currentLevel = levels[0];
+
         currentLevel.begin();
 
     }
@@ -152,13 +155,15 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             new Position(1, 1)
         );
         elements.add(hero); // Adicionar herói À lista de elementos à renderizar
-        levels[currentLevelIndex] = null; // Remover nível atual da memória
-        currentLevelIndex++; // Incrementar nível atual
-        if (currentLevelIndex >= 4) { // Se for o ultimo nível declarar vitória e sair
+        levels[levelState.getLevelIndex()] = null; // Remover nível atual da memória
+        levelState.setLevelIndex(
+            levelState.getLevelIndex() + 1
+        ); // Incrementar nível atual
+        if (levelState.getLevelIndex() >= 4) { // Se for o ultimo nível declarar vitória e sair
             victory();
             System.exit(0);
         } else {
-            currentLevel = levels[currentLevelIndex];
+            currentLevel = levels[levelState.getLevelIndex()];
             currentLevel.begin(); // Iniciar próximo nível
         }
     }
@@ -170,6 +175,18 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public Hero getHero() {
         return hero;
+    }
+
+    public ArrayList<Element> getElements() {
+        return elements;
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return enemies;
+    }
+
+    public LevelState getLevelState() {
+        return levelState;
     }
 
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/

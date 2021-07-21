@@ -13,4 +13,5 @@ public class Consts {
     public static final String PATH = File.separator+"imgs"+File.separator;
     public static final int CELL_SIZE_FACTOR = 50;
     public static final int SCREEN_BOUNDARY = Consts.CELL_SIZE_FACTOR * (Consts.RES - 1);
+    public static final String SAVE_FILE = "data.dat";
 }

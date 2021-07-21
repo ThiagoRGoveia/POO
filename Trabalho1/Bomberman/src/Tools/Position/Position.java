@@ -1,9 +1,11 @@
 package Tools.Position;
 
+import java.io.Serializable;
+
 import Tools.Consts;
 
 // Controla a posição dos elementos,
-public class Position {
+public class Position implements Serializable {
     private Row	row;
     private Column column;
 

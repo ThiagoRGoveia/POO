@@ -5,13 +5,14 @@ import Model.Hero;
 import Model.Enemies.Enemy;
 import Tools.InteractionMap;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author junio
  */
-public class Controller {
+public class Controller implements Serializable {
     private Screen screen;
 
     public Controller (Screen screen) {

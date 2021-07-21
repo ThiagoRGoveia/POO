@@ -1,11 +1,13 @@
 package Tools;
 
+import java.io.Serializable;
+
 import Model.Element;
 import Tools.Position.Position;
 
 // Esta classe centraliza as posições dos elementos (excluindo o heroi) no mapa
 // é utilizada para determinar as interações
-public class InteractionMap {
+public class InteractionMap implements Serializable {
     private Element[][] interactionMap = new Element[Consts.RES][Consts.RES];
 
     public void insert(Position position, Element element){

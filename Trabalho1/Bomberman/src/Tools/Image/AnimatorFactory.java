@@ -1,11 +1,12 @@
 package Tools.Image;
 
+import java.io.Serializable;
 import java.util.LinkedHashMap;
 
 // Esta classe é responsável por criar instancias da classe Animator sob demanda
 // cada uma das animações possíveis no jogo é reunida aqui e elas são acessadas através
 // de uma string no LinkedHashMap
-public class AnimatorFactory {
+public class AnimatorFactory implements Serializable {
     private LinkedHashMap<String,Creatable> animatorMap;
     private ImageFactory imageLoader;
 

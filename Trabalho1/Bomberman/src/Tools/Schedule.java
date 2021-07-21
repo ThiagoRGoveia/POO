@@ -1,8 +1,9 @@
 package Tools;
 
+import java.io.Serializable;
 import java.util.TimerTask;
 // Esta classe abstrai a programação de uma ação na thread principal do jogo
-public class Schedule {
+public class Schedule implements Serializable {
     public TimerTask timerTask;
     public long delay;
     public long interval;
