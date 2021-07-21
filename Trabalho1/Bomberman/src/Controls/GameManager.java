@@ -1,24 +1,45 @@
 package Controls;
 
+import Tools.Drawer;
+
 public class GameManager {
-    private GameSaver saveGame;
-    private GameLoader loadGame;
+    private GameSaver gameSaver;
+    private GameLoader gameLoader;
+    private Screen screen;
 
-    public GameManager(Screen screen) {
-        this.saveGame = new GameSaver(screen);
-        this.loadGame = new GameLoader();
+    public GameManager() {
+        this.gameLoader = new GameLoader();
     }
 
-    public void save() {
-        saveGame.save();
+    public void saveScreen() {
+        gameSaver.save();
     }
 
-    public Screen load() throws Exception {
+    public void setGameSaver(GameSaver gameSaver) {
+        this.gameSaver = gameSaver;
+    }
+
+    public void loadScreen() throws Exception {
         try {
-            return loadGame.load();
+            Screen screen = gameLoader.load();
+            setGameSaver(new GameSaver(screen));
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Unable to load Game");
         }
+    }
+
+    public void newScreen() {
+        Screen screen = new Screen(
+            new Drawer(),
+            this
+        );
+        setGameSaver(new GameSaver(screen));
+    }
+
+    public void start() {
+        screen.setVisible(true);
+        screen.createBufferStrategy(2);
+        screen.go();
     }
 }

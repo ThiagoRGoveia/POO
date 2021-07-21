@@ -2,6 +2,7 @@ package Model;
 
 
 
+import Controls.GameManager;
 import Controls.Screen;
 import Tools.Drawer;
 /**
@@ -16,12 +17,9 @@ public class Main {
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Screen screen = new Screen(
-                    new Drawer()
-                );
-                screen.setVisible(true);
-                screen.createBufferStrategy(2);
-                screen.go();
+                GameManager gm = new GameManager();
+                gm.newScreen();
+                gm.start();
             }
         });
 

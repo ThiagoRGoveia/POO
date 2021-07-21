@@ -32,10 +32,12 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private GameLevel[] levels;
     private GameLevel currentLevel;
     private LevelState levelState;
+    private GameManager gameManager;
 
-    public Screen(Drawer drawer) {
+    public Screen(Drawer drawer, GameManager gameManager) {
         timer = new Timer(); // Instancia timer que contrlará redesenhos e movimentos
         this.drawer = drawer;
+        this.gameManager = gameManager;
         drawer.setScreen(this);
 
         elements = new ArrayList<Element>(400);
@@ -189,6 +191,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         return levelState;
     }
 
+    public GameManager getGameManager() {
+        return gameManager;
+    }
+
     /*Este metodo eh executado a cada Consts.FRAME_INTERVAL milissegundos*/
     public void paint(Graphics oldGraphics) {
         Graphics newGraphics = this.getBufferStrategy().getDrawGraphics();
@@ -233,6 +239,12 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         /*Redesenha (executa o metodo paint) tudo a cada Consts.FRAME_INTERVAL milissegundos*/
         timer.schedule(redesenhar, 0, Consts.FRAME_INTERVAL);
+    }
+
+    public void stop() {
+        setVisible(false);
+        getBufferStrategy().dispose();
+        timer.cancel();
     }
 
 
