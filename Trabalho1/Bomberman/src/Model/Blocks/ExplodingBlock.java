@@ -28,6 +28,10 @@ public class ExplodingBlock extends AnimatedElement {
         this.eventBus.emit("create-schedule", this);
     }
 
+    public ExplodingBlock(EventBus<Element> eventBus, int row, int column) {
+        this(eventBus, new Position(row, column));
+    }
+
     public void interact(Hero hero) {
     }
 
