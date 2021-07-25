@@ -1,13 +1,13 @@
 package Tools.Events;
 
-import Controls.Screen;
+import Controls.GameManager;
 import Model.Element;
 
 //Permite remover um elemento da tela.
 public class RemoveElementsEvent implements Event {
-    public void fire(Screen screen, Element element) {
-        screen.getInteractionMap().remove(element.getPosition());
-        screen.removeElement(element);
+    public void fire(GameManager gameManager, Element element) {
+        gameManager.getInteractionMap().remove(element.getPosition());
+        gameManager.removeElement(element);
     }
 
 }

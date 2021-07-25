@@ -1,16 +1,16 @@
 package Tools.Events;
 
-import Controls.Screen;
+import Controls.GameManager;
 import Model.Element;
 import Tools.InteractionMap;
 
 // Permite criar um elemento no mapa e inseri-lo no mapa de interação
 public class CreateElementsEvent implements Event {
 
-    public void fire(Screen screen, Element element) {
-        InteractionMap interactionMap = screen.getInteractionMap();
+    public void fire(GameManager gameManager, Element element) {
+        InteractionMap interactionMap = gameManager.getInteractionMap();
         if (interactionMap.get(element.getPosition()) == null) { // Somente criar o elemento se posição estiver vazia
-            screen.addElement(element);
+            gameManager.addElement(element);
             interactionMap.insert(element.getPosition(), element);
         } else {
             element.die();

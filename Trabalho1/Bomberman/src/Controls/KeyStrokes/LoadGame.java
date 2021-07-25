@@ -1,15 +1,13 @@
 package Controls.KeyStrokes;
 
-import Controls.GameManager;
 import Controls.Screen;
+import Model.Enemies.Enemy;
 
 public class LoadGame implements KeyStroke {
 
     public void execute(Screen screen) {
-        GameManager gameManager = screen.getGameManager();
         try {
-            gameManager.loadScreen();
-            gameManager.start();
+            screen.getGameManager().loadGame();
         } catch (Exception e) {
             e.printStackTrace();
         }

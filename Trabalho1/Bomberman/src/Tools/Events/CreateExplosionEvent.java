@@ -1,6 +1,6 @@
 package Tools.Events;
 
-import Controls.Screen;
+import Controls.GameManager;
 import Model.Element;
 import Model.Explosion;
 import Tools.InteractionMap;
@@ -8,17 +8,17 @@ import Tools.InteractionMap;
 // Permite crirar uma explosão e fazê-la interagir com os elementos
 public class CreateExplosionEvent implements Event {
 
-    public void fire(Screen screen, Element element) {
+    public void fire(GameManager gameManager, Element element) {
         Explosion explosion = (Explosion) element;
-        InteractionMap interactionMap = screen.getInteractionMap();
+        InteractionMap interactionMap = gameManager.getInteractionMap();
         Element preExistingElement = interactionMap.get(explosion.getPosition()); // Procurar elemento na posição da explosão a ser criada
         if (preExistingElement == null) { // Se não houver elemento, propagar explosão
-            screen.addElement(explosion);
+            gameManager.addElement(explosion);
             interactionMap.insert(explosion.getPosition(), explosion);
             explosion.propagateExplosion(explosion.getIntensity());
         } else {
             if (!preExistingElement.isImmortal()) {
-                screen.addElement(explosion);
+                gameManager.addElement(explosion);
                 preExistingElement.interact(explosion); // Se houver um elemento e ele não for imortal, interagir
                 if (preExistingElement.isTraversable()) {
                     explosion.propagateExplosion(explosion.getIntensity()); // Se o elemento puder ser atravessado propagar explosão

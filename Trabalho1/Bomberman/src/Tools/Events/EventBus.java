@@ -1,7 +1,8 @@
 package Tools.Events;
 import java.io.Serializable;
 import java.util.LinkedHashMap;
-import Controls.Screen;
+
+import Controls.GameManager;
 import Model.Element;
 
 // Esta classe é responsável guardar as instancias dos eventos e
@@ -9,16 +10,16 @@ import Model.Element;
 // permite desacoblar a lógica que envolve manipulação das classes Element e Screen
 public class EventBus implements Serializable {
     private LinkedHashMap<String,Event> eventMap;
-    private Screen screen;
+    private GameManager gameManager;
     private static EventBus instance;
 
     public EventBus() throws Exception {
         throw new Exception("EventBus não pode ser instanciado diretamente");
     }
 
-    private EventBus(Screen screen, int size) {
+    private EventBus(GameManager gameManager, int size) {
         eventMap = new LinkedHashMap<String,Event>(size);
-        this.screen = screen;
+        this.gameManager = gameManager;
     }
 
     public void on(String name, Event event) { // Permite registrar um evento
@@ -32,13 +33,13 @@ public class EventBus implements Serializable {
     public void emit(String name, Element element) { // Permite disparar um evento
         Event event = eventMap.get(name);
         if (event != null) {
-            event.fire(this.screen, element);
+            event.fire(this.gameManager, element);
         }
     }
 
-    public static void setInstance(Screen screen, int size) {
+    public static void setInstance(GameManager gameManager, int size) {
         if (instance == null) {
-            instance = new EventBus(screen, size);
+            instance = new EventBus(gameManager, size);
         }
     }
 

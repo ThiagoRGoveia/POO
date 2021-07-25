@@ -1,13 +1,13 @@
 package Tools.Events;
 
-import Controls.Screen;
+import Controls.GameManager;
 import Model.Element;
 
 // Permite finalziar o jogo
 public class GameOverEvent implements Event {
 
-    public void fire(Screen screen, Element t) {
-        screen.gameOver();
+    public void fire(GameManager gameManager, Element t) {
+        gameManager.gameOver();
     }
 
 }

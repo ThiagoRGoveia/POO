@@ -172,6 +172,10 @@ public class Position implements Serializable {
         return p.getColumn().getCoordinate().value == this.getColumn().getCoordinate().value &&
             p.getRow().getCoordinate().value == this.getRow().getCoordinate().value;
     }
+
+    public String toString() {
+        return "(" + this.getRow().getCoordinate().value + "," + this.getColumn().getCoordinate().value + ")";
+    }
 }
 
 

@@ -1,13 +1,8 @@
 package Controls;
 
-import Model.Element;
-import Model.Hero;
-import Model.Enemies.Enemy;
 import Tools.*;
-import Tools.Events.*;
 import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
-import Tools.Position.Position;
 
 import java.awt.*;
 import java.awt.event.*;
@@ -23,18 +18,13 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Movements movements;
     private AnimatorFactory animatorFactory;
     private SerializableTimer timer;
-    private GameLevel[] levels;
-    private GameLevel currentLevel;
     private GameManager gameManager;
 
-    public Screen(Drawer drawer, GameManager gameManager){
+    public Screen(GameManager gameManager){
         timer = new SerializableTimer(); // Instancia timer que contrlará redesenhos e movimentos
-        this.drawer = drawer;
+        drawer = new Drawer();
         this.gameManager = gameManager;
         drawer.setScreen(this);
-
-        gameManager.state.setElements(new ArrayList<Element>(400));
-        gameManager.state.setEnemies(new ArrayList<Enemy>(20));
 
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);  /*teclado*/
@@ -52,71 +42,11 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
                 (getInsets().top +  getInsets().bottom) + 30
             )
         );
-
-        // Instancia EventBus e registra eventos
-        EventBus.setInstance(this, 15);
-        EventBus eventBus = EventBus.getInstance();
-        eventBus.on("create-element", new CreateElementsEvent());
-        eventBus.on("remove-element", new RemoveElementsEvent());
-        eventBus.on("create-explosion", new CreateExplosionEvent());
-        eventBus.on("create-animator", new CreateAnimatorEvent());
-        eventBus.on("create-schedule", new CreateScheduleEvent());
-        eventBus.on("create-schedule-loop", new CreateScheduleEventLoop());
-        eventBus.on("verify-element-interaction", new VerifyElementInteractionEvent());
-        eventBus.on("insert-element-to-map", new InsertToInteractionMapEvent());
-        eventBus.on("remove-element-from-map", new RemoveFromInteractionMapEvent());
-        eventBus.on("move-element-on-map", new MoveOnInteractionMap());
-        eventBus.on("game-over", new GameOverEvent());
-        eventBus.on("create-enemy", new CreateEnemyEvent());
-        eventBus.on("remove-enemy", new RemoveEnemyEvent());
-        eventBus.on("set-hero-lives", new SetHeroLivesEvent());
-
-        // Cria herói
-        Hero hero = new Hero(1, 1);
-        this.addElement(hero);
-        gameManager.state.setHero(hero);
-        eventBus.emit("set-hero-lives", hero);
-
         movements = new Movements();
-        gameManager.state.setInteractionMap(new InteractionMap());
-
-        // Instancia fases
-        levels = new GameLevel[4];
-        levels[0] = new Level1(this);
-        levels[1] = new Level2(this);
-        levels[2] = new Level3(this);
-        levels[3] = new Level4(this);
-
-        // Inicia primeira fase
-        gameManager.state.setLevelState(new LevelState(0));
-        currentLevel = levels[gameManager.state.getLevelState().getLevelIndex()];
-
-        currentLevel.begin();
-
-    }
-
-    public void addElement(Element element) {
-        gameManager.state.getElements().add(element);
-    }
-
-    public void removeElement(Element element) {
-        gameManager.state.getElements().remove(element);
-    }
-
-    public void addEnemy(Enemy enemy) {
-        gameManager.state.getEnemies().add(enemy);
-    }
-
-    public void removeEnemy(Enemy enemy) {
-        gameManager.state.getEnemies().remove(enemy);
     }
 
     public Graphics getGraphicsBuffer(){
         return graphics;
-    }
-
-    public InteractionMap getInteractionMap() {
-        return gameManager.state.getInteractionMap();
     }
 
     public Timer getTimer() {
@@ -129,58 +59,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public void setAnimatorFactory(AnimatorFactory animatorFactory) {
         this.animatorFactory = animatorFactory;
-    }
-
-    public void gameOver() {
-        System.out.println("GAME OVER");
-        System.exit(0);
-    }
-
-    public void nextLevel() {
-        LevelState levelState = gameManager.state.getLevelState();
-        Hero hero = (Hero) gameManager.state.getElements().get(0); // Reservar herói
-        gameManager.state.getElements().clear(); // Limpar elementos a renderizar
-        for (Enemy enemy: gameManager.state.getEnemies()) { // Parar inimigos
-            enemy.stop();
-        }
-        gameManager.state.getEnemies().clear(); // Remover inimigos
-        gameManager.state.getInteractionMap().clear(); // Limpar mapa de interação
-        hero.setPosition( // Resetar posição do herói
-            new Position(1, 1)
-        );
-        gameManager.state.getElements().add(hero); // Adicionar herói À lista de elementos à renderizar
-        levels[levelState.getLevelIndex()] = null; // Remover nível atual da memória
-        levelState.setLevelIndex(
-            levelState.getLevelIndex() + 1
-        ); // Incrementar nível atual
-        if (levelState.getLevelIndex() >= 4) { // Se for o ultimo nível declarar vitória e sair
-            victory();
-            System.exit(0);
-        } else {
-            currentLevel = levels[levelState.getLevelIndex()];
-            currentLevel.begin(); // Iniciar próximo nível
-        }
-    }
-
-    public void victory() {
-        System.out.println("CONGRATULATIONS YOU WON");
-        System.exit(0);
-    }
-
-    public Hero getHero() {
-        return gameManager.state.getHero();
-    }
-
-    public ArrayList<Element> getElements() {
-        return gameManager.state.getElements();
-    }
-
-    public ArrayList<Enemy> getEnemies() {
-        return gameManager.state.getEnemies();
-    }
-
-    public LevelState getLevelState() {
-        return gameManager.state.getLevelState();
     }
 
     public GameManager getGameManager() {
@@ -196,7 +74,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         /*Desenha cenário*/
         for (int i = 0; i < Consts.RES; i++) {
             for (int j = 0; j < Consts.RES; j++) {
-                    currentLevel.getImageFactory().getImageList("floor-static").get(0).paintIcon(
+                    gameManager.getCurrentLevel().getImageFactory().getImageList("floor-static").get(0).paintIcon(
                     this,
                     this.getGraphicsBuffer(),
                     j * Consts.CELL_SIDE,
@@ -211,7 +89,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
             this.controller.process(gameManager.state.getHero());
             boolean victory = this.controller.checkVitory(gameManager.state.getEnemies());
             if (victory) {
-                this.nextLevel();
+                this.gameManager.nextLevel();
             }
         }
 
@@ -223,6 +101,8 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void go() {
+        setVisible(true);
+        createBufferStrategy(2);
         SerializableTimerTask redesenhar = new SerializableTimerTask() {
             public void run() {
                 repaint(); /*(executa o metodo paint)*/

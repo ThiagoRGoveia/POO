@@ -1,6 +1,6 @@
 package Tools.Events;
 
-import Controls.Screen;
+import Controls.GameManager;
 import Model.Element;
 import Model.MovableElement;
 import Tools.InteractionMap;
@@ -8,9 +8,9 @@ import Tools.InteractionMap;
 // Permite mover um elemento no mapa de interação
 public class MoveOnInteractionMap implements Event{
 
-    public void fire(Screen screen, Element element) {
+    public void fire(GameManager gameManager, Element element) {
         MovableElement movableElement = (MovableElement) element;
-        InteractionMap interactionMap = screen.getInteractionMap();
+        InteractionMap interactionMap = gameManager.getInteractionMap();
         interactionMap.remove(movableElement.getPosition());
         interactionMap.insert(movableElement.getNextPosition(), movableElement);
     }

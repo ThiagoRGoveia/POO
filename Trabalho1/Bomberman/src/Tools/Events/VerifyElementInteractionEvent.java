@@ -1,6 +1,6 @@
 package Tools.Events;
 
-import Controls.Screen;
+import Controls.GameManager;
 import Model.Element;
 import Model.MovableElement;
 import Tools.Consts;
@@ -14,9 +14,9 @@ import Tools.Position.ScreenPosition;
 // Permite verificar se um elemento está interagindo com outro
 public class VerifyElementInteractionEvent implements Event{
 
-    public void fire(Screen screen, Element element) {
+    public void fire(GameManager gameManager, Element element) {
         MovableElement movableElement = (MovableElement) element;
-        InteractionMap interactionMap = screen.getInteractionMap();
+        InteractionMap interactionMap = gameManager.getInteractionMap();
         String movementDirection = movableElement.getMovementDirection();
         int rowFactor = 0;
         int colFactor = 0;

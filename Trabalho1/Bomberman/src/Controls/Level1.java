@@ -359,12 +359,12 @@ public class Level1 extends GameLevel {
         EventBus.getInstance().emit("create-element", wall);
         //obstáculos do meio do mapa
         //destrutíveis do meio do mapa
-        block = new RegularBlock(3, 1);
-        EventBus.getInstance().emit("create-element", block);
-        block = new RegularBlock(4, 1);
-        EventBus.getInstance().emit("create-element", block);
-        block = new RegularBlock(5, 1);
-        EventBus.getInstance().emit("create-element", block);
+        // block = new RegularBlock(3, 1);
+        // EventBus.getInstance().emit("create-element", block);
+        // block = new RegularBlock(4, 1);
+        // EventBus.getInstance().emit("create-element", block);
+        // block = new RegularBlock(5, 1);
+        // EventBus.getInstance().emit("create-element", block);
         block = new RegularBlock(10, 1);
         EventBus.getInstance().emit("create-element", block);
         block = new RegularBlock(11, 1);

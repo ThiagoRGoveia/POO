@@ -1,18 +1,23 @@
 package Controls;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
-import Tools.Drawer;
+import Tools.Events.*;
+import Tools.Position.Position;
+import Tools.*;
+import Model.*;
+import Model.Enemies.*;
 
 public class GameManager implements Serializable {
     private GameSaver gameSaver;
-    private GameLoader gameLoader;
     public GameState state;
     private Screen screen;
+    private GameLevel[] levels;
+    private GameLevel currentLevel;
 
     public GameManager() {
-        this.gameLoader = new GameLoader();
-        this.state = new GameState();
+        levels = new GameLevel[4];
     }
 
     public void saveGame() {
@@ -23,28 +28,161 @@ public class GameManager implements Serializable {
         this.gameSaver = gameSaver;
     }
 
-    public void loadScreen() throws Exception {
+    public Screen getScreen() {
+        return screen;
+    }
+
+    public void newGame() {
+        state = new GameState();
+        state.setElements(new ArrayList<Element>(400));
+        state.setEnemies(new ArrayList<Enemy>(20));
+
+        // Cria herói
+        Hero hero = new Hero(1, 1);
+        this.addElement(hero);
+        state.setHero(hero);
+
+        // Inicia mapa de interação
+        state.setInteractionMap(new InteractionMap());
+
+        // Inicia primeira fase
+        state.setLevelState(new LevelState(0));
+
+    }
+
+    public void loadGame() throws Exception {
         try {
-            state = gameLoader.load();
-            setGameSaver(new GameSaver(state));
+            state = (new GameLoader()).load();
+            gameSaver = new GameSaver(state);
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Unable to load Game");
         }
     }
 
-    public void createNewScreen() {
-        screen = new Screen(
-            new Drawer(),
-            this
-        );
+    public void setupScreen() {
+        screen = new Screen(this);
         setGameSaver(new GameSaver(state));
+
     }
 
     public void start() {
-        createNewScreen();
-        screen.setVisible(true);
-        screen.createBufferStrategy(2);
+        setupScreen();
+        setupEventBus();
+        setupHeroLivesDisplay();
+        setupLevels();
+        setupCurrentLevel();
         screen.go();
     }
+
+    private void setupHeroLivesDisplay() {
+        EventBus.getInstance().emit("set-hero-lives", state.getHero());
+    }
+
+    private void setupCurrentLevel() {
+        currentLevel = levels[state.getLevelState().getLevelIndex()];
+        currentLevel.begin();
+    }
+
+    private void setupLevels() {
+        levels[0] = new Level1(screen);
+        levels[1] = new Level2(screen);
+        levels[2] = new Level3(screen);
+        levels[3] = new Level4(screen);
+    }
+
+    public void setupEventBus() {
+        EventBus.setInstance(this, 15);
+        EventBus eventBus = EventBus.getInstance();
+        eventBus.on("create-element", new CreateElementsEvent());
+        eventBus.on("remove-element", new RemoveElementsEvent());
+        eventBus.on("create-explosion", new CreateExplosionEvent());
+        eventBus.on("create-animator", new CreateAnimatorEvent());
+        eventBus.on("create-schedule", new CreateScheduleEvent());
+        eventBus.on("create-schedule-loop", new CreateScheduleEventLoop());
+        eventBus.on("verify-element-interaction", new VerifyElementInteractionEvent());
+        eventBus.on("insert-element-to-map", new InsertToInteractionMapEvent());
+        eventBus.on("remove-element-from-map", new RemoveFromInteractionMapEvent());
+        eventBus.on("move-element-on-map", new MoveOnInteractionMap());
+        eventBus.on("game-over", new GameOverEvent());
+        eventBus.on("create-enemy", new CreateEnemyEvent());
+        eventBus.on("remove-enemy", new RemoveEnemyEvent());
+        eventBus.on("set-hero-lives", new SetHeroLivesEvent());
+    }
+    public void addElement(Element element) {
+        state.getElements().add(element);
+    }
+
+    public void removeElement(Element element) {
+        state.getElements().remove(element);
+    }
+
+    public void addEnemy(Enemy enemy) {
+        state.getEnemies().add(enemy);
+    }
+
+    public void removeEnemy(Enemy enemy) {
+        state.getEnemies().remove(enemy);
+    }
+
+    public InteractionMap getInteractionMap() {
+        return state.getInteractionMap();
+    }
+
+    public void gameOver() {
+        System.out.println("GAME OVER");
+        System.exit(0);
+    }
+
+    public void nextLevel() {
+        LevelState levelState = state.getLevelState();
+        Hero hero = (Hero) state.getElements().get(0); // Reservar herói
+        state.getElements().clear(); // Limpar elementos a renderizar
+        for (Enemy enemy: state.getEnemies()) { // Parar inimigos
+            enemy.stop();
+        }
+        state.getEnemies().clear(); // Remover inimigos
+        state.getInteractionMap().clear(); // Limpar mapa de interação
+        hero.setPosition( // Resetar posição do herói
+            new Position(1, 1)
+        );
+        state.getElements().add(hero); // Adicionar herói À lista de elementos à renderizar
+        levels[levelState.getLevelIndex()] = null; // Remover nível atual da memória
+        levelState.setLevelIndex(
+            levelState.getLevelIndex() + 1
+        ); // Incrementar nível atual
+        if (levelState.getLevelIndex() >= 4) { // Se for o ultimo nível declarar vitória e sair
+            victory();
+            System.exit(0);
+        } else {
+            currentLevel = levels[levelState.getLevelIndex()];
+            currentLevel.begin(); // Iniciar próximo nível
+        }
+    }
+
+    public void victory() {
+        System.out.println("CONGRATULATIONS YOU WON");
+        System.exit(0);
+    }
+
+    public Hero getHero() {
+        return state.getHero();
+    }
+
+    public ArrayList<Element> getElements() {
+        return state.getElements();
+    }
+
+    public ArrayList<Enemy> getEnemies() {
+        return state.getEnemies();
+    }
+
+    public LevelState getLevelState() {
+        return state.getLevelState();
+    }
+
+    public GameLevel getCurrentLevel() {
+        return currentLevel;
+    }
+
 }

@@ -3,6 +3,7 @@ package Tools;
 import java.io.Serializable;
 
 import Model.Element;
+import Model.Enemies.Enemy;
 import Tools.Position.Position;
 
 // Esta classe centraliza as posições dos elementos (excluindo o heroi) no mapa
@@ -27,5 +28,16 @@ public class InteractionMap implements Serializable {
                 interactionMap[i][j] = null;
             }
         }
+    }
+
+    public String toString() {
+        String result = "";
+        for (int i = 0; i < Consts.RES; i++) {
+            for (int j = 0; j < Consts.RES; j++) {
+                if (interactionMap[i][j] instanceof Enemy)
+                result += interactionMap[i][j].getPosition() + "\n";
+            }
+        }
+        return result;
     }
 }

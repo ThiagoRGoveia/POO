@@ -29,7 +29,7 @@ public class Controller implements Serializable {
         }
     }
     public void process(Hero hero){
-        InteractionMap map = screen.getInteractionMap();
+        InteractionMap map = screen.getGameManager().getInteractionMap();
         Element element = map.get(hero.getPosition()); // Buscar elemento na posição do herói
         if (element != null) { // Se elemento existir interaja com ele
             element.interact(hero);

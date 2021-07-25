@@ -5,7 +5,7 @@ import Model.Hero;
 
 public class MoveLeft implements KeyStroke {
     public void execute(Screen screen) {
-        Hero hero = screen.getHero();
+        Hero hero = screen.getGameManager().getHero();
         hero.moveLeft();
     }
 }

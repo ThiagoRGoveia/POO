@@ -18,7 +18,8 @@ public abstract class Enemy extends MovableElement {
         super(position, 35);
     }
 
-    public void interact(Hero hero) { // SE interagir com um heroi, mate ele
+    public void interact(Hero hero) { // Se interagir com um heroi, mate ele
+        System.out.println(position);
         hero.die();
     }
 
@@ -64,11 +65,14 @@ public abstract class Enemy extends MovableElement {
         if (this.movementDirection == "up") {
             this.moveUp();
         } else if (this.movementDirection == "down") {
-            this.moveDown();
+            this.moveUp();
+            // this.moveDown();
         } else if (this.movementDirection == "left") {
-            this.moveLeft();
+            // this.moveLeft();
+            this.moveUp();
         } else if (this.movementDirection == "right") {
-            this.moveRight();
+            this.moveUp();
+            // this.moveRight();
         }
     }
 
@@ -76,7 +80,7 @@ public abstract class Enemy extends MovableElement {
         changeAnimatorAndKillMovement(upAnimator, "up");
         this.movementTimer = new SerializableTimerTask() {
             public void run() {
-                nextPosition = position.getMovementUp();
+                nextPosition = position;
                 processMovement();
             }
         };
@@ -127,7 +131,7 @@ public abstract class Enemy extends MovableElement {
         EventBus.getInstance().emit("remove-enemy", this);
     }
 
-    // PAra movimento
+    // Para movimento
     public void stop() {
         this.movementTimer.cancel();
     }
