@@ -1,7 +1,10 @@
 package Tools.Image.Boundaries;
+
+import java.io.Serializable;
+
 // Esta classe reune os métodos para carregar as dimensões e posições de
 // cada uma das imagens do jogo, cada filha desta classe representa uma fase do jogo
-public abstract class BoundaryFactory {
+public abstract class BoundaryFactory implements Serializable {
     public abstract Boundaries[] getBombBoundaries();
     public abstract Boundaries[] getFirstExplosionBoundaries();
     public abstract Boundaries[] getHoriziontalLeftLastExplosionBoundaries();

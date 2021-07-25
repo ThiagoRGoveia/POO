@@ -6,7 +6,7 @@ import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-public class GameSaver {
+public class GameSaver implements Serializable {
 
     private Screen screen;
 

@@ -24,4 +24,12 @@ public class Ler {
     private  static void p(EndereçoA a) {
         System.out.println("A" + a.getClass());
     }
+
+    private  static void p(EndereçoB a) {
+        System.out.println("A" + a.getClass());
+    }
+
+    private  static void p(Endereço a) {
+        System.out.println("A" + a.getClass());
+    }
 }

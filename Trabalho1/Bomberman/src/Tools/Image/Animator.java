@@ -4,7 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 
-import java.util.Timer;
+import Controls.SerializableTimer;
+import Controls.SerializableTimerTask;
+
 import java.util.TimerTask;
 
 // Esta classe controla uma animação, ela é composta por um objeto Timer dedicado,
@@ -15,7 +17,7 @@ public class Animator implements Serializable {
     private ArrayList<ImageIcon> images;
     private int imgIndex = 0;
     private int numberOfImages;
-    private Timer timer;
+    private SerializableTimer timer;
     private boolean isLoop;
     private boolean isStatic;
     private long interval;
@@ -63,7 +65,7 @@ public class Animator implements Serializable {
     }
 
     private TimerTask getLoopTimerTask() {
-        return new TimerTask() {
+        return new SerializableTimerTask()  {
             public void run() {
                 iterateImgIndexLoop();
             }
@@ -71,7 +73,7 @@ public class Animator implements Serializable {
     }
 
     private TimerTask getOneTimeTimerTask() {
-        return new TimerTask() {
+        return new SerializableTimerTask() {
             public void run() {
                 iterateImgIndexOnce();
             }
@@ -84,7 +86,7 @@ public class Animator implements Serializable {
         } else {
             timerTask = getOneTimeTimerTask();
         }
-        timer = new Timer();
+        timer = new SerializableTimer();
         timer.schedule(timerTask, 0, interval);
     }
 

@@ -1,8 +1,10 @@
 package Controls;
 
+import java.io.Serializable;
+
 import Tools.Drawer;
 
-public class GameManager {
+public class GameManager implements Serializable {
     private GameSaver gameSaver;
     private GameLoader gameLoader;
     private Screen screen;
@@ -30,7 +32,7 @@ public class GameManager {
     }
 
     public void newScreen() {
-        Screen screen = new Screen(
+        screen = new Screen(
             new Drawer(),
             this
         );
@@ -38,6 +40,7 @@ public class GameManager {
     }
 
     public void start() {
+        newScreen();
         screen.setVisible(true);
         screen.createBufferStrategy(2);
         screen.go();

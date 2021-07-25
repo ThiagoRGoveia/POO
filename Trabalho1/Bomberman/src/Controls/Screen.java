@@ -28,14 +28,14 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Movements movements;
     private InteractionMap interactionMap;
     private AnimatorFactory animatorFactory;
-    private Timer timer;
+    private SerializableTimer timer;
     private GameLevel[] levels;
     private GameLevel currentLevel;
     private LevelState levelState;
     private GameManager gameManager;
 
     public Screen(Drawer drawer, GameManager gameManager) {
-        timer = new Timer(); // Instancia timer que contrlará redesenhos e movimentos
+        timer = new SerializableTimer(); // Instancia timer que contrlará redesenhos e movimentos
         this.drawer = drawer;
         this.gameManager = gameManager;
         drawer.setScreen(this);

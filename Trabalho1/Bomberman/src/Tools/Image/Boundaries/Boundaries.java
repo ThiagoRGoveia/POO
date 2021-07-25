@@ -1,6 +1,9 @@
 package Tools.Image.Boundaries;
+
+import java.io.Serializable;
+
 // Esta classe define as dimensões do retangulo a ser recortado da imagem que contém as sprites
-public class Boundaries {
+public class Boundaries implements Serializable {
     public int x;
     public int y;
     public int width;

@@ -9,6 +9,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.io.Serializable;
 
 import Tools.Consts;
 import Tools.Image.Boundaries.Boundaries;
@@ -17,7 +18,7 @@ import Tools.Image.Boundaries.BoundaryFactory;
 // Esta classe é responsável por carregar as listas de imagens
 // na memória, o acesso de cada lista de imagens é feito através
 // de uma string no LinkedHashMap
-public class ImageFactory {
+public class ImageFactory implements Serializable {
     private BoundaryFactory boundaryFactory;
     private LinkedHashMap<String,ArrayList<ImageIcon>> imageMap;
 

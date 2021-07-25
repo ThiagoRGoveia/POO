@@ -4,10 +4,11 @@ import java.util.HashMap;
 import Controls.Screen;
 
 import java.awt.event.KeyEvent;
+import java.io.Serializable;
 
 // Aqui é possível registrar handlers para as teclas pressionadas
 // com  o objetivo de desacoplar essa logica e tirar a responsabilidade da classe Screen
-public class Movements {
+public class Movements implements Serializable {
     private HashMap<Integer,KeyStroke> keyStrokeMap;
 
     public Movements() {
