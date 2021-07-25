@@ -12,12 +12,10 @@ import Tools.Position.Position;
 public abstract class Element implements Serializable, Drawable, Interactable {
     protected Position position;
     protected boolean traversable; /*Pode passar por cima?*/
-    protected EventBus eventBus;
     protected Schedule scheduledTask; // Tarefa a ser executada pela thread do jogo
     protected boolean isImmortal;
 
-    protected Element(EventBus eventBus, Position position) {
-        this.eventBus = eventBus;
+    protected Element(Position position) {
         this.position = position;
         isImmortal = false;
     }
@@ -58,7 +56,7 @@ public abstract class Element implements Serializable, Drawable, Interactable {
 
     public void die() {
         if (!isImmortal) {
-            eventBus.emit("remove-element", this);
+            EventBus.getInstance().emit("remove-element", this);
         }
     }
 

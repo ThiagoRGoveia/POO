@@ -2,7 +2,6 @@ package Model.Blocks;
 
 
 import Model.AnimatedElement;
-import Model.Element;
 import Model.Explosion;
 import Model.Hero;
 import Model.Enemies.Enemy;
@@ -11,16 +10,16 @@ import Tools.Position.Position;
 
 // Esta classe define um bloco regular
 public class RegularBlock extends AnimatedElement {
-    protected RegularBlock(EventBus eventBus, Position position) {
-        super(eventBus, position);
+    protected RegularBlock(Position position) {
+        super(position);
         this.setAnimatorName("floor-obstacle");
-        eventBus.emit("create-animator", this);
+        EventBus.getInstance().emit("create-animator", this);
         this.setImmortal(false);
         this.setTraversable(false);
     }
 
-    public RegularBlock(EventBus eventBus, int row, int column) {
-        this(eventBus, new Position(row, column));
+    public RegularBlock(int row, int column) {
+        this(new Position(row, column));
     }
 
     public void interact(Hero hero) {
@@ -35,9 +34,9 @@ public class RegularBlock extends AnimatedElement {
     }
 
     private void createBlockExplosion() {
-        eventBus.emit(
+        EventBus.getInstance().emit(
             "create-element",
-            new ExplodingBlock(eventBus, this.position)
+            new ExplodingBlock(this.position)
         );
      }
 

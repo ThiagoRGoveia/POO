@@ -3,7 +3,6 @@ package Model.Enemies;
 import java.util.Random;
 import Controls.SerializableTimerTask;
 
-import Model.Element;
 import Model.Explosion;
 import Model.Hero;
 import Model.MovableElement;
@@ -15,8 +14,8 @@ public abstract class Enemy extends MovableElement {
     private boolean isDead = false;
     protected static String[] directions = {"up", "down", "right", "left"}; // Direções disponíveis
 
-    protected Enemy(EventBus eventBus, Position position) {
-        super(eventBus, position, 35);
+    protected Enemy(Position position) {
+        super(position, 35);
     }
 
     public void interact(Hero hero) { // SE interagir com um heroi, mate ele
@@ -33,7 +32,7 @@ public abstract class Enemy extends MovableElement {
 
     public void processMovement() {
         if (!Position.isPositionByTheBoundaries(this.nextPosition) && !isDead) { // Mover se estiver dentro do mapa e não estiver morto
-            this.eventBus.emit("verify-element-interaction", this); // Verificar se proxima posição irá interagir com algum elemento
+            EventBus.getInstance().emit("verify-element-interaction", this); // Verificar se proxima posição irá interagir com algum elemento
             if (this.interactingElement != null && this.interactingElement != this) { // Se houver um elemento na proxima posição, interagir com ele
                 this.interactingElement.interact(this);
                 if (this.interactingElement.isTraversable()) { // Se ele não for transponível mude de direção
@@ -118,14 +117,14 @@ public abstract class Enemy extends MovableElement {
     }
     // Atualiza posição no mapa de interação
     public void updatePosition() {
-        eventBus.emit("move-element-on-map", this);
+        EventBus.getInstance().emit("move-element-on-map", this);
         this.position.setPosition(this.nextPosition);
     }
 
     public void die() {
         this.isDead = true;
         this.movementTimer.cancel();
-        eventBus.emit("remove-enemy", this);
+        EventBus.getInstance().emit("remove-enemy", this);
     }
 
     // PAra movimento

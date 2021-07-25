@@ -11,8 +11,8 @@ public abstract class AnimatedElement extends Element {
     protected Animator animator;
     protected String animatorName;
 
-    protected AnimatedElement(EventBus eventBus, Position position) {
-        super(eventBus, position);
+    protected AnimatedElement(Position position) {
+        super(position);
 
     }
 

@@ -25,8 +25,8 @@ public abstract class MovableElement extends AnimatedElement {
     protected boolean isLocked;
 
 
-    protected MovableElement(EventBus eventBus, Position position, int speed) {
-        super(eventBus, position);
+    protected MovableElement(Position position, int speed) {
+        super(position);
         this.keysDown = 0;
         setDownAnimator(); // Chama cada um dos animadores
         setLeftAnimator();
@@ -55,7 +55,7 @@ public abstract class MovableElement extends AnimatedElement {
         this.createScheduledTask(
                 new Schedule(this.movementTimer, 0, speed)
             );
-        this.eventBus.emit("create-schedule-loop", this);
+        EventBus.getInstance().emit("create-schedule-loop", this);
     }
 
     // Metodo utilizado para informar ao objeto qual elemento interagirá com ele

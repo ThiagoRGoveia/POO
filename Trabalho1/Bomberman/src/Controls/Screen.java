@@ -18,7 +18,6 @@ import Controls.KeyStrokes.Movements;
 // Esta classe centraliza o controle do jogo, ela é responsável por manter todos os objetos em uso
 public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener {
     public Drawer drawer;
-    private EventBus eventBus;
     private Controller controller = new Controller(this);
     private Graphics graphics;
     private Movements movements;
@@ -28,7 +27,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private GameLevel currentLevel;
     private GameManager gameManager;
 
-    public Screen(Drawer drawer, GameManager gameManager) throws Exception {
+    public Screen(Drawer drawer, GameManager gameManager){
         timer = new SerializableTimer(); // Instancia timer que contrlará redesenhos e movimentos
         this.drawer = drawer;
         this.gameManager = gameManager;
@@ -56,7 +55,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
         // Instancia EventBus e registra eventos
         EventBus.setInstance(this, 15);
-        eventBus = EventBus.getInstance();
+        EventBus eventBus = EventBus.getInstance();
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
@@ -73,7 +72,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("set-hero-lives", new SetHeroLivesEvent());
 
         // Cria herói
-        Hero hero = new Hero(eventBus, 1, 1);
+        Hero hero = new Hero(1, 1);
         this.addElement(hero);
         gameManager.state.setHero(hero);
         eventBus.emit("set-hero-lives", hero);
@@ -118,10 +117,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public InteractionMap getInteractionMap() {
         return gameManager.state.getInteractionMap();
-    }
-
-    public EventBus getEventBus() {
-        return eventBus;
     }
 
     public Timer getTimer() {

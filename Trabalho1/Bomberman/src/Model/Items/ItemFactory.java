@@ -8,24 +8,24 @@ import Tools.Position.Position;
 
 // Esta classe cria itens aleatóriamente
 public class ItemFactory {
-    public static Item createItem(EventBus eventBus, Position position, int itemNumber) {
+    public static Item createItem(Position position, int itemNumber) {
         switch (itemNumber) {
             case 0:
-                return new BombItem(eventBus, position);
+                return new BombItem(position);
             case 1:
-                return new ExtraLifeItem(eventBus, position);
+                return new ExtraLifeItem(position);
             case 2:
-                return new SpeedUpItem(eventBus, position);
+                return new SpeedUpItem(position);
             case 3:
-                return new BombIntensityItem(eventBus, position);
+                return new BombIntensityItem(position);
         }
         return null;
     }
 
-    public static void dropItem(EventBus eventBus, Element element) {
+    public static void dropItem(Element element) {
         Random random = new Random();
         int itemNumber = random.nextInt(4);
-        Item item = ItemFactory.createItem(eventBus, element.getPosition(), itemNumber);
-        eventBus.emit("create-element", item);
+        Item item = ItemFactory.createItem(element.getPosition(), itemNumber);
+        EventBus.getInstance().emit("create-element", item);
     }
 }

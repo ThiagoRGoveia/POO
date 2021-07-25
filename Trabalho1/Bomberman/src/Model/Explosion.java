@@ -12,8 +12,8 @@ import Tools.Position.Position;
 public abstract class Explosion extends AnimatedElement {
     protected int intensity;
 
-    protected Explosion(EventBus eventBus, Position position, int intensity) {
-        super(eventBus, position);
+    protected Explosion(Position position, int intensity) {
+        super(position);
         this.intensity = intensity;
         this.setTraversable(true);
     }
@@ -44,11 +44,11 @@ public abstract class Explosion extends AnimatedElement {
         );
         if (!Position.isPositionOutOfBoundaries(newPosition)) {
             if (intensity == 0) {
-                explodeUp = new VerticalUpLastExplosion(eventBus, newPosition);
+                explodeUp = new VerticalUpLastExplosion(newPosition);
             } else {
-                explodeUp = new VerticalUpMiddleExplosion(eventBus, intensity - 1, newPosition);
+                explodeUp = new VerticalUpMiddleExplosion(intensity - 1, newPosition);
             }
-            this.eventBus.emit("create-explosion", explodeUp);
+            EventBus.getInstance().emit("create-explosion", explodeUp);
         }
         setExplosionFinishTimer();
     }
@@ -60,15 +60,15 @@ public abstract class Explosion extends AnimatedElement {
         );
         if (!Position.isPositionOutOfBoundaries(newPosition)) {
                 if (intensity == 0) {
-                explodeDown = new VerticalDownLastExplosion(eventBus, newPosition);
+                explodeDown = new VerticalDownLastExplosion(newPosition);
             } else {
-                explodeDown = new VerticalDownMiddleExplosion(eventBus, intensity - 1, newPosition);
+                explodeDown = new VerticalDownMiddleExplosion(intensity - 1, newPosition);
             }
             explodeDown.setPosition(
                 position.getRow().getCoordinate().value + 1,
                 position.getColumn().getCoordinate().value
             );
-            this.eventBus.emit("create-explosion", explodeDown);
+            EventBus.getInstance().emit("create-explosion", explodeDown);
         }
         setExplosionFinishTimer();
     }
@@ -80,11 +80,11 @@ public abstract class Explosion extends AnimatedElement {
         );
         if (!Position.isPositionOutOfBoundaries(newPosition)) {
             if (intensity == 0) {
-                explodeLeft = new HoriziontalLeftLastExplosion(eventBus, newPosition);
+                explodeLeft = new HoriziontalLeftLastExplosion(newPosition);
             } else {
-                explodeLeft = new HorizontalLeftMiddleExplosion(eventBus, intensity - 1, newPosition);
+                explodeLeft = new HorizontalLeftMiddleExplosion(intensity - 1, newPosition);
             }
-            this.eventBus.emit("create-explosion", explodeLeft);
+            EventBus.getInstance().emit("create-explosion", explodeLeft);
         }
         setExplosionFinishTimer();
     }
@@ -96,19 +96,19 @@ public abstract class Explosion extends AnimatedElement {
         );
         if (!Position.isPositionOutOfBoundaries(newPosition)) {
             if (intensity == 0) {
-                explodeRight = new HorizontalRightLastExplosion(eventBus, newPosition);
+                explodeRight = new HorizontalRightLastExplosion(newPosition);
             } else {
-                explodeRight = new HorizontalRightMiddleExplosion(eventBus, intensity - 1, newPosition);
+                explodeRight = new HorizontalRightMiddleExplosion(intensity - 1, newPosition);
             }
-            this.eventBus.emit("create-explosion", explodeRight);
+            EventBus.getInstance().emit("create-explosion", explodeRight);
         }
         setExplosionFinishTimer();
     }
 
     // Remove explosão da tela e do mapa de interação
     private void finishExplosion() {
-        this.eventBus.emit("remove-element", this);
-        this.eventBus.emit("remove-element-from-map", this);
+        EventBus.getInstance().emit("remove-element", this);
+        EventBus.getInstance().emit("remove-element-from-map", this);
     }
 
     // Programa final da explosão
@@ -121,7 +121,7 @@ public abstract class Explosion extends AnimatedElement {
         this.createScheduledTask(
             new Schedule(task, 260)
         );
-        this.eventBus.emit("create-schedule", this);
+        EventBus.getInstance().emit("create-schedule", this);
     }
 
     public int getIntensity(){

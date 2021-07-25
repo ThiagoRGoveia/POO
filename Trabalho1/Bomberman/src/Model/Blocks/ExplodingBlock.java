@@ -4,7 +4,6 @@ import java.util.Random;
 import Controls.SerializableTimerTask;
 
 import Model.AnimatedElement;
-import Model.Element;
 import Model.Explosion;
 import Model.Hero;
 import Model.Enemies.Enemy;
@@ -16,20 +15,20 @@ import Tools.Position.Position;
 // Esse elemento substituirá um block recém destruído
 public class ExplodingBlock extends AnimatedElement {
 
-    protected ExplodingBlock(EventBus eventBus, Position position) {
-        super(eventBus, position);
+    protected ExplodingBlock(Position position) {
+        super(position);
         this.setAnimatorName("floor-obstacle-destruction");
-        eventBus.emit("create-animator", this);
+        EventBus.getInstance().emit("create-animator", this);
         this.setTraversable(true);
         this.setImmortal(false);
         this.createScheduledTask(
             getTerminationSchedule()
         );
-        this.eventBus.emit("create-schedule", this);
+        EventBus.getInstance().emit("create-schedule", this);
     }
 
-    public ExplodingBlock(EventBus eventBus, int row, int column) {
-        this(eventBus, new Position(row, column));
+    public ExplodingBlock(int row, int column) {
+        this(new Position(row, column));
     }
 
     public void interact(Hero hero) {
@@ -57,7 +56,7 @@ public class ExplodingBlock extends AnimatedElement {
         return new Schedule(
              new SerializableTimerTask(){
                  public void run() {
-                    ItemFactory.dropItem(eventBus, block);
+                    ItemFactory.dropItem(block);
                  }
              },
              100
@@ -73,7 +72,7 @@ public class ExplodingBlock extends AnimatedElement {
             this.createScheduledTask(
                 sheduleItemDrop()
             );
-            this.eventBus.emit("create-schedule", this);
+            EventBus.getInstance().emit("create-schedule", this);
         }
     }
 

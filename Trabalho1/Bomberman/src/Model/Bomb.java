@@ -15,19 +15,19 @@ public class Bomb extends AnimatedElement {
     private int intensity;
     private Hero hero;
 
-    public Bomb (EventBus eventBus, int intensity, Position position, Hero hero) {
-        super(eventBus,position);
+    public Bomb (int intensity, Position position, Hero hero) {
+        super(position);
         this.traversable = true;
         this.intensity = intensity;
         this.setAnimatorName("bomb");
-        eventBus.emit("create-animator", this); // pedir animador
+        EventBus.getInstance().emit("create-animator", this); // pedir animador
         setTraversable(true);
         setExplosionTimer(); // iniciar timer
         this.hero = hero;
     }
 
-    public Bomb(EventBus eventBus, int intensity, int row, int column, Hero hero) {
-        this(eventBus, intensity, new Position(row, column), hero);
+    public Bomb(int intensity, int row, int column, Hero hero) {
+        this(intensity, new Position(row, column), hero);
     }
 
     private void setExplosionTimer() {
@@ -39,14 +39,14 @@ public class Bomb extends AnimatedElement {
         this.createScheduledTask(
             new Schedule(explosionTimer, 4000) // Explodir depois de 4 segundos
         );
-        this.eventBus.emit("create-schedule", this);
+        EventBus.getInstance().emit("create-schedule", this);
     }
 
     private void explode() {
         this.hero.decrementNumberOfBombsPlaced();
-        this.eventBus.emit("remove-element", this);
-        FirstExplosion firstExplosion = new FirstExplosion(eventBus, intensity, this.getPosition());
-        this.eventBus.emit("create-explosion", firstExplosion);
+        EventBus.getInstance().emit("remove-element", this);
+        FirstExplosion firstExplosion = new FirstExplosion(intensity, this.getPosition());
+        EventBus.getInstance().emit("create-explosion", firstExplosion);
     }
     // Se tornar intranponível após o heoi sair de cima da bomba
     public void interact(Hero hero) {

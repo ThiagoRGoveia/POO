@@ -26,16 +26,16 @@ public final class Hero extends MovableElement {
     private int bombIntensity = 1;
     private int numberOfLives;
 
-    public Hero(EventBus eventBus, Position position) {
-        super(eventBus, position, 10);
+    public Hero(Position position) {
+        super(position, 10);
         this.setTraversable(true);
         setDeathAnimator();
         isLocked = false;
         numberOfLives = 3;
     }
 
-    public Hero(EventBus eventBus, int row, int column) {
-        this(eventBus, new Position(row, column));
+    public Hero(int row, int column) {
+        this(new Position(row, column));
     }
 
     public void resetToLastPosition(){
@@ -46,7 +46,6 @@ public final class Hero extends MovableElement {
     public void placeBomb() {
         if (this.numberOfBombsPlaced < this.maxNumberOfBombs) {
             Bomb bomb = new Bomb(
-                this.eventBus,
                 bombIntensity,
                 new Position(
                     new Row(
@@ -62,7 +61,7 @@ public final class Hero extends MovableElement {
                 ),
                 this
             );
-            this.eventBus.emit("create-element", bomb);
+            EventBus.getInstance().emit("create-element", bomb);
             this.incrementNumberOfBombsPlaced();
         }
     }
@@ -81,10 +80,10 @@ public final class Hero extends MovableElement {
         if (!isDead && !isImmortal) { // Evitar morte quando ele está imortal ou já esta morto
             decrementNumberOfLives();
             if (numberOfLives == 0) {
-                eventBus.emit("game-over", this); // Se o número de vidas zerar, game over
+                EventBus.getInstance().emit("game-over", this); // Se o número de vidas zerar, game over
                 return;
             }
-            eventBus.emit("set-hero-lives", this);
+            EventBus.getInstance().emit("set-hero-lives", this);
             this.isLocked = true;
             this.isDead = true;
             this.activeAnimator.stop(); // Parar animação atual
@@ -122,7 +121,7 @@ public final class Hero extends MovableElement {
                     2000
                 )
             );
-            this.eventBus.emit("create-schedule", this);
+            EventBus.getInstance().emit("create-schedule", this);
             // O heroi deve permanecer imortal por 5 segundos
             this.createScheduledTask(
                 new Schedule(
@@ -134,14 +133,14 @@ public final class Hero extends MovableElement {
                     7000
                 )
             );
-            this.eventBus.emit("create-schedule", this);
+            EventBus.getInstance().emit("create-schedule", this);
         }
     }
 
     public void processMovement() {
         if (!isLocked) {
             if (!Position.isPositionOutOfBoundaries(this.nextPosition)) {
-                this.eventBus.emit("verify-element-interaction", this);
+                EventBus.getInstance().emit("verify-element-interaction", this);
                 if (this.interactingElement != null && this.interactingElement != this) {
                     this.interactingElement.interact(this);
                     if (this.interactingElement.isTraversable()) {
@@ -275,7 +274,7 @@ public final class Hero extends MovableElement {
 
     public void incrementNumberOfLives() {
         this.numberOfLives++;
-        eventBus.emit("set-hero-lives", this);
+        EventBus.getInstance().emit("set-hero-lives", this);
     }
 
     public void decrementNumberOfLives() {

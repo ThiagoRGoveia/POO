@@ -1,20 +1,19 @@
 package Model.Items;
 
-import Model.Element;
 import Model.Hero;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public class BombIntensityItem extends Item {
 
-    protected BombIntensityItem(EventBus eventBus, Position position) {
-        super(eventBus, position);
+    protected BombIntensityItem(Position position) {
+        super(position);
         this.setAnimatorName("bomb-intensity-item");
-        eventBus.emit("create-animator", this);
+        EventBus.getInstance().emit("create-animator", this);
     }
 
-    public BombIntensityItem(EventBus eventBus, int row, int column) {
-        this(eventBus, new Position(row, column));
+    public BombIntensityItem(int row, int column) {
+        this(new Position(row, column));
     }
 
     public void pickUp(Hero hero) {

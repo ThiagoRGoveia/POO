@@ -36,11 +36,7 @@ public class EventBus implements Serializable {
         instance = new EventBus(screen, size);
     }
 
-    public static EventBus getInstance() throws Exception {
-        if (instance == null) {
-            throw new Exception("EventBus não inicializado");
-        }
+    public static EventBus getInstance() {
         return instance;
-
     }
 }

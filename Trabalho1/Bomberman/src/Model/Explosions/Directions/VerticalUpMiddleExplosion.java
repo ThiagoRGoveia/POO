@@ -1,13 +1,12 @@
 package Model.Explosions.Directions;
 
-import Model.Element;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public class VerticalUpMiddleExplosion  extends VerticalMiddleExplosion {
 
-    public VerticalUpMiddleExplosion(EventBus eventBus, int intensity, Position position) {
-        super(eventBus, intensity, position);
+    public VerticalUpMiddleExplosion(int intensity, Position position) {
+        super(intensity, position);
     }
 
     public void propagateExplosion(int intensity) {
@@ -17,7 +16,7 @@ public class VerticalUpMiddleExplosion  extends VerticalMiddleExplosion {
     public void changeToLastExplosion() {
         this.animator.stop();
         this.setAnimatorName("vertical-up-last-explosion");
-        eventBus.emit("create-animator", this);
+        EventBus.getInstance().emit("create-animator", this);
         super.changeToLastExplosion();
     }
 

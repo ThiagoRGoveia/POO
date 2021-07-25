@@ -1,21 +1,20 @@
 package Model.Items;
 
-import Model.Element;
 import Model.Hero;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
 public class BombItem extends Item  {
 
-    protected BombItem(EventBus eventBus, Position position) {
-        super(eventBus, position);
+    protected BombItem(Position position) {
+        super(position);
         this.setAnimatorName("bomb-item");
-        eventBus.emit("create-animator", this);
+        EventBus.getInstance().emit("create-animator", this);
         setTraversable(true);
     }
 
-    public BombItem(EventBus eventBus, int row, int column) {
-        this(eventBus, new Position(row, column));
+    public BombItem(int row, int column) {
+        this(new Position(row, column));
     }
 
     public void pickUp(Hero hero) {
