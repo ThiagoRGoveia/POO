@@ -16,7 +16,6 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 GameManager gm = new GameManager();
-                gm.createNewScreen();
                 gm.start();
             }
         });
