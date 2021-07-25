@@ -164,6 +164,7 @@ public class GameManager implements Serializable {
         } else {
             currentLevel = levels[levelState.getLevelIndex()];
             currentLevel.begin(); // Iniciar próximo nível
+            currentLevel.draw(); // Renderizar o próximo nível
         }
     }
 
