@@ -4,15 +4,15 @@ import Model.AnimatedElement;
 import Model.Explosion;
 import Model.Hero;
 import Model.Enemies.Enemy;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 // Esta classe define um bloco indestrutível
 public class IndestructableBlock extends AnimatedElement {
     protected IndestructableBlock(Position position) {
         super(position);
         this.setAnimatorName("indestructable-obstacle");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("indestructable-obstacle");
         this.setImmortal(true);
         this.setTraversable(false);
     }

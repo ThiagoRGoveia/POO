@@ -14,7 +14,6 @@ public class Main {
      * @throws Exception
      */
     public static void main(String[] args) throws Exception {
-
         Scanner sc = new Scanner(System.in);
         System.out.println("Bem vindo ao jogo Bomberman!");
         System.out.println("Escolha uma opção");

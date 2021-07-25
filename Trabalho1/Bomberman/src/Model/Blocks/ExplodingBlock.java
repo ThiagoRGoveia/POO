@@ -1,6 +1,7 @@
 package Model.Blocks;
 
 import Controls.SerializableTimerTask;
+import Controls.AnimatorSingleton;
 
 import Model.AnimatedElement;
 import Model.Explosion;
@@ -17,8 +18,7 @@ public class ExplodingBlock extends AnimatedElement {
 
     protected ExplodingBlock(Position position) {
         super(position);
-        this.setAnimatorName("floor-obstacle-destruction");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("floor-obstacle-destruction");
         this.setTraversable(true);
         this.setImmortal(false);
     }

@@ -1,5 +1,6 @@
 package Model;
 
+import Controls.AnimatorSingleton;
 import Controls.SerializableTimerTask;
 
 import Model.Enemies.Enemy;
@@ -19,8 +20,7 @@ public class Bomb extends AnimatedElement {
         super(position);
         this.traversable = true;
         this.intensity = intensity;
-        this.setAnimatorName("bomb");
-        EventBus.getInstance().emit("create-animator", this); // pedir animador
+        this.animator = AnimatorSingleton.getAnimator("bomb");
         setTraversable(true);
         this.hero = hero;
     }

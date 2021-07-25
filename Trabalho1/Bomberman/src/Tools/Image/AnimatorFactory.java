@@ -8,11 +8,11 @@ import java.util.HashMap;
 // de uma string no HashMap
 public class AnimatorFactory implements Serializable {
     private HashMap<String,Creatable> animatorMap;
-    private ImageFactory imageLoader;
+    private ImageFactory imageFactory;
 
-    public AnimatorFactory(ImageFactory imageLoader) {
+    public AnimatorFactory(ImageFactory imageFactory) {
         animatorMap = new HashMap<String,Creatable>(20);
-        this.imageLoader = imageLoader;
+        this.imageFactory = imageFactory;
 
         animatorMap.put("bomb", new BombAnimator());
         animatorMap.put("first-explosion", new FirstExplosionAnimator());
@@ -37,12 +37,16 @@ public class AnimatorFactory implements Serializable {
 
     }
 
+    public void setImageFactory(ImageFactory imageFactory) {
+        this.imageFactory = imageFactory;
+    }
+
     class BombAnimator implements Creatable {
         public Animator create() {
             return new Animator(
                 true,
                 500,
-                imageLoader.getImageList("bomb")
+                imageFactory.getImageList("bomb")
               );
             }
     }
@@ -52,7 +56,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("first-explosion")
+                imageFactory.getImageList("first-explosion")
          );
 }
     }
@@ -62,7 +66,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-left-last-explosion")
+                imageFactory.getImageList("horizontal-left-last-explosion")
          );
 }
     }
@@ -72,7 +76,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-middle-explosion")
+                imageFactory.getImageList("horizontal-middle-explosion")
          );
 }
     }
@@ -82,7 +86,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("horizontal-right-last-explosion")
+                imageFactory.getImageList("horizontal-right-last-explosion")
          );
 }
     }
@@ -92,7 +96,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-down-last-explosion")
+                imageFactory.getImageList("vertical-down-last-explosion")
          );
 }
     }
@@ -102,7 +106,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-middle-explosion")
+                imageFactory.getImageList("vertical-middle-explosion")
          );
 }
     }
@@ -112,7 +116,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 false,
                 100,
-                imageLoader.getImageList("vertical-up-last-explosion")
+                imageFactory.getImageList("vertical-up-last-explosion")
          );
 }
     }
@@ -122,7 +126,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 true,
                 100,
-                imageLoader.getImageList("enemy-vertical-up-movement")
+                imageFactory.getImageList("enemy-vertical-up-movement")
               );
             }
     }
@@ -132,7 +136,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
                 true,
                 100,
-                imageLoader.getImageList("enemy-vertical-down-movement")
+                imageFactory.getImageList("enemy-vertical-down-movement")
               );
             }
     }
@@ -142,7 +146,7 @@ public class AnimatorFactory implements Serializable {
         return new Animator(
             true,
             100,
-            imageLoader.getImageList("enemy-horizontal-left-movement")
+            imageFactory.getImageList("enemy-horizontal-left-movement")
           );
         }
     }
@@ -152,7 +156,7 @@ public class AnimatorFactory implements Serializable {
         return new Animator(
             true,
             100,
-            imageLoader.getImageList("enemy-horizontal-right-movement")
+            imageFactory.getImageList("enemy-horizontal-right-movement")
             );
         }
     }
@@ -160,7 +164,7 @@ public class AnimatorFactory implements Serializable {
     class FloorStaticAnimator implements Creatable {
     public Animator create() {
         return new Animator(
-            imageLoader.getImageList("floor-static").get(0)
+            imageFactory.getImageList("floor-static").get(0)
             );
         }
     }
@@ -170,7 +174,7 @@ public class AnimatorFactory implements Serializable {
         return new Animator(
             true,
             500,
-            imageLoader.getImageList("floor-obstacle")
+            imageFactory.getImageList("floor-obstacle")
             );
         }
     }
@@ -180,7 +184,7 @@ public class AnimatorFactory implements Serializable {
         return new Animator(
             false,
             80,
-            imageLoader.getImageList("floor-obstacle-destruction")
+            imageFactory.getImageList("floor-obstacle-destruction")
             );
         }
     }
@@ -188,7 +192,7 @@ public class AnimatorFactory implements Serializable {
     class IndestructableObstacleAnimator implements Creatable {   //FloorObstacleAnimator
     public Animator create() {
         return new Animator(
-            imageLoader.getImageList("indestructable-obstacle").get(0)
+            imageFactory.getImageList("indestructable-obstacle").get(0)
             );
         }
     }
@@ -198,7 +202,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("bomb-item")
+            imageFactory.getImageList("bomb-item")
             );
         }
     }
@@ -208,7 +212,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("bomb-intensity-item")
+            imageFactory.getImageList("bomb-intensity-item")
             );
         }
     }
@@ -218,7 +222,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("speed-up-item")
+            imageFactory.getImageList("speed-up-item")
             );
         }
     }
@@ -228,7 +232,7 @@ public class AnimatorFactory implements Serializable {
             return new Animator(
             true,
             500,
-            imageLoader.getImageList("extra-life-item")
+            imageFactory.getImageList("extra-life-item")
             );
         }
     }

@@ -1,15 +1,14 @@
 package Model.Items;
 
 import Model.Hero;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 public class ExtraLifeItem extends Item {
 
     protected ExtraLifeItem(Position position) {
         super(position);
-        this.setAnimatorName("extra-life-item");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("extra-life-item");
     }
 
     public ExtraLifeItem(int row, int column) {

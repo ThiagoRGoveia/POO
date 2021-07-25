@@ -1,14 +1,13 @@
 package Model.Explosions;
 
 import Model.Explosion;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 public class FirstExplosion extends Explosion implements Propagable {
     public FirstExplosion (int intensity, Position position) {
         super(position, intensity);
-        this.setAnimatorName("first-explosion");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("first-explosion");
     }
 
     // Propaga explosão nas 4 direções

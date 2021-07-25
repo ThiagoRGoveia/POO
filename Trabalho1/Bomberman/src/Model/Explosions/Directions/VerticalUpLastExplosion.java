@@ -1,15 +1,14 @@
 package Model.Explosions.Directions;
 
 import Model.Explosions.LastExplosion;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 public class VerticalUpLastExplosion extends LastExplosion {
 
     public VerticalUpLastExplosion(Position position) {
         super(position);
-        this.setAnimatorName("vertical-up-last-explosion");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("vertical-up-last-explosion");
     }
 
     public void propagateExplosion(int intensity) {}

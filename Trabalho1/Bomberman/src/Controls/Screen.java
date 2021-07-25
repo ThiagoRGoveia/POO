@@ -1,7 +1,6 @@
 package Controls;
 
 import Tools.*;
-import Tools.Image.Animator;
 import Tools.Image.AnimatorFactory;
 
 import java.awt.*;
@@ -51,14 +50,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
     public Timer getTimer() {
         return timer;
-    }
-
-    public Animator getAnimator(String animatorName) {
-        return animatorFactory.getAnimator(animatorName);
-    }
-
-    public void setAnimatorFactory(AnimatorFactory animatorFactory) {
-        this.animatorFactory = animatorFactory;
     }
 
     public GameManager getGameManager() {

@@ -2,15 +2,14 @@ package Model.Items;
 
 
 import Model.Hero;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 public class SpeedUpItem extends Item {
 
     protected SpeedUpItem(Position position) {
         super(position);
-        this.setAnimatorName("speed-up-item");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("speed-up-item");
     }
 
     public SpeedUpItem(int row, int column) {

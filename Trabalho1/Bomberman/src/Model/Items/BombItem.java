@@ -1,16 +1,14 @@
 package Model.Items;
 
 import Model.Hero;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 public class BombItem extends Item  {
 
     protected BombItem(Position position) {
         super(position);
-        this.setAnimatorName("bomb-item");
-        EventBus.getInstance().emit("create-animator", this);
-        setTraversable(true);
+        this.animator = AnimatorSingleton.getAnimator("bomb-item");
     }
 
     public BombItem(int row, int column) {

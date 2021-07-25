@@ -106,12 +106,11 @@ public class GameManager implements Serializable {
     }
 
     public void setupEventBus() {
-        EventBus.setInstance(this, 15);
+        EventBus.setInstance(this, 14);
         EventBus eventBus = EventBus.getInstance();
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
-        eventBus.on("create-animator", new CreateAnimatorEvent());
         eventBus.on("create-schedule", new CreateScheduleEvent());
         eventBus.on("create-schedule-loop", new CreateScheduleEventLoop());
         eventBus.on("verify-element-interaction", new VerifyElementInteractionEvent());

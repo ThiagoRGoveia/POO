@@ -1,7 +1,7 @@
 package Model.Explosions.Directions;
 
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 public class HorizontalRightMiddleExplosion extends HorizontalMiddleExplosion {
 
@@ -15,8 +15,7 @@ public class HorizontalRightMiddleExplosion extends HorizontalMiddleExplosion {
 
     public void changeToLastExplosion() {
         this.animator.stop();
-        this.setAnimatorName("horizontal-right-last-explosion");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("horizontal-right-last-explosion");
     }
 
 }

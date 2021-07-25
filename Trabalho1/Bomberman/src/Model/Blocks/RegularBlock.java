@@ -7,13 +7,13 @@ import Model.Hero;
 import Model.Enemies.Enemy;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 // Esta classe define um bloco regular
 public class RegularBlock extends AnimatedElement {
     protected RegularBlock(Position position) {
         super(position);
-        this.setAnimatorName("floor-obstacle");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("floor-obstacle");
         this.setImmortal(false);
         this.setTraversable(false);
     }

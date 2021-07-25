@@ -1,15 +1,15 @@
 package Model.Items;
 
 import Model.Hero;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
+import Controls.AnimatorSingleton;
 
 public class BombIntensityItem extends Item {
 
     protected BombIntensityItem(Position position) {
         super(position);
-        this.setAnimatorName("bomb-intensity-item");
-        EventBus.getInstance().emit("create-animator", this);
+        this.animator = AnimatorSingleton.getAnimator("bomb-intensity-item");
+
     }
 
     public BombIntensityItem(int row, int column) {

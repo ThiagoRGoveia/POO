@@ -2,9 +2,9 @@ package Model.Enemies;
 
 import java.util.ArrayList;
 import Tools.RandomSingleton;
-import Tools.Events.EventBus;
 import Tools.Position.Position;
 import Tools.Image.Animator;
+import Controls.AnimatorSingleton;
 
 // Define animações dos inimigos
 public class BasicEnemy extends Enemy {
@@ -21,27 +21,19 @@ public class BasicEnemy extends Enemy {
 
 
     public void setDownAnimator() {
-        this.setAnimatorName("enemy-vertical-down-movement");
-        EventBus.getInstance().emit("create-animator", this);
-        this.downAnimator = this.animator;
+        this.downAnimator = AnimatorSingleton.getAnimator("enemy-vertical-down-movement");
     }
 
     public void setLeftAnimator() {
-        this.setAnimatorName("enemy-horizontal-left-movement");
-        EventBus.getInstance().emit("create-animator", this);
-        this.leftAnimator = this.animator;
+        this.leftAnimator = AnimatorSingleton.getAnimator("enemy-horizontal-left-movement");
     }
 
     public void setRightAnimator() {
-        this.setAnimatorName("enemy-horizontal-right-movement");
-        EventBus.getInstance().emit("create-animator", this);
-        this.rightAnimator = this.animator;
+        this.rightAnimator = AnimatorSingleton.getAnimator("enemy-horizontal-right-movement");
     }
 
     public void setUpAnimator() {
-        this.setAnimatorName("enemy-vertical-up-movement");
-        EventBus.getInstance().emit("create-animator", this);
-        this.upAnimator = this.animator;
+        this.upAnimator = AnimatorSingleton.getAnimator("enemy-vertical-up-movement");
     }
 
     public void setStopedAnimatorList() {
