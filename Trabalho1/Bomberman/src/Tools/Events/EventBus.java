@@ -12,7 +12,11 @@ public class EventBus implements Serializable {
     private Screen screen;
     private static EventBus instance;
 
-    public EventBus(Screen screen, int size) {
+    public EventBus() throws Exception {
+        throw new Exception("EventBus não pode ser instanciado diretamente");
+    }
+
+    private EventBus(Screen screen, int size) {
         eventMap = new LinkedHashMap<String,Event>(size);
         this.screen = screen;
     }
@@ -33,7 +37,9 @@ public class EventBus implements Serializable {
     }
 
     public static void setInstance(Screen screen, int size) {
-        instance = new EventBus(screen, size);
+        if (instance == null) {
+            instance = new EventBus(screen, size);
+        }
     }
 
     public static EventBus getInstance() {
