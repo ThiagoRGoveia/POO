@@ -6,7 +6,7 @@ import Model.Explosion;
 import Tools.InteractionMap;
 
 // Permite crirar uma explosão e fazê-la interagir com os elementos
-public class CreateExplosionEvent implements Event<Element> {
+public class CreateExplosionEvent implements Event {
 
     public void fire(Screen screen, Element element) {
         Explosion explosion = (Explosion) element;

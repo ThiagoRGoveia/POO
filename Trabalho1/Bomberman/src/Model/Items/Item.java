@@ -11,7 +11,7 @@ import Tools.Position.Position;
 
 // Esta classe define um item
 public abstract class Item extends AnimatedElement implements Pickable {
-    protected Item(EventBus<Element> eventBus, Position position) {
+    protected Item(EventBus eventBus, Position position) {
         super(eventBus, position);
     }
 

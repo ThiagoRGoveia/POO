@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.TimerTask;
+import Controls.SerializableTimerTask;
 
 import Model.Enemies.Enemy;
 import Model.Explosions.Directions.*;
@@ -12,7 +12,7 @@ import Tools.Position.Position;
 public abstract class Explosion extends AnimatedElement {
     protected int intensity;
 
-    protected Explosion(EventBus<Element> eventBus, Position position, int intensity) {
+    protected Explosion(EventBus eventBus, Position position, int intensity) {
         super(eventBus, position);
         this.intensity = intensity;
         this.setTraversable(true);
@@ -113,7 +113,7 @@ public abstract class Explosion extends AnimatedElement {
 
     // Programa final da explosão
     protected void setExplosionFinishTimer() {
-        TimerTask task = new TimerTask() {
+        SerializableTimerTask task = new SerializableTimerTask() {
             public void run() {
                 finishExplosion();
             }

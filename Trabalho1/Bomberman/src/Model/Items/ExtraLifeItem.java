@@ -7,13 +7,13 @@ import Tools.Position.Position;
 
 public class ExtraLifeItem extends Item {
 
-    protected ExtraLifeItem(EventBus<Element> eventBus, Position position) {
+    protected ExtraLifeItem(EventBus eventBus, Position position) {
         super(eventBus, position);
         this.setAnimatorName("extra-life-item");
         eventBus.emit("create-animator", this);
     }
 
-    public ExtraLifeItem(EventBus<Element> eventBus, int row, int column) {
+    public ExtraLifeItem(EventBus eventBus, int row, int column) {
         this(eventBus, new Position(row, column));
     }
 

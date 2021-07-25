@@ -1,7 +1,7 @@
 package Model.Enemies;
 
 import java.util.Random;
-import java.util.TimerTask;
+import Controls.SerializableTimerTask;
 
 import Model.Element;
 import Model.Explosion;
@@ -15,7 +15,7 @@ public abstract class Enemy extends MovableElement {
     private boolean isDead = false;
     protected static String[] directions = {"up", "down", "right", "left"}; // Direções disponíveis
 
-    protected Enemy(EventBus<Element>eventBus, Position position) {
+    protected Enemy(EventBus eventBus, Position position) {
         super(eventBus, position, 35);
     }
 
@@ -75,7 +75,7 @@ public abstract class Enemy extends MovableElement {
 
     public void moveUp() {
         changeAnimatorAndKillMovement(upAnimator, "up");
-        this.movementTimer = new TimerTask() {
+        this.movementTimer = new SerializableTimerTask() {
             public void run() {
                 nextPosition = position.getMovementUp();
                 processMovement();
@@ -86,7 +86,7 @@ public abstract class Enemy extends MovableElement {
 
     public void moveDown() {
         changeAnimatorAndKillMovement(downAnimator, "down");
-        this.movementTimer = new TimerTask() {
+        this.movementTimer = new SerializableTimerTask() {
             public void run() {
                 nextPosition = position.getMovementDown();
                 processMovement();
@@ -97,7 +97,7 @@ public abstract class Enemy extends MovableElement {
 
     public void moveRight() {
         changeAnimatorAndKillMovement(rightAnimator, "right");
-        this.movementTimer = new TimerTask() {
+        this.movementTimer = new SerializableTimerTask() {
             public void run() {
                 nextPosition = position.getMovementRight();
                 processMovement();
@@ -108,7 +108,7 @@ public abstract class Enemy extends MovableElement {
 
     public void moveLeft() {
         changeAnimatorAndKillMovement(leftAnimator, "left");
-        movementTimer = new TimerTask() {
+        movementTimer = new SerializableTimerTask() {
             public void run() {
                 nextPosition = position.getMovementLeft();
                 processMovement();

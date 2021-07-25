@@ -3,7 +3,7 @@ package Model;
 
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
-import java.util.TimerTask;
+import Controls.SerializableTimerTask;
 import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Image.Animator;
@@ -17,7 +17,7 @@ public abstract class MovableElement extends AnimatedElement {
     protected Animator downAnimator;
     protected Animator activeAnimator;
     protected ArrayList<Animator> stopedAnimatorList;
-    protected TimerTask movementTimer;
+    protected SerializableTimerTask movementTimer;
     protected int keysDown;
     protected Element interactingElement;
     protected Position nextPosition;
@@ -25,7 +25,7 @@ public abstract class MovableElement extends AnimatedElement {
     protected boolean isLocked;
 
 
-    protected MovableElement(EventBus<Element>eventBus, Position position, int speed) {
+    protected MovableElement(EventBus eventBus, Position position, int speed) {
         super(eventBus, position);
         this.keysDown = 0;
         setDownAnimator(); // Chama cada um dos animadores
@@ -79,7 +79,7 @@ public abstract class MovableElement extends AnimatedElement {
     public void moveUp() {
         if (movementDirection != "up" && !isLocked) {
             changeAnimatorAndKillMovement(upAnimator, "up");
-            this.movementTimer = new TimerTask() {
+            this.movementTimer = new SerializableTimerTask() {
                 public void run() {
                     nextPosition = position.getMovementUp();
                     processMovement();
@@ -92,7 +92,7 @@ public abstract class MovableElement extends AnimatedElement {
     public void moveDown() {
         if (movementDirection != "down" && !isLocked) {
             changeAnimatorAndKillMovement(downAnimator, "down");
-            this.movementTimer = new TimerTask() {
+            this.movementTimer = new SerializableTimerTask() {
                 public void run() {
                     nextPosition = position.getMovementDown();
                     processMovement();
@@ -105,7 +105,7 @@ public abstract class MovableElement extends AnimatedElement {
     public void moveRight() {
         if (movementDirection != "right" && !isLocked) {
             changeAnimatorAndKillMovement(rightAnimator, "right");
-            this.movementTimer = new TimerTask() {
+            this.movementTimer = new SerializableTimerTask() {
                 public void run() {
                     nextPosition = position.getMovementRight();
                     processMovement();
@@ -118,7 +118,7 @@ public abstract class MovableElement extends AnimatedElement {
     public void moveLeft() {
         if (movementDirection != "left" && !isLocked) {
             changeAnimatorAndKillMovement(leftAnimator, "left");
-            movementTimer = new TimerTask() {
+            movementTimer = new SerializableTimerTask() {
                 public void run() {
                     nextPosition = position.getMovementLeft();
                     processMovement();

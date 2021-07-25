@@ -12,11 +12,11 @@ import Tools.Position.Position;
 public abstract class Element implements Serializable, Drawable, Interactable {
     protected Position position;
     protected boolean traversable; /*Pode passar por cima?*/
-    protected EventBus<Element> eventBus;
+    protected EventBus eventBus;
     protected Schedule scheduledTask; // Tarefa a ser executada pela thread do jogo
     protected boolean isImmortal;
 
-    protected Element(EventBus<Element> eventBus, Position position) {
+    protected Element(EventBus eventBus, Position position) {
         this.eventBus = eventBus;
         this.position = position;
         isImmortal = false;

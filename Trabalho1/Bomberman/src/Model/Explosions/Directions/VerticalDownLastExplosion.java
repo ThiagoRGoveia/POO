@@ -7,7 +7,7 @@ import Tools.Position.Position;
 
 public class VerticalDownLastExplosion extends LastExplosion {
 
-    public VerticalDownLastExplosion(EventBus<Element>eventBus, Position position) {
+    public VerticalDownLastExplosion(EventBus eventBus, Position position) {
         super(eventBus,position);
         this.setAnimatorName("vertical-down-last-explosion");
         eventBus.emit("create-animator", this);

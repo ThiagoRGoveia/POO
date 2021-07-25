@@ -1,7 +1,7 @@
 package Model.Blocks;
 
 import java.util.Random;
-import java.util.TimerTask;
+import Controls.SerializableTimerTask;
 
 import Model.AnimatedElement;
 import Model.Element;
@@ -16,7 +16,7 @@ import Tools.Position.Position;
 // Esse elemento substituirá um block recém destruído
 public class ExplodingBlock extends AnimatedElement {
 
-    protected ExplodingBlock(EventBus<Element> eventBus, Position position) {
+    protected ExplodingBlock(EventBus eventBus, Position position) {
         super(eventBus, position);
         this.setAnimatorName("floor-obstacle-destruction");
         eventBus.emit("create-animator", this);
@@ -28,7 +28,7 @@ public class ExplodingBlock extends AnimatedElement {
         this.eventBus.emit("create-schedule", this);
     }
 
-    public ExplodingBlock(EventBus<Element> eventBus, int row, int column) {
+    public ExplodingBlock(EventBus eventBus, int row, int column) {
         this(eventBus, new Position(row, column));
     }
 
@@ -43,7 +43,7 @@ public class ExplodingBlock extends AnimatedElement {
     // Programa fim da explosão do bloco
     private Schedule getTerminationSchedule() {
         return new Schedule(
-            new TimerTask(){
+            new SerializableTimerTask(){
                 public void run() {
                     die();
                 }
@@ -55,7 +55,7 @@ public class ExplodingBlock extends AnimatedElement {
     private Schedule sheduleItemDrop() {
         final ExplodingBlock block = this;
         return new Schedule(
-             new TimerTask(){
+             new SerializableTimerTask(){
                  public void run() {
                     ItemFactory.dropItem(eventBus, block);
                  }

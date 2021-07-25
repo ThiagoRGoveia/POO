@@ -8,7 +8,7 @@ import Tools.Position.Position;
 
 // Esta classe cria itens aleatóriamente
 public class ItemFactory {
-    public static Item createItem(EventBus<Element> eventBus, Position position, int itemNumber) {
+    public static Item createItem(EventBus eventBus, Position position, int itemNumber) {
         switch (itemNumber) {
             case 0:
                 return new BombItem(eventBus, position);
@@ -22,7 +22,7 @@ public class ItemFactory {
         return null;
     }
 
-    public static void dropItem(EventBus<Element> eventBus, Element element) {
+    public static void dropItem(EventBus eventBus, Element element) {
         Random random = new Random();
         int itemNumber = random.nextInt(4);
         Item item = ItemFactory.createItem(eventBus, element.getPosition(), itemNumber);

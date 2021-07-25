@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 import Model.Enemies.Enemy;
 
-import java.util.TimerTask;
+import Controls.SerializableTimerTask;
 import java.awt.event.KeyEvent;
 
 import Tools.Schedule;
@@ -26,7 +26,7 @@ public final class Hero extends MovableElement {
     private int bombIntensity = 1;
     private int numberOfLives;
 
-    public Hero(EventBus<Element>eventBus, Position position) {
+    public Hero(EventBus eventBus, Position position) {
         super(eventBus, position, 10);
         this.setTraversable(true);
         setDeathAnimator();
@@ -34,7 +34,7 @@ public final class Hero extends MovableElement {
         numberOfLives = 3;
     }
 
-    public Hero(EventBus<Element>eventBus, int row, int column) {
+    public Hero(EventBus eventBus, int row, int column) {
         this(eventBus, new Position(row, column));
     }
 
@@ -97,7 +97,7 @@ public final class Hero extends MovableElement {
             this.createScheduledTask( // Criar tarefa para reviver a posição dentro de dois segundos
                 new Schedule(
                     // Programa respwan do heroi pra status parado na posição (1,1)
-                    new TimerTask(){
+                    new SerializableTimerTask(){
                         public void run() {
                             position.setPosition(
                                 new Position(
@@ -126,7 +126,7 @@ public final class Hero extends MovableElement {
             // O heroi deve permanecer imortal por 5 segundos
             this.createScheduledTask(
                 new Schedule(
-                    new TimerTask(){
+                    new SerializableTimerTask(){
                         public void run() {
                             isImmortal = false;
                         }

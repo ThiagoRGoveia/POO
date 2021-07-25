@@ -13,7 +13,7 @@ import Model.Element;
 public abstract class GameLevel implements Serializable {
     protected ImageFactory imageFactory;
     protected Screen screen;
-    protected EventBus<Element> eventBus;
+    protected EventBus eventBus;
 
     public GameLevel(Screen screen) {
         this.screen = screen;

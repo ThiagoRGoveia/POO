@@ -8,14 +8,14 @@ import java.io.Serializable;
 
 public class GameSaver implements Serializable {
 
-    private Screen screen;
+    private GameState gameState;
 
-    public GameSaver(Screen screen) {
-        this.screen = screen;
+    public GameSaver(GameState gameState) {
+        this.gameState = gameState;
     }
 
     public void save() {
-        saveObject(screen);
+        saveObject(gameState);
     }
 
     public void saveObject(Serializable o) {

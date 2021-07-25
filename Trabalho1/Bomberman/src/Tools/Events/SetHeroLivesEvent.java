@@ -5,7 +5,7 @@ import Model.Element;
 import Model.Hero;
 
 // Permite setar o numero de vidas do herói no título da janela
-public class SetHeroLivesEvent implements Event<Element> {
+public class SetHeroLivesEvent implements Event {
 
     public void fire(Screen screen, Element element) {
         Hero hero = (Hero) element;

@@ -5,7 +5,7 @@ import Model.Element;
 import Tools.InteractionMap;
 
 // Permite criar um elemento no mapa e inseri-lo no mapa de interação
-public class CreateElementsEvent implements Event<Element> {
+public class CreateElementsEvent implements Event {
 
     public void fire(Screen screen, Element element) {
         InteractionMap interactionMap = screen.getInteractionMap();

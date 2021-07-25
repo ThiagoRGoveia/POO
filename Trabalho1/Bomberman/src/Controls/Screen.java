@@ -11,37 +11,31 @@ import Tools.Position.Position;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.io.Serializable;
 import java.util.*;
 
 import Controls.KeyStrokes.Movements;
 
 // Esta classe centraliza o controle do jogo, ela é responsável por manter todos os objetos em uso
-public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener, Serializable {
+public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener {
     public Drawer drawer;
-    private EventBus<Element> eventBus;
-    private Hero hero;
-    private ArrayList<Element> elements;
-    private ArrayList<Enemy> enemies;
+    private EventBus eventBus;
     private Controller controller = new Controller(this);
     private Graphics graphics;
     private Movements movements;
-    private InteractionMap interactionMap;
     private AnimatorFactory animatorFactory;
     private SerializableTimer timer;
     private GameLevel[] levels;
     private GameLevel currentLevel;
-    private LevelState levelState;
     private GameManager gameManager;
 
-    public Screen(Drawer drawer, GameManager gameManager) {
+    public Screen(Drawer drawer, GameManager gameManager) throws Exception {
         timer = new SerializableTimer(); // Instancia timer que contrlará redesenhos e movimentos
         this.drawer = drawer;
         this.gameManager = gameManager;
         drawer.setScreen(this);
 
-        elements = new ArrayList<Element>(400);
-        enemies = new ArrayList<Enemy>(20);
+        gameManager.state.setElements(new ArrayList<Element>(400));
+        gameManager.state.setEnemies(new ArrayList<Enemy>(20));
 
         this.addMouseListener(this); /*mouse*/
         this.addKeyListener(this);  /*teclado*/
@@ -61,7 +55,8 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         );
 
         // Instancia EventBus e registra eventos
-        eventBus = new EventBus<Element>(this, 15);
+        EventBus.setInstance(this, 15);
+        eventBus = EventBus.getInstance();
         eventBus.on("create-element", new CreateElementsEvent());
         eventBus.on("remove-element", new RemoveElementsEvent());
         eventBus.on("create-explosion", new CreateExplosionEvent());
@@ -78,12 +73,13 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         eventBus.on("set-hero-lives", new SetHeroLivesEvent());
 
         // Cria herói
-        hero = new Hero(eventBus, 1, 1);
+        Hero hero = new Hero(eventBus, 1, 1);
         this.addElement(hero);
+        gameManager.state.setHero(hero);
         eventBus.emit("set-hero-lives", hero);
 
         movements = new Movements();
-        interactionMap= new InteractionMap();
+        gameManager.state.setInteractionMap(new InteractionMap());
 
         // Instancia fases
         levels = new GameLevel[4];
@@ -93,27 +89,27 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         levels[3] = new Level4(this);
 
         // Inicia primeira fase
-        levelState = new LevelState(0);
-        currentLevel = levels[0];
+        gameManager.state.setLevelState(new LevelState(0));
+        currentLevel = levels[gameManager.state.getLevelState().getLevelIndex()];
 
         currentLevel.begin();
 
     }
 
     public void addElement(Element element) {
-        elements.add(element);
+        gameManager.state.getElements().add(element);
     }
 
     public void removeElement(Element element) {
-        elements.remove(element);
+        gameManager.state.getElements().remove(element);
     }
 
     public void addEnemy(Enemy enemy) {
-        enemies.add(enemy);
+        gameManager.state.getEnemies().add(enemy);
     }
 
     public void removeEnemy(Enemy enemy) {
-        enemies.remove(enemy);
+        gameManager.state.getEnemies().remove(enemy);
     }
 
     public Graphics getGraphicsBuffer(){
@@ -121,10 +117,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public InteractionMap getInteractionMap() {
-        return interactionMap;
+        return gameManager.state.getInteractionMap();
     }
 
-    public EventBus<Element>getEventBus() {
+    public EventBus getEventBus() {
         return eventBus;
     }
 
@@ -146,17 +142,18 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void nextLevel() {
-        Hero hero = (Hero) elements.get(0); // Reservar herói
-        elements.clear(); // Limpar elementos a renderizar
-        for (Enemy enemy: enemies) { // Parar inimigos
+        LevelState levelState = gameManager.state.getLevelState();
+        Hero hero = (Hero) gameManager.state.getElements().get(0); // Reservar herói
+        gameManager.state.getElements().clear(); // Limpar elementos a renderizar
+        for (Enemy enemy: gameManager.state.getEnemies()) { // Parar inimigos
             enemy.stop();
         }
-        enemies.clear(); // Remover inimigos
-        interactionMap.clear(); // Limpar mapa de interação
+        gameManager.state.getEnemies().clear(); // Remover inimigos
+        gameManager.state.getInteractionMap().clear(); // Limpar mapa de interação
         hero.setPosition( // Resetar posição do herói
             new Position(1, 1)
         );
-        elements.add(hero); // Adicionar herói À lista de elementos à renderizar
+        gameManager.state.getElements().add(hero); // Adicionar herói À lista de elementos à renderizar
         levels[levelState.getLevelIndex()] = null; // Remover nível atual da memória
         levelState.setLevelIndex(
             levelState.getLevelIndex() + 1
@@ -176,19 +173,19 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public Hero getHero() {
-        return hero;
+        return gameManager.state.getHero();
     }
 
     public ArrayList<Element> getElements() {
-        return elements;
+        return gameManager.state.getElements();
     }
 
     public ArrayList<Enemy> getEnemies() {
-        return enemies;
+        return gameManager.state.getEnemies();
     }
 
     public LevelState getLevelState() {
-        return levelState;
+        return gameManager.state.getLevelState();
     }
 
     public GameManager getGameManager() {
@@ -214,10 +211,10 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
         }
 
         /*Aqui podem ser inseridos novos processamentos de controle*/
-        if (!this.elements.isEmpty()) {
-            this.controller.draw(elements, enemies);
-            this.controller.process(hero);
-            boolean victory = this.controller.checkVitory(enemies);
+        if (!this.gameManager.state.getElements().isEmpty()) {
+            this.controller.draw(gameManager.state.getElements(), gameManager.state.getEnemies());
+            this.controller.process(gameManager.state.getHero());
+            boolean victory = this.controller.checkVitory(gameManager.state.getEnemies());
             if (victory) {
                 this.nextLevel();
             }
@@ -231,7 +228,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void go() {
-        TimerTask redesenhar = new TimerTask() {
+        SerializableTimerTask redesenhar = new SerializableTimerTask() {
             public void run() {
                 repaint(); /*(executa o metodo paint)*/
             }
@@ -303,7 +300,7 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void keyReleased(KeyEvent e) {
-        hero.stop(e.getKeyCode());
+        gameManager.state.getHero().stop(e.getKeyCode());
     }
 
     public void keyPressed(KeyEvent e) {

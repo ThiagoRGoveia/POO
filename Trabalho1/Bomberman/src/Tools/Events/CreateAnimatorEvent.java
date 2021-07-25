@@ -9,7 +9,7 @@ import Tools.Image.Animator;
 // varios animadores podem ser obtidos ao disparar esse evento
 // sequencialmente, bastando que os animadores resultantes sejam
 // salvos em outra propriedade entre cada chamada
-public class CreateAnimatorEvent implements Event<Element> {
+public class CreateAnimatorEvent implements Event {
     public void fire(Screen screen, Element element) {
        AnimatedElement animatedElement = (AnimatedElement) element;
        Animator animator = screen.getAnimator(animatedElement.getAnimatorName());

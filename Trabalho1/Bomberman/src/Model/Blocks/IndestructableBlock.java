@@ -10,7 +10,7 @@ import Tools.Position.Position;
 
 // Esta classe define um bloco indestrutível
 public class IndestructableBlock extends AnimatedElement {
-    protected IndestructableBlock(EventBus<Element> eventBus, Position position) {
+    protected IndestructableBlock(EventBus eventBus, Position position) {
         super(eventBus, position);
         this.setAnimatorName("indestructable-obstacle");
         eventBus.emit("create-animator", this);
@@ -18,7 +18,7 @@ public class IndestructableBlock extends AnimatedElement {
         this.setTraversable(false);
     }
 
-    public IndestructableBlock(EventBus<Element> eventBus, int row, int column) {
+    public IndestructableBlock(EventBus eventBus, int row, int column) {
         this(eventBus, new Position(row, column));
     }
 

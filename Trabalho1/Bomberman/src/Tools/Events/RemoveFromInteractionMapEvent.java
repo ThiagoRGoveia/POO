@@ -5,7 +5,7 @@ import Model.Element;
 import Tools.InteractionMap;
 
 //Permite remover um elemento do mapa de interação
-public class RemoveFromInteractionMapEvent implements Event<Element>{
+public class RemoveFromInteractionMapEvent implements Event{
 
     public void fire(Screen screen, Element element) {
         InteractionMap interactionMap = screen.getInteractionMap();

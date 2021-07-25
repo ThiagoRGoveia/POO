@@ -7,14 +7,14 @@ import Tools.Position.Position;
 
 public class BombItem extends Item  {
 
-    protected BombItem(EventBus<Element> eventBus, Position position) {
+    protected BombItem(EventBus eventBus, Position position) {
         super(eventBus, position);
         this.setAnimatorName("bomb-item");
         eventBus.emit("create-animator", this);
         setTraversable(true);
     }
 
-    public BombItem(EventBus<Element> eventBus, int row, int column) {
+    public BombItem(EventBus eventBus, int row, int column) {
         this(eventBus, new Position(row, column));
     }
 

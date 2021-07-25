@@ -1,6 +1,6 @@
 package Model;
 
-import java.util.TimerTask;
+import Controls.SerializableTimerTask;
 
 import Model.Enemies.Enemy;
 import Model.Explosions.FirstExplosion;
@@ -11,11 +11,11 @@ import Tools.Position.Position;
 
 // Esta classe define uma bomba
 public class Bomb extends AnimatedElement {
-    private TimerTask explosionTimer;
+    private SerializableTimerTask explosionTimer;
     private int intensity;
     private Hero hero;
 
-    public Bomb (EventBus<Element> eventBus, int intensity, Position position, Hero hero) {
+    public Bomb (EventBus eventBus, int intensity, Position position, Hero hero) {
         super(eventBus,position);
         this.traversable = true;
         this.intensity = intensity;
@@ -26,12 +26,12 @@ public class Bomb extends AnimatedElement {
         this.hero = hero;
     }
 
-    public Bomb(EventBus<Element> eventBus, int intensity, int row, int column, Hero hero) {
+    public Bomb(EventBus eventBus, int intensity, int row, int column, Hero hero) {
         this(eventBus, intensity, new Position(row, column), hero);
     }
 
     private void setExplosionTimer() {
-        explosionTimer = new TimerTask() {
+        explosionTimer = new SerializableTimerTask() {
             public void run() {
                 explode();
             }

@@ -10,10 +10,10 @@ import Tools.Consts;
 
 public class GameLoader implements Serializable {
 
-    public Screen load() throws Exception {
+    public GameState load() throws Exception {
         try {
-            Screen screen = (Screen) loadObject(Consts.SAVE_FILE);
-            return screen;
+            GameState gameState = (GameState) loadObject(Consts.SAVE_FILE);
+            return gameState;
         } catch (Exception e) {
             e.printStackTrace();
             throw new Exception("Unable to load Screen");

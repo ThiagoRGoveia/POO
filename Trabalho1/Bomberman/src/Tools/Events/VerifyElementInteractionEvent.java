@@ -12,7 +12,7 @@ import Tools.Position.ScreenPosition;
 
 
 // Permite verificar se um elemento está interagindo com outro
-public class VerifyElementInteractionEvent implements Event<Element>{
+public class VerifyElementInteractionEvent implements Event{
 
     public void fire(Screen screen, Element element) {
         MovableElement movableElement = (MovableElement) element;

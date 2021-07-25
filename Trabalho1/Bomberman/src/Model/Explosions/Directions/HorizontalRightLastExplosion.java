@@ -7,7 +7,7 @@ import Tools.Position.Position;
 
 public class HorizontalRightLastExplosion extends LastExplosion {
 
-    public HorizontalRightLastExplosion(EventBus<Element>eventBus, Position position) {
+    public HorizontalRightLastExplosion(EventBus eventBus, Position position) {
         super(eventBus,position);
         this.setAnimatorName("horizontal-right-last-explosion");
         eventBus.emit("create-animator", this);

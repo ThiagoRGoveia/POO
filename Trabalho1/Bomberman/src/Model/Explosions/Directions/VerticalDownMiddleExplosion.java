@@ -6,7 +6,7 @@ import Tools.Position.Position;
 
 public class VerticalDownMiddleExplosion  extends VerticalMiddleExplosion {
 
-    public VerticalDownMiddleExplosion(EventBus<Element>eventBus, int intensity, Position position) {
+    public VerticalDownMiddleExplosion(EventBus eventBus, int intensity, Position position) {
         super(eventBus, intensity, position);
     }
 

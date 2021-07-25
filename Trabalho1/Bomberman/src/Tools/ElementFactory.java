@@ -13,9 +13,9 @@ import Tools.Events.EventBus;
 
 public final class ElementFactory implements Serializable {
     private HashMap<String, GenericElementFactory> elementMap;
-    private EventBus<Element> eventBus;
+    private EventBus eventBus;
 
-    public ElementFactory(EventBus<Element> eventBus) {
+    public ElementFactory(EventBus eventBus) {
         this.eventBus = eventBus;
         elementMap = new HashMap<String, GenericElementFactory>(5);
         elementMap.put("hero", new HeroFactory());
