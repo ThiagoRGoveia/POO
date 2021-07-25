@@ -16,6 +16,7 @@ public class GameSaver implements Serializable {
 
     public void save() {
         saveObject(gameState);
+        System.out.println("Game saved.");
     }
 
     public void saveObject(Serializable o) {
