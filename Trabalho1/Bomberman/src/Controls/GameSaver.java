@@ -5,6 +5,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 public class GameSaver implements Serializable {
 
@@ -14,13 +16,18 @@ public class GameSaver implements Serializable {
         this.gameState = gameState;
     }
 
-    public void save() {
-        saveObject(gameState);
+    public void save(String fileName) {
+        saveObject(gameState, fileName);
         System.out.println("Game saved.");
     }
 
-    public synchronized void saveObject(Serializable o) {
-        File file = new File("data.dat");
+    public void save() {
+        saveObject(gameState, createFileName());
+        System.out.println("Game saved.");
+    }
+
+    public synchronized void saveObject(Serializable o, String fileName) {
+        File file = new File(fileName);
         try {
             file.createNewFile();
             FileOutputStream fileOutput = new FileOutputStream(file);
@@ -32,5 +39,12 @@ public class GameSaver implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    private String createFileName() {
+        LocalDateTime myDateObj = LocalDateTime.now();
+        DateTimeFormatter myFormatObj = DateTimeFormatter.ofPattern("dd-MM-yyyy-HH:mm:ss");
+        String formattedDate = myDateObj.format(myFormatObj);
+        return "save-" +formattedDate + ".dat";
     }
 }

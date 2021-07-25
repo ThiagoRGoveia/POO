@@ -58,11 +58,11 @@ public class ExplodingBlock extends AnimatedElement {
              100
          );
      }
-    // Ao morrer decida se ira dropar um item
+    // Ao morrer decidir se irá dropar um item
     public void die() {
         super.die();
         int randomNumber = RandomSingleton.getInstance().nextInt(1000);
-        boolean willItDropAnItem = 250 < randomNumber && randomNumber <= 500;
+        boolean willItDropAnItem = 0 < randomNumber && randomNumber <= 1000;
         if (willItDropAnItem) {
             this.createScheduledTask(
                 sheduleItemDrop()

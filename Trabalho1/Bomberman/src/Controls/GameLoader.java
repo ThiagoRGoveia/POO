@@ -6,13 +6,11 @@ import java.io.ObjectInputStream;
 import java.io.Serializable;
 import java.util.zip.GZIPInputStream;
 
-import Tools.Consts;
-
 public class GameLoader implements Serializable {
 
-    public GameState load() throws Exception {
+    public static GameState load(String fileName) throws Exception {
         try {
-            GameState gameState = (GameState) loadObject(Consts.SAVE_FILE);
+            GameState gameState = (GameState) GameLoader.loadObject(fileName);
             return gameState;
         } catch (Exception e) {
             e.printStackTrace();
@@ -20,7 +18,7 @@ public class GameLoader implements Serializable {
         }
     }
 
-    public Object loadObject(String fileName) throws Exception {
+    private static Object loadObject(String fileName) throws Exception {
         File file = new File(fileName);
         try {
             FileInputStream fileInput = new FileInputStream(file);

@@ -14,11 +14,6 @@ public class GameState implements Serializable {
     private LevelState levelState;
     private Hero hero;
     private InteractionMap interactionMap;
-    private TimerSingleton timer;
-
-    public TimerSingleton getTimer() {
-        return timer;
-    }
 
     public ArrayList<Element> getElements() {
         return elements;
@@ -38,10 +33,6 @@ public class GameState implements Serializable {
 
     public LevelState getLevelState() {
         return levelState;
-    }
-
-    public void setTimer(TimerSingleton timer) {
-        this.timer = timer;
     }
 
     public void setElements(ArrayList<Element> elements) {

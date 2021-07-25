@@ -74,5 +74,7 @@ public class Bomb extends AnimatedElement {
         super.start();
     }
 
-
+    public void setHero(Hero hero) {
+        this.hero = hero;
+    }
 }

@@ -12,7 +12,6 @@ public abstract class AnimatedElement extends Element {
 
     protected AnimatedElement(Position position) {
         super(position);
-
     }
 
     public void setAnimator(Animator animator) {
@@ -36,8 +35,6 @@ public abstract class AnimatedElement extends Element {
     }
 
     public void start() {
-        if (animator != null) {
-            animator.start();
-        }
+        animator.start();
     }
 }

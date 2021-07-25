@@ -2,6 +2,8 @@ package Controls;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import Tools.Events.*;
 import Tools.Position.Position;
@@ -18,15 +20,21 @@ public class GameManager implements Serializable {
 
     public GameManager() {
         levels = new GameLevel[4];
+        TimerSingleton.getInstance();
     }
+
 
     public void saveGame() {
         gameSaver.save();
     }
 
-    public void loadGame() throws Exception {
+    public void saveGame(String fileName) {
+        gameSaver.save(fileName);
+    }
+
+    public void loadGame(String fileName) throws Exception {
         try {
-            state = (new GameLoader()).load();
+            state = GameLoader.load(fileName);
             gameSaver = new GameSaver(state);
             setupScreen();
             setupLevels();
@@ -52,7 +60,6 @@ public class GameManager implements Serializable {
 
     public void newGame() {
         state = new GameState();
-        state.setTimer(TimerSingleton.getInstance());
         state.setElements(new ArrayList<Element>(400));
         state.setEnemies(new ArrayList<Enemy>(20));
 
@@ -200,6 +207,21 @@ public class GameManager implements Serializable {
         for (Enemy enemy: state.getEnemies()) {
             enemy.start();
         }
+    }
+
+    public void autoSave() {
+        (new Timer()).schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                gameSaver.save("recover.dat");
+            }
+
+        }, 0 ,5000);
+    }
+
+    public void recoverGame() throws Exception {
+        loadGame("recover.dat");
     }
 
 }
