@@ -6,8 +6,8 @@ import javax.swing.ImageIcon;
 
 import Controls.SerializableTimer;
 import Controls.SerializableTimerTask;
+import Controls.TimerSingleton;
 
-import Controls.SerializableTimerTask;
 
 // Esta classe controla uma animação, ela é composta por um objeto Timer dedicado,
 // ou seja, cada animação roda em uam thread própria. A cada intervalo dado a imagem servida
@@ -29,6 +29,7 @@ public class Animator implements Serializable {
         this.images = images;
         numberOfImages = images.size();
         isStatic = false;
+        timer = TimerSingleton.getInstance().getTimer();
     }
 
     public Animator(ImageIcon image) {
@@ -47,7 +48,7 @@ public class Animator implements Serializable {
 
     public void stop() {
         if (!this.isStatic) {
-            timer.cancel();
+            timerTask.cancel();
         }
     }
 
@@ -59,7 +60,7 @@ public class Animator implements Serializable {
 
     private void iterateImgIndexOnce() {
         if (++imgIndex >= numberOfImages) {
-            timer.cancel();
+            timerTask.cancel();
             imgIndex--;
         }
     }
@@ -86,7 +87,6 @@ public class Animator implements Serializable {
         } else {
             timerTask = getOneTimeSerializableTimerTask();
         }
-        timer = new SerializableTimer();
         timer.schedule(timerTask, 0, interval);
     }
 

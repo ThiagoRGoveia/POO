@@ -1,8 +1,7 @@
 package Model.Enemies;
 
 import java.util.ArrayList;
-import java.util.Random;
-
+import Tools.RandomSingleton;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 import Tools.Image.Animator;
@@ -12,10 +11,8 @@ public class BasicEnemy extends Enemy {
 
     protected BasicEnemy(Position position) {
         super(position);
-        Random random = new Random();
-        int nextDirection = random.nextInt(4);
+        int nextDirection = RandomSingleton.getInstance().nextInt(4);
         this.movementDirection = Enemy.directions[nextDirection];
-        this.makeMovement();
     }
 
     public BasicEnemy(int row, int column) {

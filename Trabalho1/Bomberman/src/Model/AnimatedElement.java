@@ -1,7 +1,6 @@
 package Model;
 import javax.swing.ImageIcon;
 
-import Tools.Events.EventBus;
 import Tools.Image.Animator;
 import Tools.Position.Position;
 
@@ -34,5 +33,11 @@ public abstract class AnimatedElement extends Element {
 
     public String getAnimatorName() {
         return animatorName;
+    }
+
+    public void start() {
+        if (animator != null) {
+            animator.start();
+        }
     }
 }

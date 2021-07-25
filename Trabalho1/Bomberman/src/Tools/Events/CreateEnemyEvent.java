@@ -13,6 +13,7 @@ public class CreateEnemyEvent implements Event {
         InteractionMap interactionMap = gameManager.getInteractionMap();
         gameManager.addEnemy(enemy);
         interactionMap.insert(enemy.getPosition(), enemy);
+        enemy.start();
     }
 
 }

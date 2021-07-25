@@ -22,7 +22,6 @@ public class Bomb extends AnimatedElement {
         this.setAnimatorName("bomb");
         EventBus.getInstance().emit("create-animator", this); // pedir animador
         setTraversable(true);
-        setExplosionTimer(); // iniciar timer
         this.hero = hero;
     }
 
@@ -68,6 +67,11 @@ public class Bomb extends AnimatedElement {
     public void die() {
         hero.decrementNumberOfBombsPlaced();
         explosionTimer.cancel();
+    }
+
+    public void start() {
+        setExplosionTimer(); // iniciar timer
+        super.start();
     }
 
 

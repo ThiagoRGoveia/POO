@@ -8,6 +8,7 @@ import Model.Explosion;
 import Model.Hero;
 import Model.Enemies.Enemy;
 import Model.Items.ItemFactory;
+import Tools.RandomSingleton;
 import Tools.Schedule;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
@@ -21,10 +22,6 @@ public class ExplodingBlock extends AnimatedElement {
         EventBus.getInstance().emit("create-animator", this);
         this.setTraversable(true);
         this.setImmortal(false);
-        this.createScheduledTask(
-            getTerminationSchedule()
-        );
-        EventBus.getInstance().emit("create-schedule", this);
     }
 
     public ExplodingBlock(int row, int column) {
@@ -65,8 +62,7 @@ public class ExplodingBlock extends AnimatedElement {
     // Ao morrer decida se ira dropar um item
     public void die() {
         super.die();
-        Random random = new Random();
-        int randomNumber = random.nextInt(1000);
+        int randomNumber = RandomSingleton.getInstance().nextInt(1000);
         boolean willItDropAnItem = 250 < randomNumber && randomNumber <= 500;
         if (willItDropAnItem) {
             this.createScheduledTask(
@@ -74,6 +70,14 @@ public class ExplodingBlock extends AnimatedElement {
             );
             EventBus.getInstance().emit("create-schedule", this);
         }
+    }
+
+    public void start() {
+        this.createScheduledTask(
+            getTerminationSchedule()
+        );
+        EventBus.getInstance().emit("create-schedule", this);
+        super.start();
     }
 
 }

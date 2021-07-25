@@ -12,6 +12,7 @@ public class CreateElementsEvent implements Event {
         if (interactionMap.get(element.getPosition()) == null) { // Somente criar o elemento se posição estiver vazia
             gameManager.addElement(element);
             interactionMap.insert(element.getPosition(), element);
+            element.start();
         } else {
             element.die();
         }

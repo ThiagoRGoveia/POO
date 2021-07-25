@@ -19,12 +19,8 @@ public abstract class Explosion extends AnimatedElement {
     }
 
     public abstract void propagateExplosion(int intensity); // Toda explosão que não for a final devera se propagar
-    public void changeToLastExplosion() {
-        setExplosionFinishTimer();
-    }
 
-
-    public void interact(Hero hero) { // Quando um herói interage com uma explosão ele morre
+       public void interact(Hero hero) { // Quando um herói interage com uma explosão ele morre
         hero.die();
     }
 
@@ -50,7 +46,6 @@ public abstract class Explosion extends AnimatedElement {
             }
             EventBus.getInstance().emit("create-explosion", explodeUp);
         }
-        setExplosionFinishTimer();
     }
     protected void propagateDown(int intensity) {
         Explosion explodeDown;
@@ -70,7 +65,6 @@ public abstract class Explosion extends AnimatedElement {
             );
             EventBus.getInstance().emit("create-explosion", explodeDown);
         }
-        setExplosionFinishTimer();
     }
     protected void propagateLeft(int intensity) {
         Explosion explodeLeft;
@@ -86,7 +80,6 @@ public abstract class Explosion extends AnimatedElement {
             }
             EventBus.getInstance().emit("create-explosion", explodeLeft);
         }
-        setExplosionFinishTimer();
     }
     protected void propagateRight(int intensity) {
         Explosion explodeRight;
@@ -102,7 +95,6 @@ public abstract class Explosion extends AnimatedElement {
             }
             EventBus.getInstance().emit("create-explosion", explodeRight);
         }
-        setExplosionFinishTimer();
     }
 
     // Remove explosão da tela e do mapa de interação
@@ -129,4 +121,10 @@ public abstract class Explosion extends AnimatedElement {
     }
 
     public void die() {}
+
+    public void start() {
+        setExplosionFinishTimer();
+    }
+
+    public void changeToLastExplosion() {}
 }

@@ -17,7 +17,6 @@ public class VerticalUpMiddleExplosion  extends VerticalMiddleExplosion {
         this.animator.stop();
         this.setAnimatorName("vertical-up-last-explosion");
         EventBus.getInstance().emit("create-animator", this);
-        super.changeToLastExplosion();
     }
 
 }

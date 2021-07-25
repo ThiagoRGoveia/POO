@@ -17,7 +17,6 @@ public class HorizontalLeftMiddleExplosion extends HorizontalMiddleExplosion {
         this.animator.stop();
         this.setAnimatorName("horizontal-left-last-explosion");
         EventBus.getInstance().emit("create-animator", this);
-        super.changeToLastExplosion();
     }
 
 }

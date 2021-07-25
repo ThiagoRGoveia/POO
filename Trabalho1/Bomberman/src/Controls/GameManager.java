@@ -24,6 +24,24 @@ public class GameManager implements Serializable {
         gameSaver.save();
     }
 
+    public void loadGame() throws Exception {
+        try {
+            state = (new GameLoader()).load();
+            gameSaver = new GameSaver(state);
+            setupScreen();
+            setupLevels();
+            setupEventBus();
+            setupHeroLivesDisplay();
+            currentLevel = levels[state.getLevelState().getLevelIndex()];
+            currentLevel.begin();
+            startElements();
+            screen.go();
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new Exception("Unable to load Game");
+        }
+    }
+
     public void setGameSaver(GameSaver gameSaver) {
         this.gameSaver = gameSaver;
     }
@@ -34,6 +52,7 @@ public class GameManager implements Serializable {
 
     public void newGame() {
         state = new GameState();
+        state.setTimer(TimerSingleton.getInstance());
         state.setElements(new ArrayList<Element>(400));
         state.setEnemies(new ArrayList<Enemy>(20));
 
@@ -48,31 +67,18 @@ public class GameManager implements Serializable {
         // Inicia primeira fase
         state.setLevelState(new LevelState(0));
 
-    }
-
-    public void loadGame() throws Exception {
-        try {
-            state = (new GameLoader()).load();
-            gameSaver = new GameSaver(state);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw new Exception("Unable to load Game");
-        }
+        setupScreen();
+        setupLevels();
+        setupEventBus();
+        setupHeroLivesDisplay();
+        setupCurrentLevel();
+        screen.go();
     }
 
     public void setupScreen() {
         screen = new Screen(this);
         setGameSaver(new GameSaver(state));
 
-    }
-
-    public void start() {
-        setupScreen();
-        setupEventBus();
-        setupHeroLivesDisplay();
-        setupLevels();
-        setupCurrentLevel();
-        screen.go();
     }
 
     private void setupHeroLivesDisplay() {
@@ -82,6 +88,7 @@ public class GameManager implements Serializable {
     private void setupCurrentLevel() {
         currentLevel = levels[state.getLevelState().getLevelIndex()];
         currentLevel.begin();
+        currentLevel.draw();
     }
 
     private void setupLevels() {
@@ -183,6 +190,15 @@ public class GameManager implements Serializable {
 
     public GameLevel getCurrentLevel() {
         return currentLevel;
+    }
+
+    public void startElements() {
+        for (Element element: state.getElements()) {
+            element.start();
+        }
+        for (Enemy enemy: state.getEnemies()) {
+            enemy.start();
+        }
     }
 
 }

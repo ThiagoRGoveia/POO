@@ -168,4 +168,9 @@ public abstract class MovableElement extends AnimatedElement {
         return movementDirection;
     }
 
+    public void start() {
+       activeAnimator.start();
+
+    }
+
 }

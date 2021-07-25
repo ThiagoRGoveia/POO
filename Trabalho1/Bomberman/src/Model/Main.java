@@ -39,6 +39,8 @@ public class Main {
 
         sc.close();
 
+        // System.out.println("OI " + String.format("%b", 1 == 2));
+
     }
 
     private Main() {
@@ -49,7 +51,6 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 gm.newGame();
-                gm.start();
             }
         });
     }
@@ -59,7 +60,6 @@ public class Main {
             public void run() {
                 try {
                     gm.loadGame();
-                    gm.start();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

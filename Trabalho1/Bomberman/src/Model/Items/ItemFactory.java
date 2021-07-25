@@ -1,8 +1,7 @@
 package Model.Items;
 
-import java.util.Random;
-
 import Model.Element;
+import Tools.RandomSingleton;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
@@ -23,8 +22,7 @@ public class ItemFactory {
     }
 
     public static void dropItem(Element element) {
-        Random random = new Random();
-        int itemNumber = random.nextInt(4);
+        int itemNumber = RandomSingleton.getInstance().nextInt(4);
         Item item = ItemFactory.createItem(element.getPosition(), itemNumber);
         EventBus.getInstance().emit("create-element", item);
     }

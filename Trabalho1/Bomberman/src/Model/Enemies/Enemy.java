@@ -1,11 +1,11 @@
 package Model.Enemies;
 
-import java.util.Random;
 import Controls.SerializableTimerTask;
 
 import Model.Explosion;
 import Model.Hero;
 import Model.MovableElement;
+import Tools.RandomSingleton;
 import Tools.Events.EventBus;
 import Tools.Position.Position;
 
@@ -19,7 +19,6 @@ public abstract class Enemy extends MovableElement {
     }
 
     public void interact(Hero hero) { // Se interagir com um heroi, mate ele
-        System.out.println(position);
         hero.die();
     }
 
@@ -51,10 +50,9 @@ public abstract class Enemy extends MovableElement {
 
     // A escolha da proxima direção é aleatória
     public void changeDirection() {
-        Random random = new Random();
-        int nextDirection = random.nextInt(4);
+        int nextDirection = RandomSingleton.getInstance().nextInt(4);
         while (this.movementDirection == directions[nextDirection]) {
-            nextDirection = random.nextInt(4);
+            nextDirection = RandomSingleton.getInstance().nextInt(4);
         }
         this.movementDirection = directions[nextDirection];
         makeMovement();
@@ -62,17 +60,14 @@ public abstract class Enemy extends MovableElement {
 
     // Realiza o movimento baseado na direção
     protected void makeMovement() {
-        if (this.movementDirection == "up") {
+        if (this.movementDirection.equals("up")) {
             this.moveUp();
-        } else if (this.movementDirection == "down") {
-            this.moveUp();
-            // this.moveDown();
-        } else if (this.movementDirection == "left") {
-            // this.moveLeft();
-            this.moveUp();
-        } else if (this.movementDirection == "right") {
-            this.moveUp();
-            // this.moveRight();
+        } else if (this.movementDirection.equals("down")) {
+            this.moveDown();
+        } else if (this.movementDirection.equals("left")) {
+            this.moveLeft();
+        } else if (this.movementDirection.equals("right")) {
+            this.moveRight();
         }
     }
 
@@ -80,7 +75,7 @@ public abstract class Enemy extends MovableElement {
         changeAnimatorAndKillMovement(upAnimator, "up");
         this.movementTimer = new SerializableTimerTask() {
             public void run() {
-                nextPosition = position;
+                nextPosition = position.getMovementUp();
                 processMovement();
             }
         };
@@ -134,6 +129,11 @@ public abstract class Enemy extends MovableElement {
     // Para movimento
     public void stop() {
         this.movementTimer.cancel();
+    }
+
+    public void start() {
+        this.makeMovement();
+        super.start();
     }
 
 }

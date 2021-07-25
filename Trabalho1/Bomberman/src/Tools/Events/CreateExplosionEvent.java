@@ -10,6 +10,7 @@ public class CreateExplosionEvent implements Event {
 
     public void fire(GameManager gameManager, Element element) {
         Explosion explosion = (Explosion) element;
+        explosion.start();
         InteractionMap interactionMap = gameManager.getInteractionMap();
         Element preExistingElement = interactionMap.get(explosion.getPosition()); // Procurar elemento na posição da explosão a ser criada
         if (preExistingElement == null) { // Se não houver elemento, propagar explosão

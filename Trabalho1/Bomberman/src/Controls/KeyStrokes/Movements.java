@@ -20,7 +20,6 @@ public class Movements implements Serializable {
         keyStrokeMap.put(KeyEvent.VK_E, new PlaceBomb());
         keyStrokeMap.put(KeyEvent.VK_Z, new NextLevel());
         keyStrokeMap.put(KeyEvent.VK_X, new SaveGame());
-        keyStrokeMap.put(KeyEvent.VK_C, new LoadGame());
     }
 
     public void makeMovement(KeyEvent keyEvent, Screen screen) {

@@ -21,7 +21,6 @@ public abstract class GameLevel implements Serializable {
         screen.setAnimatorFactory(
             new AnimatorFactory(imageFactory)
         );
-        draw();
     }
 
     public ImageFactory getImageFactory() {

@@ -19,7 +19,7 @@ public class GameSaver implements Serializable {
         System.out.println("Game saved.");
     }
 
-    public void saveObject(Serializable o) {
+    public synchronized void saveObject(Serializable o) {
         File file = new File("data.dat");
         try {
             file.createNewFile();
