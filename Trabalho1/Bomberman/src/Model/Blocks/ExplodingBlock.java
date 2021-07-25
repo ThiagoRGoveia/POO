@@ -1,6 +1,5 @@
 package Model.Blocks;
 
-import java.util.Random;
 import Controls.SerializableTimerTask;
 
 import Model.AnimatedElement;
