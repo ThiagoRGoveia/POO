@@ -1,6 +1,6 @@
 package Tools.Events;
 import java.io.Serializable;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 import Controls.GameManager;
 import Model.Element;
@@ -9,7 +9,7 @@ import Model.Element;
 // injetar a instancia de Screen na execução do evento. Esta abstração
 // permite desacoblar a lógica que envolve manipulação das classes Element e Screen
 public class EventBus implements Serializable {
-    private LinkedHashMap<String,Event> eventMap;
+    private HashMap<String,Event> eventMap;
     private GameManager gameManager;
     private static EventBus instance;
 
@@ -18,7 +18,7 @@ public class EventBus implements Serializable {
     }
 
     private EventBus(GameManager gameManager, int size) {
-        eventMap = new LinkedHashMap<String,Event>(size);
+        eventMap = new HashMap<String,Event>(size);
         this.gameManager = gameManager;
     }
 

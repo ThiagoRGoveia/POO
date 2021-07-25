@@ -1,7 +1,7 @@
 package Tools.Image;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
@@ -17,14 +17,14 @@ import Tools.Image.Boundaries.BoundaryFactory;
 
 // Esta classe é responsável por carregar as listas de imagens
 // na memória, o acesso de cada lista de imagens é feito através
-// de uma string no LinkedHashMap
+// de uma string no HashMap
 public class ImageFactory implements Serializable {
     private BoundaryFactory boundaryFactory;
-    private LinkedHashMap<String,ArrayList<ImageIcon>> imageMap;
+    private HashMap<String,ArrayList<ImageIcon>> imageMap;
 
     public ImageFactory(BoundaryFactory boundaryFactory) {
         this.boundaryFactory = boundaryFactory;
-        imageMap = new LinkedHashMap<String,ArrayList<ImageIcon>>(20);
+        imageMap = new HashMap<String,ArrayList<ImageIcon>>(20);
         imageMap.put("bomb", loadBombImages());
         imageMap.put("first-explosion", loadFirstExplosionImages());
         imageMap.put("horizontal-left-last-explosion", loadHoriziontalLeftLastExplosionImages());

@@ -62,7 +62,7 @@ public class ExplodingBlock extends AnimatedElement {
     public void die() {
         super.die();
         int randomNumber = RandomSingleton.getInstance().nextInt(1000);
-        boolean willItDropAnItem = 0 < randomNumber && randomNumber <= 1000;
+        boolean willItDropAnItem = 250 < randomNumber && randomNumber <= 500;
         if (willItDropAnItem) {
             this.createScheduledTask(
                 sheduleItemDrop()
