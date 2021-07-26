@@ -29,9 +29,7 @@ public class Main {
 
                 break;
             case 2:
-                System.out.println("Digite o nome do arquivo: ");
-                String fileName = sc.nextLine();
-                new Main().loadGame(fileName);
+                new Main().loadGame();
                 break;
             case 3:
                 new Main().recoverGame();
@@ -54,16 +52,16 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 gm.newGame();
-                // gm.autoSave();
+                gm.autoSave();
             }
         });
     }
 
-    private void loadGame(String fileName) throws Exception {
+    private void loadGame() throws Exception {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    gm.loadGame(fileName);
+                    gm.loadGame();
                     gm.autoSave();
                 } catch (Exception e) {
                     e.printStackTrace();

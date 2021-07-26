@@ -32,9 +32,8 @@ public class GameManager implements Serializable {
         gameSaver.save(fileName);
     }
 
-    public void loadGame(String fileName) throws Exception {
+    public void setupGame() throws Exception {
         try {
-            state = GameLoader.load(fileName);
             gameSaver = new GameSaver(state);
             setupScreen();
             setupLevels();
@@ -219,8 +218,22 @@ public class GameManager implements Serializable {
         }, 0 ,5000);
     }
 
+    public void loadGame() throws Exception {
+        loadGameState();
+        setupGame();
+    }
+
     public void recoverGame() throws Exception {
-        loadGame("recover.dat");
+        loadGameState("recover.dat");
+        setupGame();
+    }
+
+    public void loadGameState(String fileName) throws Exception {
+        state = GameLoader.load(fileName);
+    }
+
+    public void loadGameState() throws Exception {
+        state = GameLoader.load();
     }
 
 }

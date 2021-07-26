@@ -23,7 +23,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     private Controller controller = new Controller(this);
     private Graphics graphics;
     private Movements movements;
-    private AnimatorFactory animatorFactory;
     private SerializableTimer timer;
     private GameManager gameManager;
 
