@@ -18,7 +18,6 @@ public class LoadElementFromFile {
 
         if (returnValue == JFileChooser.APPROVE_OPTION) {
             File file = jfc.getSelectedFile();
-            System.out.println(file.getAbsolutePath());
             try {
                 FileInputStream fileInput = new FileInputStream(file);
                 GZIPInputStream descompactador = new GZIPInputStream(fileInput);

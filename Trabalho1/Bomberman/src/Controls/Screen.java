@@ -158,7 +158,6 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
 
             int x = e.getX();
             int y = e.getY();
-            System.out.println("X: " + x + " Y: " + y);
 
             Position pos = new Position(
                 new Row(
