@@ -1,3 +1,4 @@
+package Main;
 
 import Controls.AnimatorSingleton;
 import Model.Blocks.IndestructableBlock;
