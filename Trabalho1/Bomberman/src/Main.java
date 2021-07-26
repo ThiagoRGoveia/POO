@@ -54,7 +54,7 @@ public class Main {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 gm.newGame();
-                gm.autoSave();
+                // gm.autoSave();
             }
         });
     }

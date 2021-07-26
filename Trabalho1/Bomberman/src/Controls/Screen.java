@@ -2,12 +2,20 @@ package Controls;
 
 import Tools.*;
 import Tools.Image.AnimatorFactory;
+import Tools.Position.Column;
+import Tools.Position.Position;
+import Tools.Position.Row;
+import Tools.Position.ScreenPosition;
 
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 
+import javax.swing.SwingUtilities;
+
 import Controls.KeyStrokes.Movements;
+import Model.Element;
+import Model.Enemies.Enemy;
 
 // Esta classe centraliza o controle do jogo, ela é responsável por manter todos os objetos em uso
 public class Screen extends javax.swing.JFrame implements MouseListener, KeyListener {
@@ -145,6 +153,45 @@ public class Screen extends javax.swing.JFrame implements MouseListener, KeyList
     }
 
     public void mouseClicked(MouseEvent e) {
+        if (SwingUtilities.isRightMouseButton(e)) {
+            Element element = LoadElementFromFile.loadElement();
+
+            int x = e.getX();
+            int y = e.getY();
+            System.out.println("X: " + x + " Y: " + y);
+
+            Position pos = new Position(
+                new Row(
+                    new ScreenPosition(y - 57)
+                ),
+                new Column(
+                    new ScreenPosition(x - 22)
+                )
+            );
+
+            element.setPosition(
+                pos.getRow().getCoordinate().value,
+                pos.getColumn().getCoordinate().value
+            );
+
+            Element oldElement = gameManager.getInteractionMap().get(pos);
+            if (oldElement != null) {
+                gameManager.getInteractionMap().remove(pos);
+                if (gameManager.getElements().indexOf(oldElement) > -1) {
+                    gameManager.getElements().remove(oldElement);
+                } else if (gameManager.getEnemies().indexOf(oldElement) > -1) {
+                    gameManager.getEnemies().remove(oldElement);
+                }
+            }
+
+            gameManager.getInteractionMap().insert(pos, element);
+            if (element instanceof Enemy) {
+                gameManager.getEnemies().add((Enemy) element);
+            } else {
+                gameManager.getElements().add(element);
+            }
+            element.start();
+        }
     }
 
     public void mouseReleased(MouseEvent e) {

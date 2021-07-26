@@ -123,6 +123,7 @@ public abstract class Explosion extends AnimatedElement {
     public void die() {}
 
     public void start() {
+        animator.start();
         setExplosionFinishTimer();
     }
 
