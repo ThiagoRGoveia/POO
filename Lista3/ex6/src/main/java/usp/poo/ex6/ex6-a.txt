@@ -1,5 +1,0 @@
-a) Qual solução de projeto você adotaria para que os desenvolvedores de dispositivos pudessem
-desenvolver dispositivos para este sistema sem que o código do sistema fosse revelado?
-
-Uma forma de desenvolvedores se adequarem facilmente ao desenvolverem dispositivos para esse sistema
-é utilizar uma interface como um contrato que obriga que métodos sejam implementados.

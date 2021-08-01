@@ -1,7 +1,0 @@
-Instruções:
-
-As fases são extensas portanto incluímos um comando para trocar de fase automaticamente apertando a tecla Z, caso contrário é necessário matar todos os monstros para passar de fase. Um total de quatro fases foram construídas.
-
-A tecla X salva o jogo, o salvamento automático ocorre a cada 5 segundos.
-
-O arquivo .jar foi testado com Java 11 nos sistemas operacionais Ubuntu 18.4 e Windows 10.
